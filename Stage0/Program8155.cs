@@ -3,7 +3,7 @@ using System;
 
 namespace Stage0
 {
-    partial class Porogram
+    partial class Program
     {
         static void Main(string[] args)
         {
