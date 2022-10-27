@@ -1,0 +1,15 @@
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\bin\Debug\net6.0\Stage0.exe
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\bin\Debug\net6.0\Stage0.deps.json
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\bin\Debug\net6.0\Stage0.runtimeconfig.json
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\bin\Debug\net6.0\Stage0.dll
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\bin\Debug\net6.0\Stage0.pdb
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.csproj.AssemblyReference.cache
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.AssemblyInfoInputs.cache
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.AssemblyInfo.cs
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.csproj.CoreCompileInputs.cache
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.dll
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\refint\Stage0.dll
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.pdb
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\Stage0.genruntimeconfig.cache
+C:\Users\Ron\source\repos\dotNet5783_3110_8155\dotNet5783_3110_8155\Stage0\obj\Debug\net6.0\ref\Stage0.dll
