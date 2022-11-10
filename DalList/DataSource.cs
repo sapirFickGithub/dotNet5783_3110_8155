@@ -10,21 +10,39 @@ using System.Windows.Markup;
 
 static internal class DataSource
 {
-    static readonly int RandNum=0;
-    internal static Order[] arrayOrder=new Order[100];
+    static readonly int RandNum = 0;
+    internal static Order[] arrayOrder = new Order[100];
     internal static OrderItem[] arrayOrderItem = new OrderItem[200];
     internal static Product[] arrayProduct = new Product[50];
 
-    internal static string[] ProductName = { "Lamborgini", "BMW", "Ferrari","Porche","Jeep","Tesla","jaguar","Audi","Corvette","MINI cooper" };
-    internal static string[] CustomerName = {"Moshe","Yeoram","Yossi","Dani","Avi","Sapir","Hadar"}
-    //internal static string[] CategoryName = { "Familly car", "Race car", "4x4", "Sport" };
-    private static void _InitializeProduct()
+    internal static string[] ProductName = { "Lamborgini", "BMW", "Ferrari", "Porche", "Jeep", "Tesla", "jaguar", "Audi", "Corvette", "MINI cooper" };
+    internal static string[] CustomerName = { "Moshe", "Yeoram", "Yossi", "Dani", "Avi", "Sapir", "Hadar" };
+
+    static internal class _Config
+    {
+        // how much places are contain thigs
+        internal static int _ProductIndex = 0;
+        internal static int _OrderIndex = 0;
+        internal static int _OrderItemIndex = 0;
+
+        //
+        internal static int _OrderID = 123456;
+        public static int get_OrderID()
+        {
+                   return _OrderID++;
+        }
+       
+     
+        internal static int _OrderItemID = 654321;
+    }
+
+    private static void _InitializeProduct()//initializ product
     {
         Random rand = new Random();
         for (int i = 0; i < 10; i++)
         {
             Product p = new Product();
-            p.ID = rand.Next(100000, 1000000);
+            p.ID = i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
             p.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
             p.ProductCategory = (Category)v.GetValue(rand.Next(0, 10));
@@ -32,30 +50,51 @@ static internal class DataSource
             p.Price = rand.Next(200000, 5000000);
         }
     }
-    private static void _InitializeOrder()
+    private static void _InitializeOrder()//initializ order
     {
         Random rand = new Random();
         for (int i = 0; i < 20; i++)
         {
+           _Config._OrderIndex++;
             Order _order = new Order();
-            _order.ID = rand.Next(100000, 1000000);
+            _order.ID = _Config._OrderID++;
             _order.CustomerName = CustomerName[rand.Next(0, 10)];
-            _order.DateCreateDelivery = DateTime.MinValue;
+            _order.DateOfOrder = DateTime.MinValue;
+            TimeSpan spaceTime = TimeSpan.FromDays(1);
+            _order.DateCreateDelivery = _order.DateOfOrder + spaceTime;//one day after the order the dilevery will create
+            _order.DateOfDelivery = _order.DateCreateDelivery + spaceTime;//one day after the order the dilevery will dlivered
+            _order.CustamerAddress = "jrusalem";
+            _order.CustomerMail = "maill@gmail.com";
 
-            var v = Enum.GetValues(typeof(Category));
-            p.ProductCategory = (Category)v.GetValue(rand.Next(0, 10));
-            p.InStock = rand.Next(1, 5);
-            p.Price = rand.Next(200000, 5000000);
         }
+    }
+
+    private static void _InitializeOrdetItem()//initializ orderItem
+    {
+        Random rand = new Random();
+        for (int i = 0; i < 40; i++)
+        {
+            _Config._OrderItemIndex++;
+            OrderItem _orderItem = new OrderItem();
+            _orderItem.ID =_Config._OrderItemID++ ;
+            _orderItem.NumOfOrder = arrayOrder[i%19].ID;//i%19 will chosse the order , in this way all the place be uesed
+            int index=rand.Next(0, 10);//choss a product 
+            _orderItem.IdOfItem= arrayProduct[index].ID;
+            _orderItem.amount = rand.Next(1, 5);
+            _orderItem.Price = arrayProduct[index].Price;
+
+        }
+
     }
     static DataSource()
     {
-       s_Initialize();
+        s_Initialize();
     }
 
     private static void s_Initialize()
     {
-        
-
+        _InitializeProduct();
+        _InitializeOrder();
+        _InitializeOrdetItem();
     }
 }

@@ -9,9 +9,5 @@ using DO;
 public class DalOrder
 {
     static int i = 0;
-    private void _add(Order orderAdd)
-    {
-        DataSource.arrayOrder[i] = orderAdd;
-        i++;
-    }
+  
 }

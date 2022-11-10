@@ -10,9 +10,5 @@ namespace Dal;
 public class DalProduct
 {
     static int i = 0;
-    private void _add(Product addProduct)
-    {
-        DataSource.arrayProduct[i] = addProduct;
-        i++;
-    }
+ 
 }
