@@ -42,7 +42,7 @@ public class DalOrderItem
     }
     public void delete(int id)
     {
-        if (!search(id))
+        if (0>search(id))
         {
             throw new Exception("ORDER NOT FOUND!");
         }
@@ -92,17 +92,25 @@ public class DalOrderItem
         }
         return false;
     }
-    public bool search(int find)//help function for int, get id and check if the id exist in the orderitem
+    public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
         int i;
         for (i = 0; i < arrayOrderItem.Length; i++)
         {
-            if (find == arrayOrderItem[i].ID)
+            if (id == arrayOrderItem[i].ID)
             {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
+
+
+    public void print(int index)
+    {
+        arrayOrderItem[index].ToString();
+    }
+
+    public int length() { return arrayOrderItem.Length; }
 }
 
