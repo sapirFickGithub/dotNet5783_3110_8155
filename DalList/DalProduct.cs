@@ -43,6 +43,10 @@ public class DalProduct
     }
     public void delete(int id)
     {
+        if (!search(id))
+        {
+            throw new Exception("ORDER NOT FOUND!");
+        }
         Product[] Product = new Product[50];
         int i;
         for (i = 0; i < arrayProduct.Length; i++)
@@ -84,7 +88,22 @@ public class DalProduct
                     arrayProduct[i] = newProduct;
             }
         }
+        else
+        {
+            throw new Exception("ORDER NOT FOUND!");
+        }
     }
-
+    public bool search(int find)//help function for int, get id and check if the id exist in the product
+    {
+        int i;
+        for (i = 0; i < arrayProduct.Length; i++)
+        {
+            if (find == arrayProduct[i].ID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -43,8 +43,11 @@ public class DalOrder
     }
     public void delete(int id)
     {
-        if
-        Order[] Order = new Order[100];
+        if (!search(id))
+        {
+            throw new Exception("ORDER NOT FOUND!");
+        }
+    Order[] Order = new Order[100];
         int i;
         for (i = 0; i < arrayOrder.Length; i++)
         {
@@ -73,6 +76,10 @@ public class DalOrder
                     arrayOrder[i] = newOrder;
             }
         }
+        else
+        {
+            throw new Exception("ORDER NOT FOUND!");
+        }
     }
     public bool search(Order find)//help function
     {
@@ -80,6 +87,18 @@ public class DalOrder
         for (i = 0; i < arrayOrder.Length; i++)
         {
             if (find.ID == arrayOrder[i].ID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool search(int find)//help function for int, get id and check if the id exist in the order
+    {
+        int i;
+        for (i = 0; i < arrayOrder.Length; i++)
+        {
+            if (find == arrayOrder[i].ID)
             {
                 return true;
             }

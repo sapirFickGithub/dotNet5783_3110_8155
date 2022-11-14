@@ -18,7 +18,7 @@ namespace Stage0
         {
             Console.WriteLine("enter name");
             string name = Console.ReadLine();
-            Console.WriteLine("tnx for ");
+            Console.Write("tnx for ");
             Console.ReadKey();
         }
     }
