@@ -103,7 +103,7 @@ public class Program
             {
                 case 'a':
                     {
-                        Console.WriteLine("please enter: customer name, mail,and address");
+                        Console.WriteLine(" please enter: customer name, mail,and address");
                         temp.CustomerName = Console.ReadLine();
                         temp.CustomerMail = Console.ReadLine();
                         temp.CustamerAddress = Console.ReadLine();
