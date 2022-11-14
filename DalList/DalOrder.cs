@@ -43,7 +43,7 @@ public class DalOrder
     }
     public void delete(int id)
     {
-        if (!search(id))
+        if (0>search(id))
         {
             throw new Exception("ORDER NOT FOUND!");
         }
@@ -93,17 +93,24 @@ public class DalOrder
         }
         return false;
     }
-    public bool search(int find)//help function for int, get id and check if the id exist in the order
+    public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
         int i;
         for (i = 0; i < arrayOrder.Length; i++)
         {
-            if (find == arrayOrder[i].ID)
+            if (id == arrayOrder[i].ID)
             {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
+
+    public void print(int index)
+    {
+        arrayOrder[index].ToString();
+    }
+
+    public int length() { return arrayOrder.Length; }
 }

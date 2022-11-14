@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Dal.DataSource;
-
 namespace Dal;
 
 public class DalProduct
 {
-    public int Add(Product product)
+    public int Add( Product product)
     {
         if (_Config._ProductIndex == 50)
         {
@@ -20,7 +19,7 @@ public class DalProduct
         {
             throw new Exception("DUPLICATION! this product already exist");
         }
-        product.ID = _Config.get_ProductID;//צריך לבדוק אם מותר לעשות בדיקה ידנית
+        product.ID = _Config.get_ProductID;//צריך לבדואם מותר לעשות בדיקה ידנית
         arrayProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }
@@ -43,7 +42,7 @@ public class DalProduct
     }
     public void delete(int id)
     {
-        if (!search(id))
+        if (search(id)<0)
         {
             throw new Exception("ORDER NOT FOUND!");
         }
@@ -93,17 +92,28 @@ public class DalProduct
             throw new Exception("ORDER NOT FOUND!");
         }
     }
-    public bool search(int find)//help function for int, get id and check if the id exist in the product
+
+
+    public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
         int i;
         for (i = 0; i < arrayProduct.Length; i++)
         {
-            if (find == arrayProduct[i].ID)
+            if (id == arrayProduct[i].ID)
             {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
+
+    public void print(int index)
+    {
+        arrayProduct[index].ToString();
+    }
+
+    public int length() { return arrayProduct.Length; }
 }
+
+
