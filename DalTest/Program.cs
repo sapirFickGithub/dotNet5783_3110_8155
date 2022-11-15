@@ -1,6 +1,7 @@
 ﻿
 using Dal;
 using DO;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
@@ -13,7 +14,7 @@ public class Program
 
     public static void productOption(ref DalProduct dalProduct)
     {
-        int option = 1;
+        char option;
         Console.WriteLine("Order Item\n" +
                 "a -add object\n" +
                 "b -return the object details by getting ID\n" +
@@ -22,7 +23,7 @@ public class Program
                 "e -update the object's details\n" +
                 "f -search object by getting ID\n" +
                 "h -end\n");
-        option= Console.Read();
+        char.TryParse(Console.ReadLine(), out option);
         Product temp = new Product();
         int id;
         while (option != 0)
@@ -31,7 +32,10 @@ public class Program
                 case 'a':
                     {
                         Console.WriteLine("please enter: name, category, price, and how much of this product you have");
-                        temp.Name = Console.ReadLine();
+                        string name;
+                        name = Console.ReadLine();
+                        temp.Name = name;
+                        //temp.Name = Console.ReadLine();
                         temp.ProductCategory = (Category)Enum.Parse(typeof(Category), Console.ReadLine());
                         temp.Price = double.Parse(Console.ReadLine());
                         temp.InStock = Console.Read();
@@ -94,8 +98,8 @@ public class Program
                   "e -update the object's details\n" +
                   "f  -search object by getting ID\n" +
                   "h -end\n");
-        int option;
-        int.TryParse(Console.ReadLine(), out option);
+        char option;
+        char.TryParse(Console.ReadLine(), out option);
         Order temp = new Order();
         int id;
         while (option != 0)
@@ -164,7 +168,7 @@ public class Program
                     "e -update the object's details\n" +
                     "f -search object by getting ID\n" +
                     "h -end\n");
-        int option = Console.Read();
+        char.TryParse(Console.ReadLine(), out char option);
         OrderItem temp = new OrderItem();
         int id;
         while (option != 0)
