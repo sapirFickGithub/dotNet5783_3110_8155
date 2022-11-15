@@ -11,6 +11,7 @@ public class DalProduct
 {
     public int Add( Product product)
     {
+        product.ID = _Config.get_ProductID;
         if (_Config._ProductIndex == 50)
         {
             throw new Exception("OVERLOAD! no more space in arrayProduct");
@@ -19,7 +20,7 @@ public class DalProduct
         {
             throw new Exception("DUPLICATION! this product already exist");
         }
-        product.ID = _Config.get_ProductID;//צריך לבדואם מותר לעשות בדיקה ידנית
+        //product.ID = _Config.get_ProductID;//צריך לבדואם מותר לעשות בדיקה ידנית
         arrayProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }
@@ -36,9 +37,30 @@ public class DalProduct
         throw new Exception("PRODUCT NOT FOUND!");
         //return arrayProduct[(id - 100000) / 23];//in the class config we colculate the id eith the formula "100000+ _ProductIndex * 20 + _ProductIndex * 3" so to get the right index, we did the opposite formula
     }
-    public Product[] get()
+    public Product[] idMatch(int id)
     {
-        return arrayProduct;
+        int counter=0;
+        for (int k = 0; k < arrayProduct.Length; k++)
+        {
+            if (id == arrayProduct[k].ID)
+            {
+                counter++;
+            }
+        }
+       
+        Product[] Product = new Product[counter];
+        int j = 0;
+        for (int i = 0; i < arrayProduct.Length; i++)
+        {
+            if (0 != arrayProduct[i].ID)
+            {
+
+               Product[j] = arrayProduct[i];
+                j++;
+            }
+        }
+        return Product;
+        
     }
     public void delete(int id)
     {
@@ -108,9 +130,9 @@ public class DalProduct
     }
 
 
-    public void print(int index)
+    public void print(int n)
     {
-        arrayProduct[index].ToString();
+        Console.WriteLine(arrayProduct[n]);
     }
 
     public int length() { return arrayProduct.Length; }

@@ -12,6 +12,7 @@ public class DalOrderItem
 {
     public int Add(OrderItem orderItem)
     {
+        orderItem.ID = _Config.get_OrderItemID;
         if (_Config._OrderItemIndex == 200)
         {
             throw new Exception("OVERLOAD! no more space in arrayOrderItem");
@@ -20,7 +21,7 @@ public class DalOrderItem
         {
             throw new Exception("DUPLICATION! this OrderItem already exist");
         }
-        orderItem.ID = _Config.get_OrderItemID;
+        
         arrayOrderItem[_Config._OrderItemIndex++] = orderItem;
         return orderItem.ID;
     }
@@ -108,7 +109,7 @@ public class DalOrderItem
 
     public void print(int index)
     {
-        arrayOrderItem[index].ToString();
+        Console.WriteLine(arrayOrderItem[index]);
     }
 
     public int length() { return arrayOrderItem.Length; }
