@@ -21,6 +21,7 @@ public class Program
                 "e -update the object's details\n" +
                 "f -search object by getting ID\n" +
                 "h -end\n");
+
         option= Console.Read();
         Product temp = new Product();
         int id;
@@ -171,14 +172,11 @@ public class Program
                 case 'a':
                     {
                         Console.WriteLine("please enter (ProductID,OrderID,Price,Amount)");
-                        int ProductID;
-                        int OrderID;
-                        double price;
-                        int Amount;
-                        int.TryParse(Console.ReadLine(), out ProductID);
-                        int.TryParse(Console.ReadLine(), out OrderID);
-                        double.TryParse(Console.ReadLine(), out price);
-                        int.TryParse(Console.ReadLine(), out Amount);
+            
+                       temp.ID= Console.Read();
+                       temp.IdOfItem=Console.Read();
+                        temp.Price=double.Parse(Console.ReadLine());
+                       temp.amount=Console.Read();
                         id = dalOrderItem.Add(temp);
                         break;
                     }
@@ -239,6 +237,13 @@ public class Program
             DalOrderItem dalOrderItem = new DalOrderItem();
             DalProduct dalProduct = new DalProduct();
             int num = 6;
+        Console.Write("press 0 ");
+
+       num = Console.Read();
+        Console.Write("press 3 ");
+
+        num = Console.Read();
+
         while (num != 0)
         {
             try
@@ -261,7 +266,7 @@ public class Program
                             orderOption(ref dalOrder);
                             break;
                         }
-                    case 3://orderitem
+                    case '3'://orderitem
                         {
 
                             orderItem(ref dalOrderItem);
