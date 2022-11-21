@@ -12,7 +12,7 @@ public class Program
 {
 
 
-    public static void productOption(ref DalProduct dalProduct)
+    public static void productOption(DalList dal)
     {
         char option;
         Console.WriteLine("Order Item\n" +
@@ -41,23 +41,23 @@ public class Program
                     temp.Price = double.Parse(Console.ReadLine());
                     int.TryParse(Console.ReadLine(), out int inStock);
                     temp.InStock = inStock;
-                    id = dalProduct.Add(temp);
+                    id = dal.Product.Add(temp);
                     break;
                 }
             case 'b':
                 {
                     Console.WriteLine("please enter ID of product");
                     int.TryParse(Console.ReadLine(), out id);
-                    int i = dalProduct.search(id);
-                    dalProduct.print(i);
+                    int i = dal.Product.search(id);
+                    dal.Product.print(i);
                     break;
                 }
             case 'c':
                 {
-
-                    for (int _i = 0; _i < dalProduct.length(); _i++)
+                    int length = dal.Product.length();
+                    for (int _i = 0; _i < length; _i++)
                     { // print all the order items
-                        dalProduct.print(_i);
+                        dal.Product.print(_i);
                     }
                     break;
                 }
@@ -67,8 +67,8 @@ public class Program
                 {
                     Console.WriteLine("please enter ID of product you want delete\n");
                     int.TryParse(Console.ReadLine(), out id);
-                    dalProduct.delete(id);
-                    dalProduct.print(id);
+                    dal.Product.delete(id);
+                    dal.Product.print(id);
                     break;
                 }
             case 'e':
@@ -79,21 +79,21 @@ public class Program
                     temp.Price = double.Parse(Console.ReadLine());
                     int.TryParse(Console.ReadLine(), out int inStock);
                     temp.InStock = inStock;
-                    dalProduct.update(temp);
+                    dal.Product.update(temp);
                     break;
                 }
             case 'f':
                 {
                     Console.WriteLine("please enter ID\n");
                     id = Console.Read();
-                    Console.WriteLine("the index is" + dalProduct.search(id));
+                    Console.WriteLine("the index is" + dal.Product.search(id));
 
                     break;
                 }
 
         }
     }
-    public static void orderOption(ref DalOrder dalOrder)
+    public static void orderOption(DalList dal)
     {
         Console.WriteLine("Order Item\n" +
                   "a -add object\n" +
@@ -116,23 +116,23 @@ public class Program
                     temp.CustomerName = Console.ReadLine();
                     temp.CustomerMail = Console.ReadLine();
                     temp.CustamerAddress = Console.ReadLine();
-                    id = dalOrder.Add(temp);
+                    id = dal.Order.Add(temp);
                     break;
                 }
             case 'b':
                 {
                     Console.WriteLine("please enter ID of Order");
                     int.TryParse(Console.ReadLine(), out id);
-                    int i = dalOrder.search(id);
-                    dalOrder.print(i);
+                    int i = dal.Order.search(id);
+                    dal.Order.print(i);
                     break;
                 }
             case 'c':
                 {
-                    for (int i = 0; i < dalOrder.length(); i++)
+                    for (int i = 0; i < dal.Order.length(); i++)
                     {
                         Console.Write((i + 1) + "-");
-                        dalOrder.print(i);
+                        dal.Order.print(i);
 
                     }
                     break;
@@ -141,8 +141,8 @@ public class Program
                 {
                     Console.WriteLine("please enter ID of Order you want delete\n");
                     int.TryParse(Console.ReadLine(), out id);
-                    dalOrder.delete(id);
-                    dalOrder.print(id);
+                    dal.Order.delete(id);
+                    dal.Order.print(id);
                     break;
                 }
             case 'e':
@@ -151,20 +151,20 @@ public class Program
                     temp.CustomerName = Console.ReadLine();
                     temp.CustomerMail = Console.ReadLine();
                     temp.CustamerAddress = Console.ReadLine();
-                    dalOrder.update(temp);
+                    dal.Order.update(temp);
                     break;
                 }
             case 'f':
                 {
                     Console.WriteLine("please enter ID\n");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine("the index is" + dalOrder.search(id));
+                    Console.WriteLine("the index is" + dal.Order.search(id));
 
                     break;
                 }
         }
     }
-    public static void orderItem(ref DalOrderItem dalOrderItem)
+    public static void orderItem(DalList dal)
     {
         Console.WriteLine("Order Item\n" +
                     "a -add object\n" +
@@ -190,23 +190,23 @@ public class Program
                     int.TryParse(Console.ReadLine(), out OrderID);
                     double.TryParse(Console.ReadLine(), out price);
                     int.TryParse(Console.ReadLine(), out Amount);
-                    id = dalOrderItem.Add(temp);
+                    id = dal.OrderItem.Add(temp);
                     break;
                 }
             case 'b':
                 {
                     Console.WriteLine("please enter ID of Order");
                     int.TryParse(Console.ReadLine(), out id);
-                    int i = dalOrderItem.search(id);
-                    dalOrderItem.print(i);
+                    int i = dal.OrderItem.search(id);
+                    dal.OrderItem.print(i);
                     break;
                 }
             case 'c':
                 {
-                    for (int i = 0; i < dalOrderItem.length(); i++)
+                    for (int i = 0; i < dal.OrderItem.length(); i++)
                     {
                         Console.Write((i + 1) + "-");
-                        dalOrderItem.print(i);
+                        dal.OrderItem.print(i);
 
                     }
                     break;
@@ -215,8 +215,8 @@ public class Program
                 {
                     Console.WriteLine("please enter ID of Order you want delete\n");
                     int.TryParse(Console.ReadLine(), out id);
-                    dalOrderItem.delete(id);
-                    dalOrderItem.print(id);
+                    dal.OrderItem.delete(id);
+                    dal.OrderItem.print(id);
                     break;
                 }
             case 'e':
@@ -230,14 +230,14 @@ public class Program
                     int.TryParse(Console.ReadLine(), out OrderID);
                     double.TryParse(Console.ReadLine(), out price);
                     int.TryParse(Console.ReadLine(), out Amount);
-                    dalOrderItem.update(temp);
+                    dal.OrderItem.update(temp);
                     break;
                 }
             case 'f':
                 {
                     Console.WriteLine("please enter ID\n");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine("the index is" + dalOrderItem.search(id));
+                    Console.WriteLine("the index is" + dal.OrderItem.search(id));
 
                     break;
                 }
@@ -246,10 +246,10 @@ public class Program
 
     public static void Main(string[] args)
     {
-
-        DalOrder dalOrder = new DalOrder();
-        DalOrderItem dalOrderItem = new DalOrderItem();
-        DalProduct dalProduct = new DalProduct();
+        DalList dal = new DalList();
+        //DalOrder dalOrder = new DalOrder();
+        //DalOrderItem dalOrderItem = new DalOrderItem();
+        //DalProduct dalProduct = new DalProduct();
         char num = '5';
         Console.WriteLine("press 0 to exit\nfor Product press 1\n for Ordr press 2\n for OrderItem press 3");
         while (num != '0')
@@ -268,18 +268,18 @@ public class Program
                         }
                     case '1'://Product
                         {
-                            productOption(ref dalProduct);
+                            productOption(dal);
                             break;
                         }
                     case '2'://Order
                         {
-                            orderOption(ref dalOrder);
+                            orderOption(dal);
                             break;
                         }
                     case '3'://orderitem
                         {
 
-                            orderItem(ref dalOrderItem);
+                            orderItem(dal);
                             break;
                         }
                 }

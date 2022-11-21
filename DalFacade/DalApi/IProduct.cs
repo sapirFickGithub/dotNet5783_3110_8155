@@ -7,10 +7,11 @@ using DO;
 
 namespace DalApi
 {
-    public interface IProduct : ICrud<Product>
+    public interface IProduct : ICrud<Product> 
     {
         public int search(int id);
         public bool search(Product find);
         public void print(int index);
+        public int length();
     }
 }

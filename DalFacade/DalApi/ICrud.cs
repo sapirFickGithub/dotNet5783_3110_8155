@@ -8,11 +8,11 @@ namespace DalApi
 {
    public interface ICrud<T>
     {
-        public T Add(T ob);
-        public T updat(T ob);
-        public T delete(T ob);
-        public T get(T ob);
-        public IEnumerable<T> getAll();
+        public int Add(T ob);
+        public void update(T ob);
+        public void delete(int ob);
+        public T get(int ob);
+        public List<T> getAll();
     }
 
 }

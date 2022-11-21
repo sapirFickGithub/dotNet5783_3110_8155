@@ -11,5 +11,6 @@ namespace DalApi
         public int search(int id);
         public bool search(OrderItem find);
         public void print(int index);
+        public int length();
     }
 }

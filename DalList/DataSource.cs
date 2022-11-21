@@ -12,19 +12,20 @@ static internal class DataSource
 {
 
     static readonly int RandNum = 0;
-    internal static Order[] arrayOrder = new Order[100];
-    internal static OrderItem[] arrayOrderItem = new OrderItem[200];
-    internal static Product[] arrayProduct = new Product[50];
+    internal static List<OrderItem> listOrderItem = new List<OrderItem>();
+    internal static List<Product> listProduct = new List<Product>();
+    internal static List<Order> listOrder = new List<Order>();
+
 
     internal static string[] ProductName = { "Lamborgini", "BMW", "Ferrari", "Porche", "Jeep", "Tesla", "jaguar", "Audi", "Corvette", "MINI cooper" };
     internal static string[] CustomerName = { "Moshe", "Yeoram", "Yossi", "Dani", "Avi", "Sapir", "Hadar" };
 
     static internal class _Config
     {
-        // how much places are contain thigs
-        internal static int _ProductIndex = 0;
-        internal static int _OrderIndex = 0;
-        internal static int _OrderItemIndex = 0;
+        //// how much places are contain thigs
+        internal static int _ProductIndex = 0;//for the get product function
+        //internal static int _OrderIndex = 0;
+        //internal static int _OrderItemIndex = 0;
 
         //
         private static int _OrderID = 10000;
@@ -65,6 +66,8 @@ static internal class DataSource
             p.ProductCategory = (Category)v.GetValue(rand.Next(0, 4));
             p.InStock = rand.Next(1, 5);
             p.Price = rand.Next(200000, 5000000);
+
+            listProduct.Add(p);
         }
     }
     private static void _InitializeOrder()//initializ order
@@ -72,7 +75,6 @@ static internal class DataSource
         Random rand = new Random();
         for (int i = 0; i < 20; i++)
         {
-            _Config._OrderIndex++;
             Order _order = new Order();
             _order.ID = _Config.get_OrderID;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
@@ -83,6 +85,7 @@ static internal class DataSource
             _order.CustamerAddress = "jrusalem";
             _order.CustomerMail = "maill@gmail.com";
 
+            listOrder.Add(_order); 
         }
     }
 
@@ -91,15 +94,14 @@ static internal class DataSource
         Random rand = new Random();
         for (int i = 0; i < 40; i++)
         {
-            _Config._OrderItemIndex++;
             OrderItem _orderItem = new OrderItem();
             _orderItem.ID = _Config.get_OrderItemID;
-            _orderItem.NumOfOrder = arrayOrder[i % 19].ID;//i%19 will chosse the order , in this way all the place be uesed
+            _orderItem.NumOfOrder = listOrder[i % 19].ID;//i%19 will chosse the order , in this way all the place be uesed
             int index = rand.Next(0, 10);//choss a product 
-            _orderItem.IdOfItem = arrayProduct[index].ID;
+            _orderItem.IdOfItem = listProduct[index].ID;
             _orderItem.amount = rand.Next(1, 5);
-            _orderItem.Price = arrayProduct[index].Price;
-
+            _orderItem.Price = listProduct[index].Price;
+            listOrderItem.Add(_orderItem);
         }
 
     }

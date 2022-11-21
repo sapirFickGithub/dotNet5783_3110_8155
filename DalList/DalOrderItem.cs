@@ -5,41 +5,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Dal.DataSource;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem:IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
         orderItem.ID = _Config.get_OrderItemID;
-        if (_Config._OrderItemIndex == 200)
-        {
-            throw new overload();
-        }
         if (search(orderItem))
         {
             throw new duplication();
         }
 
-        arrayOrderItem[_Config._OrderItemIndex++] = orderItem;
+        listOrderItem[listOrderItem.Count()] = orderItem;
         return orderItem.ID;
     }
     public OrderItem get(int id)
     {
-        int i;
-        for (i = 0; i < arrayOrderItem.Length; i++)
+        int i, length = listOrderItem.Count();
+        for (i = 0; i < length; i++)
         {
-            if (id == arrayOrderItem[i].ID)
+            if (id == listOrderItem[i].ID)
             {
-                return arrayOrderItem[i];
+                return listOrderItem[i];
             }
         }
         throw new notFound();
     }
-    public OrderItem[] get()
+    public List<OrderItem> getAll()
     {
-        return arrayOrderItem;
+        return listOrderItem;
     }
     public void delete(int id)
     {
@@ -47,33 +44,33 @@ public class DalOrderItem
         {
             throw new notFound();
         }
-        OrderItem[] OrderItem = new OrderItem[200];
+       List<OrderItem> OrderItem = new List<OrderItem>();
         int i;
-        for (i = 0; i < arrayOrderItem.Length; i++)
+        for (i = 0; i < listOrderItem.Count(); i++)
         {
-            if (id == arrayOrderItem[i].ID)
+            if (id == listOrderItem[i].ID)
             {
                 break;
             }
         }
         for (int j = 0; j < i - 1; j++)
         {
-            OrderItem[j] = arrayOrderItem[j];
+            OrderItem[j] = listOrderItem[j];
         }
-        for (int j = i + 1; j < arrayOrderItem.Length; j++)
+        for (int j = i + 1; j < listOrderItem.Count; j++)
         {
-            OrderItem[j] = arrayOrderItem[j];
+            OrderItem[j] = listOrderItem[j];
         }
-        arrayOrderItem = OrderItem;
+        listOrderItem = OrderItem;
     }
     public void update(OrderItem newOrderItem)
     {
         if (search(newOrderItem))
         {
-            for (int i = 0; i < arrayOrderItem.Length; i++)
+            for (int i = 0; i < listOrderItem.Count(); i++)
             {
-                if (newOrderItem.ID == arrayOrderItem[i].ID)
-                    arrayOrderItem[i] = newOrderItem;
+                if (newOrderItem.ID == listOrderItem[i].ID)
+                   listOrderItem[i] = newOrderItem;
             }
         }
         else
@@ -84,9 +81,9 @@ public class DalOrderItem
     public bool search(OrderItem find)//help function
     {
         int i;
-        for (i = 0; i < arrayOrderItem.Length; i++)
+        for (i = 0; i < listOrderItem.Count(); i++)
         {
-            if (find.ID == arrayOrderItem[i].ID)
+            if (find.ID == listOrderItem[i].ID)
             {
                 return true;
             }
@@ -96,21 +93,19 @@ public class DalOrderItem
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
         int i;
-        for (i = 0; i < arrayOrderItem.Length; i++)
+        for (i = 0; i < listOrderItem.Count(); i++)
         {
-            if (id == arrayOrderItem[i].ID)
+            if (id == listOrderItem[i].ID)
             {
                 return i;
             }
         }
         return -1;
     }
-
-
     public void print(int index)
     {
-        Console.WriteLine(arrayOrderItem[index]);
+        Console.WriteLine(listOrderItem[index]);
     }
-
-    public int length() { return arrayOrderItem.Length; }
+    public int length() 
+    { return listOrderItem.Count();}
 }
