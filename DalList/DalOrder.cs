@@ -13,29 +13,29 @@ public class DalOrder
 {
     public int Add(Order order)
     {
-        if (_Config._OrderIndex ==100)
+        order.ID = _Config.get_OrderID;
+        if (_Config._OrderIndex == 100)
         {
-            throw new Exception("OVERLOAD! no more space in arrayOrder");
+            throw new overload();
         }
         if (search(order))
         {
-            throw new Exception("DUPLICATION! this Order already exist");
+            throw new duplication();
         }
-        order.ID = _Config.get_OrderID;
         arrayOrder[_Config._OrderIndex++] = order;
         return order.ID;
     }
     public Order get(int id)
     {
         int i;
-        for ( i = 0; i < arrayOrder.Length; i++)
+        for (i = 0; i < arrayOrder.Length; i++)
         {
-            if (id== arrayOrder[i].ID)
+            if (id == arrayOrder[i].ID)
             {
                 return arrayOrder[i];
             }
         }
-        throw new Exception("ORDER NOT FOUND!");
+        throw new notFound();
     }
     public Order[] get()
     {
@@ -43,11 +43,11 @@ public class DalOrder
     }
     public void delete(int id)
     {
-        if (0>search(id))
+        if (0 > search(id))
         {
-            throw new Exception("ORDER NOT FOUND!");
+            throw new notFound();
         }
-    Order[] Order = new Order[100];
+        Order[] Order = new Order[100];
         int i;
         for (i = 0; i < arrayOrder.Length; i++)
         {
@@ -78,7 +78,7 @@ public class DalOrder
         }
         else
         {
-            throw new Exception("ORDER NOT FOUND!");
+            throw new notFound();
         }
     }
     public bool search(Order find)//help function
@@ -109,7 +109,7 @@ public class DalOrder
 
     public void print(int index)
     {
-        arrayOrder[index].ToString();
+        Console.WriteLine(arrayOrderItem[index]);
     }
 
     public int length() { return arrayOrder.Length; }

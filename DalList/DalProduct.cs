@@ -9,17 +9,18 @@ namespace Dal;
 
 public class DalProduct
 {
-    public int Add( Product product)
+    public int Add(Product product)
     {
+        product.ID = _Config.get_ProductID;
         if (_Config._ProductIndex == 50)
         {
-            throw new Exception("OVERLOAD! no more space in arrayProduct");
+            throw new overload();
         }
         if (search(product))
         {
-            throw new Exception("DUPLICATION! this product already exist");
+            throw new duplication();
         }
-        product.ID = _Config.get_ProductID;//צריך לבדוק אם מותר לעשות בדיקה ידנית
+        //product.ID = _Config.get_ProductID;//צריך לבדואם מותר לעשות בדיקה ידנית
         arrayProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }
@@ -33,18 +34,39 @@ public class DalProduct
                 return arrayProduct[i];
             }
         }
-        throw new Exception("PRODUCT NOT FOUND!");
+        throw new notFound();
         //return arrayProduct[(id - 100000) / 23];//in the class config we colculate the id eith the formula "100000+ _ProductIndex * 20 + _ProductIndex * 3" so to get the right index, we did the opposite formula
     }
-    public Product[] get()
+    public Product[] idMatch(int id)
     {
-        return arrayProduct;
+        int counter = 0;
+        for (int k = 0; k < arrayProduct.Length; k++)
+        {
+            if (id == arrayProduct[k].ID)
+            {
+                counter++;
+            }
+        }
+
+        Product[] Product = new Product[counter];
+        int j = 0;
+        for (int i = 0; i < arrayProduct.Length; i++)
+        {
+            if (0 != arrayProduct[i].ID)
+            {
+
+                Product[j] = arrayProduct[i];
+                j++;
+            }
+        }
+        return Product;
+
     }
     public void delete(int id)
     {
-        if (search(id)<0)
+        if (search(id) < 0)
         {
-            throw new Exception("ORDER NOT FOUND!");
+            throw new notFound();
         }
         Product[] Product = new Product[50];
         int i;
@@ -55,11 +77,11 @@ public class DalProduct
                 break;
             }
         }
-        for (int j = 0; j < i-1; j++)
+        for (int j = 0; j < i - 1; j++)
         {
-            Product[j]= arrayProduct[j];
+            Product[j] = arrayProduct[j];
         }
-        for (int j = i+1; j < arrayProduct.Length; j++)
+        for (int j = i + 1; j < arrayProduct.Length; j++)
         {
             Product[j] = arrayProduct[j];
         }
@@ -89,7 +111,7 @@ public class DalProduct
         }
         else
         {
-            throw new Exception("ORDER NOT FOUND!");
+            throw new notFound();
         }
     }
 
@@ -108,12 +130,11 @@ public class DalProduct
     }
 
 
-    public void print(int index)
+    public void print(int n)
     {
-        arrayProduct[index].ToString();
+        Console.WriteLine(arrayProduct[n]);
     }
 
     public int length() { return arrayProduct.Length; }
 }
-
 

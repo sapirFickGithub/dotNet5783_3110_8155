@@ -10,7 +10,7 @@ using System.Windows.Markup;
 
 static internal class DataSource
 {
-    
+
     static readonly int RandNum = 0;
     internal static Order[] arrayOrder = new Order[100];
     internal static OrderItem[] arrayOrderItem = new OrderItem[200];
@@ -28,11 +28,12 @@ static internal class DataSource
 
         //
         private static int _OrderID = 10000;
-        public static int get_OrderID 
-        { get 
-            { return _OrderID++; } 
+        public static int get_OrderID
+        {
+            get
+            { return _OrderID++; }
         }
-       
+
         private static int _OrderItemID = 10000;
         public static int get_OrderItemID
         {
@@ -45,8 +46,9 @@ static internal class DataSource
             get
             {
                 Random randi = new Random();
-                _ProductID= 100000+ _ProductIndex * 20 + _ProductIndex * 3;
-                return _ProductID; }
+                _ProductID = 100000 + _ProductIndex * 20 + _ProductIndex * 3;
+                return _ProductID;
+            }
         }
     }
 
@@ -60,7 +62,7 @@ static internal class DataSource
             p.ID = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
             p.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
-            p.ProductCategory = (Category)v.GetValue(rand.Next(0, 10));
+            p.ProductCategory = (Category)v.GetValue(rand.Next(0, 4));
             p.InStock = rand.Next(1, 5);
             p.Price = rand.Next(200000, 5000000);
         }
@@ -70,10 +72,10 @@ static internal class DataSource
         Random rand = new Random();
         for (int i = 0; i < 20; i++)
         {
-           _Config._OrderIndex++;
+            _Config._OrderIndex++;
             Order _order = new Order();
             _order.ID = _Config.get_OrderID;
-            _order.CustomerName = CustomerName[rand.Next(0, 10)];
+            _order.CustomerName = CustomerName[rand.Next(0, 7)];
             _order.DateOfOrder = DateTime.MinValue;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
             _order.DateCreateDelivery = _order.DateOfOrder + spaceTime;//one day after the order the dilevery will create
@@ -91,10 +93,10 @@ static internal class DataSource
         {
             _Config._OrderItemIndex++;
             OrderItem _orderItem = new OrderItem();
-            _orderItem.ID =_Config.get_OrderItemID;
-            _orderItem.NumOfOrder = arrayOrder[i%19].ID;//i%19 will chosse the order , in this way all the place be uesed
-            int index=rand.Next(0, 10);//choss a product 
-            _orderItem.IdOfItem= arrayProduct[index].ID;
+            _orderItem.ID = _Config.get_OrderItemID;
+            _orderItem.NumOfOrder = arrayOrder[i % 19].ID;//i%19 will chosse the order , in this way all the place be uesed
+            int index = rand.Next(0, 10);//choss a product 
+            _orderItem.IdOfItem = arrayProduct[index].ID;
             _orderItem.amount = rand.Next(1, 5);
             _orderItem.Price = arrayProduct[index].Price;
 
