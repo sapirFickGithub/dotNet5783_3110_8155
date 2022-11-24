@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO;
 public enum Category { FAMILLY, RACE, JEEP, SPORT }
-/// <summary>
-///  DLIVERY-  the order is on the way.
-///  SUPPLY- the order has been supply.
-///  TREATMENT- the order is in treatment process.
-/// </summary>
-public enum Status { DLIVERY, SUPPLY, TREATMENT }
+
+/// ordered - order been received and take care of
+///Shipped - the order has been ordered and shipped out to the customer
+///Delivered - the order being ordered shipped and delivered to the customer
+
+public enum Status { DLIVERY, SHIPPED, ORDERED }
