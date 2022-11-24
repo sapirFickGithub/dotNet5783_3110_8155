@@ -11,6 +11,10 @@ namespace BlImplementation
     {
         public Cart add(Cart cart, int id)
         {
+            foreach (var item in cart.Item)
+            {
+
+            }
 
             return cart;
         }
