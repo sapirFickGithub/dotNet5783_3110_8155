@@ -8,9 +8,9 @@ namespace BO
 {
     public class Cart
     {
-        public string CustomerName { get; set; }
-        public string CustomerMail { get; set; }
-        public string CustomerAddress { get; set; }
+        public string? CustomerName { get; set; }
+        public string? CustomerMail { get; set; }
+        public string? CustomerAddress { get; set; }
         public List<OrderItem> Item { get; set; }
         public double TotalPrice { get; set; }
 
