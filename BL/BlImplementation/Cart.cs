@@ -15,10 +15,10 @@ namespace BlImplementation
     {
         public BO.Cart add(BO.Cart cart, int id)
         {
-            foreach(var OrderItem in Item)
-            {
+            //foreach(var OrderItem in Item)
+            //{
 
-            }
+            //}
             return cart;
         }
         public BO.Cart updet(BO.Cart cart, int id, int amount)
