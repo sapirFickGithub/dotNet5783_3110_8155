@@ -12,12 +12,12 @@ namespace BO
         public string? CustomerName { get; set; }
         public string? CustomerMail { get; set; }
         public string? CustomerAddress { get; set; }
-        public DateTime? DateCreateDelivery { get; set; }
-        public DateTime? DateOfOrder { get; set; }
-        public DateTime? DateOfDelivery { get; set; }
-        public OrderSatus Status { get; set; }//
+        public DateTime? DateCreateDelivery { get; set; }//תאריך הזמנה
+        public DateTime? DateOfOrder { get; set; }//תאריך שילוח
+        public DateTime? DateOfDelivery { get; set; }//תאריך אספקה
+        public OrderStatus Status { get; set; }
         public DateTime? PaymentDate { get; set; }
-        public OrderItem Items { get; set; }
+        public List<OrderItem> Items { get; set; }
         public double TotalPrice { get; set; }
 
 

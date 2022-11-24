@@ -11,4 +11,4 @@ public enum Category { FAMILLY, RACE, JEEP, SPORT }
 ///Shipped - the order has been ordered and shipped out to the customer
 ///Delivered - the order being ordered shipped and delivered to the customer
 
-public enum Status { DLIVERY, SHIPPED, ORDERED }
+public enum OrderStatus { DLIVERY, SHIPPED, ORDERED }
