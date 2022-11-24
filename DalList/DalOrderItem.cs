@@ -34,7 +34,7 @@ internal class DalOrderItem:IOrderItem
         }
         throw new notFound();
     }
-    public List<OrderItem> getAll()
+    public IEnumerable<OrderItem> getAll()
     {
         return listOrderItem;
     }

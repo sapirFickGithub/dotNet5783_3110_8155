@@ -12,7 +12,7 @@ namespace DalApi
         public void update(T ob);
         public void delete(int ob);
         public T get(int ob);
-        public List<T> getAll();
+        public IEnumerable<T> getAll();
     }
 
 }

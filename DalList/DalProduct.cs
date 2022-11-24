@@ -35,7 +35,7 @@ internal class DalProduct :IProduct
         throw new notFound();
         //return arrayProduct[(id - 100000) / 23];//in the class config we colculate the id eith the formula "100000+ _ProductIndex * 20 + _ProductIndex * 3" so to get the right index, we did the opposite formula
     }
-    public List<Product> getAll()
+    public IEnumerable<Product> getAll()
     {
 
         return listProduct;

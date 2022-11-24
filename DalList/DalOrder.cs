@@ -33,7 +33,7 @@ internal class DalOrder:IOrder
         }
         throw new notFound();
     }
-    public List<Order> getAll()
+    public IEnumerable<Order> getAll()
     {
         return listOrder;
     }
