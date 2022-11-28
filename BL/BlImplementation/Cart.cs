@@ -15,10 +15,13 @@ namespace BlImplementation
     {
         public BO.Cart add(BO.Cart cart, int id)
         {
-            foreach (var Item in cart.Item)
+        BO.Product product= GetProduct(id);
+            foreach (var item in cart.Item)
             {
-
+                if(item.IdProduct==id)
+                    throw new duplication();
             }
+            
             return cart;
         }
         public BO.Cart updet(BO.Cart cart, int id, int amount)
