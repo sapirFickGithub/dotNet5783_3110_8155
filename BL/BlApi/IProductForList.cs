@@ -9,7 +9,7 @@ namespace BlApi
 {
     public interface IProductForList
     {
-        /// the method return all the product in the stor
+        /// the method return all the product in the store
         /// ProductForList
         public ProductForList allProduct();
 

@@ -8,8 +8,8 @@ namespace BlApi
 {
     public interface IOrderTracking
     {
-        public Order updatDelivery(int id);
-        public Order updatSupply(int id);
+        public Order updateDelivery(int id);
+        public Order updateSupply(int id);
         public OrderTracking tracking(int id);
     }
 }

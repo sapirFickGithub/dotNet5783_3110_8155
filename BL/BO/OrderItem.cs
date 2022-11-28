@@ -8,6 +8,8 @@ namespace BO
 {
     public class OrderItem
     {
+        internal Enum.Category? ProductCategory;
+
         public int ID { get; set; }
         public int NumOfOrder { get; set; }
         public int IdOfItem { get; set; }

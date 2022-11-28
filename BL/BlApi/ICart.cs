@@ -12,7 +12,7 @@ namespace BlApi
     {
       
       public BO.Cart add (Cart cart, int id);
-        public BO.Cart updet(Cart cart, int id,int amount);
+        public BO.Cart updete(Cart cart, int id,int amount);
         public bool approvment(Cart cart);
     }
 }

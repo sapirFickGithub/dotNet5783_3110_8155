@@ -12,9 +12,9 @@ static internal class DataSource
 {
 
     static readonly int RandNum = 0;
-    internal static List<OrderItem> listOrderItem = new List<OrderItem>();
-    internal static List<Product> listProduct = new List<Product>();
-    internal static List<Order> listOrder = new List<Order>();
+    internal static IEnumerable<OrderItem> listOrderItem = new List<OrderItem>();
+    internal static IEnumerable<Product> listProduct = new List<Product>();
+    internal static IEnumerable<Order> listOrder = new List<Order>();
 
 
     internal static string[] ProductName = { "Lamborgini", "BMW", "Ferrari", "Porche", "Jeep", "Tesla", "jaguar", "Audi", "Corvette", "MINI cooper" };
