@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
-
-using BO;
 using System.Runtime.CompilerServices;
 
 
@@ -13,25 +11,53 @@ namespace BlImplementation
 {
     internal class Cart : ICart
     {
+        private DalApi.IDal dal = new Dal.DalList();
         public BO.Cart add(BO.Cart cart, int id)
         {
-        BO.Product product= GetProduct(id);
-            foreach (var item in cart.Item)
-            {
-                if(item.IdProduct==id)
-                    throw new duplication();
-            }
             
+            BO.Product product = new BO.Product();
+            // product = dal.(int id);
+           product.
+
+
+            foreach (var i in cart.Item)
+            {
+                if (i.IdOfProduct == id)
+                {
+
+                    i.amount++;
+                    i.totalPrice+=product.Price;
+                    cart.TotalPrice+=product.Price;
+                    return cart;
+                }
+            }
+            BO.OrderItem newOrderItem = new BO.OrderItem()
+            {
+                IdOfProduct = id,
+                NameOfProduct = product.Name,
+                PriceOfProduct = product.Price,
+                amount = 1,
+                totalPrice = product.Price,
+            };
+            cart.Item.Add(newOrderItem);
+            cart.TotalPrice += product.Price;
             return cart;
         }
-        public BO.Cart updet(BO.Cart cart, int id, int amount)
+        public BO.Cart updetAmount(BO.Cart cart, int id, int amount)
         {
-            foreach (var item in cart.Item)
+            foreach (var i in cart.Item)
             {
+                if (i.ID == id)
+                {
+                    Product product = requstedProduct(id);
+                    if (product.InStock >= amount)
+                        i.Amount = amount;
+                    else
 
+                }
             }
+            throw new notFound();
 
-            return cart;
         }
         public bool approvment(BO.Cart cart)
         {

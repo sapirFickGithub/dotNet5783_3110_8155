@@ -108,4 +108,15 @@ internal class DalOrderItem:IOrderItem
     }
     public int length() 
     { return listOrderItem.Count();}
+    public IEnumerable<OrderItem> getAllItemOrter(int id) { 
+    List<OrderItem> list=new List<OrderItem>();
+        foreach(OrderItem item in listOrderItem)
+        {
+            if(item.IdOfItem==id)
+                list.Add(item);
+            if (item.amount == 0)
+                throw new notFound();
+        }
+        return list;    
+    }
 }

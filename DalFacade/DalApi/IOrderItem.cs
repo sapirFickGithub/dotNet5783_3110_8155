@@ -12,5 +12,6 @@ namespace DalApi
         public bool search(OrderItem find);
         public void print(int index);
         public int length();
+        public IEnumerable<OrderItem> getAllItemOrter(int id);
     }
 }

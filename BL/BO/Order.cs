@@ -15,7 +15,7 @@ namespace BO
         public DateTime? DateCreateDelivery { get; set; }//תאריך הזמנה
         public DateTime? DateOfOrder { get; set; }//תאריך שילוח
         public DateTime? DateOfDelivery { get; set; }//תאריך אספקה
-        public Enum.OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; }
         public DateTime? PaymentDate { get; set; }
         public List<OrderItem> Items { get; set; }
         public double TotalPrice { get; set; }

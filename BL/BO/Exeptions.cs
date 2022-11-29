@@ -6,29 +6,20 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class notExist : Exception
+    public class duplication : Exception
     {
-        public string Messege => "NOT EXIST!";
+        public string Messege => "DUPLICATION!";
         public string ToString()
         {
             return Messege;
         }
     }
-    public class IncorrectData : Exception
+    public class notFound : Exception
     {
-        public string Messege => "INCORRECT DATA!";
+        public string Messege => "NOT FOUND!";
         public string ToString()
         {
             return Messege;
         }
     }
-    public class exitInOrders : Exception
-    {
-        public string Messege => "EXIST IN ORDER!";
-        public string ToString()
-        {
-            return Messege;
-        }
-    }
-
 }

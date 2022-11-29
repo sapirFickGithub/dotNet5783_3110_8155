@@ -8,8 +8,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Dal;
+
 public class Program
 {
+    static DalList dal = new DalList();
 
 
     public static void productOption(DalList dal)
