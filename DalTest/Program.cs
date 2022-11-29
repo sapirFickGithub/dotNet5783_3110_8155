@@ -13,7 +13,10 @@ public class Program
 {
     static DalList dal = new DalList();
 
-
+/// <summary>
+/// test all the fonctions on product
+/// </summary>
+/// <param name="dal"></param>
     public static void productOption(DalList dal)
     {
         char option;
@@ -95,6 +98,10 @@ public class Program
 
         }
     }
+    /// <summary>
+    ///  test all the fonctions on order
+    /// </summary>
+    /// <param name="dal"></param>
     public static void orderOption(DalList dal)
     {
         Console.WriteLine("Order Item\n" +
@@ -166,6 +173,10 @@ public class Program
                 }
         }
     }
+    /// <summary>
+    ///  test all the fonctions on order item
+    /// </summary>
+    /// <param name="dal"></param>
     public static void orderItem(DalList dal)
     {
         Console.WriteLine("Order Item\n" +
