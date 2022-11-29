@@ -6,10 +6,12 @@ using System.Data.Common;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using BlImplementation;
+using BO;
 
 namespace BlTest;
 
 public class Program
+
 {
     static IBl ibl = new BL();
 
