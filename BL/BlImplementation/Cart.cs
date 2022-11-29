@@ -15,7 +15,7 @@ namespace BlImplementation
     {
         public BO.Cart add(BO.Cart cart, int id)
         {
-            foreach (var Item in cart.Item)
+            foreach (var Item in cart.)
             {
 
             }

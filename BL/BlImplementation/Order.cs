@@ -1,4 +1,5 @@
 ﻿using BO;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +83,8 @@ namespace BlImplementation
                         order.Items.Add(new()
                         {
                             ID = item.ID,
-                            NameOfProduct = Dal.Product.get(id),
+                            NameOfProduct = Dal.Product.get(id).Name,
+                            
                         })
                     }
                 }
@@ -96,6 +98,65 @@ namespace BlImplementation
 
             }
         }
+        public BO.Order updateDliveryOrder(int numOfOrder)
+        {
+            DO.Order Dorder = Dal.Order.get(numOfOrder);
+            if (Dorder.DateOfDelivery == DateTime.MinValue && Dorder.ID>0)
+            {
+                Dorder.DateOfDelivery = DateTime.Now;
+                BO.Order order = GetOrder(numOfOrder);
+                order.DateOfDelivery = DateTime.Now;
+                Dal.Order.update(Dorder);
+                return order;
+            }
+            else
+            {
+                throw new IncorrectData();
+            }
+        }
+        public BO.Order OrderDeliveryUpdate(int numOfOrder)
+        {
+            DO.Order Dorder = Dal.Order.get(numOfOrder);
+            if (Dorder.DateOfDelivery != DateTime.MinValue && Dorder.ID > 0 && Dorder.DateOfOrder == DateTime.MinValue)
+            {
+                Dorder.DateOfOrder = DateTime.Now;
+                BO.Order order = GetOrder(numOfOrder);
+                order.DateOfOrder = DateTime.Now;
+                Dal.Order.update(Dorder);
+                return order;
+            }
+            else
+            {
+                throw new IncorrectData();
+            }
+        }
+        public BO.OrderTracking orderTracking(int numOfOrder)
+        {
+            DO.Order Dorder = Dal.Order.get(numOfOrder); //אם ההזמנה לא קיימת תיזרק שגיאה
 
+            if (numOfOrder > 0)
+            {
+                BO.OrderTracking orderTracking = new()
+                {
+                    if (Dorder.DateCreateDelivery == DateTime.MinValue)
+                {
+                    orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
+                }
+                else if (Dal.Order.get(id).DateOfOrder != DateTime.MinValue && Dal.Order.get(id).DateCreateDelivery == DateTime.MinValue)
+                {
+                    order.Status = (BO.Enum.OrderStatus.ORDERED);
+                }
+                else
+                {
+                    order.Status = (BO.Enum.OrderStatus.DLIVERY);
+                }
+            }
+            }
+
+
+            }
+
+            }
+        }
     }
 }
