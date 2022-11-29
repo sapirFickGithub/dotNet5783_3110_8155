@@ -19,7 +19,7 @@ namespace BlImplementation
 
             foreach (var item in cart.itemList)
             {
-                if (item.IdOfItem == id)
+                if (item.ID == id)
                 {
                     if (product.InStock - item.amount >= 0)
                     {
@@ -35,7 +35,7 @@ namespace BlImplementation
                 OrderItem newItem = new OrderItem
                 {
                     NameOfProduct = product.Name,
-                    IdOfItem = product.ID,
+                    ID = product.ID,
                     PriceOfProduct = product.Price,
                     totalPrice = product.Price,
                     amount = 1
@@ -47,13 +47,13 @@ namespace BlImplementation
             else throw new outOfStock();
 
         }
-        public BO.Cart updet(BO.Cart cart, int id, int amount)
+        public BO.Cart updete(BO.Cart cart, int id, int amount)
         {
             DO.Product product = Dal.Product.get(id);
 
             foreach (var item in cart.itemList)
             {
-                if (item.IdOfItem == id)
+                if (item.ID == id)
                 {
                     if (amount == 0)
                     {
@@ -101,7 +101,7 @@ namespace BlImplementation
 
                 DO.OrderItem newOrderItem = new DO.OrderItem()
                 {
-                    IdOfItem = item.IdOfItem,
+                    IdOfItem = item.ID,
                     NumOfOrder = id,
                     Price = item.PriceOfProduct,
                     amount = item.amount,

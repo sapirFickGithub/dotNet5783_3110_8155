@@ -46,11 +46,10 @@ namespace BlImplementation
         }
         public BO.Order GetOrder(int id)
         {
-            double _price = 0;
-            int _amount = 0;
-            if (id>0)
+            double _price = 0,_totalPrice =0;
+            if (id > 0)
             {
-                
+                DO.OrderItem amount = Dal.OrderItem.get(id);
                 DO.Order Dorder = Dal.Order.get(id);
                 IEnumerable<DO.OrderItem> orderItem = Dal.OrderItem.getAll();
                 BO.Order order = new()
@@ -80,23 +79,22 @@ namespace BlImplementation
                     if (id == item.NumOfOrder)
                     {
                         _price += item.Price;
+                        _totalPrice = Dal.OrderItem.get(id).amount * item.Price;
                         order.Items.Add(new()
                         {
                             ID = item.ID,
                             NameOfProduct = Dal.Product.get(id).Name,
-                            
-                        })
+                            amount = Dal.OrderItem.get(id).amount,
+                            PriceOfProduct = item.Price,
+                            totalPrice = _totalPrice
+                        });
                     }
                 }
                 order.TotalPrice = _price;
-                order.Items = _amount;
-                
-
-
-
-
-
+                return order;
             }
+            else
+                throw new notExist();
         }
         public BO.Order updateDliveryOrder(int numOfOrder)
         {
@@ -111,10 +109,10 @@ namespace BlImplementation
             }
             else
             {
-                throw new IncorrectData();
+                throw new incorrectData();
             }
         }
-        public BO.Order OrderDeliveryUpdate(int numOfOrder)
+        public BO.Order UpdateSupplyDelivery(int numOfOrder)
         {
             DO.Order Dorder = Dal.Order.get(numOfOrder);
             if (Dorder.DateOfDelivery != DateTime.MinValue && Dorder.ID > 0 && Dorder.DateOfOrder == DateTime.MinValue)
@@ -127,36 +125,45 @@ namespace BlImplementation
             }
             else
             {
-                throw new IncorrectData();
+                throw new incorrectData();
             }
         }
         public BO.OrderTracking orderTracking(int numOfOrder)
         {
             DO.Order Dorder = Dal.Order.get(numOfOrder); //אם ההזמנה לא קיימת תיזרק שגיאה
+           
 
             if (numOfOrder > 0)
             {
-                BO.OrderTracking orderTracking = new()
+                BO.OrderTracking orderTracking = new() { ID = numOfOrder };
+                orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
+                if (numOfOrder > 0)
                 {
                     if (Dorder.DateCreateDelivery == DateTime.MinValue)
-                {
-                    orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
-                }
-                else if (Dal.Order.get(id).DateOfOrder != DateTime.MinValue && Dal.Order.get(id).DateCreateDelivery == DateTime.MinValue)
-                {
-                    order.Status = (BO.Enum.OrderStatus.ORDERED);
-                }
-                else
-                {
-                    order.Status = (BO.Enum.OrderStatus.DLIVERY);
-                }
-            }
-            }
+                    {
+                        orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
+                        Tuple<DateTime, BO.Enum.OrderStatus> a =  new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, orderTracking.Status);
+                       
 
 
+                    }
+                    else if (Dal.Order.get(numOfOrder).DateOf!= DateTime.MinValue && Dal.Order.get(numOfOrder).DateCreateDelivery == DateTime.MinValue)
+                    {
+                        order.Status = (BO.Enum.OrderStatus.ORDERED);
+                        Tuple<DateTime, BO.Enum.OrderStatus> a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, orderTracking.Status);
+                    }
+                    else
+                    {
+                        order.Status = (BO.Enum.OrderStatus.DLIVERY);
+                    }
+                }
             }
+        }
 
-            }
+
+    }
+
+}
         }
     }
 }
