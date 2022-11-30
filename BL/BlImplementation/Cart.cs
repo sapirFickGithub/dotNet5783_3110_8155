@@ -47,7 +47,7 @@ namespace BlImplementation
             else throw new outOfStock();
 
         }
-        public BO.Cart updet(BO.Cart cart, int id, int amount)
+        public BO.Cart updete(BO.Cart cart, int id, int amount)
         {
             DO.Product product = Dal.Product.get(id);
 
