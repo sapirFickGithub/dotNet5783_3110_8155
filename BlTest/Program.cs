@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using BlImplementation;
 using BO;
+using Enum = BO.Enum;
 
 namespace BlTest;
 
@@ -37,23 +38,23 @@ public class Program
                 case 'a'://Product
                     {
                         Console.WriteLine("insert id, name, category, price and instock.");
-                        int id = Console.Read();
+                        int.TryParse(Console.ReadLine(), out int id);
                         string? name = Console.ReadLine();
-                        BO.Category productCategory = (BO.Category)Enum.Parse(typeof(BO.Category), Console.ReadLine());
-                        double price = double.Parse(Console.ReadLine());
-                        int inStock = Console.Read();
+                        BO.Enum.Category productCategory = (BO.Enum.Category)Enum.Category.Parse(typeof(BO.Enum.Category), Console.ReadLine());
+                        double.TryParse(Console.ReadLine(), out double price);
+                        int.TryParse(Console.ReadLine(), out int inStock);
 
-                        ibl.Product.add(id, name, productCategory, price, inStock);
+                        ibl.Product.addProduct(id, name, productCategory, price, inStock);
                         break;
                     }
                 case 'u'://updete
                     {
                         Console.WriteLine("insert id, name, category, price and instock.");
-                        int id = Console.Read();
+                        int.TryParse(Console.ReadLine(), out int id);
                         string? name = Console.ReadLine();
-                        BO.Category productCategory = (BO.Category)Enum.Parse(typeof(BO.Category), Console.ReadLine());
-                        double price = double.Parse(Console.ReadLine());
-                        int inStock = Console.Read();
+                        BO.Enum.Category productCategory = (BO.Enum.Category)Enum.Category.Parse(typeof(BO.Enum.Category), Console.ReadLine());
+                        double.TryParse(Console.ReadLine(), out double price);
+                        int.TryParse(Console.ReadLine(), out int inStock);
                         BO.Product product = new BO.Product()
                         {
                             ID = id,
@@ -63,20 +64,20 @@ public class Program
                             InStock = inStock
                         };
 
-                        ibl.Product.updat(product);
+                        ibl.Product.update(product);
                         break;
                     }
                 case 'd'://delete
                     {
                         Console.WriteLine("insert id of product you want to delete");
-                        int id = Console.Read();
+                        int.TryParse(Console.ReadLine(), out int id);
                         ibl.Product.delete(id);
                         break;
                     }
                 case 'l'://cart
                     {
 
-                        BO.ProductForList listProduct = ibl.Product.allProduct();
+                        BO.ProductForList listProduct = (ProductForList)ibl.Product.getListOfProduct();
 
                       /////////////////////////////////////////////////////////
                         break;
@@ -111,30 +112,30 @@ public class Program
                 case 'g'://exit
                     {
                         Console.WriteLine("insert id of order");
-                        int id = Console.Read();
-                        order = ibl.Order.get(id);
+                        int.TryParse(Console.ReadLine(), out int id);
+                        order = ibl.Order.GetOrder(id);
                         break;
                     }
                 case 'd'://Product
                     {
                         Console.WriteLine("insert id of order");
-                        int id = Console.Read();
-                        order = ibl.Order.updatDelivery(id);
+                        int.TryParse(Console.ReadLine(), out int id);
+                        order = ibl.Order.updateDliveryOrder(id);
                         break;
                     }
                 case 's'://Order
                     {
                         Console.WriteLine("insert id of order");
-                        int id = Console.Read();
-                        order = ibl.Order.updatShipping(id);
+                        int.TryParse(Console.ReadLine(), out int id);
+                        order = ibl.Order.UpdateSupplyDelivery(id);
                         break;
                     }
                 case 't'://tracking
                     {
                         Console.WriteLine("insert id of order");
-                        int id = Console.Read();
-                        BO.OrderTracking tracking = ibl.Order.tracking(id);
-                        Console.WriteLine(tracking);
+                        int.TryParse(Console.ReadLine(), out int id);
+                        //BO.OrderTracking tracking = ibl.Order.orderTracking(id);
+                        //Console.WriteLine(tracking);
                         break;
                     }
                 case 'e'://cart
@@ -187,17 +188,17 @@ public class Program
                 case 'a'://add cart
                     {
                         Console.WriteLine("insert id of product");
-                        int id = Console.Read();
+                        int.TryParse(Console.ReadLine(), out int id);
                         ibl.Cart.add(cart, id);
                         break;
                     }
                 case 'u'://updete amount
                     {
                         Console.WriteLine("insert id of product");
-                        int id = Console.Read();
+                        int.TryParse(Console.ReadLine(), out int id);
                         Console.WriteLine("insert the new amount");
-                        int amount = Console.Read();
-                        ibl.Cart.updetAmount(cart, id, amount);
+                        int.TryParse(Console.ReadLine(), out int amount);
+                        ibl.Cart.updete(cart, id, amount);
                         break;
                     }
                 case 'v'://approvment

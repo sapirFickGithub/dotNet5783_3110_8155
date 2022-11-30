@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BO;
+public class Enum
+{
 public enum Category { FAMILLY, RACE, JEEP, SPORT }
 
 /// ordered - order been received and take care of
@@ -12,3 +14,4 @@ public enum Category { FAMILLY, RACE, JEEP, SPORT }
 ///Delivered - the order being ordered shipped and delivered to the customer
 
 public enum OrderStatus { DLIVERY, SHIPPED, ORDERED }
+};

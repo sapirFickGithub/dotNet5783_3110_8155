@@ -8,16 +8,17 @@ namespace BO
 {
     public class OrderItem
     {
-        public int ID { get; set; }
-        public int NumOfOrder { get; set; }
+        public int ID { get; set; }//num of order
         public int IdOfProduct { get; set; }
-        public string? NameOfProduct { get; set; }
+        public string? NameOfProduct { get; set; }//name of product
         public double PriceOfProduct { get; set; }
         public int amount { get; set; }
         public double totalPrice { get; set; }
+        public Enum.Category ProductCategory { get; internal set; }
+
         public override string ToString() => $@"
- Order item ID={ID}: {NumOfOrder}, 
-    ID of item - {IdOfProduct}
+ Order item ID: {ID}
+    ID of item: {IdOfProduct}
     Price: {PriceOfProduct}.
     Amount: {amount}.
     Total price: {totalPrice}.

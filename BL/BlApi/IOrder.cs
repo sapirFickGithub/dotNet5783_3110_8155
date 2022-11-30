@@ -8,10 +8,12 @@ namespace BlApi
 {
     public interface IOrder
     {
-        public IEnumerable<OrderItem> getLisr(int id);
-        public Order get(int id);
-        public Order updatDelivery(int id);
-        public Order updatShipping(int id);
-        public OrderTracking tracking(int id);
+        public IEnumerable<BO.OrderForList> getListOfOrder();
+        public Order GetOrder(int id);
+        public Order updateDliveryOrder(int numOfOrder);
+        public BO.Order UpdateSupplyDelivery(int numOfOrder);
+        //public BO.OrderTracking orderTracking(int numOfOrder);
+
+
     }
 }

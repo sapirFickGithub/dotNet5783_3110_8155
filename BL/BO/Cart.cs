@@ -21,7 +21,7 @@ Cart:
    Customer name: {CustomerName}.
    Customer Mail- {CustomerMail}.
    Custamer address- {CustomerAddress}.
-   Item: {Item}.
+   Item: {itemList}.
    Total price: {TotalPrice}.
 ";
     }
