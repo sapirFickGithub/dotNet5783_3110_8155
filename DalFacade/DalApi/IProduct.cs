@@ -15,3 +15,4 @@ namespace DalApi
         public int length();
     }
 }
+

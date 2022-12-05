@@ -23,6 +23,7 @@ public struct Product
     /// make a string with all the fields in the struct.
     /// </summary>
     /// <returns></returns>
+    /// 
     public override string ToString() => $@"
     Product ID={ID}: {Name}, 
     category - {ProductCategory}

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DalApi
 {
    public interface ICrud<T>
-    {
+    { 
         public int Add(T ob);
         public void update(T ob);
         public void delete(int ob);

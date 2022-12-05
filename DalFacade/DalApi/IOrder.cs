@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using DO;
 
 namespace DalApi
-{
-    public interface IOrder : ICrud<Order>
+{    public interface IOrder : ICrud<Order>
     {
         public int search(int id);
         public bool search(Order find);

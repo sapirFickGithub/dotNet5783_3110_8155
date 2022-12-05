@@ -32,3 +32,4 @@ Order ID={ID}: {CustomerName},
   Date of delivery: {DateOfDelivery}
 ";
 }
+

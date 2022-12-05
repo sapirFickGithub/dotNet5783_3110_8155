@@ -12,7 +12,6 @@ namespace DO;
 /// </summary>
 public struct OrderItem
 {
- 
     public int ID { get; set; } 
     public int NumOfOrder { get; set; }
     public int IdOfItem { get; set; } 

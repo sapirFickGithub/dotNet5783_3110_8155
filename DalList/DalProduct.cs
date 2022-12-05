@@ -8,7 +8,6 @@ using static Dal.DataSource;
 namespace Dal;
 using DalApi;
 
-
 internal class DalProduct :IProduct
 {
     public int Add(Product product)
