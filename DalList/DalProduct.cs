@@ -12,7 +12,7 @@ internal class DalProduct :IProduct
 {
     public int Add(Product product)
     {
-        product.ID = _Config.get_ProductID;
+       // product.ID = _Config.get_ProductID;
         if (search(product))
         {
             throw new duplication();
