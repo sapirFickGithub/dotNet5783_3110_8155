@@ -12,7 +12,7 @@ namespace BlApi
         public Order GetOrder(int id);
         public Order updateDliveryOrder(int numOfOrder);
         public BO.Order UpdateSupplyDelivery(int numOfOrder);
-        //public BO.OrderTracking orderTracking(int numOfOrder);
+        public BO.OrderTracking orderTracking(int numOfOrder);
 
 
     }
