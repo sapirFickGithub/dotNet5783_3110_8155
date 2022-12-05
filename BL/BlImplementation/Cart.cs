@@ -103,9 +103,11 @@ namespace BlImplementation
                     NumOfOrder = id,
                     Price = item.PriceOfProduct,
                     amount = item.amount,
+                    ID=newOrder.ID
                 };
             }
             //all the details are true
+            Console.WriteLine("your order number is" +newOrder.ID);
             return true;
         }
     }
