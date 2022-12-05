@@ -20,7 +20,7 @@ namespace BlImplementation
             foreach (var item in cart.itemList)
             {
                 if (item.ID == id)
-                {
+                {//item alredy in cart- amount++
                     if (product.InStock - item.amount >= 0)
                     {
                         item.amount++;
@@ -30,7 +30,7 @@ namespace BlImplementation
                     else throw new outOfStock();
                 }
             }
-            if (product.InStock > 0)
+            if (product.InStock > 0)// add the item to cart 
             {
                 OrderItem newItem = new OrderItem
                 {

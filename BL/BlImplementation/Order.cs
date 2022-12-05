@@ -147,7 +147,7 @@ namespace BlImplementation
 
 
                     }
-                    else if (Dal.Order.get(numOfOrder).DateOf!= DateTime.MinValue && Dal.Order.get(numOfOrder).DateCreateDelivery == DateTime.MinValue)
+                    else if (Dal.Order.get(numOfOrder).DateOfOrder!= DateTime.MinValue && Dal.Order.get(numOfOrder).DateCreateDelivery == DateTime.MinValue)
                     {
                         order.Status = (BO.Enum.OrderStatus.ORDERED);
                         Tuple<DateTime, BO.Enum.OrderStatus> a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, orderTracking.Status);
@@ -164,6 +164,4 @@ namespace BlImplementation
     }
 
 }
-        }
-    }
-}
+  
