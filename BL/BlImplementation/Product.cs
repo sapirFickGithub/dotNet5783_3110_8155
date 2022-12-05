@@ -18,13 +18,14 @@ namespace BlImplementation
         public IEnumerable<BO.ProductForList> getListOfProduct()
         {
             IEnumerable<DO.Product> products = Dal.Product.getAll();
-            IEnumerable<BO.ProductForList> productForList = new List<BO.ProductForList>();
+            List<BO.ProductForList> productForList = new List<BO.ProductForList>();
+
             foreach (var item in products)
             {
                 BO.ProductForList temp = new() { ID = item.ID, Name = item.Name, Price = item.Price, ProductCategory = (BO.Enum.Category)item.ProductCategory };
-                productForList.Append(temp);
+                productForList.Add(temp);
             }
-            return productForList;
+            return productForList.AsEnumerable();
         }
 
         public BO.Product GetProduct(int id)

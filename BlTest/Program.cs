@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using BlImplementation;
 using BO;
 using Enum = BO.Enum;
+using System.Collections.Generic;
 
 namespace BlTest;
 
@@ -77,9 +78,10 @@ public class Program
                 case 'l'://cart
                     {
 
-                        BO.ProductForList listProduct = (ProductForList)ibl.Product.getListOfProduct();
+                        //BO.ProductForList JlistProduct = (ProductForList)ibl.Product.getListOfProduct();
+                        IEnumerable < BO.ProductForList> listProduct = ibl.Product.getListOfProduct();
 
-                      /////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////
                         break;
                     }
 
