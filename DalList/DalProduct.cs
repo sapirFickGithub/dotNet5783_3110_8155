@@ -16,6 +16,7 @@ internal class DalProduct : IProduct
         {
             throw new duplication();
         }
+
         listProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }

@@ -83,8 +83,8 @@ namespace BlImplementation
 
             DO.Order newOrder = new DO.Order();
 
-            int id = Dal.Order.Add(newOrder);//return the id of the new order
-            if (id < 0)
+            int idOfOrder = Dal.Order.Add(newOrder);//return the id of the new order
+            if (idOfOrder < 0)
                 throw new incorrectData();
             newOrder.DateOfOrder = DateTime.Now;
             newOrder.DateOfShipping = DateTime.MinValue;
@@ -100,14 +100,14 @@ namespace BlImplementation
                 DO.OrderItem newOrderItem = new DO.OrderItem()
                 {
                     IdOfItem = item.IdOfProduct,
-                    NumOfOrder = id,
+                    NumOfOrder = product.ID,
                     Price = item.PriceOfProduct,
                     amount = item.amount,
-                    ID=newOrder.ID
+                    ID = idOfOrder
                 };
             }
             //all the details are true
-            Console.WriteLine("your order number is" +newOrder.ID);
+            Console.WriteLine("your order number is : " + idOfOrder);
             return true;
         }
     }
