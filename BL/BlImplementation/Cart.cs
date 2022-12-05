@@ -16,10 +16,9 @@ namespace BlImplementation
         public BO.Cart add(BO.Cart cart, int id)
         {
             DO.Product product = Dal.Product.get(id);
-
             foreach (var item in cart.itemList)
             {
-                if (item.ID == id)
+                if (item.IdOfProduct == id)
                 {//item alredy in cart- amount++
                     if (product.InStock - item.amount >= 0)
                     {
@@ -35,7 +34,7 @@ namespace BlImplementation
                 OrderItem newItem = new OrderItem
                 {
                     NameOfProduct = product.Name,
-                    ID = product.ID,
+                    IdOfProduct = product.ID,
                     PriceOfProduct = product.Price,
                     totalPrice = product.Price,
                     amount = 1
@@ -53,7 +52,7 @@ namespace BlImplementation
 
             foreach (var item in cart.itemList)
             {
-                if (item.ID == id)
+                if (item.IdOfProduct == id)
                 {
                     if (amount == 0)
                     {
@@ -62,7 +61,7 @@ namespace BlImplementation
                         return cart;
                     }
                     if (item.amount < amount)
-                        if (product.InStock - item.amount >= 0)
+                        if (product.InStock - amount >= 0)
                         {
                             cart.TotalPrice += (amount - item.amount) * product.Price;// so that we dont count the price that was befor.
                             item.amount = amount;
@@ -71,7 +70,6 @@ namespace BlImplementation
                             return cart;
                         }
                         else throw new outOfStock();
-
                 }
             }
 
@@ -80,17 +78,13 @@ namespace BlImplementation
         public bool approvment(BO.Cart cart)
         {
             //data tast
-            if (!cart.CustomerMail.Contains('@'))
-                throw new incorrectData();//incorect email
-            if (cart.CustomerName == "")
-                throw new incorrectData();//incorect name
-            if (cart.CustomerAddress == "")
+            if ((!cart.CustomerMail.Contains('@')) && (cart.CustomerName == "") && (cart.CustomerAddress == ""))
                 throw new incorrectData();//incorect address
 
             DO.Order newOrder = new DO.Order();
 
-            int id = Dal.Order.Add(newOrder);
-            if (id < 0)
+            int idOfOrder = Dal.Order.Add(newOrder);//return the id of the new order
+            if (idOfOrder < 0)
                 throw new incorrectData();
             newOrder.DateOfOrder = DateTime.Now;
             newOrder.DateOfShipping = DateTime.MinValue;
@@ -98,16 +92,23 @@ namespace BlImplementation
 
             foreach (var item in cart.itemList)
             {
-
+                //check if the product is in stock
+                DO.Product product = Dal.Product.get(item.IdOfProduct);
+                if (product.InStock - item.amount < 0)
+                    return false;
+                //if the produt in stock so add to order
                 DO.OrderItem newOrderItem = new DO.OrderItem()
                 {
-                    IdOfItem = item.ID,
-                    NumOfOrder = id,
+                    IdOfItem = item.IdOfProduct,
+                    NumOfOrder = product.ID,
                     Price = item.PriceOfProduct,
                     amount = item.amount,
+                    ID = idOfOrder
                 };
             }
-            return false;
+            //all the details are true
+            Console.WriteLine("your order number is : " + idOfOrder);
+            return true;
         }
     }
 }

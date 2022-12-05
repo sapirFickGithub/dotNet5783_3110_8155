@@ -12,23 +12,22 @@ internal class DalProduct : IProduct
 {
     public int Add(Product product)
     {
-        // product.ID = _Config.get_ProductID;
         if (search(product))
         {
             throw new duplication();
         }
-        //product.ID = _Config.get_ProductID;//צריך לבדואם מותר לעשות בדיקה ידנית
+
         listProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }
     public Product get(int id)
     {
         int i;
-        for (i = 0; i < listProduct.Count(); i++)
+        foreach(Product product in listProduct)
         {
-            if (id == listProduct[i].ID)
+            if (id == product.ID)
             {
-                return listProduct[i];
+                return product;
             }
         }
         throw new notFound();

@@ -19,7 +19,8 @@ internal class DalOrder:IOrder
         {
             throw new duplication();
         }
-        listOrder[listOrder.Count()] = order;
+        //listOrder[listOrder.Count()] = order;
+        listOrder.Add(order);
         return order.ID;
     }
     public Order get(int id)
