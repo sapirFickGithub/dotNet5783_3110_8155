@@ -14,7 +14,7 @@ internal class DalOrder:IOrder
 {
     public int Add(Order order)
     {
-        order.ID = _Config.get_OrderID;
+      //  order.ID = _Config.get_OrderID;
         if (search(order))
         {
             throw new duplication();
@@ -80,12 +80,17 @@ internal class DalOrder:IOrder
     }
     public bool search(Order find)//help function
     {
+        int count = 0;
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
             if (find.ID == listOrder[i].ID)
             {
-                return true;
+                count++;
+                if (count == 0)
+                {
+                    return true;
+                }
             }
         }
         return false;
