@@ -13,7 +13,7 @@ internal class DalOrderItem:IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
-        //orderItem.ID = _Config.get_OrderItemID;
+        orderItem.ID = _Config.get_OrderItemID;
         if (search(orderItem))
         {
             throw new duplication();

@@ -71,7 +71,6 @@ namespace BlImplementation
                             return cart;
                         }
                         else throw new outOfStock();
-
                 }
             }
 
@@ -80,16 +79,12 @@ namespace BlImplementation
         public bool approvment(BO.Cart cart)
         {
             //data tast
-            if (!cart.CustomerMail.Contains('@'))
-                throw new incorrectData();//incorect email
-            if (cart.CustomerName == "")
-                throw new incorrectData();//incorect name
-            if (cart.CustomerAddress == "")
+            if ((!cart.CustomerMail.Contains('@')) && (cart.CustomerName == "") && (cart.CustomerAddress == ""))
                 throw new incorrectData();//incorect address
 
             DO.Order newOrder = new DO.Order();
 
-            int id = Dal.Order.Add(newOrder);
+            int id = Dal.Order.Add(newOrder);//return the id of the new order
             if (id < 0)
                 throw new incorrectData();
             newOrder.DateOfOrder = DateTime.Now;

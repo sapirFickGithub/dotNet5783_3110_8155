@@ -14,7 +14,7 @@ internal class DalOrder:IOrder
 {
     public int Add(Order order)
     {
-      //  order.ID = _Config.get_OrderID;
+       order.ID = _Config.get_OrderID;
         if (search(order))
         {
             throw new duplication();
