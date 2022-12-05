@@ -13,7 +13,7 @@ internal class DalOrderItem:IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
-        //orderItem.ID = _Config.get_OrderItemID;
+        orderItem.ID = _Config.get_OrderItemID;
         if (search(orderItem))
         {
             throw new duplication();
@@ -42,7 +42,7 @@ internal class DalOrderItem:IOrderItem
     {
         if (0 > search(id))
         {
-            throw new notFound();
+             throw new notFound();
         }
        List<OrderItem> OrderItem = new List<OrderItem>();
         int i;
@@ -50,18 +50,10 @@ internal class DalOrderItem:IOrderItem
         {
             if (id == listOrderItem[i].ID)
             {
-                break;
+                OrderItem p = new OrderItem();
+                listOrderItem[i] = p;
             }
         }
-        for (int j = 0; j < i - 1; j++)
-        {
-            OrderItem[j] = listOrderItem[j];
-        }
-        for (int j = i + 1; j < listOrderItem.Count; j++)
-        {
-            OrderItem[j] = listOrderItem[j];
-        }
-        listOrderItem = OrderItem;
     }
     public void update(OrderItem newOrderItem)
     {
