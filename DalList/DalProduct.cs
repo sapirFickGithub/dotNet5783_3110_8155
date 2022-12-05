@@ -8,27 +8,25 @@ using static Dal.DataSource;
 namespace Dal;
 using DalApi;
 
-internal class DalProduct :IProduct
+internal class DalProduct : IProduct
 {
     public int Add(Product product)
     {
-       // product.ID = _Config.get_ProductID;
         if (search(product))
         {
             throw new duplication();
         }
-        //product.ID = _Config.get_ProductID;//צריך לבדואם מותר לעשות בדיקה ידנית
         listProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }
     public Product get(int id)
     {
         int i;
-        for (i = 0; i < listProduct.Count(); i++)
+        foreach(Product product in listProduct)
         {
-            if (id == listProduct[i].ID)
+            if (id == product.ID)
             {
-                return listProduct[i];
+                return product;
             }
         }
         throw new notFound();
@@ -46,24 +44,25 @@ internal class DalProduct :IProduct
         {
             throw new notFound();
         }
-      List<  Product> Product = new List<Product>();
+        List<Product> Product = new List<Product>();
         int i;
-        for (i = 0; i < listProduct.Count(); i++)
+        for (i = 0; i <= listProduct.Count(); i++)
         {
             if (id == listProduct[i].ID)
             {
-                break;
+                Product p = new Product();
+                listProduct[i]=p;
             }
         }
-        for (int j = 0; j < i - 1; j++)
-        {
-            Product[j] = listProduct[j];
-        }
-        for (int j = i + 1; j < listProduct.Count(); j++)
-        {
-            Product[j] =listProduct[j];
-        }
-        listProduct = Product;
+        //for (int j = 0; j <= i ; j++)
+        //{
+        //    Product[j] = listProduct[j];
+        //}
+        //for (int j = i + 1; j < listProduct.Count(); j++)
+        //{
+        //    Product[j] =listProduct[j];
+        //}
+        //listProduct = Product;
     }
     public bool search(Product find)//help function
     {

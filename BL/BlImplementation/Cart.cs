@@ -16,10 +16,9 @@ namespace BlImplementation
         public BO.Cart add(BO.Cart cart, int id)
         {
             DO.Product product = Dal.Product.get(id);
-
             foreach (var item in cart.itemList)
             {
-                if (item.ID == id)
+                if (item.IdOfProduct == id)
                 {//item alredy in cart- amount++
                     if (product.InStock - item.amount >= 0)
                     {
@@ -35,7 +34,7 @@ namespace BlImplementation
                 OrderItem newItem = new OrderItem
                 {
                     NameOfProduct = product.Name,
-                    ID = product.ID,
+                    IdOfProduct = product.ID,
                     PriceOfProduct = product.Price,
                     totalPrice = product.Price,
                     amount = 1
@@ -53,7 +52,7 @@ namespace BlImplementation
 
             foreach (var item in cart.itemList)
             {
-                if (item.ID == id)
+                if (item.IdOfProduct == id)
                 {
                     if (amount == 0)
                     {
@@ -62,7 +61,7 @@ namespace BlImplementation
                         return cart;
                     }
                     if (item.amount < amount)
-                        if (product.InStock - item.amount >= 0)
+                        if (product.InStock - amount >= 0)
                         {
                             cart.TotalPrice += (amount - item.amount) * product.Price;// so that we dont count the price that was befor.
                             item.amount = amount;
@@ -93,16 +92,21 @@ namespace BlImplementation
 
             foreach (var item in cart.itemList)
             {
-
+                //check if the product is in stock
+                DO.Product product = Dal.Product.get(item.IdOfProduct);
+                if (product.InStock - item.amount < 0)
+                    return false;
+                //if the produt in stock so add to order
                 DO.OrderItem newOrderItem = new DO.OrderItem()
                 {
-                    IdOfItem = item.ID,
+                    IdOfItem = item.IdOfProduct,
                     NumOfOrder = id,
                     Price = item.PriceOfProduct,
                     amount = item.amount,
                 };
             }
-            return false;
+            //all the details are true
+            return true;
         }
     }
 }

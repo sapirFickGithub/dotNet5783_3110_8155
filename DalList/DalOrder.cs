@@ -14,12 +14,13 @@ internal class DalOrder:IOrder
 {
     public int Add(Order order)
     {
-       order.ID = _Config.get_OrderID;
+        order.ID = _Config.get_OrderID;
         if (search(order))
         {
             throw new duplication();
         }
-        listOrder[listOrder.Count()] = order;
+        //listOrder[listOrder.Count()] = order;
+        listOrder.Add(order);
         return order.ID;
     }
     public Order get(int id)
@@ -50,18 +51,10 @@ internal class DalOrder:IOrder
         {
             if (id == listOrder[i].ID)
             {
-                break;
+                Order p = new Order();
+                listOrder[i] = p;
             }
         }
-        for (int j = 0; j < i - 1; j++)
-        {
-            Order[j] = listOrder[j];
-        }
-        for (int j = i + 1; j < listOrder.Count(); j++)
-        {
-            Order[j] = listOrder[j];
-        }
-        listOrder = Order;
     }
     public void update(Order newOrder)
     {

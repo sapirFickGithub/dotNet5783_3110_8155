@@ -166,7 +166,8 @@ public class Program
         {
             CustomerName = cN,
             CustomerMail = cM,
-            CustomerAddress = cA
+            CustomerAddress = cA,
+            itemList = new List<OrderItem?>()
         };
         char option;
         Console.WriteLine("hello\n" +
@@ -212,10 +213,10 @@ public class Program
 
             }
             Console.WriteLine("hello\n" +
-          "enter p to function on product\n" +
-          "enter c to function on cart\n" +
-          "enter o to function on order\n" +
-          "enter e to exit");
+              "enter a to add cart\n" +
+              "enter u to updete amount\n" +
+              "enter v to approvment cart\n" +
+              "enter e to exit");
             char.TryParse(Console.ReadLine(), out option);
         }
     }
