@@ -28,11 +28,11 @@ namespace BlImplementation
             {
                 temp = new() { ID = item.ID, CustomerName = item.CustomerName, AmountOfItem = _items, TotalPrice = _totalPrice};
                 
-                if(Dal.Order.get(item.ID).DateCreateDelivery == DateTime.MinValue)
+                if(Dal.Order.get(item.ID).DateOfOrder == DateTime.MinValue)
                 {
                     temp.Status = (BO.Enum.OrderStatus.SHIPPED);
                 }
-                else if (Dal.Order.get(item.ID).DateOfOrder != DateTime.MinValue && Dal.Order.get(item.ID).DateCreateDelivery == DateTime.MinValue)
+                else if (Dal.Order.get(item.ID).DateOfShipping != DateTime.MinValue && Dal.Order.get(item.ID).DateOfOrder == DateTime.MinValue)
                 {
                     temp.Status = (BO.Enum.OrderStatus.ORDERED);
                 }
@@ -58,15 +58,15 @@ namespace BlImplementation
                     CustomerName = Dorder.CustomerName,
                     CustomerAddress = Dorder.CustamerAddress,
                     CustomerMail = Dorder.CustomerMail,
+                    DateOfShipping = Dorder.DateOfShipping,
                     DateOfOrder = Dorder.DateOfOrder,
-                    DateCreateDelivery = Dorder.DateCreateDelivery,
                     DateOfDelivery = Dorder.DateOfDelivery
                 };
-                if (Dal.Order.get(id).DateCreateDelivery == DateTime.MinValue)
+                if (Dal.Order.get(id).DateOfOrder == DateTime.MinValue)
                 {
                     order.Status = (BO.Enum.OrderStatus.SHIPPED);
                 }
-                else if (Dal.Order.get(id).DateOfOrder != DateTime.MinValue && Dal.Order.get(id).DateCreateDelivery == DateTime.MinValue)
+                else if (Dal.Order.get(id).DateOfShipping != DateTime.MinValue && Dal.Order.get(id).DateOfOrder == DateTime.MinValue)
                 {
                     order.Status = (BO.Enum.OrderStatus.ORDERED);
                 }
@@ -115,11 +115,11 @@ namespace BlImplementation
         public BO.Order UpdateSupplyDelivery(int numOfOrder)
         {
             DO.Order Dorder = Dal.Order.get(numOfOrder);
-            if (Dorder.DateOfDelivery != DateTime.MinValue && Dorder.ID > 0 && Dorder.DateOfOrder == DateTime.MinValue)
+            if (Dorder.DateOfDelivery != DateTime.MinValue && Dorder.ID > 0 && Dorder.DateOfShipping == DateTime.MinValue)
             {
-                Dorder.DateOfOrder = DateTime.Now;
+                Dorder.DateOfShipping = DateTime.Now;
                 BO.Order order = GetOrder(numOfOrder);
-                order.DateOfOrder = DateTime.Now;
+                order.DateOfShipping = DateTime.Now;
                 Dal.Order.update(Dorder);
                 return order;
             }
@@ -131,7 +131,7 @@ namespace BlImplementation
         public BO.OrderTracking orderTracking(int numOfOrder)
         {
             DO.Order Dorder = Dal.Order.get(numOfOrder); //אם ההזמנה לא קיימת תיזרק שגיאה
-           
+            Tuple<DateTime, BO.Enum.OrderStatus> a;
 
             if (numOfOrder > 0)
             {
@@ -139,31 +139,32 @@ namespace BlImplementation
                 orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
                 if (numOfOrder > 0)
                 {
-                    if (Dorder.DateCreateDelivery == DateTime.MinValue)
+                    if (Dorder.DateOfShipping == DateTime.MinValue)
                     {
-                        orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
-                        Tuple<DateTime, BO.Enum.OrderStatus> a =  new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, orderTracking.Status);
-                       
-
+                        orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
+                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, orderTracking.Status);
 
                     }
-                    else if (Dal.Order.get(numOfOrder).DateOf!= DateTime.MinValue && Dal.Order.get(numOfOrder).DateCreateDelivery == DateTime.MinValue)
+                    else if (Dal.Order.get(numOfOrder).DateOfShipping != DateTime.MinValue && Dal.Order.get(numOfOrder).DateOfDelivery == DateTime.MinValue)
                     {
-                        order.Status = (BO.Enum.OrderStatus.ORDERED);
-                        Tuple<DateTime, BO.Enum.OrderStatus> a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, orderTracking.Status);
+                        orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
+                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, orderTracking.Status);
                     }
                     else
                     {
-                        order.Status = (BO.Enum.OrderStatus.DLIVERY);
+                        orderTracking.Status = (BO.Enum.OrderStatus.DLIVERY);
+                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, orderTracking.Status);
                     }
+                    orderTracking.Track.Add(a);
                 }
+                return orderTracking;
             }
+            else
+                throw new incorrectData();
         }
 
 
     }
 
 }
-        }
-    }
-}
+       

@@ -78,10 +78,10 @@ static internal class DataSource
             Order _order = new Order();
             _order.ID = _Config.get_OrderID;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
-            _order.DateOfOrder = DateTime.MinValue;
+            _order.DateOfShipping = DateTime.MinValue;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
-            _order.DateCreateDelivery = _order.DateOfOrder + spaceTime;//one day after the order the dilevery will create
-            _order.DateOfDelivery = _order.DateCreateDelivery + spaceTime;//one day after the order the dilevery will dlivered
+            _order.DateOfOrder = _order.DateOfShipping + spaceTime;//one day after the order the dilevery will create
+            _order.DateOfDelivery = _order.DateOfOrder + spaceTime;//one day after the order the dilevery will dlivered
             _order.CustamerAddress = "jrusalem";
             _order.CustomerMail = "maill@gmail.com";
 

@@ -16,8 +16,8 @@ public struct Order
     public string CustomerName { get; set; }
     public string CustomerMail { get; set; }
     public string CustamerAddress { get; set; }
-    public DateTime? DateCreateDelivery { get; set; }
     public DateTime? DateOfOrder { get; set; }
+    public DateTime? DateOfShipping { get; set; }
     public DateTime? DateOfDelivery { get; set; }
 
     /// <summary>
@@ -28,7 +28,7 @@ public struct Order
 Order ID={ID}: {CustomerName}, 
   Customer Mail- {CustomerMail}
   Custamer address- {CustamerAddress}
-  Date of order: {DateOfOrder}
+  Date of order: {DateOfShipping}
   Date of delivery: {DateOfDelivery}
 ";
 }

@@ -12,8 +12,8 @@ namespace BO
         public string? CustomerName { get; set; }
         public string? CustomerMail { get; set; }
         public string? CustomerAddress { get; set; }
-        public DateTime? DateCreateDelivery { get; set; }//תאריך הזמנה
-        public DateTime? DateOfOrder { get; set; }//תאריך שילוח
+        public DateTime? DateOfOrder { get; set; }//תאריך הזמנה
+        public DateTime? DateOfShipping { get; set; }//תאריך שילוח
         public DateTime? DateOfDelivery { get; set; }//תאריך אספקה
         public Enum.OrderStatus Status { get; set; }
         public DateTime? PaymentDate { get; set; }
@@ -25,7 +25,7 @@ namespace BO
 Order ID={ID}: {CustomerName}.
    Customer Mail- {CustomerMail}.
    Custamer address- {CustomerAddress}.
-   Date of order: {DateOfOrder}.
+   Date of order: {DateOfShipping}.
    Date of delivery: {DateOfDelivery}.
    Status: {Status}.
    Date of payment: {PaymentDate}.
