@@ -8,10 +8,10 @@ using DO;
 using System.Runtime.CompilerServices;
 using System.Windows.Markup;
 
-static internal class DataSource
+ internal static class DataSource
 {
 
-    static readonly int RandNum = 0;
+    //static readonly int RandNum = 0;
     internal static List<OrderItem> listOrderItem = new List<OrderItem>();
     internal static List<Product> listProduct = new List<Product>();
     internal static List<Order> listOrder = new List<Order>();
@@ -48,7 +48,7 @@ static internal class DataSource
             get
             {
                 Random randi = new Random();
-                _ProductID = 100000 + _ProductIndex * 20 + _ProductIndex * 3;
+                _ProductID = randi.Next(100000, 1000000);
                 return _ProductID;
             }
         }
@@ -60,15 +60,14 @@ static internal class DataSource
         Random rand = new Random();
         for (int i = 0; i < 10; i++)
         {
-            Product p = new Product();
-            p.ID = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
-            p.Name = ProductName[rand.Next(0, 10)];
+            Product product = new Product();
+            product.ID = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
+            product.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
-            p.ProductCategory = (Category)v.GetValue(rand.Next(0, 4));
-            p.InStock = rand.Next(1, 5);
-            p.Price = rand.Next(200000, 5000000);
-
-            listProduct.Add(p);
+            product.ProductCategory = (Category)v.GetValue(rand.Next(0, 4));
+            product.InStock = rand.Next(0, 5);
+            product.Price = rand.Next(2000, 5000000);
+            listProduct.Add(product);
         }
     }
     private static void _InitializeOrder()//initializ order
@@ -85,7 +84,6 @@ static internal class DataSource
             _order.DateOfDelivery = _order.DateOfOrder + spaceTime;//one day after the order the dilevery will dlivered
             _order.CustamerAddress = "jrusalem";
             _order.CustomerMail = "maill@gmail.com";
-
             listOrder.Add(_order); 
         }
     }
@@ -97,7 +95,7 @@ static internal class DataSource
         {
             OrderItem _orderItem = new OrderItem();
             _orderItem.ID = _Config.get_OrderItemID;
-            _orderItem.NumOfOrder = listOrder[i % 19].ID;//i%19 will chosse the order , in this way all the place be uesed
+            _orderItem.IdOfOrder = listOrder[i % 19].ID;//i%19 will chosse the order , in this way all the place be uesed
             int index = rand.Next(0, 10);//choss a product 
             _orderItem.IdOfItem = listProduct[index].ID;
             _orderItem.amount = rand.Next(1, 5);

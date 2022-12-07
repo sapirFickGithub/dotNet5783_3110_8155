@@ -16,8 +16,8 @@ internal class DalProduct : IProduct
         {
             throw new duplication();
         }
-
-        listProduct[_Config._ProductIndex++] = product;
+        listProduct.Add(product);
+        //listProduct[_Config._ProductIndex++] = product;
         return product.ID;
     }
     public Product get(int id)

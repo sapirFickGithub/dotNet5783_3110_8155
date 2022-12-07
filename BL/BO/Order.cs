@@ -21,16 +21,20 @@ namespace BO
         public double TotalPrice { get; set; }
 
 
-       public override string ToString() => $@"
+        public override string ToString() {
+            string print = $@"
 Order ID={ID}: {CustomerName}.
    Customer Mail- {CustomerMail}.
    Custamer address- {CustomerAddress}.
    Date of order: {DateOfShipping}.
    Date of delivery: {DateOfDelivery}.
    Status: {Status}.
-   Date of payment: {PaymentDate}.
-   Items: {Items}.
-   Total price: {TotalPrice}.
-";
+   Date of payment: {PaymentDate}.";
+            foreach (var item in Items)
+            {
+                print = print + "\n" + $@"TotalPrice: {TotalPrice}";
+            }
+            return print;
+        }
     }
 }

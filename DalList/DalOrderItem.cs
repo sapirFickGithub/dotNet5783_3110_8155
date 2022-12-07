@@ -13,13 +13,13 @@ internal class DalOrderItem:IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
-        orderItem.ID = _Config.get_OrderItemID;
+        //orderItem.ID = _Config.get_OrderItemID;
         if (search(orderItem))
         {
             throw new duplication();
         }
-
-        listOrderItem[listOrderItem.Count()] = orderItem;
+        listOrderItem.Add(orderItem);
+        //listOrderItem[listOrderItem.Count()] = orderItem;
         return orderItem.ID;
     }
     public OrderItem get(int id)
@@ -29,7 +29,7 @@ internal class DalOrderItem:IOrderItem
         {
             if (id == listOrderItem[i].ID)
             {
-                return listOrderItem[i];
+                return listOrderItem[i-1];
             }
         }
         throw new notFound();

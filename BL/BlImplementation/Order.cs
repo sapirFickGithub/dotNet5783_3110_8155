@@ -17,7 +17,7 @@ namespace BlImplementation
         {
             IEnumerable<DO.OrderItem> orderItem = Dal.OrderItem.getAll();
             IEnumerable<DO.Order> order = Dal.Order.getAll();
-            IEnumerable<BO.OrderForList> orderForList = new List<BO.OrderForList>();
+            List<BO.OrderForList> orderForList = new List<BO.OrderForList>();
             BO.OrderForList temp;
             foreach (var item in orderItem)
             {
@@ -40,21 +40,19 @@ namespace BlImplementation
                 {
                     temp.Status = (BO.Enum.OrderStatus.DLIVERY);
                 }
-                orderForList.Append(temp);
+                orderForList.Add(temp);
             }
-            return orderForList;
+            return orderForList.AsEnumerable();
         }
-        public BO.Order GetOrder(int id)
+        public BO.Order GetOrder(int orderId)
         {
-            double _price = 0,_totalPrice =0;
-            if (id > 0)
+            if (orderId > 0)
             {
-                DO.OrderItem amount = Dal.OrderItem.get(id);
-                DO.Order Dorder = Dal.Order.get(id);
-                IEnumerable<DO.OrderItem> orderItem = Dal.OrderItem.getAll();
+                DO.Order Dorder = Dal.Order.get(orderId);
+                IEnumerable<DO.OrderItem> orderItems = Dal.OrderItem.getAll();
                 BO.Order order = new()
                 {
-                    ID = id,
+                    ID = orderId,
                     CustomerName = Dorder.CustomerName,
                     CustomerAddress = Dorder.CustamerAddress,
                     CustomerMail = Dorder.CustomerMail,
@@ -62,11 +60,11 @@ namespace BlImplementation
                     DateOfOrder = Dorder.DateOfOrder,
                     DateOfDelivery = Dorder.DateOfDelivery
                 };
-                if (Dal.Order.get(id).DateOfOrder == DateTime.MinValue)
+                if (Dal.Order.get(orderId).DateOfOrder == DateTime.MinValue)
                 {
                     order.Status = (BO.Enum.OrderStatus.SHIPPED);
                 }
-                else if (Dal.Order.get(id).DateOfShipping != DateTime.MinValue && Dal.Order.get(id).DateOfOrder == DateTime.MinValue)
+                else if (Dal.Order.get(orderId).DateOfShipping != DateTime.MinValue && Dal.Order.get(orderId).DateOfOrder == DateTime.MinValue)
                 {
                     order.Status = (BO.Enum.OrderStatus.ORDERED);
                 }
@@ -74,23 +72,24 @@ namespace BlImplementation
                 {
                     order.Status = (BO.Enum.OrderStatus.DLIVERY);
                 }
-                foreach (var item in orderItem)
+                int i = 0;
+                order.Items = new List<BO.OrderItem>();
+                foreach (var item in orderItems)
                 {
-                    if (id == item.NumOfOrder)
+                    if (orderId == item.IdOfOrder)
                     {
-                        _price += item.Price;
-                        _totalPrice = Dal.OrderItem.get(id).amount * item.Price;
-                        order.Items.Add(new()
-                        {
-                            ID = item.ID,
-                            NameOfProduct = Dal.Product.get(id).Name,
-                            amount = Dal.OrderItem.get(id).amount,
-                            PriceOfProduct = item.Price,
-                            totalPrice = _totalPrice
-                        });
+                        order.Items.Add(new(){ });
+                        order.Items[i].ID = item.ID;
+                        order.Items[i].IdOfProduct = item.IdOfItem;
+                        order.Items[i].NameOfProduct = Dal.Product.get(item.IdOfItem).Name;
+                        order.Items[i].amount = Dal.OrderItem.get(item.ID).amount;
+                        order.Items[i].PriceOfProduct = item.Price;
+                        order.Items[i].totalPrice = Dal.OrderItem.get(item.ID).amount * item.Price;
+                        order.TotalPrice += Dal.OrderItem.get(item.ID).amount * item.Price;
+                        i++;
                     }
+                    
                 }
-                order.TotalPrice = _price;
                 return order;
             }
             else

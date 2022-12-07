@@ -9,6 +9,7 @@ using BlImplementation;
 using BO;
 using Enum = BO.Enum;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace BlTest;
 
@@ -115,7 +116,8 @@ public class Program
                     {
                         Console.WriteLine("insert id of order");
                         int.TryParse(Console.ReadLine(), out int id);
-                        order = ibl.Order.GetOrder(id);
+                       // order = ibl.Order.GetOrder(id);
+                        Console.WriteLine(ibl.Order.GetOrder(id));
                         break;
                     }
                 case 'd'://Product
@@ -136,8 +138,8 @@ public class Program
                     {
                         Console.WriteLine("insert id of order");
                         int.TryParse(Console.ReadLine(), out int id);
-                        //BO.OrderTracking tracking = ibl.Order.orderTracking(id);
-                        //Console.WriteLine(tracking);
+                        BO.OrderTracking tracking = ibl.Order.orderTracking(id);
+                        Console.WriteLine(tracking);
                         break;
                     }
                 case 'e'://cart

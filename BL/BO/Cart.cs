@@ -12,17 +12,28 @@ namespace BO
         public string? CustomerName { get; set; }
         public string? CustomerMail { get; set; }
         public string? CustomerAddress { get; set; }
-        public List<OrderItem?>? itemList { get; set; }
+        public List<OrderItem?>? itemList { get; set; } = new List<OrderItem?>();
         public double TotalPrice { get; set; }
 
 
-        public override string ToString() => $@"
+
+        public override string ToString()
+        {
+            string print = $@"
 Cart:
    Customer name: {CustomerName}.
    Customer Mail- {CustomerMail}.
-   Custamer address- {CustomerAddress}.
-   Item: {itemList}.
-   Total price: {TotalPrice}.
-";
+   Custamer address- {CustomerAddress}.";
+            foreach (var item in itemList)
+            {
+                print = print + "\n" + item.NameOfProduct + "\n" + item.ToString();
+            }
+            print = print + "\n" + $@"TotalPrice: {TotalPrice}";
+            return print;
+        }
     }
 }
+  
+            
+
+	
