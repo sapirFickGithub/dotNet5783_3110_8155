@@ -61,7 +61,7 @@ using System.Windows.Markup;
         for (int i = 0; i < 10; i++)
         {
             Product product = new Product();
-            product.ID = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
+            product.idOfProduct = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
             product.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
             product.ProductCategory = (Category)v.GetValue(rand.Next(0, 4));
@@ -76,7 +76,7 @@ using System.Windows.Markup;
         for (int i = 0; i < 20; i++)
         {
             Order _order = new Order();
-            _order.ID = _Config.get_OrderID;
+            _order.idOfOrder = _Config.get_OrderID;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
             _order.DateOfShipping = DateTime.MinValue;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
@@ -95,9 +95,9 @@ using System.Windows.Markup;
         {
             OrderItem _orderItem = new OrderItem();
             _orderItem.ID = _Config.get_OrderItemID;
-            _orderItem.IdOfOrder = listOrder[i % 19].ID;//i%19 will chosse the order , in this way all the place be uesed
+            _orderItem.idOfOrder = listOrder[i % 19].idOfOrder;//i%19 will chosse the order , in this way all the place be uesed
             int index = rand.Next(0, 10);//choss a product 
-            _orderItem.IdOfItem = listProduct[index].ID;
+            _orderItem.idOfItem = listProduct[index].idOfProduct;
             _orderItem.amount = rand.Next(1, 5);
             _orderItem.Price = listProduct[index].Price;
             listOrderItem.Add(_orderItem);

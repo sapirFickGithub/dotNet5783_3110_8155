@@ -18,14 +18,14 @@ internal class DalProduct : IProduct
         }
         listProduct.Add(product);
         //listProduct[_Config._ProductIndex++] = product;
-        return product.ID;
+        return product.idOfProduct;
     }
     public Product get(int id)
     {
         int i;
         foreach(Product product in listProduct)
         {
-            if (id == product.ID)
+            if (id == product.idOfProduct)
             {
                 return product;
             }
@@ -49,7 +49,7 @@ internal class DalProduct : IProduct
         int i;
         for (i = 0; i <= listProduct.Count(); i++)
         {
-            if (id == listProduct[i].ID)
+            if (id == listProduct[i].idOfProduct)
             {
                 Product p = new Product();
                 listProduct[i]=p;
@@ -71,7 +71,7 @@ internal class DalProduct : IProduct
         int i;
         for (i = 0; i < listProduct.Count(); i++)
         {
-            if (find.ID == listProduct[i].ID)
+            if (find.idOfProduct == listProduct[i].idOfProduct)
             {
                 count++;
                 if (count == 0)
@@ -88,7 +88,7 @@ internal class DalProduct : IProduct
         {
             for (int i = 0; i < listProduct.Count(); i++)
             {
-                if (newProduct.ID == listProduct[i].ID)
+                if (newProduct.idOfProduct == listProduct[i].idOfProduct)
                     listProduct[i] = newProduct;
             }
         }
@@ -102,7 +102,7 @@ internal class DalProduct : IProduct
         int i;
         for (i = 0; i < listProduct.Count(); i++)
         {
-            if (id == listProduct[i].ID)
+            if (id == listProduct[i].idOfProduct)
             {
                 return i;
             }

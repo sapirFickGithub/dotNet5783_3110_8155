@@ -22,37 +22,37 @@ namespace BlImplementation
 
             foreach (var item in products)
             {
-                BO.ProductForList temp = new() { ID = item.ID, Name = item.Name, Price = item.Price, ProductCategory = (BO.Enum.Category)item.ProductCategory };
+                BO.ProductForList temp = new() { idOfProduct = item.idOfProduct, Name = item.Name, Price = item.Price, ProductCategory = (BO.Enum.Category)item.ProductCategory };
                 productForList.Add(temp);
             }
             return productForList.AsEnumerable();
         }
 
-        public BO.Product GetProduct(int id)
+        public BO.Product GetProduct(int idOfProduct)
         {
             BO.Product product = new BO.Product();
-            if (id > 0)
+            if (idOfProduct > 0)
             {
-                DO.Product Dproduct = Dal.Product.get(id);
-                BO.Product temp = new() { ID = Dproduct.ID, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
+                DO.Product Dproduct = Dal.Product.get(idOfProduct);
+                BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
                 return temp;
             }
             else
                 throw new notExist();
         }
-        public BO.ProductItem GetDetails(int id, BO.Cart cart)
+        public BO.ProductItem GetDetails(int idOfProduct, BO.Cart cart)
         {
-            if (id > 0)
+            if (idOfProduct > 0)
             {
-                DO.Product Dproduct = Dal.Product.get(id);
-                BO.Product temp = new() { ID = Dproduct.ID, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
+                DO.Product Dproduct = Dal.Product.get(idOfProduct);
+                BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
                 foreach (var item in cart.itemList)
                 {
-                    if (id == item.ID)
+                    if (idOfProduct == item.IdOfProduct)
                     {
                         BO.ProductItem productItem = new()
                         {
-                            ID = item.ID,
+                            idOfProduct = item.IdOfProduct,
                             Name = item.NameOfProduct,
                             Price = item.PriceOfProduct,
                             ProductCategory = (BO.Enum.Category)item.ProductCategory,
@@ -65,13 +65,13 @@ namespace BlImplementation
             }
             throw new notExist();
         }
-        public void addProduct(int id, string name, BO.Enum.Category productCategory, double price, int inStock)
+        public void addProduct(int idOfProduct, string name, BO.Enum.Category productCategory, double price, int inStock)
         {
-            if (id > 0 && name != null && price > 0 && inStock > 0)
+            if (idOfProduct > 0 && name != null && price > 0 && inStock > 0)
             {
                 DO.Product Dproduct = new DO.Product
                 {
-                    ID = id,
+                    idOfProduct = idOfProduct,
                     Name = name,
                     ProductCategory = (DO.Category)productCategory,
                     Price = price,
@@ -82,30 +82,34 @@ namespace BlImplementation
             else
                 throw new incorrectData();
         }
-        public void delete(int id)
+        public void delete(int idOfProduct)
         {
-            IEnumerable<DO.Order> order = Dal.Order.getAll();
-            foreach (var item in order)
+
+            IEnumerable<DO.Order> orders = Dal.Order.getAll();
+            foreach (var thisOrder in orders)
             {
-                if (id == item.ID)
+                List<DO.OrderItem> orderItem = (List<DO.OrderItem>)Dal.OrderItem.getAllItemOrder(thisOrder.idOfOrder);
+                foreach (var thisOrderItem in orderItem)
+                    if (idOfProduct == thisOrderItem.idOfItem)
                 {
                     throw new existInOrders();
                 }
-                if (id < 0)
+            }
+
+            if (idOfProduct < 0)
                 {
                     throw new notExist();
                 }
-            }
-            Dal.Product.delete(id);
+            Dal.Product.delete(idOfProduct);
         }
         public void update(BO.Product product)
         {
 
-            if (product.ID > 0 && product.Name != null && product.Price > 0 && product.InStock > 0)
+            if (product.idOfProduct > 0 && product.Name != null && product.Price > 0 && product.InStock > 0)
             {
                 DO.Product Dproduct = new DO.Product
                 {
-                    ID = product.ID,
+                    idOfProduct = product.idOfProduct,
                     Name = product.Name,
                     ProductCategory = (DO.Category)product.ProductCategory,
                     Price = product.Price,
