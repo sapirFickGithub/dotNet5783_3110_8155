@@ -80,8 +80,25 @@ using System.Windows.Markup;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
             _order.DateOfShipping = DateTime.MinValue;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
-            _order.DateOfOrder = _order.DateOfShipping + spaceTime;//one day after the order the dilevery will create
-            _order.DateOfDelivery = _order.DateOfOrder + spaceTime;//one day after the order the dilevery will dlivered
+            _order.DateOfOrder = DateTime.Now;
+            int _rand = rand.Next(0, 10);
+            if (_rand <=8)
+            {
+                _order.DateOfShipping = _order.DateOfOrder + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
+                if (_rand <=4)
+                {
+                    _order.DateOfDelivery = _order.DateOfShipping + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
+                }
+                else
+                {
+                    _order.DateOfDelivery = DateTime.MinValue;
+                }
+            }
+            else
+            {
+                _order.DateOfShipping = DateTime.MinValue;
+                _order.DateOfDelivery = DateTime.MinValue;
+            }
             _order.CustamerAddress = "jrusalem";
             _order.CustomerMail = "maill@gmail.com";
             listOrder.Add(_order); 
