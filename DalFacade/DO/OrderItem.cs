@@ -13,8 +13,8 @@ namespace DO;
 public struct OrderItem
 {
     public int ID { get; set; } 
-    public int IdOfOrder { get; set; }
-    public int IdOfItem { get; set; } 
+    public int idOfOrder { get; set; }
+    public int idOfItem { get; set; } 
     public double Price { get; set; }
     public int amount { get; set; }
 
@@ -23,8 +23,8 @@ public struct OrderItem
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
- Order item ID={ID}: {IdOfOrder}, 
-    ID of item - {IdOfItem}
+ Order item ID={ID}: {idOfOrder}, 
+    ID of item - {idOfItem}
     Price: {Price}
     Amount: {amount}
 ";

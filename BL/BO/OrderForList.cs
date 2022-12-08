@@ -8,14 +8,14 @@ namespace BO
 {
     public class OrderForList
     {
-        public int ID { get; set; }
-        public string CustomerName { get; set; }
+        public int idOfOrder { get; set; }
+        public string? CustomerName { get; set; }
         public Enum.OrderStatus Status { get; set; }
         public int AmountOfItem { get; set; }
         public double TotalPrice { get; set; }
 
         public override string ToString() => $@"
-Order for list ID={ID}: {CustomerName}..
+Order for list ID={idOfOrder}: {CustomerName}..
    Status: {Status}.
    Amount of items: {AmountOfItem}.
    Total price: {TotalPrice}.

@@ -59,7 +59,7 @@ public class Program
                         int.TryParse(Console.ReadLine(), out int inStock);
                         BO.Product product = new BO.Product()
                         {
-                            ID = id,
+                            idOfProduct = id,
                             Name = name,
                             ProductCategory = productCategory,
                             Price = price,
@@ -80,9 +80,11 @@ public class Program
                     {
 
                         //BO.ProductForList JlistProduct = (ProductForList)ibl.Product.getListOfProduct();
-                        IEnumerable < BO.ProductForList> listProduct = ibl.Product.getListOfProduct();
-
-                        /////////////////////////////////////////////////////////
+                        IEnumerable<BO.ProductForList> listProduct = ibl.Product.getListOfProduct();
+                        foreach(var product in listProduct)
+                        {
+                            Console.WriteLine(product);
+                        }
                         break;
                     }
 
@@ -116,7 +118,7 @@ public class Program
                     {
                         Console.WriteLine("insert id of order");
                         int.TryParse(Console.ReadLine(), out int id);
-                       // order = ibl.Order.GetOrder(id);
+                        // order = ibl.Order.GetOrder(id);
                         Console.WriteLine(ibl.Order.GetOrder(id));
                         break;
                     }

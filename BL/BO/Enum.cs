@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 namespace BO;
 public class Enum
 {
-public enum Category { FAMILLY, RACE, JEEP, SPORT }
+    //Categories of cars.=Category.
+    public enum Category { FAMILLY, RACE, JEEP, SPORT }
 
-/// ordered - order been received and take care of
-///Shipped - the order has been ordered and shipped out to the customer
-///Delivered - the order being ordered shipped and delivered to the customer
 
-public enum OrderStatus { DLIVERY, SHIPPED, ORDERED }
+    public enum OrderStatus { DLIVERY, SHIPPED, ORDERED }
+    // ORDERED - order been received and take care of
+    // SHIPPED- the order has been ordered and shipped out to the customer
+    // DLIVERY - the order being ordered shipped and delivered to the customer
+
+
 };

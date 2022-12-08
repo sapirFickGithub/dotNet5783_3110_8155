@@ -14,21 +14,21 @@ internal class DalOrder:IOrder
 {
     public int Add(Order order)
     {
-        order.ID = _Config.get_OrderID;
+        order.idOfOrder = _Config.get_OrderID;
         if (search(order))
         {
             throw new duplication();
         }
         //listOrder[listOrder.Count()] = order;
         listOrder.Add(order);
-        return order.ID;
+        return order.idOfOrder;
     }
     public Order get(int id)
     {
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
-            if (id == listOrder[i].ID)
+            if (id == listOrder[i].idOfOrder)
             {
                 return listOrder[i];
             }
@@ -49,7 +49,7 @@ internal class DalOrder:IOrder
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
-            if (id == listOrder[i].ID)
+            if (id == listOrder[i].idOfOrder)
             {
                 Order p = new Order();
                 listOrder[i] = p;
@@ -62,7 +62,7 @@ internal class DalOrder:IOrder
         {
             for (int i = 0; i < listOrder.Count(); i++)
             {
-                if (newOrder.ID == listOrder[i].ID)
+                if (newOrder.idOfOrder == listOrder[i].idOfOrder)
                     listOrder[i] = newOrder;
             }
         }
@@ -77,7 +77,7 @@ internal class DalOrder:IOrder
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
-            if (find.ID == listOrder[i].ID)
+            if (find.idOfOrder == listOrder[i].idOfOrder)
             {
                 count++;
                 if (count == 0)
@@ -93,7 +93,7 @@ internal class DalOrder:IOrder
         int i;
         for (i = 0; i <listOrder.Count(); i++)
         {
-            if (id == listOrder[i].ID)
+            if (id == listOrder[i].idOfOrder)
             {
                 return i;
             }

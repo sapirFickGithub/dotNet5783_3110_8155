@@ -13,12 +13,12 @@ namespace BlImplementation
     internal class Cart : ICart
     {
         private DalApi.IDal Dal = new Dal.DalList();
-        public BO.Cart add(BO.Cart cart, int id)
+        public BO.Cart add(BO.Cart cart, int idOfProduct)
         {
-            DO.Product product = Dal.Product.get(id);
+            DO.Product product = Dal.Product.get(idOfProduct);
             foreach (var item in cart.itemList)
             {
-                if (item.IdOfProduct == id)
+                if (item.IdOfProduct == idOfProduct)
                 {//item alredy in cart- amount++
                     if (product.InStock - item.amount >= 0)
                     {
@@ -34,7 +34,7 @@ namespace BlImplementation
                 OrderItem newItem = new OrderItem
                 {
                     NameOfProduct = product.Name,
-                    IdOfProduct = product.ID,
+                    IdOfProduct = product.idOfProduct,
                     PriceOfProduct = product.Price,
                     totalPrice = product.Price,
                     amount = 1
@@ -46,13 +46,13 @@ namespace BlImplementation
             else throw new outOfStock();
 
         }
-        public BO.Cart updete(BO.Cart cart, int id, int amount)
+        public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
         {
-            DO.Product product = Dal.Product.get(id);
+            DO.Product product = Dal.Product.get(idOfProduct);
 
             foreach (var item in cart.itemList)
             {
-                if (item.IdOfProduct == id)
+                if (item.IdOfProduct == idOfProduct)
                 {
                     if (amount == 0)
                     {
@@ -99,12 +99,14 @@ namespace BlImplementation
                 //if the produt in stock so add to order
                 DO.OrderItem newOrderItem = new DO.OrderItem()
                 {
-                    IdOfItem = item.IdOfProduct,
-                    IdOfOrder = product.ID,
+
+                   idOfItem = product.idOfProduct, 
+                    idOfOrder =item.idOfOrder,
                     Price = item.PriceOfProduct,
                     amount = item.amount,
                     ID = idOfOrder
                 };
+
                 Dal.OrderItem.Add(newOrderItem);
             }
            // Dal.Order.Add(newOrder);

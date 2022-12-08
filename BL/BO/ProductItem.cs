@@ -8,7 +8,7 @@ namespace BO
 {
     public class ProductItem
     {
-        public int ID { get; set; }
+        public int idOfProduct { get; set; }
         public string? Name { get; set; }
         public Enum.Category ProductCategory { get; set; }
         public double Price { get; set; }
@@ -16,7 +16,7 @@ namespace BO
         public int Amount { get; set; }
 
         public override string ToString() => $@"
-    Product ID={ID}: {Name}.
+    Product ID={idOfProduct}: {Name}.
     category - {ProductCategory}.
     Price: {Price}.
     Amount: {Amount}.

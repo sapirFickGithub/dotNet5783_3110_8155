@@ -38,7 +38,7 @@ public class Program
             case 'a':
                 {
                     Console.WriteLine("please enter: name, category, price, and how much of this product you have");
-                    string name;
+                    string? name;
                     name = Console.ReadLine();
                     temp.Name = name;
                     //temp.Name = Console.ReadLine();
