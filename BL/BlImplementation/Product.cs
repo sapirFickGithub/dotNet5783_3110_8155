@@ -85,21 +85,18 @@ namespace BlImplementation
         public void delete(int idOfProduct)
         {
 
-            IEnumerable<DO.Order> orders = Dal.Order.getAll();
-            foreach (var thisOrder in orders)
-            {
-                List<DO.OrderItem> orderItem = (List<DO.OrderItem>)Dal.OrderItem.getAllItemOrder(thisOrder.idOfOrder);
-                foreach (var thisOrderItem in orderItem)
-                    if (idOfProduct == thisOrderItem.idOfItem)
+
+            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)Dal.OrderItem.getAll();
+            foreach (var thisOrderItem in orderItem)
+                if (idOfProduct == thisOrderItem.idOfItem)
                 {
                     throw new existInOrders();
                 }
-            }
 
             if (idOfProduct < 0)
-                {
-                    throw new notExist();
-                }
+            {
+                throw new notExist();
+            }
             Dal.Product.delete(idOfProduct);
         }
         public void update(BO.Product product)
