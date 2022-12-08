@@ -9,7 +9,7 @@ using DalApi;
 
 namespace Dal;
 
-internal class DalOrderItem:IOrderItem
+internal class DalOrderItem : IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
@@ -29,7 +29,7 @@ internal class DalOrderItem:IOrderItem
         {
             if (id == listOrderItem[i].ID)
             {
-                return listOrderItem[i-1];
+                return listOrderItem[i - 1];
             }
         }
         throw new notFound();
@@ -38,23 +38,13 @@ internal class DalOrderItem:IOrderItem
     {
         return listOrderItem;
     }
+
+   
     public void delete(int id)
     {
-        if (0 > search(id))
-        {
-             throw new notFound();
-        }
-       List<OrderItem> OrderItem = new List<OrderItem>();
-        int i;
-        for (i = 0; i < listOrderItem.Count(); i++)
-        {
-            if (id == listOrderItem[i].ID)
-            {
-                OrderItem p = new OrderItem();
-                listOrderItem[i] = p;
-            }
-        }
+        listOrderItem.Remove(get(id));
     }
+
     public void update(OrderItem newOrderItem)
     {
         if (search(newOrderItem))
@@ -62,7 +52,7 @@ internal class DalOrderItem:IOrderItem
             for (int i = 0; i < listOrderItem.Count(); i++)
             {
                 if (newOrderItem.ID == listOrderItem[i].ID)
-                   listOrderItem[i] = newOrderItem;
+                    listOrderItem[i] = newOrderItem;
             }
         }
         else
@@ -103,17 +93,18 @@ internal class DalOrderItem:IOrderItem
     {
         Console.WriteLine(listOrderItem[index]);
     }
-    public int length() 
-    { return listOrderItem.Count();}
-    public IEnumerable<OrderItem> getAllItemOrder(int id) { 
-    List<OrderItem> list=new List<OrderItem>();
-        foreach(OrderItem item in listOrderItem)
+    public int length()
+    { return listOrderItem.Count(); }
+    public IEnumerable<OrderItem> getAllItemOrder(int id)
+    {
+        List<OrderItem> list = new List<OrderItem>();
+        foreach (OrderItem item in listOrderItem)
         {
-            if(item.idOfItem==id)
+            if (item.idOfItem == id)
                 list.Add(item);
             if (item.amount == 0)
                 throw new notFound();
         }
-        return list;    
+        return list;
     }
 }

@@ -41,29 +41,7 @@ internal class DalProduct : IProduct
     }
     public void delete(int id)
     {
-        if (search(id) < 0)
-        {
-            throw new notFound();
-        }
-        List<Product> Product = new List<Product>();
-        int i;
-        for (i = 0; i <= listProduct.Count(); i++)
-        {
-            if (id == listProduct[i].idOfProduct)
-            {
-                Product p = new Product();
-                listProduct[i]=p;
-            }
-        }
-        //for (int j = 0; j <= i ; j++)
-        //{
-        //    Product[j] = listProduct[j];
-        //}
-        //for (int j = i + 1; j < listProduct.Count(); j++)
-        //{
-        //    Product[j] =listProduct[j];
-        //}
-        //listProduct = Product;
+     listProduct.Remove(get(id));        
     }
     public bool search(Product find)//help function
     {

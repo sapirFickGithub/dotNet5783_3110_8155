@@ -141,18 +141,18 @@ namespace BlImplementation
                     if (Dorder.DateOfShipping == DateTime.MinValue)
                     {
                         orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
-                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, orderTracking.Status);
+                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status);
 
                     }
                     else if (Dal.Order.get(numOfOrder).DateOfOrder!= DateTime.MinValue && Dal.Order.get(numOfOrder).DateOfDelivery == DateTime.MinValue)
                     {
                         orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
-                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, orderTracking.Status);
+                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, (BO.Enum.OrderStatus)orderTracking.Status);
                     }
                     else
                     {
                         orderTracking.Status = (BO.Enum.OrderStatus.DLIVERY);
-                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, orderTracking.Status);
+                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, (BO.Enum.OrderStatus)orderTracking.Status);
                     }
                     orderTracking.Track.Add(a);
                 }

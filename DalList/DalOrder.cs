@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using static Dal.DataSource;
 
 
-internal class DalOrder:IOrder
+internal class DalOrder : IOrder
 {
     public int Add(Order order)
     {
@@ -41,20 +41,9 @@ internal class DalOrder:IOrder
     }
     public void delete(int id)
     {
-        if (0 > search(id))
-        {
-            throw new notFound();
-        }
-        List<Order> Order = new List<Order>();
-        int i;
-        for (i = 0; i < listOrder.Count(); i++)
-        {
-            if (id == listOrder[i].idOfOrder)
-            {
-                Order p = new Order();
-                listOrder[i] = p;
-            }
-        }
+
+        listOrder.Remove(get(id));
+
     }
     public void update(Order newOrder)
     {
@@ -91,7 +80,7 @@ internal class DalOrder:IOrder
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
         int i;
-        for (i = 0; i <listOrder.Count(); i++)
+        for (i = 0; i < listOrder.Count(); i++)
         {
             if (id == listOrder[i].idOfOrder)
             {

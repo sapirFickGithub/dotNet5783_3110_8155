@@ -10,6 +10,7 @@ using BO;
 using Enum = BO.Enum;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using DO;
 
 namespace BlTest;
 
@@ -74,6 +75,11 @@ public class Program
                         Console.WriteLine("insert id of product you want to delete");
                         int.TryParse(Console.ReadLine(), out int id);
                         ibl.Product.delete(id);
+                        IEnumerable<BO.ProductForList> listProduct = ibl.Product.getListOfProduct();
+                        foreach (var product in listProduct)
+                        {
+                            Console.WriteLine(product);
+                        }
                         break;
                     }
                 case 'l'://cart
@@ -168,13 +174,7 @@ public class Program
         cN = Console.ReadLine();
         cM = Console.ReadLine();
         cA = Console.ReadLine();
-        BO.Cart cart = new BO.Cart()
-        {
-            CustomerName = cN,
-            CustomerMail = cM,
-            CustomerAddress = cA,
-            itemList = new List<OrderItem?>()
-        };
+        BO.Cart cart = new BO.Cart() { CustomerName = cN, CustomerMail = cM, CustomerAddress = cA, itemList = new List<BO.OrderItem>() };
         char option;
         Console.WriteLine("hello\n" +
             "enter a to add cart\n" +

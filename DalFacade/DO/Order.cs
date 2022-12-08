@@ -10,15 +10,15 @@ namespace DO;
 /// <summary>
 /// struct that represent identification information about the order
 /// </summary>
-public struct Order
+public struct  Order 
 {
     public int idOfOrder { get; set; }
-    public string CustomerName { get; set; }
-    public string CustomerMail { get; set; }
-    public string CustamerAddress { get; set; }
+    public string? CustomerName { get; set; }
+    public string? CustomerMail { get; set; }
+    public string? CustamerAddress { get; set; }
     public DateTime? DateOfOrder { get; set; }
-    public DateTime? DateOfShipping { get; set; }
-    public DateTime? DateOfDelivery { get; set; }
+    public DateTime DateOfShipping { get; set; }
+    public DateTime DateOfDelivery { get; set; }
 
     /// <summary>
     /// make a string with all the fields in the struct.

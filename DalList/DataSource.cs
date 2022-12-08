@@ -84,7 +84,7 @@ using System.Windows.Markup;
             int _rand = rand.Next(0, 10);
             if (_rand <=8)
             {
-                _order.DateOfShipping = _order.DateOfOrder + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
+                _order.DateOfShipping = (DateTime)(_order.DateOfOrder + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)));
                 if (_rand <=4)
                 {
                     _order.DateOfDelivery = _order.DateOfShipping + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
