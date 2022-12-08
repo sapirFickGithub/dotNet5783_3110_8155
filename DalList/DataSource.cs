@@ -12,9 +12,9 @@ using System.Windows.Markup;
 {
 
     //static readonly int RandNum = 0;
-    internal static List<OrderItem> listOrderItem = new List<OrderItem>();
-    internal static List<Product> listProduct = new List<Product>();
-    internal static List<Order> listOrder = new List<Order>();
+    internal static List<OrderItem?> listOrderItem = new List<OrderItem?>();
+    internal static List<Product?> listProduct = new List<Product?>();
+    internal static List<Order?> listOrder = new List<Order?>();
 
 
 
@@ -112,11 +112,11 @@ using System.Windows.Markup;
         {
             OrderItem _orderItem = new OrderItem();
             _orderItem.ID = _Config.get_OrderItemID;
-            _orderItem.idOfOrder = listOrder[i % 19].idOfOrder;//i%19 will chosse the order , in this way all the place be uesed
+            _orderItem.idOfOrder = listOrder[i % 19].Value.idOfOrder;//i%19 will chosse the order , in this way all the place be uesed
             int index = rand.Next(0, 10);//choss a product 
-            _orderItem.idOfItem = listProduct[index].idOfProduct;
+            _orderItem.idOfItem = listProduct[index].Value.idOfProduct;
             _orderItem.amount = rand.Next(1, 5);
-            _orderItem.Price = listProduct[index].Price;
+            _orderItem.Price = listProduct[index].Value.Price;
             listOrderItem.Add(_orderItem);
         }
 

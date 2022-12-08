@@ -12,7 +12,7 @@ namespace BO
         public string? CustomerName { get; set; }
         public string? CustomerMail { get; set; }
         public string? CustomerAddress { get; set; }
-        public List<OrderItem> itemList { get; set; } = new List<OrderItem>();
+        public List<OrderItem?>? itemList { get; set; } = new List<OrderItem>();
         public double TotalPrice { get; set; }
 
 

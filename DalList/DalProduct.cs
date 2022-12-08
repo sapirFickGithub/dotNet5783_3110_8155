@@ -22,7 +22,6 @@ internal class DalProduct : IProduct
     }
     public Product get(int id)
     {
-        int i;
         foreach(Product product in listProduct)
         {
             if (id == product.idOfProduct)
@@ -33,11 +32,22 @@ internal class DalProduct : IProduct
         throw new notFound();
         //return arrayProduct[(id - 100000) / 23];//in the class config we colculate the id eith the formula "100000+ _ProductIndex * 20 + _ProductIndex * 3" so to get the right index, we did the opposite formula
     }
-    public IEnumerable<Product> getAll()
+    public IEnumerable<Product?> getAll(Func<Product?, bool>? param)
     {
 
-        return listProduct;
-
+        if (param == null)//לחזור לראות אם זה תקין
+        {
+            return listProduct;
+        }
+        List<Product?> list = new List<Product?>();
+        foreach (var item in listProduct)
+        {
+            if (param(item))
+            {
+                list.Add(item);
+            }
+        }
+        return list;
     }
     public void delete(int id)
     {
@@ -49,7 +59,7 @@ internal class DalProduct : IProduct
         int i;
         for (i = 0; i < listProduct.Count(); i++)
         {
-            if (find.idOfProduct == listProduct[i].idOfProduct)
+            if (find.idOfProduct == listProduct[i]?.idOfProduct)
             {
                 count++;
                 if (count == 0)
@@ -66,7 +76,7 @@ internal class DalProduct : IProduct
         {
             for (int i = 0; i < listProduct.Count(); i++)
             {
-                if (newProduct.idOfProduct == listProduct[i].idOfProduct)
+                if (newProduct.idOfProduct == listProduct[i]?.idOfProduct)
                     listProduct[i] = newProduct;
             }
         }
@@ -80,7 +90,7 @@ internal class DalProduct : IProduct
         int i;
         for (i = 0; i < listProduct.Count(); i++)
         {
-            if (id == listProduct[i].idOfProduct)
+            if (id == listProduct[i]?.idOfProduct)
             {
                 return i;
             }
@@ -92,5 +102,19 @@ internal class DalProduct : IProduct
         Console.WriteLine(listProduct[n]);
     }
     public int length() { return listProduct.Count(); }
+    public Product getByParam(Func<Product?, bool>? param)
+    {
+        foreach (var item in listProduct)
+        {
+            if (param(item))
+            {
+                Product? product = new Product();
+                product = item;
+                return (Product)product;
+            }
+        }
+        throw new Exception("NOT EXIST!");
+
+    }
 }
 

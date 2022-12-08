@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -17,12 +18,12 @@ namespace BlImplementation
         private DalApi.IDal Dal = new Dal.DalList();
         public IEnumerable<BO.ProductForList> getListOfProduct()
         {
-            IEnumerable<DO.Product> products = Dal.Product.getAll();
-            List<BO.ProductForList> productForList = new List<BO.ProductForList>();
+            IEnumerable<DO.Product?> products = Dal.Product.getAll()?? throw new Exception("NULL");
+            List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
 
             foreach (var item in products)
             {
-                BO.ProductForList temp = new() { idOfProduct = item.idOfProduct, Name = item.Name, Price = item.Price, ProductCategory = (BO.Enum.Category)item.ProductCategory };
+                BO.ProductForList temp = new() { idOfProduct = (int)(item?.idOfProduct), Name = item?.Name, Price = (double)(item?.Price), ProductCategory = (BO.Enum.Category)item?.ProductCategory };
                 productForList.Add(temp);
             }
             return productForList.AsEnumerable();

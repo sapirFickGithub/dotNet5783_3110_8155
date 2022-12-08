@@ -15,7 +15,7 @@ namespace BlImplementation
         private DalApi.IDal Dal = new Dal.DalList();
         public BO.Cart add(BO.Cart cart, int idOfProduct)
         {
-            DO.Product product = Dal.Product.get(idOfProduct);
+            DO.Product product = (DO.Product)Dal.Product.get(idOfProduct);
             foreach (var item in cart.itemList)
             {
                 if (item.IdOfProduct == idOfProduct)
@@ -48,7 +48,7 @@ namespace BlImplementation
         }
         public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
         {
-            DO.Product product = Dal.Product.get(idOfProduct);
+            DO.Product product = (DO.Product)Dal.Product.get(idOfProduct);
 
             foreach (var item in cart.itemList)
             {
@@ -93,7 +93,7 @@ namespace BlImplementation
             foreach (var item in cart.itemList)
             {
                 //check if the product is in stock
-                DO.Product product = Dal.Product.get(item.IdOfProduct);
+                DO.Product product = (DO.Product)Dal.Product.getByParam(item.IdOfProduct);
                 if (product.InStock - item.amount < 0)
                     return false;
                 //if the produt in stock so add to order

@@ -17,8 +17,8 @@ public struct  Order
     public string? CustomerMail { get; set; }
     public string? CustamerAddress { get; set; }
     public DateTime? DateOfOrder { get; set; }
-    public DateTime DateOfShipping { get; set; }
-    public DateTime DateOfDelivery { get; set; }
+    public DateTime? DateOfShipping { get; set; }
+    public DateTime? DateOfDelivery { get; set; }
 
     /// <summary>
     /// make a string with all the fields in the struct.

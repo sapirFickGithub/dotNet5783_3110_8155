@@ -10,7 +10,7 @@ namespace BO
     {
         public int idOfOrder { get; set; }
         public string? CustomerName { get; set; }
-        public Enum.OrderStatus Status { get; set; }
+        public Enum.OrderStatus? Status { get; set; }
         public int AmountOfItem { get; set; }
         public double TotalPrice { get; set; }
 

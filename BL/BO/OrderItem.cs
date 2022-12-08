@@ -14,7 +14,7 @@ namespace BO
         public double PriceOfProduct { get; set; }
         public int amount { get; set; }
         public double totalPrice { get; set; }
-        public Enum.Category ProductCategory { get; internal set; }
+        public Enum.Category? ProductCategory { get; internal set; }
 
         public override string ToString() => $@"
  Order item ID: {idOfOrder}

@@ -27,22 +27,35 @@ internal class DalOrderItem : IOrderItem
         int i, length = listOrderItem.Count();
         for (i = 0; i < length; i++)
         {
-            if (id == listOrderItem[i].ID)
+            if (id == listOrderItem[i]?.ID)
             {
-                return listOrderItem[i - 1];
+                return (OrderItem)listOrderItem[i - 1];
             }
         }
         throw new notFound();
     }
-    public IEnumerable<OrderItem> getAll()
+    public IEnumerable<OrderItem?> getAll(Func<OrderItem?, bool>? param)
     {
-        return listOrderItem;
+
+        if (param == null)//לחזור לראות אם זה תקין
+        {
+            return listOrderItem;
+        }
+        List<OrderItem?> list = new List<OrderItem?>();
+        foreach (var item in listOrderItem)
+        {
+            if (param(item))
+            {
+                list.Add(item);
+            }
+        }
+        return list;
     }
 
-   
+
     public void delete(int id)
     {
-        listOrderItem.Remove(get(id));
+        listOrderItem.Remove(getByParam(x =>id == x?.ID));
     }
 
     public void update(OrderItem newOrderItem)
@@ -51,7 +64,7 @@ internal class DalOrderItem : IOrderItem
         {
             for (int i = 0; i < listOrderItem.Count(); i++)
             {
-                if (newOrderItem.ID == listOrderItem[i].ID)
+                if (newOrderItem.ID == listOrderItem[i]?.ID)
                     listOrderItem[i] = newOrderItem;
             }
         }
@@ -66,7 +79,7 @@ internal class DalOrderItem : IOrderItem
         int i;
         for (i = 0; i < listOrderItem.Count(); i++)
         {
-            if (find.ID == listOrderItem[i].ID)
+            if (find.ID == listOrderItem[i]?.ID)
             {
                 count++;
                 if (count == 0)
@@ -82,7 +95,7 @@ internal class DalOrderItem : IOrderItem
         int i;
         for (i = 0; i < listOrderItem.Count(); i++)
         {
-            if (id == listOrderItem[i].ID)
+            if (id == listOrderItem[i]?.ID)
             {
                 return i;
             }
@@ -95,7 +108,7 @@ internal class DalOrderItem : IOrderItem
     }
     public int length()
     { return listOrderItem.Count(); }
-    public IEnumerable<OrderItem> getAllItemOrder(int id)
+    public IEnumerable<OrderItem?> getAllItemOrder(int id)
     {
         List<OrderItem> list = new List<OrderItem>();
         foreach (OrderItem item in listOrderItem)
@@ -105,6 +118,20 @@ internal class DalOrderItem : IOrderItem
             if (item.amount == 0)
                 throw new notFound();
         }
-        return list;
+        return (IEnumerable<OrderItem?>)list.AsEnumerable();
+    }
+    public OrderItem getByParam(Func<OrderItem?, bool>? param)
+    {
+        foreach (var item in listOrderItem)
+        {
+            if (param(item))
+            {
+                OrderItem? orderItem = new OrderItem();
+                orderItem = item;
+                return (OrderItem)orderItem;
+            }
+        }
+        throw new Exception("NOT EXIST!");
+
     }
 }

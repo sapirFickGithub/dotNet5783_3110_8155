@@ -28,16 +28,29 @@ internal class DalOrder : IOrder
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
-            if (id == listOrder[i].idOfOrder)
+            if (id == listOrder[i]?.idOfOrder)
             {
-                return listOrder[i];
+                return (Order)listOrder[i];
             }
         }
         throw new notFound();
     }
-    public IEnumerable<Order> getAll()
+    public IEnumerable<Order?> getAll(Func<Order?, bool>? param)
     {
-        return listOrder;
+
+        if (param == null)//לחזור לראות אם זה תקין
+        {
+            return listOrder;
+        }
+        List<Order?> list = new List<Order?>();
+        foreach (var item in listOrder)
+        {
+            if (param(item))
+            {
+                list.Add(item);
+            }
+        }
+        return list;
     }
     public void delete(int id)
     {
@@ -51,7 +64,7 @@ internal class DalOrder : IOrder
         {
             for (int i = 0; i < listOrder.Count(); i++)
             {
-                if (newOrder.idOfOrder == listOrder[i].idOfOrder)
+                if (newOrder.idOfOrder == listOrder[i]?.idOfOrder)
                     listOrder[i] = newOrder;
             }
         }
@@ -66,7 +79,7 @@ internal class DalOrder : IOrder
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
-            if (find.idOfOrder == listOrder[i].idOfOrder)
+            if (find.idOfOrder == listOrder[i]?.idOfOrder)
             {
                 count++;
                 if (count == 0)
@@ -82,7 +95,7 @@ internal class DalOrder : IOrder
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
-            if (id == listOrder[i].idOfOrder)
+            if (id == listOrder[i]?.idOfOrder)
             {
                 return i;
             }
@@ -94,4 +107,18 @@ internal class DalOrder : IOrder
         Console.WriteLine(listOrder[index]);
     }
     public int length() { return listOrder.Count(); }
+    public Order getByParam(Func<Order?, bool>? param)
+    {
+        foreach (var item in listOrder)
+        {
+            if (param(item))
+            {
+                Order? order = new Order();
+                order = item;
+                return (Order)order ;
+            }
+        }
+        throw new Exception("NOT EXIST!");
+
+    }
 }

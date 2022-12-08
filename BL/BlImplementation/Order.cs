@@ -15,8 +15,8 @@ namespace BlImplementation
         private DalApi.IDal Dal = new Dal.DalList();
         public IEnumerable<BO.OrderForList> getListOfOrder()
         {
-            IEnumerable<DO.OrderItem> orderItem = Dal.OrderItem.getAll();
-            IEnumerable<DO.Order> order = Dal.Order.getAll();
+            IEnumerable<DO.OrderItem> orderItem = (IEnumerable<DO.OrderItem>)(Dal.OrderItem?.getAll());
+            IEnumerable<DO.Order> order = (IEnumerable<DO.Order>)Dal.Order.getAll();
             List<BO.OrderForList> orderForList = new List<BO.OrderForList>();
             BO.OrderForList temp;
             foreach (var item in orderItem)
@@ -49,7 +49,7 @@ namespace BlImplementation
             if (numOfOrder > 0)
             {
                 DO.Order Dorder = Dal.Order.get(numOfOrder);
-                IEnumerable<DO.OrderItem> orderItems = Dal.OrderItem.getAll();
+                IEnumerable<DO.OrderItem> orderItems = (IEnumerable<DO.OrderItem>)Dal.OrderItem.getAll();
                 BO.Order? order = new()
                 {
                     idOfOrder = numOfOrder,
@@ -154,7 +154,9 @@ namespace BlImplementation
                         orderTracking.Status = (BO.Enum.OrderStatus.DLIVERY);
                         a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, (BO.Enum.OrderStatus)orderTracking.Status);
                     }
-                    orderTracking.Track.Add(a);
+
+                   
+                    orderTracking.Track.Add((a));
                 }
                 return orderTracking;
             }
