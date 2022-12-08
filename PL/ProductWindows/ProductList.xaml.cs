@@ -27,7 +27,7 @@ namespace PL.ProductWindows
         {
             InitializeComponent();
             List_of_product.ItemsSource = bl.Product.getListOfProduct();
-            Category.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
+            Category.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));//////////////////////////////
         }
 
         private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)

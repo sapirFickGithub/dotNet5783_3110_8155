@@ -7,24 +7,45 @@
         mc:Ignorable="d"
         Title="ProductList" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="49*"/>
-            <RowDefinition Height="337*"/>
-            <RowDefinition Height="48*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="105*"/>
+            <RowDefinition Height="102*"/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="Category" HorizontalAlignment="Left" Margin="583,0,0,0" VerticalAlignment="Center" Width="181" Height="22" SelectionChanged="Category_SelectionChanged">
-            <ComboBoxItem Content="All"/>
-            <ComboBoxItem Content="Collectors"/>
-            <ComboBoxItem Content="Familly"/>
-            <ComboBoxItem Content="Gears"/>
-            <ComboBoxItem Content="Jeep"/>
-            <ComboBoxItem Content="Race"/>
-            <ComboBoxItem Content="Sport"/>
+        <Button Content="Add new Product" 
+                Grid.Row="3" 
+                HorizontalAlignment="Left" 
+                Margin="43,26,0,30" 
+                Padding="5" 
+                Background="#FFF1F1D8"
+                Width="228" 
+                FontFamily="Maiandra GD" 
+                FontSize="20" RenderTransformOrigin="0.446,0.113">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="179.662"/>
+                    <TranslateTransform X="0.292" Y="-0.198"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <ComboBox x:Name="Category"
+                  HorizontalAlignment="Left"
+                  Margin="583,0,0,0" 
+                  VerticalAlignment="Center"
+                  Width="181" Height="22"
+                  SelectionChanged="Category_SelectionChanged">
+          
 
 
         </ComboBox>
 
-        <ListView x:Name="List_of_product" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="List_of_product_SelectionChanged" Margin="0,49,0,3" Grid.RowSpan="2">
+        <ListView x:Name="List_of_product" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="List_of_product_SelectionChanged" Margin="0,9,0,3" Grid.Row="1" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
