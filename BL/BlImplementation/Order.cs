@@ -11,7 +11,7 @@ namespace BlImplementation
     internal class Order : BlApi.IOrder
     {
         int _items = 0;
-        double _totalPrice=0;
+        double _totalPrice = 0;
         private DalApi.IDal Dal = new Dal.DalList();
         public IEnumerable<BO.OrderForList> getListOfOrder()
         {
@@ -26,13 +26,15 @@ namespace BlImplementation
             }
             foreach (var item in order)
             {
-                temp = new() { idOfOrder = item.idOfOrder, CustomerName = item.CustomerName, AmountOfItem = _items, TotalPrice = _totalPrice};
-                
-                if(Dal.Order.get(item.idOfOrder).DateOfOrder == DateTime.MinValue)
+
+                temp = new() { idOfOrder = item.idOfOrder, CustomerName = item.CustomerName, AmountOfItem = _items, TotalPrice = _totalPrice };
+                var orderTemp = Dal.Order.getByParam(x => item.idOfOrder == x?.idOfOrder);
+
+                if (orderTemp.DateOfOrder == null)
                 {
                     temp.Status = (BO.Enum.OrderStatus.SHIPPED);
                 }
-                else if (Dal.Order.get(item.idOfOrder).DateOfShipping != DateTime.MinValue && Dal.Order.get(item.idOfOrder).DateOfOrder == DateTime.MinValue)
+                else if (orderTemp.DateOfShipping != null && orderTemp.DateOfOrder == null)
                 {
                     temp.Status = (BO.Enum.OrderStatus.ORDERED);
                 }
@@ -48,7 +50,7 @@ namespace BlImplementation
         {
             if (numOfOrder > 0)
             {
-                DO.Order Dorder = Dal.Order.get(numOfOrder);
+                DO.Order Dorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
                 IEnumerable<DO.OrderItem> orderItems = (IEnumerable<DO.OrderItem>)Dal.OrderItem.getAll();
                 BO.Order? order = new()
                 {
@@ -60,11 +62,11 @@ namespace BlImplementation
                     DateOfOrder = Dorder.DateOfOrder,
                     DateOfDelivery = Dorder.DateOfDelivery
                 };
-                if (Dal.Order.get(numOfOrder).DateOfOrder == DateTime.MinValue)
+                if (Dorder.DateOfOrder == null)
                 {
                     order.Status = (BO.Enum.OrderStatus.SHIPPED);
                 }
-                else if (Dal.Order.get(numOfOrder).DateOfShipping != DateTime.MinValue && Dal.Order.get(numOfOrder).DateOfOrder == DateTime.MinValue)
+                else if (Dorder.DateOfShipping != null && Dorder.DateOfOrder == null)
                 {
                     order.Status = (BO.Enum.OrderStatus.ORDERED);
                 }
@@ -78,17 +80,17 @@ namespace BlImplementation
                 {
                     if (numOfOrder == item.ID)
                     {
-                        order.Items.Add(new(){ });
+                        order.Items.Add(new() { });
                         order.Items[i].idOfOrder = item.ID;
-                        order.Items[i].IdOfProduct = item.idOfItem;
-                        order.Items[i].NameOfProduct = Dal.Product.get(item.idOfItem).Name;
-                        order.Items[i].amount = Dal.OrderItem.get(item.ID).amount;
+                        order.Items[i].idOfProduct = item.idOfItem;
+                        order.Items[i].NameOfProduct = Dal.Product.getByParam(x => item.idOfItem == x?.idOfProduct).Name;
+                        order.Items[i].amount = Dal.OrderItem.getByParam(x => item.ID == x?.ID).amount;
                         order.Items[i].PriceOfProduct = item.Price;
-                        order.Items[i].totalPrice = Dal.OrderItem.get(item.ID).amount * item.Price;
-                        order.TotalPrice += Dal.OrderItem.get(item.ID).amount * item.Price;
+                        order.Items[i].totalPrice = Dal.OrderItem.getByParam(x => item.ID == x?.ID).amount * item.Price;
+                        order.TotalPrice += Dal.OrderItem.getByParam(x => item.ID == x?.ID).amount * item.Price;
                         i++;
                     }
-                    
+
                 }
                 return order;
             }
@@ -97,8 +99,8 @@ namespace BlImplementation
         }
         public BO.Order updateDliveryOrder(int numOfOrder)
         {
-            DO.Order Dorder = Dal.Order.get(numOfOrder);
-            if (Dorder.DateOfDelivery == DateTime.MinValue && Dorder.idOfOrder > 0)
+            DO.Order Dorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
+            if (Dorder.DateOfDelivery ==null && Dorder.idOfOrder > 0)
             {
                 Dorder.DateOfDelivery = DateTime.Now;
                 BO.Order order = GetOrder(numOfOrder);
@@ -113,8 +115,8 @@ namespace BlImplementation
         }
         public BO.Order UpdateSupplyDelivery(int numOfOrder)
         {
-            DO.Order Dorder = Dal.Order.get(numOfOrder);
-            if (Dorder.DateOfDelivery != DateTime.MinValue && Dorder.idOfOrder > 0 && Dorder.DateOfShipping == DateTime.MinValue)
+            DO.Order Dorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
+            if (Dorder.DateOfDelivery != null && Dorder.idOfOrder > 0 && Dorder.DateOfShipping == null)
             {
                 Dorder.DateOfShipping = DateTime.Now;
                 BO.Order order = GetOrder(numOfOrder);
@@ -129,7 +131,7 @@ namespace BlImplementation
         }
         public BO.OrderTracking orderTracking(int numOfOrder)
         {
-            DO.Order Dorder = Dal.Order.get(numOfOrder); //אם ההזמנה לא קיימת תיזרק שגיאה
+            DO.Order Dorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder); //אם ההזמנה לא קיימת תיזרק שגיאה
             Tuple<DateTime, BO.Enum.OrderStatus> a;
 
             if (numOfOrder > 0)
@@ -138,13 +140,13 @@ namespace BlImplementation
                 orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
                 if (numOfOrder > 0)
                 {
-                    if (Dorder.DateOfShipping == DateTime.MinValue)
+                    if (Dorder.DateOfShipping == null)
                     {
                         orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
                         a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status);
 
                     }
-                    else if (Dal.Order.get(numOfOrder).DateOfOrder!= DateTime.MinValue && Dal.Order.get(numOfOrder).DateOfDelivery == DateTime.MinValue)
+                    else if (Dorder.DateOfOrder != null && Dorder.DateOfDelivery == null)
                     {
                         orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
                         a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, (BO.Enum.OrderStatus)orderTracking.Status);
@@ -155,7 +157,7 @@ namespace BlImplementation
                         a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, (BO.Enum.OrderStatus)orderTracking.Status);
                     }
 
-                   
+
                     orderTracking.Track.Add((a));
                 }
                 return orderTracking;
@@ -168,4 +170,4 @@ namespace BlImplementation
     }
 
 }
-  
+

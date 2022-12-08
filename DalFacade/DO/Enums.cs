@@ -1,2 +1,2 @@
 ﻿namespace DO;
-public enum Category { FAMILLY, RACE, JEEP, SPORT}
+public enum Category { Familly, Race, Jeep, Sport, Gears, Collectors }

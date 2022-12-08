@@ -15,7 +15,7 @@ namespace BlApi
         /// Returns a list of all existing products.
         /// </summary>
         /// <IEnumerable<BO.ProductForList>></returns>
-        public IEnumerable<BO.ProductForList> getListOfProduct();
+        public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param=null);
         /// <summary>
         /// For admin screen:
         /// Gets a product ID number and returns an object with all its details
@@ -54,5 +54,6 @@ namespace BlApi
         /// </summary>
         /// <param name="product"></param>
         public void update(BO.Product idOfProduct);
+      
     }
 }

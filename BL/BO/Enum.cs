@@ -8,7 +8,7 @@ namespace BO;
 public class Enum
 {
     //Categories of cars.=Category.
-    public enum Category { FAMILLY, RACE, JEEP, SPORT }
+    public enum Category {Familly, Race, Jeep, Sport ,Gears, Collectors}
 
 
     public enum OrderStatus { DLIVERY, SHIPPED, ORDERED }

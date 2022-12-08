@@ -64,7 +64,7 @@ using System.Windows.Markup;
             product.idOfProduct = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
             product.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
-            product.ProductCategory = (Category)v.GetValue(rand.Next(0, 4));
+            product.ProductCategory = (Category)v.GetValue(rand.Next(0, 6));
             product.InStock = rand.Next(0, 5);
             product.Price = rand.Next(2000, 5000000);
             listProduct.Add(product);
@@ -78,7 +78,7 @@ using System.Windows.Markup;
             Order _order = new Order();
             _order.idOfOrder = _Config.get_OrderID;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
-            _order.DateOfShipping = DateTime.MinValue;
+            _order.DateOfShipping = null;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
             _order.DateOfOrder = DateTime.Now;
             int _rand = rand.Next(0, 10);
@@ -91,13 +91,13 @@ using System.Windows.Markup;
                 }
                 else
                 {
-                    _order.DateOfDelivery = DateTime.MinValue;
+                    _order.DateOfDelivery = null;
                 }
             }
             else
             {
-                _order.DateOfShipping = DateTime.MinValue;
-                _order.DateOfDelivery = DateTime.MinValue;
+                _order.DateOfShipping = null;
+                _order.DateOfDelivery = null;
             }
             _order.CustamerAddress = "jrusalem";
             _order.CustomerMail = "maill@gmail.com";

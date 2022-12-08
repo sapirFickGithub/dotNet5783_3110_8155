@@ -16,14 +16,19 @@ namespace BlImplementation
     internal class Product : BlApi.IProduct
     {
         private DalApi.IDal Dal = new Dal.DalList();
-        public IEnumerable<BO.ProductForList> getListOfProduct()
+        public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
         {
-            IEnumerable<DO.Product?> products = Dal.Product.getAll()?? throw new Exception("NULL");
+            IEnumerable<DO.Product?> products = Dal.Product.getAll(param)?? throw new Exception("NULL");
             List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
 
             foreach (var item in products)
             {
-                BO.ProductForList temp = new() { idOfProduct = (int)(item?.idOfProduct), Name = item?.Name, Price = (double)(item?.Price), ProductCategory = (BO.Enum.Category)item?.ProductCategory };
+                BO.ProductForList temp = new() 
+                { 
+                    idOfProduct = (int)(item?.idOfProduct),
+                    Name = item?.Name,
+                    Price = (double)(item?.Price),
+                    ProductCategory = (BO.Enum.Category)item?.ProductCategory };
                 productForList.Add(temp);
             }
             return productForList.AsEnumerable();
@@ -34,7 +39,7 @@ namespace BlImplementation
             BO.Product product = new BO.Product();
             if (idOfProduct > 0)
             {
-                DO.Product Dproduct = Dal.Product.get(idOfProduct);
+                DO.Product Dproduct = Dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
                 BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
                 return temp;
             }
@@ -45,15 +50,19 @@ namespace BlImplementation
         {
             if (idOfProduct > 0)
             {
-                DO.Product Dproduct = Dal.Product.get(idOfProduct);
-                BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
+                DO.Product Dproduct = Dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+                BO.Product temp = new()
+                { idOfProduct = Dproduct.idOfProduct,
+                    Name = Dproduct.Name, 
+                    Price = Dproduct.Price,
+                    InStock = Dproduct.InStock };
                 foreach (var item in cart.itemList)
                 {
-                    if (idOfProduct == item.IdOfProduct)
+                    if (idOfProduct == item.idOfProduct)
                     {
                         BO.ProductItem productItem = new()
                         {
-                            idOfProduct = item.IdOfProduct,
+                            idOfProduct = item.idOfProduct,
                             Name = item.NameOfProduct,
                             Price = item.PriceOfProduct,
                             ProductCategory = (BO.Enum.Category)item.ProductCategory,
@@ -118,5 +127,23 @@ namespace BlImplementation
             else
                 throw new incorrectData();
         }
+        //public IEnumerable<BO.ProductForList> getByCategory(BO.Enum.Category category)
+        //{
+        //    List<DO.Product?> productList = Dal.Product.getAll(x => category == x?.Category);
+        //    List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
+
+        //    foreach (var item in productList)
+        //    {
+        //        BO.ProductForList temp = new()
+        //        {
+        //            idOfProduct = (int)(item?.idOfProduct),
+        //            Name = item?.Name,
+        //            Price = (double)(item?.Price),
+        //            ProductCategory = (BO.Enum.Category)item?.ProductCategory
+        //        };
+        //        productForList.Add(temp);
+        //    }
+        //    return productForList.AsEnumerable();
+        //}
     }
 }
