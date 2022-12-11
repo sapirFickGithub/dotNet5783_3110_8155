@@ -16,7 +16,8 @@
             <RowDefinition Height="105*"/>
             <RowDefinition Height="102*"/>
         </Grid.RowDefinitions>
-        <Button Content="Add new Product" 
+        <Button x:Name="Add_New_Product"
+                Content="Add new Product"
                 Grid.Row="3" 
                 HorizontalAlignment="Left" 
                 Margin="43,26,0,30" 
@@ -24,7 +25,7 @@
                 Background="#FFF1F1D8"
                 Width="228" 
                 FontFamily="Maiandra GD" 
-                FontSize="20" RenderTransformOrigin="0.446,0.113">
+                FontSize="20" RenderTransformOrigin="0.446,0.113" Click="EditProductWindow_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1" ScaleX="-1"/>
@@ -34,22 +35,30 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <ComboBox x:Name="Category"
+        <ComboBox x:Name="Category_selector"
                   HorizontalAlignment="Left"
                   Margin="583,0,0,0" 
                   VerticalAlignment="Center"
                   Width="181" Height="22"
                   SelectionChanged="Category_SelectionChanged">
-          
-
-
         </ComboBox>
 
-        <ListView x:Name="List_of_product" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="List_of_product_SelectionChanged" Margin="0,9,0,3" Grid.Row="1" Grid.RowSpan="2">
+        <ListView x:Name="List_of_product"
+                  d:ItemsSource="{d:SampleData ItemCount=6}" 
+                  SelectionChanged="List_of_product_SelectionChanged"
+                  Margin="0,40,0,5"
+                  Grid.RowSpan="3">
             <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
+                <GridView AllowsColumnReorder="True" >
+
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding idOfProduct}"/>
+                    <GridViewColumn  Header="Category" DisplayMemberBinding="{Binding ProductCategory }" />
+                    <GridViewColumn  Header="Price" DisplayMemberBinding="{Binding Price}" />
+                    <GridViewColumn  Header="InStock" DisplayMemberBinding="{Binding InStock}" />
+                  
                 </GridView>
+
             </ListView.View>
         </ListView>
 

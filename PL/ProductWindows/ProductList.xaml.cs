@@ -19,15 +19,16 @@ namespace PL.ProductWindows
 {
     /// <summary>
     /// Interaction logic for ProductList.xaml
+
     /// </summary>
     public partial class ProductList : Window
     {
-        private IBl bl = new BL();
+        private static IBl bl = new BL();
         public ProductList()
         {
             InitializeComponent();
             List_of_product.ItemsSource = bl.Product.getListOfProduct();
-            Category.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));//////////////////////////////
+            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));//////////////////////////////
         }
 
         private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -35,13 +36,22 @@ namespace PL.ProductWindows
 
         }
 
+      
+     
+
+        private void EditProductWindow_Click(object sender, RoutedEventArgs e)
+        {
+            new ProductWindows.EditProduct().Show();
+            this.Close();
+        }
+
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Object selectedItem = Category.SelectedItem;
+            Object selectedItem = Category_selector.SelectedItem;
             if (selectedItem.ToString() == "All")
-                selectedItem = bl.Product.getListOfProduct();
+                List_of_product.ItemsSource = bl.Product.getListOfProduct();
             else
-                selectedItem = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
+                List_of_product.ItemsSource = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
         }
     }
 }
