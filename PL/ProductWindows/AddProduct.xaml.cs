@@ -47,6 +47,7 @@ namespace PL.ProductWindows
         }
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
+            
             int.TryParse(ID.Text, out int id);
             double.TryParse(Price.Text, out double price);
             int.TryParse(InStock.Text, out int inStock);

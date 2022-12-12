@@ -51,7 +51,7 @@ namespace BlImplementation
             if (numOfOrder > 0)
             {
                 DO.Order Dorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
-                IEnumerable<DO.OrderItem> orderItems = (IEnumerable<DO.OrderItem>)Dal.OrderItem.getAll();
+                IEnumerable<DO.OrderItem?> orderItems = Dal.OrderItem.getAll();
                 BO.Order? order = new()
                 {
                     idOfOrder = numOfOrder,
@@ -78,16 +78,16 @@ namespace BlImplementation
                 order.Items = new List<BO.OrderItem>();
                 foreach (var item in orderItems)
                 {
-                    if (numOfOrder == item.ID)
+                    if (numOfOrder == (int)item?.ID)
                     {
                         order.Items.Add(new() { });
-                        order.Items[i].idOfOrder = item.ID;
-                        order.Items[i].idOfProduct = item.idOfItem;
-                        order.Items[i].NameOfProduct = Dal.Product.getByParam(x => item.idOfItem == x?.idOfProduct).Name;
-                        order.Items[i].amount = Dal.OrderItem.getByParam(x => item.ID == x?.ID).amount;
-                        order.Items[i].PriceOfProduct = item.Price;
-                        order.Items[i].totalPrice = Dal.OrderItem.getByParam(x => item.ID == x?.ID).amount * item.Price;
-                        order.TotalPrice += Dal.OrderItem.getByParam(x => item.ID == x?.ID).amount * item.Price;
+                        order.Items[i].idOfOrder = (int)item?.ID;
+                        order.Items[i].idOfProduct = (int)item?.idOfItem;
+                        order.Items[i].NameOfProduct = Dal.Product.getByParam(x => (int)item?.idOfItem == x?.idOfProduct).Name;
+                        order.Items[i].amount = Dal.OrderItem.getByParam(x => (int)item?.ID == x?.ID).amount;
+                        order.Items[i].PriceOfProduct = (double)item?.Price;
+                        order.Items[i].totalPrice = Dal.OrderItem.getByParam(x => (int)item?.ID == x?.ID).amount * (double)item?.Price;
+                        order.TotalPrice += Dal.OrderItem.getByParam(x => (int)item?.ID == x?.ID).amount * (double)item?.Price;
                         i++;
                     }
 

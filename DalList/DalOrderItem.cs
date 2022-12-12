@@ -49,7 +49,7 @@ internal class DalOrderItem : IOrderItem
                 list.Add(item);
             }
         }
-        return list;
+        return list.AsEnumerable();
     }
 
 
