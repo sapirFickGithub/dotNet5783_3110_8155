@@ -28,7 +28,10 @@ namespace BlImplementation
                     idOfProduct = (int)(item?.idOfProduct),
                     Name = item?.Name,
                     Price = (double)(item?.Price),
-                    ProductCategory = (BO.Enum.Category)item?.ProductCategory };
+                    ProductCategory = (BO.Enum.Category)item?.ProductCategory
+                                 
+                };
+
                 productForList.Add(temp);
             }
             return productForList.AsEnumerable();

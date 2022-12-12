@@ -25,7 +25,9 @@
                 Background="#FFF1F1D8"
                 Width="228" 
                 FontFamily="Maiandra GD" 
-                FontSize="20" RenderTransformOrigin="0.446,0.113" Click="EditProductWindow_Click">
+                FontSize="20" 
+                RenderTransformOrigin="0.446,0.113" 
+                Click="AddProductWindow_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1" ScaleX="-1"/>
@@ -55,9 +57,9 @@
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding idOfProduct}"/>
                     <GridViewColumn  Header="Category" DisplayMemberBinding="{Binding ProductCategory }" />
                     <GridViewColumn  Header="Price" DisplayMemberBinding="{Binding Price}" />
-                    <GridViewColumn  Header="InStock" DisplayMemberBinding="{Binding InStock}" />
-                  
+                                      
                 </GridView>
+               
 
             </ListView.View>
         </ListView>

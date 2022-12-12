@@ -39,9 +39,9 @@ namespace PL.ProductWindows
       
      
 
-        private void EditProductWindow_Click(object sender, RoutedEventArgs e)
+        private void AddProductWindow_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindows.EditProduct().Show();
+            new ProductWindows.AddProduct().Show();
             this.Close();
         }
 
