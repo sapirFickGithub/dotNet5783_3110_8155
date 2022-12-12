@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.ProductWindows"
         mc:Ignorable="d"
         Title="UpdateProduct" Height="450" Width="800">
-    <Grid  RenderTransformOrigin="0.507,0.477">
+    <Grid  RenderTransformOrigin="0.82,0.765">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -28,7 +28,8 @@
             Margin="300,0,0,0" 
             Grid.Row="1"
             TextWrapping="Wrap" 
-            VerticalAlignment="Center" TextChanged="InStock_TextChanged"
+            VerticalAlignment="Center"
+           
             />
         <Label Content="ID:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
 
@@ -41,6 +42,7 @@
             Grid.Row="2"
             TextWrapping="Wrap" 
            VerticalAlignment="Center"
+            
            />
 
         <Label Content="Name:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
@@ -53,7 +55,9 @@
             Width="250"
             Grid.Row="3"
             TextWrapping="Wrap" 
-            VerticalAlignment="Center"
+            VerticalAlignment="Center" 
+            RenderTransformOrigin="1.372,3.394" 
+           
             />
         <Label Content="Price:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
 
@@ -66,7 +70,7 @@
             Grid.Row="4"
             TextWrapping="Wrap" 
             VerticalAlignment="Center"
-            TextChanged="Price_TextChanged"
+            
             />
         <Label Content="In stock:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontFamily="Arial" FontWeight="Normal" FontSize="14"/>
 
@@ -80,13 +84,14 @@
             Height="30"
             SelectionChanged="Category_selector_SelectionChanged"/>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="220,8,0,7" Grid.Row="5" Width="84" FontFamily="Arial" FontSize="14" FontWeight="Normal"/>
+       
         <Button Content="Update"
                 HorizontalAlignment="Left"
-                Margin="380,27,0,0" 
+                Margin="370,10,0,0" 
                 Grid.Row="6" 
                 VerticalAlignment="Top" 
-                Width="90" 
-                Height="37" 
+                Width="110" 
+                Height="38" 
                 FontSize="16"
                 Click="UpdateProduct_Click"/>
 

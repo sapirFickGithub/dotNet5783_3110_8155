@@ -50,7 +50,7 @@ internal class DalOrder : IOrder
                 list.Add(item);
             }
         }
-        return list;
+        return list.AsEnumerable();
     }
     public void delete(int id)
     {
@@ -75,17 +75,13 @@ internal class DalOrder : IOrder
     }
     public bool search(Order find)//help function
     {
-        int count = 0;
+
         int i;
         for (i = 0; i < listOrder.Count(); i++)
         {
             if (find.idOfOrder == listOrder[i]?.idOfOrder)
             {
-                count++;
-                if (count == 0)
-                {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
@@ -115,7 +111,7 @@ internal class DalOrder : IOrder
             {
                 Order? order = new Order();
                 order = item;
-                return (Order)order ;
+                return (Order)order;
             }
         }
         throw new Exception("NOT EXIST!");

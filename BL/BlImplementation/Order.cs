@@ -50,9 +50,10 @@ namespace BlImplementation
         {
             if (numOfOrder > 0)
             {
-                DO.Order Dorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
-                IEnumerable<DO.OrderItem> orderItems = (IEnumerable<DO.OrderItem>)Dal.OrderItem.getAll();
-                BO.Order? order = new()
+                DO.Order? DNorder = Dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
+                DO.Order Dorder =(DO.Order)DNorder;
+                IEnumerable<DO.OrderItem> orderItems = (List<DO.OrderItem>)Dal.OrderItem.getAll();
+                BO.Order order = new()
                 {
                     idOfOrder = numOfOrder,
                     CustomerName = Dorder.CustomerName,

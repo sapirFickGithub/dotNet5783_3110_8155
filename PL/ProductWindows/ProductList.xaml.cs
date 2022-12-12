@@ -53,5 +53,16 @@ namespace PL.ProductWindows
             else
                 List_of_product.ItemsSource = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
         }
+
+        private void UpdateProduct(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ProductWindows.UpdateProduct().Show();
+            this.Close();
+        }
     }
 }
