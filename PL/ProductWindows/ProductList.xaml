@@ -49,7 +49,7 @@
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
                   SelectionChanged="List_of_product_SelectionChanged"
                   Margin="0,40,0,5"
-                  Grid.RowSpan="3">
+                  Grid.RowSpan="3" MouseDoubleClick="List_of_product_MouseDoubleClick">
             <ListView.View>
                 <GridView AllowsColumnReorder="True" >
 

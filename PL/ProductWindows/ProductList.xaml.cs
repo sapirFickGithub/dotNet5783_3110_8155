@@ -36,8 +36,8 @@ namespace PL.ProductWindows
 
         }
 
-      
-     
+
+
 
         private void AddProductWindow_Click(object sender, RoutedEventArgs e)
         {
@@ -47,11 +47,36 @@ namespace PL.ProductWindows
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Object selectedItem = Category_selector.SelectedItem;
-            if (selectedItem.ToString() == "All")
-                List_of_product.ItemsSource = bl.Product.getListOfProduct();
-            else
-                List_of_product.ItemsSource = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
+            try
+            {
+                Object selectedItem = Category_selector.SelectedItem;
+                if (selectedItem.ToString() == "All")
+                    List_of_product.ItemsSource = bl.Product.getListOfProduct();
+                else
+                    List_of_product.ItemsSource = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(
+                         "Somthing went worng...\n please try again later",
+                         "Unknown error",
+                        // MessageBoxButton.OKCancel,
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Hand,
+                         MessageBoxResult.Cancel,
+                         MessageBoxOptions.RtlReading);
+            }
+        }
+
+        private void UpdateProduct(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new ProductWindows.UpdateProduct().Show();
+            this.Close();
         }
     }
 }

@@ -61,11 +61,11 @@ internal class DalProduct : IProduct
         {
             if (find.idOfProduct == listProduct[i]?.idOfProduct)
             {
-                count++;
-                if (count == 0)
-                {
+                //count++;
+                //if (count == 0)
+                //{
                     return true;
-                }
+               // }
             }
         }
         return false;
@@ -77,7 +77,10 @@ internal class DalProduct : IProduct
             for (int i = 0; i < listProduct.Count(); i++)
             {
                 if (newProduct.idOfProduct == listProduct[i]?.idOfProduct)
+                {
                     listProduct[i] = newProduct;
+                    return;
+                }
             }
         }
         else

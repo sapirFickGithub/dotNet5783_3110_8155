@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.ProductWindows"
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
-    <Grid RenderTransformOrigin="0.507,0.477">
+    <Grid  RenderTransformOrigin="0.82,0.765">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -25,71 +25,71 @@
             HorizontalAlignment="Left"
             Height="30"
             Width="250"
-            Margin="250,0,0,0" 
+            Margin="300,0,0,0" 
             Grid.Row="1"
             TextWrapping="Wrap" 
             VerticalAlignment="Center" TextChanged="InStock_TextChanged"
             />
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="207,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
 
         <TextBox 
             x:Name="Name"
             HorizontalAlignment="Left" 
             Height="30"
             Width="250"
-            Margin="250,0,0,0" 
+            Margin="300,0,0,0" 
             Grid.Row="2"
             TextWrapping="Wrap" 
            VerticalAlignment="Center"
            />
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="184,0,0,0" Grid.Row="2" VerticalAlignment="Center"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
 
         <TextBox 
             x:Name="Price"
             HorizontalAlignment="Left" 
             Height="30"
-            Margin="250,0,0,0" 
+            Margin="300,0,0,0" 
             Width="250"
             Grid.Row="3"
             TextWrapping="Wrap" 
-            VerticalAlignment="Center"
+            VerticalAlignment="Center" RenderTransformOrigin="1.372,3.394"
             />
-        <Label Content="Price:" HorizontalAlignment="Left" Margin="196,5,0,0" Grid.Row="3" VerticalAlignment="Top"/>
-       
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
+
         <TextBox 
             x:Name="InStock"
             HorizontalAlignment="Left" 
             Height="30"
             Width="250"
-            Margin="250,0,0,0" 
+            Margin="300,0,0,0" 
             Grid.Row="4"
             TextWrapping="Wrap" 
             VerticalAlignment="Center"
             TextChanged="Price_TextChanged"
             />
-        <Label Content="In stock:" HorizontalAlignment="Left" Margin="178,3,0,0" Grid.Row="4" VerticalAlignment="Top"/>
-       
+        <Label Content="In stock:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontFamily="Arial" FontWeight="Normal" FontSize="14"/>
+
         <ComboBox 
-                  x:Name="Category_selector"
-                  HorizontalAlignment="Left" 
-                  Margin="250,5,0,0" 
-                  Grid.Row="5" 
-                  VerticalAlignment="Top" 
-                  Width="250" 
-                  Height="30"
-                  SelectionChanged="Category_selector_SelectionChanged"/>
-        <Label Content="Category:" HorizontalAlignment="Left" Margin="165,0,0,10" Grid.Row="5" VerticalAlignment="Bottom" Height="30" Width="84" FontFamily="Jokerman" FontSize="14"/>
+            x:Name="Category_selector"
+            HorizontalAlignment="Left" 
+            Margin="300,5,0,0" 
+            Grid.Row="5" 
+            VerticalAlignment="Top" 
+            Width="250" 
+            Height="30"
+            SelectionChanged="Category_selector_SelectionChanged"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="220,8,0,7" Grid.Row="5" Width="84" FontFamily="Arial" FontSize="14" FontWeight="Normal"/>
+       
         <Button Content="Add"
-                HorizontalAlignment="Left"
-                Margin="325,39,0,0" 
+               HorizontalAlignment="Left"
+                Margin="370,10,0,0" 
                 Grid.Row="6" 
                 VerticalAlignment="Top" 
-                Width="91" 
-                Height="37" 
+                Width="110" 
+                Height="38" 
                 FontSize="16"
                 Click="AddProduct_Click"
-               
                 />
     </Grid>
 </Window>
