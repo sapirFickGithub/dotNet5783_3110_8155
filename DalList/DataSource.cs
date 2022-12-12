@@ -30,20 +30,20 @@ using System.Windows.Markup;
         //internal static int _OrderItemIndex = 0;
 
         //
-        private static int _OrderID = 10000;
+        private static int _OrderID = 100000;
         public static int get_OrderID
         {
             get
             { return _OrderID++; }
         }
 
-        private static int _OrderItemID = 10000;
+        private static int _OrderItemID = 100000;
         public static int get_OrderItemID
         {
             get
             { return _OrderItemID++; }
         }
-        private static int _ProductID = 10000;
+        private static int _ProductID = 100000;
         public static int get_ProductID
         {
             get
