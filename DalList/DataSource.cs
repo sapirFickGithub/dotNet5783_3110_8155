@@ -20,6 +20,7 @@ using System.Windows.Markup;
 
     internal static string[] ProductName = { "Lamborgini", "BMW", "Ferrari", "Porche", "Jeep", "Tesla", "jaguar", "Audi", "Corvette", "MINI cooper" };
     internal static string[] CustomerName = { "Moshe", "Yeoram", "Yossi", "Dani", "Avi", "Sapir", "Hadar" };
+    internal static string[] Price = { "100000", "500000", "250000", "350000", "650000", "200000", "850000" };
 
     static internal class _Config
     {
@@ -66,7 +67,8 @@ using System.Windows.Markup;
             var v = Enum.GetValues(typeof(Category));
             product.ProductCategory = (Category)v.GetValue(rand.Next(0, 6));
             product.InStock = rand.Next(0, 5);
-            product.Price = rand.Next(2000, 5000000);
+            double.TryParse(Price[rand.Next(0, 7)], out double price);
+            product.Price =price;
             listProduct.Add(product);
         }
     }

@@ -45,15 +45,15 @@ namespace PL.ProductWindows
         {
            
         }
-        private void AddProduc_Click(object sender, RoutedEventArgs e)
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(ID.Text, out int id);
             double.TryParse(Price.Text, out double price);
             int.TryParse(InStock.Text, out int inStock);
             BO.Enum.Category.TryParse(Category_selector.Text, out BO.Enum.Category category);
             bl.Product.addProduct(id, Name.Text, category, price, inStock);
-            //new ProductWindows.ProductList().Show();
-            //this.Close();
+            new ProductWindows.ProductList().Show();
+            this.Close();
         }
     }
 
