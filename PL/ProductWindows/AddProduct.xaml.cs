@@ -116,17 +116,17 @@ namespace PL.ProductWindows
                            MessageBoxOptions.RtlReading);
             }
            
-            catch (Exception)
-            {
-                MessageBox.Show(
-                         "Somthing went worng...\n please try again later",
-                         "Unknown error",
-                        // MessageBoxButton.OKCancel,
-                        MessageBoxButton.OK,
-                         MessageBoxImage.Hand,
-                         MessageBoxResult.Cancel,
-                         MessageBoxOptions.RtlReading);
-            }
+            //catch (Exception)
+            //{
+            //    MessageBox.Show(
+            //             "Somthing went worng...\n please try again later",
+            //             "Unknown error",
+            //            // MessageBoxButton.OKCancel,
+            //            MessageBoxButton.OK,
+            //             MessageBoxImage.Hand,
+            //             MessageBoxResult.Cancel,
+            //             MessageBoxOptions.RtlReading);
+            //}
         }
     }
 

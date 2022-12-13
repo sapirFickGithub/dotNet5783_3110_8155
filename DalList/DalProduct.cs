@@ -55,17 +55,17 @@ internal class DalProduct : IProduct
     }
     public bool search(Product find)//help function
     {
-        int count = 0;
+        //int count = 0;
         int i;
-        for (i = 0; i <= listProduct.Count(); i++)
+        for (i = 0; i < listProduct.Count(); i++)
         {
             if (find.idOfProduct == listProduct[i]?.idOfProduct)
             {
-                //count++;
-                //if (count == 0)
-                //{
+               // count++;
+               // if (count == 0)
+               // {
                     return true;
-               // }
+              // }
             }
         }
         return false;
