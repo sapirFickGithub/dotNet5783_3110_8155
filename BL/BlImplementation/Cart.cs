@@ -12,10 +12,10 @@ namespace BlImplementation
 {
     internal class Cart : ICart
     {
-        private DalApi.IDal Dal = new Dal.DalList();
+        DalApi.IDal? dal = DalApi.Factory.Get();
         public BO.Cart add(BO.Cart cart, int idOfProduct)
         {
-            DO.Product product = (DO.Product)Dal.Product.getByParam(x =>idOfProduct == x?.idOfProduct);
+            DO.Product product = (DO.Product)dal?.Product.getByParam(x =>idOfProduct == x?.idOfProduct);
             foreach (var item in cart.itemList)
             {
                 if (item.idOfProduct == idOfProduct)
@@ -48,7 +48,7 @@ namespace BlImplementation
         }
         public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
         {
-            DO.Product product = (DO.Product)Dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+            DO.Product product = (DO.Product)dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
 
             foreach (var item in cart.itemList)
             {
@@ -83,7 +83,7 @@ namespace BlImplementation
 
             DO.Order newOrder = new DO.Order();
           
-            int idOfOrder = Dal.Order.Add(newOrder);//return the id of the new order
+            int idOfOrder = dal.Order.Add(newOrder);//return the id of the new order
             if (idOfOrder < 0)
                 throw new incorrectData();
             newOrder.DateOfOrder = DateTime.Now;
@@ -93,7 +93,7 @@ namespace BlImplementation
             foreach (var item in cart.itemList)
             {
                 //check if the product is in stock
-                DO.Product product = (DO.Product)Dal.Product.getByParam(x => item.idOfProduct == x?.idOfProduct);
+                DO.Product product = (DO.Product)dal.Product.getByParam(x => item.idOfProduct == x?.idOfProduct);
                 if (product.InStock - item.amount < 0)
                     return false;
                 //if the produt in stock so add to order
@@ -107,7 +107,7 @@ namespace BlImplementation
                     ID = idOfOrder
                 };
 
-                Dal.OrderItem.Add(newOrderItem);
+                dal.OrderItem.Add(newOrderItem);
             }
            // Dal.Order.Add(newOrder);
             //all the details are true

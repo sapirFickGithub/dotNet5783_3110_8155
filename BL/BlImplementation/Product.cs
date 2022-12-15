@@ -15,10 +15,11 @@ namespace BlImplementation
 {
     internal class Product : BlApi.IProduct
     {
-        private DalApi.IDal Dal = new Dal.DalList();
+        DalApi.IDal? dal = DalApi.Factory.Get();
+
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
         {
-            IEnumerable<DO.Product?> products = Dal.Product.getAll(param)?? throw new Exception("NULL");
+            IEnumerable<DO.Product?> products = dal.Product.getAll(param)?? throw new Exception("NULL");
             List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
 
             foreach (var item in products)
@@ -42,7 +43,7 @@ namespace BlImplementation
             BO.Product product = new BO.Product();
             if (idOfProduct > 0)
             {
-                DO.Product Dproduct = Dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+                DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
                 BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
                 return temp;
             }
@@ -53,7 +54,7 @@ namespace BlImplementation
         {
             if (idOfProduct > 0)
             {
-                DO.Product Dproduct = Dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+                DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
                 BO.Product temp = new()
                 { idOfProduct = Dproduct.idOfProduct,
                     Name = Dproduct.Name, 
@@ -90,7 +91,7 @@ namespace BlImplementation
                     Price = price,
                     InStock = inStock
                 };
-                Dal.Product.Add(Dproduct);
+                dal.Product.Add(Dproduct);
             }
             else
                 throw new incorrectData();
@@ -99,7 +100,7 @@ namespace BlImplementation
         {
 
 
-            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)Dal.OrderItem.getAll();
+            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAll();
             foreach (var thisOrderItem in orderItem)
                 if (idOfProduct == thisOrderItem.idOfItem)
                 {
@@ -110,7 +111,7 @@ namespace BlImplementation
             {
                 throw new notExist();
             }
-            Dal.Product.delete(idOfProduct);
+            dal.Product.delete(idOfProduct);
         }
         public void update(BO.Product product)
         {
@@ -125,7 +126,7 @@ namespace BlImplementation
                     Price = product.Price,
                     InStock = product.InStock
                 };
-                Dal.Product.update(Dproduct);
+                dal.Product.update(Dproduct);
             }
             else
                 throw new incorrectData();

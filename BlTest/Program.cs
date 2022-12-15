@@ -86,7 +86,7 @@ public class Program
                     {
 
                         //BO.ProductForList JlistProduct = (ProductForList)ibl.Product.getListOfProduct();
-                        IEnumerable<BO.ProductForList> listProduct = ibl.Product.getListOfProduct();
+                        IEnumerable<BO.ProductForList> listProduct = ibl.getListOfProduct();
                         foreach(var product in listProduct)
                         {
                             Console.WriteLine(product);

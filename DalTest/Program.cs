@@ -11,13 +11,13 @@ namespace Dal;
 
 public class Program
 {
-    static DalList dal = new DalList();
+    static DalApi.IDal? dal = DalApi.Factory.Get();
 
 /// <summary>
 /// test all the fonctions on product
 /// </summary>
 /// <param name="dal"></param>
-    public static void productOption(DalList dal)
+    public static void productOption(DalApi.IDal? dal)
     {
         char option;
         Console.WriteLine("Order Item\n" +
@@ -102,7 +102,7 @@ public class Program
     ///  test all the fonctions on order
     /// </summary>
     /// <param name="dal"></param>
-    public static void orderOption(DalList dal)
+    public static void orderOption(DalApi.IDal? dal)
     {
         Console.WriteLine("Order Item\n" +
                   "a -add object\n" +
@@ -177,7 +177,7 @@ public class Program
     ///  test all the fonctions on order item
     /// </summary>
     /// <param name="dal"></param>
-    public static void orderItem(DalList dal)
+    public static void orderItem(DalApi.IDal? dal)
     {
         Console.WriteLine("Order Item\n" +
                     "a -add object\n" +
@@ -259,10 +259,9 @@ public class Program
 
     public static void Main(string[] args)
     {
-        DalList dal = new DalList();
-        //DalOrder dalOrder = new DalOrder();
-        //DalOrderItem dalOrderItem = new DalOrderItem();
-        //DalProduct dalProduct = new DalProduct();
+       // DalList dal = new DalList();
+        DalApi.IDal? dal = DalApi.Factory.Get();
+
         char num = '5';
         Console.WriteLine("press 0 to exit\nfor Product press 1\n for Ordr press 2\n for OrderItem press 3");
         while (num != '0')
