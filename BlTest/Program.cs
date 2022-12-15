@@ -17,9 +17,9 @@ namespace BlTest;
 public class Program
 
 {
-    static IBl ibl = new BL();
+    static BlApi.IBl? ibl = BlApi.Factory.Get();
 
-    public static void productOption(IBl ibl)//fonction on product
+    public static void productOption(IBl? ibl)//fonction on product
     {
         char option;
         Console.WriteLine("hello\n" +
@@ -86,7 +86,7 @@ public class Program
                     {
 
                         //BO.ProductForList JlistProduct = (ProductForList)ibl.Product.getListOfProduct();
-                        IEnumerable<BO.ProductForList> listProduct = ibl.getListOfProduct();
+                        List<BO.ProductForList> listProduct = ibl?.getListOfProduct();
                         foreach(var product in listProduct)
                         {
                             Console.WriteLine(product);
@@ -104,7 +104,7 @@ public class Program
             char.TryParse(Console.ReadLine(), out option);
         }
     }
-    public static void orderOption(IBl ibl)//fonction on order
+    public static void orderOption(IBl? ibl)//fonction on order
     {
         BO.Order order = new BO.Order();
         char option;
@@ -167,7 +167,7 @@ public class Program
 
     }
 
-    public static void cartOption(IBl ibl)//fonction on cart
+    public static void cartOption(IBl? ibl)//fonction on cart
     {
         string? cN, cM, cA;
         Console.WriteLine("enter name, mail, address of customer");
