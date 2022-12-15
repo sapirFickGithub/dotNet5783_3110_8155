@@ -22,8 +22,8 @@ namespace PL.ProductWindows
     /// </summary>
     public partial class ProductList : Window
     {
-        private static BlApi.IBl? bl =new BlApi.Factory.Get();
-       
+        private static BlApi.IBl? bl = BlApi.Factory.Get();
+
         public ProductList()
         {
             InitializeComponent();
