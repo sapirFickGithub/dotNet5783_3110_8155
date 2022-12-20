@@ -13,7 +13,7 @@ namespace BlApi
         public IOrder Order { get; }
         public ICart Cart { get; }
 
-        List<ProductForList> getListOfProduct();
+       // public List<ProductForList> getListOfProduct();
     }
 }
 
