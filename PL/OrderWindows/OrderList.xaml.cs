@@ -10,30 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BO;
-using BlImplementation;
-using BlApi;
 
-namespace PL
+namespace PL.OrderWindows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddProduct.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class OrderList : Window
     {
-        private BlApi.IBl? bl = BlApi.Factory.Get();
-        public MainWindow()
+        private static BlApi.IBl? bl = BlApi.Factory.Get();
+        public OrderList()
         {
             InitializeComponent();
         }
 
-
-        private void Admin_Click(object ob, RoutedEventArgs e)
-        {
-            new Admin().Show();
-            this.Close();
-        }
     }
+
 }
