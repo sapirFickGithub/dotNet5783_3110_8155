@@ -53,16 +53,36 @@
             <ListView.View>
                 <GridView AllowsColumnReorder="True" >
 
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding idOfProduct}"/>
-                    <GridViewColumn  Header="Category" DisplayMemberBinding="{Binding ProductCategory }" />
-                    <GridViewColumn  Header="Price" DisplayMemberBinding="{Binding Price}" />
-                                      
+                    <GridViewColumn Header="Name"
+                                   Mouse.MouseEnter="Sort_By_Name_Click"
+                                    DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="ID"
+                                    Mouse.MouseEnter="Sort_By_ID_Click"
+                                     DisplayMemberBinding="{Binding idOfProduct}"/>
+                    <GridViewColumn  Header="Category" 
+                                     Mouse.MouseEnter="Sort_By_Category_Click"
+                                     DisplayMemberBinding="{Binding ProductCategory }" />
+                    <GridViewColumn  Header="Price"
+                                     Mouse.MouseEnter="Sort_By_Price_Click"
+                                     DisplayMemberBinding="{Binding Price}" />
+
                 </GridView>
-               
+
 
             </ListView.View>
         </ListView>
+        <Button x:Name="Back_Botton"
+                Content="Back"   
+                HorizontalAlignment="Left"
+                Margin="647,23,0,0" 
+                Grid.Row="3"
+                Background="#FFF1F1D8"
+                VerticalAlignment="Top"
+                Height="46" 
+                Width="117" 
+                FontSize="20"
+                FontFamily="Maiandra GD"
+                Click="BackToMainWindow_Click"/>
 
     </Grid>
 </Window>

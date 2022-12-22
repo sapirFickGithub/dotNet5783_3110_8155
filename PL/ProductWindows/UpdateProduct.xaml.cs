@@ -146,5 +146,12 @@ namespace PL.ProductWindows
         {
 
         }
+
+        private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
+        {
+            //move to Main window
+            new ProductWindows.ProductList().Show();
+            this.Close();
+        }
     }
 }

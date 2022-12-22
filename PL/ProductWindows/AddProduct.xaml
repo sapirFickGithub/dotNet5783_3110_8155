@@ -75,21 +75,35 @@
             HorizontalAlignment="Left" 
             Margin="300,5,0,0" 
             Grid.Row="5" 
+            Background="#FFF1F1D8"
             VerticalAlignment="Top" 
             Width="250" 
             Height="30"
             SelectionChanged="Category_selector_SelectionChanged"/>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="220,8,0,7" Grid.Row="5" Width="84" FontFamily="Arial" FontSize="14" FontWeight="Normal"/>
-       
+
         <Button Content="Add"
-               HorizontalAlignment="Left"
+                Background="#FFF1F1D8"
+                HorizontalAlignment="Left"
                 Margin="370,10,0,0" 
                 Grid.Row="6" 
+                FontFamily="Maiandra GD"
                 VerticalAlignment="Top" 
                 Width="110" 
                 Height="38" 
                 FontSize="16"
-                Click="AddProduct_Click"
-                />
+                Click="AddProduct_Click"  />
+        <Button x:Name="Back_Botton"
+                Content="Back"   
+                HorizontalAlignment="Left"
+                Margin="370,64,0,0" 
+                Grid.Row="6"
+                Background="#FFF1F1D8"
+                VerticalAlignment="Top"
+                Height="33" 
+                Width="110" 
+                FontSize="20"
+                FontFamily="Maiandra GD"
+                Click="BackToProductListWindow_Click"/>
     </Grid>
 </Window>
