@@ -89,11 +89,24 @@
                 HorizontalAlignment="Left"
                 Margin="370,10,0,0" 
                 Grid.Row="6" 
+                Background="#FFF1F1D8"
+                FontFamily="Maiandra GD"
                 VerticalAlignment="Top" 
                 Width="110" 
                 Height="38" 
                 FontSize="16"
                 Click="UpdateProduct_Click"/>
-
+        <Button x:Name="Back_Botton"
+                Content="Back"   
+                HorizontalAlignment="Left"
+                Margin="370,64,0,0" 
+                Grid.Row="6"
+                Background="#FFF1F1D8"
+                VerticalAlignment="Top"
+                Height="33" 
+                Width="110" 
+                FontSize="20"
+                FontFamily="Maiandra GD"
+                Click="BackToProductListWindow_Click"/>
     </Grid>
 </Window>

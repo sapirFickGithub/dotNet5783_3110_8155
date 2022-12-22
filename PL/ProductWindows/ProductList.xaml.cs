@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+using System.ComponentModel;
+
 
 
 namespace PL.ProductWindows
@@ -23,27 +25,89 @@ namespace PL.ProductWindows
     public partial class ProductList : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
-
+        public bool hasSorted = true;
         public ProductList()
         {
             InitializeComponent();
             List_of_product.ItemsSource = bl.Product.getListOfProduct();
-            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));//////////////////////////////
+            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));////////////
         }
 
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
+        }
         private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-
-
-
-        private void AddProductWindow_Click(object sender, RoutedEventArgs e)
+        private void Sort_By_Name_Click(object sender, MouseEventArgs e)// sort the list view by Name
         {
-            new ProductWindows.AddProduct().Show();
-            this.Close();
+            var listTemp = bl.Product.getListOfProduct();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+
+                view.SortDescriptions.Add(new("Name", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
         }
+        private void Sort_By_ID_Click(object sender, RoutedEventArgs e) // sort the list view by ID
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+        private void Sort_By_Category_Click(object sender, RoutedEventArgs e) // sort the list view by Category
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+                view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+        private void Sort_By_Price_Click(object sender, MouseEventArgs e) // sort the list view by Price
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+                view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+
+
+
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -60,7 +124,7 @@ namespace PL.ProductWindows
                 MessageBox.Show(
                          "Somthing went worng...\n please try again later",
                          "Unknown error",
-                        // MessageBoxButton.OKCancel,
+                         // MessageBoxButton.OKCancel,
                          MessageBoxButton.OK,
                          MessageBoxImage.Hand,
                          MessageBoxResult.Cancel,
@@ -68,15 +132,24 @@ namespace PL.ProductWindows
             }
         }
 
-        private void UpdateProduct(object sender, MouseButtonEventArgs e)
-        {
-
+        private void AddProductWindow_Click(object sender, RoutedEventArgs e)
+        {//move to add product window
+            new ProductWindows.AddProduct().Show();
+            this.Close();
         }
-
         private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+        {//move to updete product window
             new ProductWindows.UpdateProduct().Show();
             this.Close();
         }
+
+        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            //move to Main window
+            new MainWindow().Show();
+            this.Close();
+        }
+
+
     }
 }

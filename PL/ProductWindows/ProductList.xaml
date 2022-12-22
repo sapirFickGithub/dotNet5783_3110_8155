@@ -49,20 +49,56 @@
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
                   SelectionChanged="List_of_product_SelectionChanged"
                   Margin="0,40,0,5"
-                  Grid.RowSpan="3" MouseDoubleClick="List_of_product_MouseDoubleClick">
+                  Grid.RowSpan="3"
+                  MouseDoubleClick="List_of_product_MouseDoubleClick">
             <ListView.View>
-                <GridView AllowsColumnReorder="True" >
+                <GridView>
 
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding idOfProduct}"/>
-                    <GridViewColumn  Header="Category" DisplayMemberBinding="{Binding ProductCategory }" />
-                    <GridViewColumn  Header="Price" DisplayMemberBinding="{Binding Price}" />
-                                      
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding Name}" >
+                        <GridViewColumnHeader 
+                            Content="Name"
+                            Click="Sort_By_Name_Click"/>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding idOfProduct}">
+                        <GridViewColumnHeader 
+                            Content="ID"
+                            Click="Sort_By_ID_Click"/>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn  
+                            DisplayMemberBinding="{Binding ProductCategory }" >
+                        <GridViewColumnHeader 
+                            Content="Category"
+                            Click="Sort_By_Category_Click"/>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding Price}" >
+                        <GridViewColumnHeader 
+                            Content= "Price"
+                            Click= "Sort_By_Price_Click"/>
+                    </GridViewColumn>
+
                 </GridView>
-               
+
 
             </ListView.View>
         </ListView>
+        <Button x:Name="Back_Botton"
+                Content="Back"   
+                HorizontalAlignment="Left"
+                Margin="647,23,0,0" 
+                Grid.Row="3"
+                Background="#FFF1F1D8"
+                VerticalAlignment="Top"
+                Height="46" 
+                Width="117" 
+                FontSize="20"
+                FontFamily="Maiandra GD"
+                Click="BackToMainWindow_Click"/>
 
     </Grid>
 </Window>
