@@ -23,17 +23,21 @@
             <Button Content="Admin"
                 FontSize="36"
                 Background="#FFFEFEEC"
-                FontFamily="Magneto"
+                FontFamily= "Maiandra GD"
                 Margin="0,1,0,-1" 
                 FontWeight="Normal"
-                Click="Admin_Click" HorizontalAlignment="Right" Width="205"/>
+                Click="Admin_Click"
+                HorizontalAlignment="Right" 
+                Width="205"/>
             <Button Content="client"
                 FontSize="36"
                 Background="#FFFEFEEC"
-                FontFamily="Magneto"
+                FontFamily= "Maiandra GD"
                 Margin="0,91,0,-91" 
                 FontWeight="Normal"
-                Click= "Admin_Click" HorizontalAlignment="Center" Width="205"/>
+                Click= "Admin_Click"
+                HorizontalAlignment="Center"
+                Width="205"/>
             <Grid.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

@@ -43,7 +43,8 @@ namespace PL.ProductWindows
 
         }
 
-        private void Sort_By_Name_Click(object sender, MouseEventArgs e)// sort the list view by Name
+
+        private void Sort_By_Name_Click(object sender, RoutedEventArgs e)
         {
             var listTemp = bl.Product.getListOfProduct();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
@@ -90,7 +91,8 @@ namespace PL.ProductWindows
                 hasSorted = true;
             }
         }
-        private void Sort_By_Price_Click(object sender, MouseEventArgs e) // sort the list view by Price
+
+        private void Sort_By_Price_Click(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
             view.SortDescriptions.Clear();
@@ -105,8 +107,6 @@ namespace PL.ProductWindows
                 hasSorted = true;
             }
         }
-
-
 
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)

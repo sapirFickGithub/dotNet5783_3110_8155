@@ -23,6 +23,7 @@
         <TextBox 
             x:Name="ID"
             HorizontalAlignment="Left"
+            FontFamily= "Maiandra GD"
             Height="30"
             Width="250"
             Margin="300,0,0,0" 
@@ -31,11 +32,12 @@
             VerticalAlignment="Center"
            
             />
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
         <TextBox 
             x:Name="Name"
             HorizontalAlignment="Left" 
+            FontFamily= "Maiandra GD"
             Height="30"
             Width="250"
             Margin="300,0,0,0" 
@@ -45,7 +47,7 @@
             
            />
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily= "Maiandra GD"/>
 
         <TextBox 
             x:Name="Price"
@@ -53,17 +55,19 @@
             Height="30"
             Margin="300,0,0,0" 
             Width="250"
+           FontFamily= "Maiandra GD"
             Grid.Row="3"
             TextWrapping="Wrap" 
             VerticalAlignment="Center" 
             RenderTransformOrigin="1.372,3.394" 
            
             />
-        <Label Content="Price:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Arial"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
         <TextBox 
             x:Name="InStock"
             HorizontalAlignment="Left" 
+            FontFamily= "Maiandra GD"
             Height="30"
             Width="250"
             Margin="300,0,0,0" 
@@ -72,18 +76,19 @@
             VerticalAlignment="Center"
             
             />
-        <Label Content="In stock:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontFamily="Arial" FontWeight="Normal" FontSize="14"/>
+        <Label Content="In stock:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" VerticalAlignment="Center"  FontFamily= "Maiandra GD" FontWeight="Normal" FontSize="14"/>
 
         <ComboBox 
             x:Name="Category_selector"
             HorizontalAlignment="Left" 
+            FontFamily= "Maiandra GD"
             Margin="300,5,0,0" 
             Grid.Row="5" 
             VerticalAlignment="Top" 
             Width="250" 
             Height="30"
             SelectionChanged="Category_selector_SelectionChanged"/>
-        <Label Content="Category:" HorizontalAlignment="Left" Margin="220,8,0,7" Grid.Row="5" Width="84" FontFamily="Arial" FontSize="14" FontWeight="Normal"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="220,8,0,7" Grid.Row="5" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
        
         <Button Content="Update"
                 HorizontalAlignment="Left"
