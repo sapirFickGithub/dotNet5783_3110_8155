@@ -38,7 +38,7 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "The ID you enter is incorrect",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
@@ -48,7 +48,7 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "The price you enter is incorrect",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
@@ -58,7 +58,7 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "The in stock you enter is incorrect",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
@@ -68,7 +68,7 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "You did not choose a category",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
@@ -77,7 +77,7 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "You did not enter a name for the product.",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
@@ -100,7 +100,7 @@ namespace PL.ProductWindows
                 MessageBox.Show(
                          "Product dosent exist\n make sure all the dtails are correct\n and try again",
                          "Not Found",
-                         MessageBoxButton.OKCancel,
+                         MessageBoxButton.OK,
                          MessageBoxImage.Hand,
                          MessageBoxResult.Cancel,
                          MessageBoxOptions.RtlReading);
@@ -110,7 +110,7 @@ namespace PL.ProductWindows
                 MessageBox.Show(
                            "Incorrect data. please try again.",
                            "Data error",
-                           MessageBoxButton.OKCancel,
+                           MessageBoxButton.OK,
                            MessageBoxImage.Hand,
                            MessageBoxResult.Cancel,
                            MessageBoxOptions.RtlReading);

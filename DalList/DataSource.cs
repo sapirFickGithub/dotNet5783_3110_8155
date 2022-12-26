@@ -62,7 +62,8 @@ using System.Windows.Markup;
         for (int i = 0; i < 10; i++)
         {
             Product product = new Product();
-            product.idOfProduct = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
+            product.idOfProduct = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID
+                                                        // priduct
             product.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
             product.ProductCategory = (Category)v.GetValue(rand.Next(0, 6));

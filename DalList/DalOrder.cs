@@ -38,18 +38,19 @@ internal class DalOrder : IOrder
     public IEnumerable<Order?> getAll(Func<Order?, bool>? param)
     {
 
-        if (param == null)//לחזור לראות אם זה תקין
+        if (param == null)
         {
             return listOrder;
         }
-        List<Order?> list = new List<Order?>();
-        foreach (var item in listOrder)
-        {
-            if (param(item))
-            {
-                list.Add(item);
-            }
-        }
+        //List<Order?> list = new List<Order?>();
+       var  list = from item in listOrder where param(item) select item;
+        //foreach (var item in listOrder)
+        //{
+        //    if (param(item))
+        //    {
+        //        list.Add(item);
+        //    }
+        //}
         return list.AsEnumerable();
     }
     public void delete(int id)

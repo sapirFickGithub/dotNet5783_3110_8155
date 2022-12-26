@@ -39,15 +39,16 @@ internal class DalProduct : IProduct
         {
             return listProduct;
         }
-        List<Product?> list = new List<Product?>();
-        foreach (var item in listProduct)
-        {
-            if (param(item))
-            {
-                list.Add(item);
-            }
-        }
-        return list;
+        var list = from item in listProduct where param(item) select item;
+        //List<Product?> list = new List<Product?>();
+        //foreach (var item in listProduct)
+        //{
+        //    if (param(item))
+        //    {
+        //        list.Add(item);
+        //    }
+        //}
+        return list.AsEnumerable();
     }
     public void delete(int id)
     {

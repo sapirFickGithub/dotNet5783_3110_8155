@@ -41,14 +41,15 @@ internal class DalOrderItem : IOrderItem
         {
             return listOrderItem;
         }
-        List<OrderItem?> list = new List<OrderItem?>();
-        foreach (var item in listOrderItem)
-        {
-            if (param(item))
-            {
-                list.Add(item);
-            }
-        }
+        var list = from item in listOrderItem where param(item) select item;
+        //List<OrderItem?> list = new List<OrderItem?>();
+        //foreach (var item in listOrderItem)
+        //{
+        //    if (param(item))
+        //    {
+        //        list.Add(item);
+        //    }
+        //}
         return list.AsEnumerable();
     }
 
@@ -62,6 +63,7 @@ internal class DalOrderItem : IOrderItem
     {
         if (search(newOrderItem))
         {
+
             for (int i = 0; i < listOrderItem.Count(); i++)
             {
                 if (newOrderItem.ID == listOrderItem[i]?.ID)
@@ -75,22 +77,25 @@ internal class DalOrderItem : IOrderItem
     }
     public bool search(OrderItem find)//help function
     {
-        
-        int i;
-        for (i = 0; i < listOrderItem.Count(); i++)
-        {
-            if (find.ID == listOrderItem[i]?.ID)
-            {
+        if (search(find.ID) != -1)
+            return true;
+        //int i;
+
+        //for (i = 0; i < listOrderItem.Count(); i++)
+        //{
+        //    if (find.ID == listOrderItem[i]?.ID)
+        //    {
                 
-                    return true;
+        //            return true;
                 
-            }
-        }
+        //    }
+        //}
         return false;
     }
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
         int i;
+     //   listOrderItem.FindIndex(x =>)
         for (i = 0; i < listOrderItem.Count(); i++)
         {
             if (id == listOrderItem[i]?.ID)
@@ -109,6 +114,7 @@ internal class DalOrderItem : IOrderItem
     public IEnumerable<OrderItem?> getAllItemOrder(int id)
     {
         List<OrderItem> list = new List<OrderItem>();
+        //listOrderItem.orEach(x=> )
         foreach (OrderItem item in listOrderItem)
         {
             if (item.idOfItem == id)

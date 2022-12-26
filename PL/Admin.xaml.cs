@@ -22,7 +22,10 @@ namespace PL
         public Admin()
         {
             InitializeComponent();
+            
         }
+
+
 
         private void ProductListWindow_Click(object sender, RoutedEventArgs e)
         {
