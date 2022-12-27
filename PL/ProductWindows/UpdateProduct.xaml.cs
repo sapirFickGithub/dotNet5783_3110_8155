@@ -90,7 +90,7 @@ namespace PL.ProductWindows
                     Price = price,
                     ProductCategory = category
                 };
-                bl.Product.update(product);
+                bl?.Product.update(product);
 
                 new ProductWindows.ProductList().Show();
                 this.Close();
