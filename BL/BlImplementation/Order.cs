@@ -10,8 +10,7 @@ namespace BlImplementation
 {
     internal class Order : BlApi.IOrder
     {
-        int _items = 0;
-        double _totalPrice = 0;
+
         DalApi.IDal? dal = DalApi.Factory.Get();
         public IEnumerable<BO.OrderForList> getListOfOrder()
         {
@@ -19,14 +18,17 @@ namespace BlImplementation
             IEnumerable<DO.Order> order = (IEnumerable<DO.Order>)dal.Order.getAll();
             List<BO.OrderForList> orderForList = new List<BO.OrderForList>();
             BO.OrderForList temp;
-            foreach (var item in orderItem)
-            {
-                _items += item.amount;
-                _totalPrice += item.Price;
-            }
+
             foreach (var item in order)
             {
-
+                int _items = 0;
+                double _totalPrice = 0;
+                foreach (var ite in orderItem)
+                {
+                    if (ite.idOfOrder == item.idOfOrder)
+                        _items += ite.amount;
+                    _totalPrice += ite.Price;
+                }
                 temp = new() { idOfOrder = item.idOfOrder, CustomerName = item.CustomerName, AmountOfItem = _items, TotalPrice = _totalPrice };
                 var orderTemp = dal.Order.getByParam(x => item.idOfOrder == x?.idOfOrder);
 
