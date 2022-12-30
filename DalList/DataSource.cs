@@ -11,7 +11,9 @@ using System.Windows.Markup;
  internal static class DataSource
 {
 
-    //static readonly int RandNum = 0;
+    /// <summary>
+    /// the list of each entities
+    /// </summary>
     internal static List<OrderItem?> listOrderItem = new List<OrderItem?>();
     internal static List<Product?> listProduct = new List<Product?>();
     internal static List<Order?> listOrder = new List<Order?>();
@@ -21,6 +23,7 @@ using System.Windows.Markup;
     internal static string[] ProductName = { "Lamborgini", "BMW", "Ferrari", "Porche", "Jeep", "Tesla", "jaguar", "Audi", "Corvette", "MINI cooper" };
     internal static string[] CustomerName = { "Moshe", "Yeoram", "Yossi", "Dani", "Avi", "Sapir", "Hadar" };
     internal static string[] Price = { "100000", "500000", "250000", "350000", "650000", "200000", "850000" };
+    internal static string[] city = { "Jerusalem", "Tiberias", "Tel aviv", "Eilat", "Erzeliya" };
 
     static internal class _Config
     {
@@ -56,19 +59,19 @@ using System.Windows.Markup;
     }
 
 
-    private static void _InitializeProduct()//initializ product
+    private static void _InitializeProduct()//initialize product
     {
         Random rand = new Random();
         for (int i = 0; i < 10; i++)
         {
             Product product = new Product();
-            product.idOfProduct = _Config.get_ProductID;// i * 100000 + i * 20 + i * 3;//create a uniqe ID for each priduct
+            product.idOfProduct = _Config.get_ProductID;
             product.Name = ProductName[rand.Next(0, 10)];
             var v = Enum.GetValues(typeof(Category));
             product.ProductCategory = (Category)v.GetValue(rand.Next(0, 6));
             product.InStock = rand.Next(0, 5);
             double.TryParse(Price[rand.Next(0, 7)], out double price);
-            product.Price =price;
+            product.Price = price;
             listProduct.Add(product);
         }
     }
@@ -101,8 +104,8 @@ using System.Windows.Markup;
                 _order.DateOfShipping = null;
                 _order.DateOfDelivery = null;
             }
-            _order.CustamerAddress = "jrusalem";
-            _order.CustomerMail = "maill@gmail.com";
+            _order.CustamerAddress = city[rand.Next(0, 5)];//"jrusalem";
+            _order.CustomerMail = _order.CustomerName+"@gmail.com";
             listOrder.Add(_order); 
         }
     }
@@ -123,11 +126,14 @@ using System.Windows.Markup;
         }
 
     }
-    static DataSource()
+    static DataSource()//constructure
     {
         s_Initialize();
     }
 
+    /// <summary>
+    /// the methode call to help functions in order to Initialize the list of the entities
+    /// </summary>
     private static void s_Initialize()
     {
         _InitializeProduct();

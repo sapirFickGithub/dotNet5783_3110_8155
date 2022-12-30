@@ -12,7 +12,7 @@ internal class DalProduct : IProduct
 {
     public int Add(Product product)
     {
-        if (search(product))
+        if (search(product))//לבדוק למה צריך לבדוק כפילות שמסתמכת על מספר מזהה אם המילא המספר מזהה לא ניתן עי לידי המוכר 
         {
             throw new duplication();
         }
@@ -56,8 +56,7 @@ internal class DalProduct : IProduct
     public bool search(Product find)//help function
     {
         //int count = 0;
-        int i;
-        for (i = 0; i < listProduct.Count(); i++)
+        for (int i = 0; i < listProduct.Count(); i++)
         {
             if (find.idOfProduct == listProduct[i]?.idOfProduct)
             {

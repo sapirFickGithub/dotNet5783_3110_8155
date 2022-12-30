@@ -27,6 +27,7 @@ namespace PL.ProductWindows
         {
             InitializeComponent();
             Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
+
         }
 
         private void UpdateProduct_Click(object sender, RoutedEventArgs e)
@@ -152,6 +153,16 @@ namespace PL.ProductWindows
             //move to Main window
             new ProductWindows.ProductList().Show();
             this.Close();
+        }
+
+        private void ID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

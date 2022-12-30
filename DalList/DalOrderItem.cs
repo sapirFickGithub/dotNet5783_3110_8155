@@ -13,11 +13,11 @@ internal class DalOrderItem : IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
-        //orderItem.ID = _Config.get_OrderItemID;
-        if (search(orderItem))
-        {
-            throw new duplication();
-        }
+        //orderItem.ID = _Config.get_OrderItemID;למה לא מוסיפים מספר מזהה לפריט מוצר 
+        //if (search(orderItem))לא בטוח שצריך מכיוון שמדובר ל מספר רץ
+        //{
+        //    throw new duplication();
+        //}
         listOrderItem.Add(orderItem);
         //listOrderItem[listOrderItem.Count()] = orderItem;
         return orderItem.ID;

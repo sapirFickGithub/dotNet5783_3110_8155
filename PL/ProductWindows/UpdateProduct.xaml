@@ -29,7 +29,7 @@
             Margin="300,0,0,0" 
             Grid.Row="1"
             TextWrapping="Wrap" 
-            VerticalAlignment="Center"
+            VerticalAlignment="Center" TextChanged="ID_TextChanged"
            
             />
         <Label Content="ID:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
@@ -43,7 +43,7 @@
             Margin="300,0,0,0" 
             Grid.Row="2"
             TextWrapping="Wrap" 
-           VerticalAlignment="Center"
+           VerticalAlignment="Center" TextChanged="Name_TextChanged"
             
            />
 

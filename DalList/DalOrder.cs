@@ -15,18 +15,12 @@ internal class DalOrder : IOrder
     public int Add(Order order)
     {
         order.idOfOrder = _Config.get_OrderID;
-        if (search(order))
-        {
-            throw new duplication();
-        }
-        //listOrder[listOrder.Count()] = order;
         listOrder.Add(order);
         return order.idOfOrder;
     }
     public Order get(int id)
     {
-        int i;
-        for (i = 0; i < listOrder.Count(); i++)
+        for (int i = 0; i < listOrder.Count(); i++)
         {
             if (id == listOrder[i]?.idOfOrder)
             {

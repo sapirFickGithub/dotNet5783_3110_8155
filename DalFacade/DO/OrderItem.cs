@@ -12,10 +12,33 @@ namespace DO;
 /// </summary>
 public struct OrderItem
 {
+    /// <summary>
+    /// ID of the specific orderItem
+    /// </summary>
     public int ID { get; set; } 
+
+
+    /// <summary>
+    /// ID of order 
+    /// </summary>
     public int idOfOrder { get; set; }
+
+
+    /// <summary>
+    /// צריך לבדןק אם ID מדבר על מוצר אן על ORDER ITEM
+    /// </summary>
     public int idOfItem { get; set; } 
+
+
+    /// <summary>
+    /// the price per unit
+    /// </summary>
     public double Price { get; set; }
+
+
+    /// <summary>
+    /// the amount of per unit
+    /// </summary>
     public int amount { get; set; }
 
     /// <summary>
@@ -23,9 +46,10 @@ public struct OrderItem
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
- Order item ID={ID}: {idOfOrder}, 
-    ID of item - {idOfItem}
-    Price: {Price}
-    Amount: {amount}
+    ID of order item: {ID}
+    ID of orde: {idOfOrder}, 
+    ID of product: {idOfItem}
+    Price per unit: {Price}
+    Amount of items: {amount}
 ";
 }
