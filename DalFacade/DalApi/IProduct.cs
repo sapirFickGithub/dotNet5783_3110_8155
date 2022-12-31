@@ -10,8 +10,7 @@ namespace DalApi
     public interface IProduct : ICrud<Product> 
     {
         public int search(int id);
-        public bool search(Product find);
-        public void print(int index);
+        public void print();
         public int length();
     }
 }

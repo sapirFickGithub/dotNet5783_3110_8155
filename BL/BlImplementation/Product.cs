@@ -19,7 +19,7 @@ namespace BlImplementation
 
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
         {
-            IEnumerable<DO.Product?> products = dal.Product.getAll(param)?? throw new Exception("NULL");
+            IEnumerable<DO.Product?> products = dal.Product.getAllByParam(param)?? throw new Exception("NULL");
             List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
 
             foreach (var item in products)
@@ -43,18 +43,18 @@ namespace BlImplementation
             BO.Product product = new BO.Product();
             if (idOfProduct > 0)
             {
-                DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+                DO.Product? Dproduct = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
                 BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
                 return temp;
             }
             else
-                throw new notExist();
+                throw new BO.notExist();
         }
         public BO.ProductItem GetDetails(int idOfProduct, BO.Cart cart)
         {
             if (idOfProduct > 0)
             {
-                DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+                DO.Product Dproduct = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
                 BO.Product temp = new()
                 { idOfProduct = Dproduct.idOfProduct,
                     Name = Dproduct.Name, 
@@ -77,7 +77,7 @@ namespace BlImplementation
                     }
                 }
             }
-            throw new notExist();
+            throw new BO.notExist();
         }
         public void addProduct(int idOfProduct, string name, BO.Enum.Category productCategory, double price, int inStock)
         {
@@ -100,16 +100,16 @@ namespace BlImplementation
         {
 
 
-            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAll();
+            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAllByParam();
             foreach (var thisOrderItem in orderItem)
-                if (idOfProduct == thisOrderItem.idOfItem)
+                if (idOfProduct == thisOrderItem.idProduct)
                 {
                     throw new existInOrders();
                 }
 
             if (idOfProduct < 0)
             {
-                throw new notExist();
+                throw new BO.notExist();
             }
             dal.Product.delete(idOfProduct);
         }
@@ -133,7 +133,7 @@ namespace BlImplementation
         }
         //public IEnumerable<BO.ProductForList> getByCategory(BO.Enum.Category category)
         //{
-        //    List<DO.Product?> productList = Dal.Product.getAll(x => category == x?.Category);
+        //    List<DO.Product?> productList = Dal.Product.getAllByParam(x => category == x?.Category);
         //    List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
 
         //    foreach (var item in productList)

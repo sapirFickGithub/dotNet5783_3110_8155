@@ -12,111 +12,94 @@ internal class DalProduct : IProduct
 {
     public int Add(Product product)
     {
-        if (search(product))//לבדוק למה צריך לבדוק כפילות שמסתמכת על מספר מזהה אם המילא המספר מזהה לא ניתן עי לידי המוכר 
+        product.idOfProduct = _Config.get_ProductID;
+        int index = search(product.idOfProduct);
+        if (index != -1)
         {
             throw new duplication();
         }
         listProduct.Add(product);
-        //listProduct[_Config._ProductIndex++] = product;
         return product.idOfProduct;
     }
-    public Product get(int id)
-    {
-        foreach(Product product in listProduct)
-        {
-            if (id == product.idOfProduct)
-            {
-                return product;
-            }
-        }
-        throw new notFound();
-        //return arrayProduct[(id - 100000) / 23];//in the class config we colculate the id eith the formula "100000+ _ProductIndex * 20 + _ProductIndex * 3" so to get the right index, we did the opposite formula
-    }
-    public IEnumerable<Product?> getAll(Func<Product?, bool>? param)
-    {
 
-        if (param == null)//לחזור לראות אם זה תקין
+
+    //public Product? get(int idOfProduct)
+    //{
+    //    foreach(var product in listProduct)
+    //    {
+    //        if (idOfProduct == product?.idOfProduct)
+    //        {
+    //            return product;
+    //        }
+    //    }
+    //    throw new notExist();
+    //}
+    public IEnumerable<Product?> getAllByParam(Func<Product?, bool>? param)
+    {
+        if (param == null)
         {
             return listProduct;
         }
         var list = from item in listProduct where param(item) select item;
-        //List<Product?> list = new List<Product?>();
-        //foreach (var item in listProduct)
-        //{
-        //    if (param(item))
-        //    {
-        //        list.Add(item);
-        //    }
-        //}
         return list.AsEnumerable();
     }
+
+
     public void delete(int id)
     {
-     listProduct.Remove(get(id));        
+        listProduct.Remove(getOneByParam(x => id == x?.idOfProduct));        
     }
-    public bool search(Product find)//help function
-    {
-        //int count = 0;
-        for (int i = 0; i < listProduct.Count(); i++)
-        {
-            if (find.idOfProduct == listProduct[i]?.idOfProduct)
-            {
-               // count++;
-               // if (count == 0)
-               // {
-                    return true;
-              // }
-            }
-        }
-        return false;
-    }
+
+
+  
     public void update(Product newProduct)
     {
-        if (search(newProduct))
+        int index = search(newProduct.idOfProduct);
+        if (index == -1)
         {
-            for (int i = 0; i < listProduct.Count(); i++)
-            {
-                if (newProduct.idOfProduct == listProduct[i]?.idOfProduct)
-                {
-                    listProduct[i] = newProduct;
-                    return;
-                }
-            }
+            throw new notExist();
         }
-        else
-        {
-            throw new notFound();
-        }
+        listProduct[index] = newProduct;
     }
+
+
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
-        int i;
-        for (i = 0; i < listProduct.Count(); i++)
+        int counter = 0;
+        foreach (var item in listProduct)
         {
-            if (id == listProduct[i]?.idOfProduct)
+            if (id == item?.idOfProduct)
             {
-                return i;
+                return counter;
             }
+            counter++;
         }
         return -1;
     }
-    public void print(int n)
+
+
+    public void print()
     {
-        Console.WriteLine(listProduct[n]);
+        foreach (var item in listProduct)
+        {
+            Console.WriteLine(item);
+        }
     }
+
+
     public int length() { return listProduct.Count(); }
-    public Product getByParam(Func<Product?, bool>? param)
+
+
+    public Product? getOneByParam(Func<Product?, bool>? param)
     {
         foreach (var item in listProduct)
         {
             if (param(item))
             {
-                Product? product = new Product();
-                product = item;
-                return (Product)product;
+                return item;
             }
         }
-        throw new Exception("NOT EXIST!");
+        throw new notExist();
 
     }
 }

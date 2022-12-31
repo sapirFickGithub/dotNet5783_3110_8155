@@ -25,9 +25,9 @@ public struct OrderItem
 
 
     /// <summary>
-    /// צריך לבדןק אם ID מדבר על מוצר אן על ORDER ITEM
+    /// id of product
     /// </summary>
-    public int idOfItem { get; set; } 
+    public int idProduct { get; set; } 
 
 
     /// <summary>
@@ -48,7 +48,7 @@ public struct OrderItem
     public override string ToString() => $@"
     ID of order item: {ID}
     ID of orde: {idOfOrder}, 
-    ID of product: {idOfItem}
+    ID of product: {idProduct}
     Price per unit: {Price}
     Amount of items: {amount}
 ";

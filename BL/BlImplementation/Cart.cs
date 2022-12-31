@@ -15,7 +15,7 @@ namespace BlImplementation
         DalApi.IDal? dal = DalApi.Factory.Get();
         public BO.Cart add(BO.Cart cart, int idOfProduct)
         {
-            DO.Product product = (DO.Product)dal?.Product.getByParam(x =>idOfProduct == x?.idOfProduct);
+            DO.Product product = (DO.Product)dal?.Product.getOneByParam(x =>idOfProduct == x?.idOfProduct);
             foreach (var item in cart.itemList)
             {
                 if (item.idOfProduct == idOfProduct)
@@ -48,7 +48,7 @@ namespace BlImplementation
         }
         public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
         {
-            DO.Product product = (DO.Product)dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+            DO.Product product = (DO.Product)dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
 
             foreach (var item in cart.itemList)
             {
@@ -93,14 +93,14 @@ namespace BlImplementation
             foreach (var item in cart.itemList)
             {
                 //check if the product is in stock
-                DO.Product product = (DO.Product)dal.Product.getByParam(x => item.idOfProduct == x?.idOfProduct);
+                DO.Product product = (DO.Product)dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct);
                 if (product.InStock - item.amount < 0)
                     return false;
                 //if the produt in stock so add to order
                 DO.OrderItem newOrderItem = new DO.OrderItem()
                 {
 
-                   idOfItem = product.idOfProduct, 
+                   idProduct = product.idOfProduct, 
                     idOfOrder =item.idOfOrder,
                     Price = item.PriceOfProduct,
                     amount = item.amount,

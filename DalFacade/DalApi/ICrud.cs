@@ -30,21 +30,21 @@ namespace DalApi
         public void delete(int ob);
 
 
-        /// <summary>
-        /// get object from the list by id
-        /// </summary>
-        /// <param name="ob"></param>
-        /// <returns></returns>
-        public T get(int ob);
-
 
         /// <summary>
         /// get all the list of the etentetis
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public IEnumerable<T?> getAll(Func<T?, bool>? param = null);
-        public T getByParam(Func<T?, bool>? param);//לבדוק אם צקיך למחוק את get all וכדומה
+        public IEnumerable<T?> getAllByParam(Func<T?, bool>? param = null);
+
+
+        /// <summary>
+        /// get an object by func
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public T? getOneByParam(Func<T?, bool>? param);//לבדוק אם צקיך למחוק את get all וכדומה
     }
 
 }

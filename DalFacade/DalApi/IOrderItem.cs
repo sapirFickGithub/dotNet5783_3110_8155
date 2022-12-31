@@ -9,9 +9,8 @@ namespace DalApi
     public interface IOrderItem : ICrud<OrderItem>
     {
         public int search(int id);
-        public bool search(OrderItem find);
-        public void print(int index);
+        public void print();
         public int length();
-        public IEnumerable<OrderItem?> getAllItemOrder(int id);
+       
     }
 }

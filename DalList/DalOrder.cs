@@ -7,6 +7,7 @@ using DalApi;
 namespace Dal;
 using DO;
 using System.Runtime.CompilerServices;
+using System.Transactions;
 using static Dal.DataSource;
 
 
@@ -18,98 +19,73 @@ internal class DalOrder : IOrder
         listOrder.Add(order);
         return order.idOfOrder;
     }
-    public Order get(int id)
-    {
-        for (int i = 0; i < listOrder.Count(); i++)
-        {
-            if (id == listOrder[i]?.idOfOrder)
-            {
-                return (Order)listOrder[i];
-            }
-        }
-        throw new notFound();
-    }
-    public IEnumerable<Order?> getAll(Func<Order?, bool>? param)
-    {
+    
 
+    public IEnumerable<Order?> getAllByParam(Func<Order?, bool>? param)
+    {
         if (param == null)
         {
             return listOrder;
         }
-        //List<Order?> list = new List<Order?>();
-       var  list = from item in listOrder where param(item) select item;
-        //foreach (var item in listOrder)
-        //{
-        //    if (param(item))
-        //    {
-        //        list.Add(item);
-        //    }
-        //}
+        var list = from item in listOrder where param(item) select item;
         return list.AsEnumerable();
     }
+
+
     public void delete(int id)
     {
-
-        listOrder.Remove(get(id));
-
+        listOrder.Remove(getOneByParam(x=> id ==x?.idOfOrder));
     }
+
+
     public void update(Order newOrder)
     {
-        if (search(newOrder))
+        int index = search(newOrder.idOfOrder);
+        if (index == -1)
         {
-            for (int i = 0; i < listOrder.Count(); i++)
-            {
-                if (newOrder.idOfOrder == listOrder[i]?.idOfOrder)
-                    listOrder[i] = newOrder;
-            }
+            throw new notExist();
         }
-        else
-        {
-            throw new notFound();
-        }
+            listOrder[index] = newOrder;
     }
-    public bool search(Order find)//help function
-    {
 
-        int i;
-        for (i = 0; i < listOrder.Count(); i++)
-        {
-            if (find.idOfOrder == listOrder[i]?.idOfOrder)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    public int search(int id)//help function for delete, get id and check if the id exist in the product
+
+    public int search(int id)//help function, get id and check if the id exist in the product and send the index of the list
     {
-        int i;
-        for (i = 0; i < listOrder.Count(); i++)
+        int counter = 0;
+        foreach (var item in listOrder)
         {
-            if (id == listOrder[i]?.idOfOrder)
+            if (id == item?.idOfOrder)
             {
-                return i;
+                return counter;
             }
+            counter++;
         }
         return -1;
     }
-    public void print(int index)
+
+
+    public void print()
     {
-        Console.WriteLine(listOrder[index]);
+        foreach (var item in listOrder)
+        {
+            Console.WriteLine(item);
+        }
     }
+
+    
     public int length() { return listOrder.Count(); }
-    public Order getByParam(Func<Order?, bool>? param)
+
+
+    public Order? getOneByParam(Func<Order?, bool>? param)
     {
         foreach (var item in listOrder)
         {
             if (param(item))
             {
-                Order? order = new Order();
-                order = item;
-                return (Order)order;
+                return item;
             }
         }
-        throw new Exception("NOT EXIST!");
+        throw new notExist();
 
     }
 }

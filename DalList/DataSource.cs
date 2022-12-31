@@ -119,7 +119,7 @@ using System.Windows.Markup;
             _orderItem.ID = _Config.get_OrderItemID;
             _orderItem.idOfOrder = listOrder[i % 19].Value.idOfOrder;//i%19 will chosse the order , in this way all the place be uesed
             int index = rand.Next(0, 10);//choss a product 
-            _orderItem.idOfItem = listProduct[index].Value.idOfProduct;
+            _orderItem.idProduct = listProduct[index].Value.idOfProduct;
             _orderItem.amount = rand.Next(1, 5);
             _orderItem.Price = listProduct[index].Value.Price;
             listOrderItem.Add(_orderItem);
