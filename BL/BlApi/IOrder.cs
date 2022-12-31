@@ -37,7 +37,13 @@ namespace BlApi
         /// <param name="numOfOrder"></param>
         /// <OrderTracking></returns>
         public BO.OrderTracking orderTracking(int numOfOrder);
-
-
+        /// <summary>
+        /// func to admin only - updete exist order
+        /// </summary>
+        /// <param name="idOrder"></param>
+        /// <param name="idProduct"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public bool updateAdmin(int idOrder, int idProduct, int amount);
     }
 }

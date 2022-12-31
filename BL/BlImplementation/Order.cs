@@ -50,9 +50,10 @@ namespace BlImplementation
         }
         public BO.Order GetOrder(int numOfOrder)
         {
-            if (numOfOrder > 0)
-            {
-                DO.Order Dorder = dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
+            if (numOfOrder > 999999 || numOfOrder < 100000)
+                throw new incorrectData();
+
+            DO.Order Dorder = dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
                 IEnumerable<DO.OrderItem?> orderItems = dal.OrderItem.getAll(x => numOfOrder == (int)(x?.ID));
                 BO.Order? order = new()
                 {
@@ -91,14 +92,12 @@ namespace BlImplementation
                     i++;
                 }
                 return order;
-            }
-            else
-                throw new notExist();
+           
         }
         public BO.Order updateDliveryOrder(int numOfOrder)
         {
             DO.Order Dorder = dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
-            if (Dorder.DateOfDelivery == null && Dorder.idOfOrder > 0)
+            if (Dorder.DateOfDelivery == null && (Dorder.idOfOrder > 999999 || Dorder.idOfOrder < 100000))
             {
                 Dorder.DateOfDelivery = DateTime.Now;
                 BO.Order order = GetOrder(numOfOrder);
@@ -114,7 +113,7 @@ namespace BlImplementation
         public BO.Order UpdateSupplyDelivery(int numOfOrder)
         {
             DO.Order Dorder = dal.Order.getByParam(x => numOfOrder == x?.idOfOrder);
-            if (Dorder.DateOfDelivery != null && Dorder.idOfOrder > 0 && Dorder.DateOfShipping == null)
+            if (Dorder.DateOfDelivery != null && (Dorder.idOfOrder > 999999 || Dorder.idOfOrder < 100000) && Dorder.DateOfShipping == null)
             {
                 Dorder.DateOfShipping = DateTime.Now;
                 BO.Order order = GetOrder(numOfOrder);
@@ -129,39 +128,39 @@ namespace BlImplementation
         }
         public BO.OrderTracking orderTracking(int numOfOrder)
         {
-            DO.Order Dorder = dal.Order.getByParam(x => numOfOrder == x?.idOfOrder); //אם ההזמנה לא קיימת תיזרק שגיאה
+            DO.Order Dorder = dal.Order.getByParam(x => numOfOrder == x?.idOfOrder); //if the order is not exsist -throw
             Tuple<DateTime, BO.Enum.OrderStatus> a;
 
-            if (numOfOrder > 0)
+            if (numOfOrder > 999999|| numOfOrder<100000)
+                                throw new incorrectData();
+
+            BO.OrderTracking orderTracking = new() { idOfOrder = numOfOrder };
+            orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
+            if (numOfOrder > 999999 || numOfOrder < 100000)
             {
-                BO.OrderTracking orderTracking = new() { idOfOrder = numOfOrder };
-                orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
-                if (numOfOrder > 0)
+                if (Dorder.DateOfShipping == null)
                 {
-                    if (Dorder.DateOfShipping == null)
-                    {
-                        orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
-                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status);
+                    orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
+                    a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status);
 
-                    }
-                    else if (Dorder.DateOfOrder != null && Dorder.DateOfDelivery == null)
-                    {
-                        orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
-                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, (BO.Enum.OrderStatus)orderTracking.Status);
-                    }
-                    else
-                    {
-                        orderTracking.Status = (BO.Enum.OrderStatus.DLIVERY);
-                        a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, (BO.Enum.OrderStatus)orderTracking.Status);
-                    }
-
-
-                    orderTracking.Track.Add((a));
                 }
-                return orderTracking;
+                else if (Dorder.DateOfOrder != null && Dorder.DateOfDelivery == null)
+                {
+                    orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
+                    a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, (BO.Enum.OrderStatus)orderTracking.Status);
+                }
+                else
+                {
+                    orderTracking.Status = (BO.Enum.OrderStatus.DLIVERY);
+                    a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, (BO.Enum.OrderStatus)orderTracking.Status);
+                }
+
+
+                orderTracking.Track.Add((a));
             }
-            else
-                throw new incorrectData();
+            return orderTracking;
+
+
         }
 
         public bool updateAdmin(int idOrder, int idProduct, int amount)

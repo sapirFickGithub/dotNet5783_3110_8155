@@ -108,19 +108,33 @@ public class Program
     {
         BO.Order order = new BO.Order();
         char option;
-        Console.WriteLine("hello\n" +
-            "enter g to get order\n" +
-            "enter d to updat delivery\n" +
-            "enter s to updat shipping\n" +
-            "enter t to get the tracking\n" +
-            "enter e to exit");
+        Console.WriteLine("hello,\n" +
+            "enter g to get order,\n" +
+            "enter d to updat delivery,\n" +
+            "enter s to updat shipping,\n" +
+            "enter t to get the tracking,\n" +
+            "enter a to Admin updat order,\n" +
+            "enter e to exit.");
         char.TryParse(Console.ReadLine(), out option);
         while (option != 'e')
         {
             switch (option)
             {
 
-                case 'g'://exit
+                case 'a'://Admin updat order
+                    {
+                        Console.WriteLine("insert id of order you wand to edit.");
+                        int.TryParse(Console.ReadLine(), out int idOrder); 
+                        Console.WriteLine("insert id of product you want to chang.");
+                        int.TryParse(Console.ReadLine(), out int idProduct);
+                        Console.WriteLine("insert the new amount.");
+                        int.TryParse(Console.ReadLine(), out int amount);
+                        if ( ibl.Order.updateAdmin(idOrder,idProduct, amount))
+
+                        Console.WriteLine(ibl.Order.GetOrder(idOrder));
+                        break;
+                    }
+                case 'g'://get order
                     {
                         Console.WriteLine("insert id of order");
                         int.TryParse(Console.ReadLine(), out int id);
@@ -128,14 +142,14 @@ public class Program
                         Console.WriteLine(ibl.Order.GetOrder(id));
                         break;
                     }
-                case 'd'://Product
+                case 'd'://updat delivery
                     {
                         Console.WriteLine("insert id of order");
                         int.TryParse(Console.ReadLine(), out int id);
                         order = ibl.Order.updateDliveryOrder(id);
                         break;
                     }
-                case 's'://Order
+                case 's'://updat shipping
                     {
                         Console.WriteLine("insert id of order");
                         int.TryParse(Console.ReadLine(), out int id);
@@ -150,7 +164,7 @@ public class Program
                         Console.WriteLine(tracking);
                         break;
                     }
-                case 'e'://cart
+                case 'e'://exit
                     {
                         return;
                     }

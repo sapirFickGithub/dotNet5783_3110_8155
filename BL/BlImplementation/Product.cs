@@ -19,29 +19,23 @@ namespace BlImplementation
 
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
         {
-            IEnumerable<DO.Product?> products = dal.Product.getAll(param)?? throw new Exception("NULL");
-            List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
+            IEnumerable<DO.Product?> products = dal.Product.getAll(param) ?? throw new Exception("NULL");
+            var productsList = from product in products
+                               select (new BO.ProductForList
+                               {
+                                   idOfProduct = (int)(product?.idOfProduct),
+                                   Name = product?.Name,
+                                   Price = (double)(product?.Price),
+                                   ProductCategory = (BO.Enum.Category)product?.ProductCategory
 
-            foreach (var item in products)
-            {
-                BO.ProductForList temp = new() 
-                { 
-                    idOfProduct = (int)(item?.idOfProduct),
-                    Name = item?.Name,
-                    Price = (double)(item?.Price),
-                    ProductCategory = (BO.Enum.Category)item?.ProductCategory
-                                 
-                };
-
-                productForList.Add(temp);
-            }
-            return productForList.AsEnumerable();
+                               });
+            return productsList.AsEnumerable();
         }
 
         public BO.Product GetProduct(int idOfProduct)
         {
             BO.Product product = new BO.Product();
-            if (idOfProduct > 0)
+            if (idOfProduct > 999999 || idOfProduct < 100000)
             {
                 DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
                 BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
@@ -52,36 +46,34 @@ namespace BlImplementation
         }
         public BO.ProductItem GetDetails(int idOfProduct, BO.Cart cart)
         {
-            if (idOfProduct > 0)
+            if (idOfProduct > 999999 || idOfProduct < 100000)
+                throw new incorrectData();
+            DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
+            BO.Product temp = new()
             {
-                DO.Product Dproduct = dal.Product.getByParam(x => idOfProduct == x?.idOfProduct);
-                BO.Product temp = new()
-                { idOfProduct = Dproduct.idOfProduct,
-                    Name = Dproduct.Name, 
-                    Price = Dproduct.Price,
-                    InStock = Dproduct.InStock };
-                foreach (var item in cart.itemList)
-                {
-                    if (idOfProduct == item.idOfProduct)
-                    {
-                        BO.ProductItem productItem = new()
-                        {
-                            idOfProduct = item.idOfProduct,
-                            Name = item.NameOfProduct,
-                            Price = item.PriceOfProduct,
-                            ProductCategory = (BO.Enum.Category)item.ProductCategory,
-                            Amount = item.amount,
-                            InStock = temp.InStock
-                        };
-                        return productItem;
-                    }
-                }
-            }
-            throw new notExist();
+                idOfProduct = Dproduct.idOfProduct,
+                Name = Dproduct.Name,
+                Price = Dproduct.Price,
+                InStock = Dproduct.InStock
+            };
+            var productsList = from product in cart.itemList
+                               where idOfProduct == product.idOfProduct
+                               select (new BO.ProductItem
+                               {
+                                   idOfProduct = product.idOfProduct,
+                                   Name = product.NameOfProduct,
+                                   Price = product.PriceOfProduct,
+                                   ProductCategory = (BO.Enum.Category)product.ProductCategory,
+                                   Amount = product.amount,
+                                   InStock = temp.InStock
+                               });
+            var p = (List<BO.ProductItem>)(productsList);
+            return p[0];
+
         }
         public void addProduct(int idOfProduct, string name, BO.Enum.Category productCategory, double price, int inStock)
         {
-            if (idOfProduct > 0 && name != null && price > 0 && inStock > 0)
+            if ((idOfProduct > 999999 || idOfProduct < 100000) && name != null && price > 0 && inStock > 0)
             {
                 DO.Product Dproduct = new DO.Product
                 {
@@ -99,24 +91,27 @@ namespace BlImplementation
         public void delete(int idOfProduct)
         {
 
-
-            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAll();
-            foreach (var thisOrderItem in orderItem)
+            if (idOfProduct > 999999 || idOfProduct < 100000)
+                throw new incorrectData();
+    
+            List<DO.OrderItem> orderItems = (List<DO.OrderItem>)dal.OrderItem.getAll();   
+        ///option 1:  --with LINQ  but not so effectiv
+        ///    var orderItemTemp =from thisOrderItem in orderItems 
+        ///                       where idOfProduct == thisOrderItem.idOfItem  
+        ///                      select thisOrderItem;
+        ///orderItemTemp?? throw new existInOrders();
+            ///option2:
+            foreach (var thisOrderItem in orderItems)
                 if (idOfProduct == thisOrderItem.idOfItem)
                 {
                     throw new existInOrders();
                 }
-
-            if (idOfProduct < 0)
-            {
-                throw new notExist();
-            }
             dal.Product.delete(idOfProduct);
         }
         public void update(BO.Product product)
         {
 
-            if (product.idOfProduct > 0 && product.Name != null && product.Price > 0 && product.InStock > 0)
+            if ((product.idOfProduct > 999999 || product.idOfProduct < 100000) && product.Name != null && product.Price > 0 && product.InStock > 0)
             {
                 DO.Product Dproduct = new DO.Product
                 {
