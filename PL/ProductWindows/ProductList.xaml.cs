@@ -139,7 +139,14 @@ namespace PL.ProductWindows
         }
         private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {//move to updete product window
+
+            string id = List_of_product.SelectedItems[0].ToString();
+
+
+          id = id.Substring(17,6);
+            Console.WriteLine(id);
             new ProductWindows.UpdateProduct().Show();
+
             this.Close();
         }
 

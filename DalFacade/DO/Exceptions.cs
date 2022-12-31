@@ -14,9 +14,9 @@ namespace DO
             return Messege;
         }
     }
-    public class notFound : Exception
+    public class notExist : Exception
     {
-        public string Messege => "NOT FOUND!";
+        public string Messege => "NOT EXIST!";
         public string ToString()
         {
             return Messege;

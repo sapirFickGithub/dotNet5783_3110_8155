@@ -13,28 +13,12 @@ internal class DalOrderItem : IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
-        //orderItem.ID = _Config.get_OrderItemID;
-        if (search(orderItem))
-        {
-            throw new duplication();
-        }
+        orderItem.ID = _Config.get_OrderItemID;//למה לא מוסיפים מספר מזהה לפריט מוצר 
         listOrderItem.Add(orderItem);
-        //listOrderItem[listOrderItem.Count()] = orderItem;
         return orderItem.ID;
     }
-    public OrderItem get(int id)
-    {
-        int i, length = listOrderItem.Count();
-        for (i = 0; i < length; i++)
-        {
-            if (id == listOrderItem[i]?.ID)
-            {
-                return (OrderItem)listOrderItem[i - 1];
-            }
-        }
-        throw new notFound();
-    }
-    public IEnumerable<OrderItem?> getAll(Func<OrderItem?, bool>? param)
+  
+    public IEnumerable<OrderItem?> getAllByParam(Func<OrderItem?, bool>? param)
     {
 
         if (param == null)//לחזור לראות אם זה תקין
@@ -42,100 +26,63 @@ internal class DalOrderItem : IOrderItem
             return listOrderItem;
         }
         var list = from item in listOrderItem where param(item) select item;
-        //List<OrderItem?> list = new List<OrderItem?>();
-        //foreach (var item in listOrderItem)
-        //{
-        //    if (param(item))
-        //    {
-        //        list.Add(item);
-        //    }
-        //}
+        
         return list.AsEnumerable();
     }
 
 
     public void delete(int id)
     {
-        listOrderItem.Remove(getByParam(x =>id == x?.ID));
+        listOrderItem.Remove(getOneByParam(x =>id == x?.ID));
     }
 
     public void update(OrderItem newOrderItem)
     {
-        if (search(newOrderItem))
+        int index = search(newOrderItem.ID);
+        if (index == -1)
         {
-
-            for (int i = 0; i < listOrderItem.Count(); i++)
-            {
-                if (newOrderItem.ID == listOrderItem[i]?.ID)
-                    listOrderItem[i] = newOrderItem;
-            }
+            throw new notExist();
         }
-        else
-        {
-            throw new notFound();
-        }
+        listOrderItem[index] = newOrderItem;
     }
-    public bool search(OrderItem find)//help function
-    {
-        if (search(find.ID) != -1)
-            return true;
-        //int i;
-
-        //for (i = 0; i < listOrderItem.Count(); i++)
-        //{
-        //    if (find.ID == listOrderItem[i]?.ID)
-        //    {
-                
-        //            return true;
-                
-        //    }
-        //}
-        return false;
-    }
+ 
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
-        int i;
-     //   listOrderItem.FindIndex(x =>)
-        for (i = 0; i < listOrderItem.Count(); i++)
+        int counter = 0;
+        foreach (var item in listOrderItem)
         {
-            if (id == listOrderItem[i]?.ID)
+            if (id == item?.ID)
             {
-                return i;
+                return counter;
             }
+            counter++;
         }
         return -1;
     }
-    public void print(int index)
+
+
+    public void print()
     {
-        Console.WriteLine(listOrderItem[index]);
+        foreach (var item in listOrderItem)
+        {
+            Console.WriteLine(item);
+        }
     }
+
+
     public int length()
     { return listOrderItem.Count(); }
-    public IEnumerable<OrderItem?> getAllItemOrder(int id)
-    {
-        List<OrderItem> list = new List<OrderItem>();
-        //listOrderItem.orEach(x=> )
-        foreach (OrderItem item in listOrderItem)
-        {
-            if (item.idOfItem == id)
-                list.Add(item);
-            if (item.amount == 0)
-                throw new notFound();
-        }
-        return (IEnumerable<OrderItem?>)list.AsEnumerable();
-    }
-    public OrderItem getByParam(Func<OrderItem?, bool>? param)
+
+
+    public OrderItem? getOneByParam(Func<OrderItem?, bool>? param)
     {
         foreach (var item in listOrderItem)
         {
             if (param(item))
             {
-                OrderItem? orderItem = new OrderItem();
-                orderItem = item;
-                return (OrderItem)orderItem;
+                return item;
             }
         }
-        throw new Exception("NOT EXIST!");
-
+        throw new notExist();
     }
 }

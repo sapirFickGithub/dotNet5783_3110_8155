@@ -13,11 +13,35 @@ namespace DO;
 /// </summary>
 public struct Product
 {
+    /// <summary>
+    /// ID number of the product
+    /// </summary>
     public int idOfProduct { get; set; }
+
+
+    /// <summary>
+    /// name of product
+    /// </summary>
     public string? Name { get; set; }
+
+
+    /// <summary>
+    /// the category of the product
+    /// </summary>
     public Category? ProductCategory { get; set; }
+
+
+    /// <summary>
+    /// the price of the product
+    /// </summary>
     public double Price { get; set; }
+
+
+    /// <summary>
+    /// who much products in the stock
+    /// </summary>
     public int InStock { get; set; }
+
 
     /// <summary>
     /// make a string with all the fields in the struct.
@@ -25,8 +49,9 @@ public struct Product
     /// <returns></returns>
     /// 
     public override string ToString() => $@"
-    Product ID={idOfProduct}: {Name}, 
-    category - {ProductCategory}
+    ID of product: {idOfProduct}
+    Name of product: {Name} 
+    Category: {ProductCategory}
     Price: {Price}
-    Amount in stock: {InStock}";
+    Product's amount in stock: {InStock}";
 }
