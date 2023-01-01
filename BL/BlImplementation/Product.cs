@@ -17,25 +17,33 @@ namespace BlImplementation
     {
         DalApi.IDal? dal = DalApi.Factory.Get();
 
+        public IEnumerable<BO.ProductItem> getListOfProductItem(Func<DO.Product?, bool>? param = null)
+        {
+            IEnumerable<DO.Product?> products = dal.Product.getAllByParam(param) ?? throw new Exception("NULL");
+            var productsItemList = from product in products
+                                   select (new BO.ProductItem
+                                   {
+                                       idOfProduct = (int)(product?.idOfProduct),
+                                       Name = product?.Name,
+                                       Price = (double)(product?.Price),
+                                       InStock = ((int)(product?.InStock) > 0),
+                                       Amount = 0,
+                                       ProductCategory = (BO.Enum.Category)product?.ProductCategory
+                                   });
+            return productsItemList;
+        }
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
         {
-            IEnumerable<DO.Product?> products = dal.Product.getAllByParam(param)?? throw new Exception("NULL");
-            List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
-
-            foreach (var item in products)
-            {
-                BO.ProductForList temp = new() 
-                { 
-                    idOfProduct = (int)(item?.idOfProduct),
-                    Name = item?.Name,
-                    Price = (double)(item?.Price),
-                    ProductCategory = (BO.Enum.Category)item?.ProductCategory
-                                 
-                };
-
-                productForList.Add(temp);
-            }
-            return productForList.AsEnumerable();
+            IEnumerable<DO.Product?> products = dal.Product.getAllByParam(param) ?? throw new Exception("NULL");
+            var productsList = from product in products
+                               select (new BO.ProductForList
+                               {
+                                   idOfProduct = (int)(product?.idOfProduct),
+                                   Name = product?.Name,
+                                   Price = (double)(product?.Price),
+                                   ProductCategory = (BO.Enum.Category)product?.ProductCategory
+                               });
+            return productsList;
         }
 
         public BO.Product GetProduct(int idOfProduct)
@@ -43,111 +51,96 @@ namespace BlImplementation
             BO.Product product = new BO.Product();
             if (idOfProduct > 999999 || idOfProduct < 100000)
             {
-                DO.Product? Dproduct = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
-                BO.Product temp = new() { idOfProduct = Dproduct.idOfProduct, Name = Dproduct.Name, Price = Dproduct.Price, InStock = Dproduct.InStock };
-                return temp;
+                throw new incorrectData();
             }
-            else
-                throw new BO.notExist();
+            DO.Product Dproduct = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
+            BO.Product? tempProduct = new()
+            {
+                idOfProduct = Dproduct.idOfProduct,
+                Name = Dproduct.Name,
+                Price = Dproduct.Price,
+                InStock = Dproduct.InStock
+            };
+            return tempProduct;
+
         }
         public BO.ProductItem GetDetails(int idOfProduct, BO.Cart cart)
         {
-            if (idOfProduct > 0)
+            if ((idOfProduct > 999999 || idOfProduct < 100000))
             {
-                DO.Product Dproduct = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
-                BO.Product temp = new()
-                { idOfProduct = Dproduct.idOfProduct,
-                    Name = Dproduct.Name, 
-                    Price = Dproduct.Price,
-                    InStock = Dproduct.InStock };
-                foreach (var item in cart.itemList)
+                throw new BO.incorrectData();
+            }
+            DO.Product Dproduct = (DO.Product)dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
+            BO.Product tempProduct = new()
+            {
+                idOfProduct = Dproduct.idOfProduct,
+                Name = Dproduct.Name,
+                Price = Dproduct.Price,
+                InStock = Dproduct.InStock
+            };
+
+            foreach (var item in cart.itemList)
+            {
+                if (idOfProduct == item.idOfProduct)
                 {
-                    if (idOfProduct == item.idOfProduct)
+                    BO.ProductItem productItem = new()
                     {
-                        BO.ProductItem productItem = new()
-                        {
-                            idOfProduct = item.idOfProduct,
-                            Name = item.NameOfProduct,
-                            Price = item.PriceOfProduct,
-                            ProductCategory = (BO.Enum.Category)item.ProductCategory,
-                            Amount = item.amount,
-                            InStock = temp.InStock
-                        };
-                        return productItem;
-                    }
+                        idOfProduct = item.idOfProduct,
+                        Name = item.NameOfProduct,
+                        Price = item.PriceOfProduct,
+                        ProductCategory = (BO.Enum.Category)item.ProductCategory,
+                        Amount = item.amount,
+                        InStock = (tempProduct.InStock > 0)
+                    };
+                    return productItem;
                 }
             }
             throw new BO.notExist();
         }
         public void addProduct(int idOfProduct, string name, BO.Enum.Category productCategory, double price, int inStock)
         {
-            if ((idOfProduct > 999999 || idOfProduct < 100000) && name != null && price > 0 && inStock > 0)
+            if ((idOfProduct > 999999 || idOfProduct < 100000) && name == null && price < 0 && inStock <= 0)
+            { throw new incorrectData(); }
+            DO.Product Dproduct = new DO.Product
             {
-                DO.Product Dproduct = new DO.Product
-                {
-                    idOfProduct = idOfProduct,
-                    Name = name,
-                    ProductCategory = (DO.Category)productCategory,
-                    Price = price,
-                    InStock = inStock
-                };
-                dal.Product.Add(Dproduct);
-            }
-            else
-                throw new incorrectData();
+                idOfProduct = idOfProduct,
+                Name = name,
+                ProductCategory = (DO.Category)productCategory,
+                Price = price,
+                InStock = inStock
+            };
+            dal.Product.Add(Dproduct);
+
         }
         public void delete(int idOfProduct)
         {
-
-
+            if (idOfProduct > 999999 || idOfProduct < 100000)
+            {
+                throw new BO.incorrectData();
+            }
             List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAllByParam();
             foreach (var thisOrderItem in orderItem)
                 if (idOfProduct == thisOrderItem.idProduct)
                 {
                     throw new existInOrders();
                 }
-
-            if (idOfProduct < 0)
-            {
-                throw new BO.notExist();
-            }
             dal.Product.delete(idOfProduct);
         }
         public void update(BO.Product product)
         {
+            if ((product.idOfProduct > 999999 || product.idOfProduct < 100000) && product.Name == null && product.Price < 0 && product.InStock <= 0)
+            { throw new incorrectData(); }
 
-            if ((product.idOfProduct > 999999 || product.idOfProduct < 100000) && product.Name != null && product.Price > 0 && product.InStock > 0)
+            DO.Product Dproduct = new DO.Product
             {
-                DO.Product Dproduct = new DO.Product
-                {
-                    idOfProduct = product.idOfProduct,
-                    Name = product.Name,
-                    ProductCategory = (DO.Category)product.ProductCategory,
-                    Price = product.Price,
-                    InStock = product.InStock
-                };
-                dal.Product.update(Dproduct);
-            }
-            else
-                throw new incorrectData();
-        }
-        //public IEnumerable<BO.ProductForList> getByCategory(BO.Enum.Category category)
-        //{
-        //    List<DO.Product?> productList = Dal.Product.getAllByParam(x => category == x?.Category);
-        //    List<BO.ProductForList?> productForList = new List<BO.ProductForList?>();
+                idOfProduct = product.idOfProduct,
+                Name = product.Name,
+                ProductCategory = (DO.Category)product.ProductCategory,
+                Price = product.Price,
+                InStock = product.InStock
+            };
+            dal.Product.update(Dproduct);
 
-        //    foreach (var item in productList)
-        //    {
-        //        BO.ProductForList temp = new()
-        //        {
-        //            idOfProduct = (int)(item?.idOfProduct),
-        //            Name = item?.Name,
-        //            Price = (double)(item?.Price),
-        //            ProductCategory = (BO.Enum.Category)item?.ProductCategory
-        //        };
-        //        productForList.Add(temp);
-        //    }
-        //    return productForList.AsEnumerable();
-        //}
+        }
     }
 }

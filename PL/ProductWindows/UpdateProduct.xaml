@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.ProductWindows"
         mc:Ignorable="d"
-        Title="UpdateProduct" Height="450" Width="800">
+        Title="UpdateProduct" Height="450" Width="485">
     <Grid  RenderTransformOrigin="0.82,0.765">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -26,13 +26,12 @@
             FontFamily= "Maiandra GD"
             Height="30"
             Width="250"
-            Margin="300,0,0,0" 
-            Grid.Row="1"
+            Margin="152,7,0,0"
             TextWrapping="Wrap" 
-            VerticalAlignment="Center" TextChanged="ID_TextChanged"
+            VerticalAlignment="Top" TextChanged="ID_TextChanged" Grid.Row="1"
            
             />
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD" Grid.Row="1"/>
 
         <TextBox 
             x:Name="Name"
@@ -40,20 +39,20 @@
             FontFamily= "Maiandra GD"
             Height="30"
             Width="250"
-            Margin="300,0,0,0" 
+            Margin="152,7,0,0" 
             Grid.Row="2"
             TextWrapping="Wrap" 
-           VerticalAlignment="Center" TextChanged="Name_TextChanged"
+           VerticalAlignment="Top" TextChanged="Name_TextChanged"
             
            />
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily= "Maiandra GD"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily= "Maiandra GD"/>
 
         <TextBox 
             x:Name="Price"
             HorizontalAlignment="Left" 
             Height="30"
-            Margin="300,0,0,0" 
+            Margin="152,0,0,0" 
             Width="250"
            FontFamily= "Maiandra GD"
             Grid.Row="3"
@@ -62,7 +61,7 @@
             RenderTransformOrigin="1.372,3.394" 
            
             />
-        <Label Content="Price:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
         <TextBox 
             x:Name="InStock"
@@ -70,29 +69,29 @@
             FontFamily= "Maiandra GD"
             Height="30"
             Width="250"
-            Margin="300,0,0,0" 
+            Margin="152,0,0,0" 
             Grid.Row="4"
             TextWrapping="Wrap" 
             VerticalAlignment="Center"
             
             />
-        <Label Content="In stock:" HorizontalAlignment="Left" Margin="220,0,0,0" Grid.Row="4" VerticalAlignment="Center"  FontFamily= "Maiandra GD" FontWeight="Normal" FontSize="14"/>
+        <Label Content="In stock:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="4" VerticalAlignment="Center"  FontFamily= "Maiandra GD" FontWeight="Normal" FontSize="14"/>
 
         <ComboBox 
             x:Name="Category_selector"
             HorizontalAlignment="Left" 
             FontFamily= "Maiandra GD"
-            Margin="300,5,0,0" 
+            Margin="152,6,0,0" 
             Grid.Row="5" 
             VerticalAlignment="Top" 
             Width="250" 
             Height="30"
             SelectionChanged="Category_selector_SelectionChanged"/>
-        <Label Content="Category:" HorizontalAlignment="Left" Margin="220,8,0,7" Grid.Row="5" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
-       
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
+
         <Button Content="Update"
                 HorizontalAlignment="Left"
-                Margin="370,10,0,0" 
+                Margin="292,10,0,0" 
                 Grid.Row="6" 
                 Background="#FFF1F1D8"
                 FontFamily="Maiandra GD"
@@ -104,7 +103,7 @@
         <Button x:Name="Back_Botton"
                 Content="Back"   
                 HorizontalAlignment="Left"
-                Margin="370,64,0,0" 
+                Margin="152,15,0,0" 
                 Grid.Row="6"
                 Background="#FFF1F1D8"
                 VerticalAlignment="Top"
@@ -113,5 +112,7 @@
                 FontSize="20"
                 FontFamily="Maiandra GD"
                 Click="BackToProductListWindow_Click"/>
+        <Label Content="Insert the details:" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontSize="18" FontFamily="Maiandra GD" FontWeight="Normal"/>
+
     </Grid>
 </Window>

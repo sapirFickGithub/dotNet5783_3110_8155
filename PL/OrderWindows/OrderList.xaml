@@ -10,5 +10,97 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="105*"/>
+            <RowDefinition Height="102*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Add_New_Order"
+                Content="Add new order"
+                Grid.Row="3" 
+                HorizontalAlignment="Left" 
+                Margin="43,26,0,30" 
+                Padding="5" 
+                Background="#FFF1F1D8"
+                Width="228" 
+                 FontFamily= "Maiandra GD"
+                FontSize="20" 
+                RenderTransformOrigin="0.446,0.113" 
+                Click="Add_Order_Window_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="179.662"/>
+                    <TranslateTransform X="0.292" Y="-0.198"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+     
+
+        <ListView x:Name="List_of_orders"
+                  d:ItemsSource="{d:SampleData ItemCount=6}" 
+                  SelectionChanged="List_of_orders_SelectionChanged"
+                  Margin="0,40,0,5"
+                  FontFamily="Maiandra GD" 
+                  Grid.RowSpan="3"
+                  MouseDoubleClick="List_of_orders_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding idOfOrder}">
+                        <GridViewColumnHeader 
+                            Content="ID" FontFamily= "Maiandra GD"
+                            Click="Sort_By_ID_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding CustomerName}" >
+                        <GridViewColumnHeader 
+                            Content="Name" FontFamily= "Maiandra GD"
+                            Click="Sort_By_CustumerName_Click"/>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn  
+                            DisplayMemberBinding="{Binding Status }" >
+                        <GridViewColumnHeader 
+                            Content="Status" FontFamily= "Maiandra GD"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn  
+                            DisplayMemberBinding="{Binding AmountOfItem }" >
+                        <GridViewColumnHeader 
+                            Content="Amount of item" FontFamily= "Maiandra GD"
+                             Click="Sort_By_AmountOfItem_Click"/>
+                    </GridViewColumn>
+
+                            <GridViewColumn 
+                            DisplayMemberBinding="{Binding TotalPrice}" >
+                                <GridViewColumnHeader 
+                            Content= "Total price" FontFamily= "Maiandra GD"
+                            Click= "Sort_By_TotalPrice_Click"/>
+                            </GridViewColumn>
+
+                </GridView>
+
+
+            </ListView.View>
+        </ListView>
+        <Button x:Name="Back_Botton"
+                Content="Back"   
+                HorizontalAlignment="Left"
+                Margin="647,23,0,0" 
+                Grid.Row="3"
+                Background="#FFF1F1D8"
+                VerticalAlignment="Top"
+                Height="46" 
+                Width="117" 
+                FontSize="20"
+                FontFamily="Maiandra GD"
+                Click="BackToMainWindow_Click"/>
+
     </Grid>
 </Window>

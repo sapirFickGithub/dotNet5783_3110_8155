@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CartWindows\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="1593678163641.jpeg" />
     <Resource Include="Hist_5773_Sem_B_Moed_A_Pitr_Sh1.jpg" />
   </ItemGroup>

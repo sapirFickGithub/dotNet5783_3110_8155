@@ -86,7 +86,7 @@ public class Program
                     {
 
                         //BO.ProductForList JlistProduct = (ProductForList)ibl.Product.getListOfProduct();
-                        List<BO.ProductForList> listProduct = ibl?.getListOfProduct();
+                      var listProduct = ibl.Product.getListOfProduct();
                         foreach(var product in listProduct)
                         {
                             Console.WriteLine(product);
@@ -114,6 +114,7 @@ public class Program
             "enter s to updat shipping,\n" +
             "enter t to get the tracking,\n" +
             "enter a to Admin updat order,\n" +
+            "enter l to get all the order list\n" +
             "enter e to exit.");
         char.TryParse(Console.ReadLine(), out option);
         while (option != 'e')
@@ -162,6 +163,15 @@ public class Program
                         int.TryParse(Console.ReadLine(), out int id);
                         BO.OrderTracking tracking = ibl.Order.orderTracking(id);
                         Console.WriteLine(tracking);
+                        break;
+                    }
+                case 'l'://tracking
+                    {
+                        var listOrder = ibl.Order.getListOfOrder();
+                        foreach (var product in listOrder)
+                        {
+                            Console.WriteLine(product);
+                        }
                         break;
                     }
                 case 'e'://exit

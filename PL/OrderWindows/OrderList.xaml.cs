@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BO;
+using System.ComponentModel;
 
 namespace PL.OrderWindows
 {
@@ -20,11 +22,101 @@ namespace PL.OrderWindows
     public partial class OrderList : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
+        public bool hasSorted = true;
         public OrderList()
         {
             InitializeComponent();
+            List_of_orders.ItemsSource = bl.Order.getListOfOrder();
         }
 
+        private void Sort_By_TotalPrice_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+                view.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+
+        private void Sort_By_AmountOfItem_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+                view.SortDescriptions.Add(new SortDescription("AmountOfItem", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("AmountOfItem", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+
+        private void Sort_By_CustumerName_Click(object sender, RoutedEventArgs e)
+        {
+            var listTemp = bl.Product.getListOfProduct();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+
+                view.SortDescriptions.Add(new("CustomerName", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("CustomerName", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+
+        private void Sort_By_ID_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+            view.SortDescriptions.Clear();
+            if (hasSorted)
+            {
+                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Descending));
+                hasSorted = false;
+            }
+            else
+            {
+                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
+                hasSorted = true;
+            }
+        }
+
+        private void Add_Order_Window_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderWindows.AddOrder().Show();
+            this.Close();
+        }
+
+        private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new OrderWindows.UpdateOrder().Show();
+            this.Close();
+        }
+
+        private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
+            this.Close();
+        }
     }
 
 }

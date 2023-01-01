@@ -11,33 +11,30 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BO;
 using System.ComponentModel;
 
 
-
-namespace PL.ProductWindows
+namespace PL.CartWindows
 {
     /// <summary>
-    /// Interaction logic for ProductList.xaml
-
+    /// Interaction logic for CartNew.xaml
     /// </summary>
-    public partial class ProductList : Window
+    public partial class CartNew : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
         public bool hasSorted = true;
-        public ProductList()
+        public CartNew()
         {
             InitializeComponent();
-            List_of_product.ItemsSource = bl.Product.getListOfProduct();
-            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));////////////
+            List_of_product.ItemsSource = bl.Product.getListOfProductItem();
         }
 
-        private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
         {
-
+            //move to Main window
+            new MainWindow().Show();
+            this.Close();
         }
-
 
         private void Sort_By_Name_Click(object sender, RoutedEventArgs e)
         {
@@ -56,7 +53,8 @@ namespace PL.ProductWindows
                 hasSorted = true;
             }
         }
-        private void Sort_By_ID_Click(object sender, RoutedEventArgs e) // sort the list view by ID
+
+        private void Sort_By_ID_Click(object sender, RoutedEventArgs e)
         {
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
             view.SortDescriptions.Clear();
@@ -68,21 +66,6 @@ namespace PL.ProductWindows
             else
             {
                 view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
-        private void Sort_By_Category_Click(object sender, RoutedEventArgs e) // sort the list view by Category
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-                view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
                 hasSorted = true;
             }
         }
@@ -103,16 +86,15 @@ namespace PL.ProductWindows
             }
         }
 
-
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 Object selectedItem = Category_selector.SelectedItem;
                 if (selectedItem.ToString() == "All")
-                    List_of_product.ItemsSource = bl.Product.getListOfProduct();
+                    List_of_product.ItemsSource = bl.Product.getListOfProductItem();
                 else
-                    List_of_product.ItemsSource = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
+                    List_of_product.ItemsSource = bl.Product.getListOfProductItem(a => a?.ProductCategory.ToString() == selectedItem.ToString());
             }
             catch (Exception)
             {
@@ -127,31 +109,9 @@ namespace PL.ProductWindows
             }
         }
 
-        private void AddProductWindow_Click(object sender, RoutedEventArgs e)
-        {//move to add product window
-            new ProductWindows.AddProduct().Show();
-            this.Close();
-        }
-        private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {//move to updete product window
-
-            string id = List_of_product.SelectedItems[0].ToString();
-
-
-          id = id.Substring(17,6);
-            Console.WriteLine(id);
-            new ProductWindows.UpdateProduct().Show();
-
-            this.Close();
-        }
-
-        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
+        private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //move to Main window
-            new MainWindow().Show();
-            this.Close();
+
         }
-
-
     }
 }

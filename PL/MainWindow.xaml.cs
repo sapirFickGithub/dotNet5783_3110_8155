@@ -35,5 +35,18 @@ namespace PL
             new Admin().Show();
             this.Close();
         }
+
+        private void Client_Click(object sender, RoutedEventArgs e)
+        {
+            new Customer().Show();
+            this.Close();
+        }
+
+        private void Tracking_Click(object sender, RoutedEventArgs e)
+        {
+            int.TryParse(ID.Text, out int id);
+            new OrderWindows.OrderTracking(id).Show();
+            this.Close();
+        }
     }
 }
