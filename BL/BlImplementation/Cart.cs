@@ -47,6 +47,7 @@ namespace BlImplementation
             }
             else throw new outOfStock();
 
+
         }
         public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
         {

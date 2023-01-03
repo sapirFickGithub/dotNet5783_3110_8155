@@ -140,7 +140,7 @@ namespace PL.ProductWindows
 
           id = id.Substring(17,6);
             Console.WriteLine(id);
-            new ProductWindows.UpdateProduct().Show();
+            new ProductWindows.UpdateProduct(id.ToString()).Show();
 
             this.Close();
         }

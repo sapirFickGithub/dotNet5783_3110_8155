@@ -20,16 +20,20 @@ namespace PL.OrderWindows
     public partial class OrderTracking : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
-        public OrderTracking(int idOfOrder)
+        public OrderTracking()
         {
             InitializeComponent();
-           var track= bl.Order.orderTracking(idOfOrder);
         }
 
         private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
             this.Close();
+        }
+
+        private void Tracking_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

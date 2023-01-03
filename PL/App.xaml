@@ -4,6 +4,37 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--It should make a button illusion to press it-->
+                    <ControlTemplate TargetType = "{x:Type ButtonBase}" >
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="FontWeight" Value="ExtraBold"/>
+                                <Setter Property="Foreground" Value="Aqua"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}" Name="button">
+
+                            <ContentPresenter TextBlock.FontSize="{TemplateBinding FontSize}" TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                                              TextBlock.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                              Content="{TemplateBinding Content}" ClipToBounds="True"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Background" Value="#FFFEFEEC" />
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Maiandra GD"/>
+            <Setter Property="FontStyle" Value="Normal"/>
+
+        </Style>
     </Application.Resources>
 </Application>

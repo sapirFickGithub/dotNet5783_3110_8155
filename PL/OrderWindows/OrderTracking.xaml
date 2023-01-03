@@ -10,13 +10,12 @@
         <Button x:Name="Back_Botton"
                 Content="Back"   
                 HorizontalAlignment="Left"
-                Margin="10,386,0,0"
-                Background="#FFF1F1D8"
-                VerticalAlignment="Top"
-                Height="38" 
-                Width="110" 
-                FontSize="20"
-                FontFamily="Maiandra GD"
-                Click="BackToProductListWindow_Click"/>
+                Margin="10,386,0,0"  VerticalAlignment="Top" Height="38" Width="110" Click="BackToProductListWindow_Click"/>
+        <TextBox x:Name="ID"  Background="#FFFEFEEC" HorizontalAlignment="Left" Margin="156,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="35"  FontSize="20"
+                FontFamily="Maiandra GD"/>
+        <Label Content="Enter ID of your order to track:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="293"  Background="#FFFEFEEC" FontSize="20"
+                FontFamily="Maiandra GD" Height="35"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="312,52,0,0" VerticalAlignment="Top" Height="33" Width="44" Background="#FFFEFEEC" Click= "Tracking_Click" />
+
     </Grid>
 </Window>

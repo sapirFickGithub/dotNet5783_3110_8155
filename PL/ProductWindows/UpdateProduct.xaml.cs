@@ -23,9 +23,10 @@ namespace PL.ProductWindows
     public partial class UpdateProduct : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
-        public UpdateProduct()
+        public UpdateProduct(string id)
         {
             InitializeComponent();
+            ID.Text = id.ToString();
             Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
 
         }
@@ -121,11 +122,11 @@ namespace PL.ProductWindows
                 MessageBox.Show(
                          "Somthing went worng...\n please try again later",
                          "Unknown error",
-                        // MessageBoxButton.OKCancel,
+
                          MessageBoxButton.OK,
                          MessageBoxImage.Hand,
                          MessageBoxResult.Cancel,
-                         MessageBoxOptions.RtlReading);
+                         MessageBoxOptions.RtlReading) ;
             }
         }
 

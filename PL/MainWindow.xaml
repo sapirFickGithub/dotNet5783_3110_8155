@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" ScrollViewer.HorizontalScrollBarVisibility="Visible">
         <Grid.Background>
-            <ImageBrush ImageSource="/1593678163641.jpeg"/>
+            <ImageBrush ImageSource="/1593678163641.jpeg" TileMode="None"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="116"/>
@@ -28,7 +28,7 @@
                 FontWeight="Normal"
                 Click="Admin_Click"
                 HorizontalAlignment="Right" 
-                Width="205"/>
+                Width="205" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
             <Button Content="Client"
                 FontSize="36"
                 Background="#FFFEFEEC"
@@ -38,10 +38,7 @@
                 Click= "Client_Click"
                 HorizontalAlignment="Center"
                 Width="205"/>
-            <TextBox x:Name="ID"  Background="#FFFEFEEC" HorizontalAlignment="Left" Margin="13,-251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="35"  FontSize="20"
-                FontFamily="Maiandra GD"/>
-            <Label Content="Enter ID of your order to track:" HorizontalAlignment="Left" Margin="-283,-251,0,0" VerticalAlignment="Top" Width="293"  Background="#FFFEFEEC" FontSize="20"
-                FontFamily="Maiandra GD" Height="35"/>
+            
             <Grid.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -57,7 +54,6 @@
                 </TransformGroup>
             </Grid.RenderTransform>
         </Grid>
-        <Button Content="OK" HorizontalAlignment="Left" Margin="442,11,0,0" VerticalAlignment="Top" Height="34" Width="24" Background="#FFFEFEEC" Click= "Tracking_Click" />
-
+      
     </Grid>
 </Window>

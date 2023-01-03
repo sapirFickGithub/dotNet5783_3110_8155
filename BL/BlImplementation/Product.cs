@@ -45,7 +45,6 @@ namespace BlImplementation
                                });
             return productsList;
         }
-
         public BO.Product GetProduct(int idOfProduct)
         {
             BO.Product product = new BO.Product();
@@ -128,19 +127,22 @@ namespace BlImplementation
         }
         public void update(BO.Product product)
         {
-            if ((product.idOfProduct > 999999 || product.idOfProduct < 100000) && product.Name == null && product.Price < 0 && product.InStock <= 0)
-            { throw new incorrectData(); }
-
-            DO.Product Dproduct = new DO.Product
+          //  try
             {
-                idOfProduct = product.idOfProduct,
-                Name = product.Name,
-                ProductCategory = (DO.Category)product.ProductCategory,
-                Price = product.Price,
-                InStock = product.InStock
-            };
-            dal.Product.update(Dproduct);
+                if ((product.idOfProduct > 999999 || product.idOfProduct < 100000) && product.Name == null && product.Price < 0 && product.InStock <= 0)
+                { throw new incorrectData(); }
 
+                DO.Product Dproduct = new DO.Product
+                {
+                    idOfProduct = product.idOfProduct,
+                    Name = product.Name,
+                    ProductCategory = (DO.Category)product.ProductCategory,
+                    Price = product.Price,
+                    InStock = product.InStock
+                };
+                dal.Product.update(Dproduct);
+            }
+          //  catch()
         }
     }
 }

@@ -7,46 +7,23 @@
         mc:Ignorable="d"
         Title="Admin" Height="450" Width="800">
     <Grid>
-     
-                <Button Content="Product"
+
+        <Button Content="Product"
                 FontSize="36"
                 Background="#FFFEFEEC"
                 FontFamily= "Maiandra GD"
                 Margin="0,123,325,251" 
-                FontWeight="Normal"
                 Click="ProductListWindow_Click"
                 HorizontalAlignment="Right"
                 Width="205">
-        <Button.Style>
-            <Style TargetType="Button" >
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="FontWeight" Value="ExtraBold"/>
-                    <Setter Property="Foreground" Value="Aqua"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-          </Button.Style>
-            </Button>
+        </Button>
         <Button Content="Order"
                 FontSize="36"
-                Background="#FFFEFEEC"
-                FontFamily= "Maiandra GD"
                 Margin="0,255,325,120" 
                 FontWeight="Normal"
                 Click="OrderListWindow_Click"
                 HorizontalAlignment="Right"
                 Width="205">
-            <Button.Style>
-                <Style TargetType="Button" >
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="FontWeight" Value="ExtraBold"/>
-                            <Setter Property="Foreground" Value="Aqua"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
         </Button>
                     
         <TextBox HorizontalAlignment="Left"

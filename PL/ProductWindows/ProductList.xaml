@@ -22,10 +22,7 @@
                 HorizontalAlignment="Left" 
                 Margin="43,26,0,30" 
                 Padding="5" 
-                Background="#FFF1F1D8"
                 Width="228" 
-                 FontFamily= "Maiandra GD"
-                FontSize="20" 
                 RenderTransformOrigin="0.446,0.113" 
                 Click="AddProductWindow_Click">
             <Button.RenderTransform>
@@ -94,12 +91,9 @@
                 HorizontalAlignment="Left"
                 Margin="647,23,0,0" 
                 Grid.Row="3"
-                Background="#FFF1F1D8"
                 VerticalAlignment="Top"
                 Height="46" 
                 Width="117" 
-                FontSize="20"
-                FontFamily="Maiandra GD"
                 Click="BackToMainWindow_Click"/>
 
     </Grid>

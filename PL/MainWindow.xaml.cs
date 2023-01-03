@@ -42,11 +42,6 @@ namespace PL
             this.Close();
         }
 
-        private void Tracking_Click(object sender, RoutedEventArgs e)
-        {
-            int.TryParse(ID.Text, out int id);
-            new OrderWindows.OrderTracking(id).Show();
-            this.Close();
-        }
+      
     }
 }
