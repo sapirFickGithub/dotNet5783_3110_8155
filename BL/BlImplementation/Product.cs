@@ -21,30 +21,42 @@ namespace BlImplementation
         {
             IEnumerable<DO.Product?> products = dal.Product.getAllByParam(param) ?? throw new Exception("NULL");
             var productsItemList = from product in products
-                                   select (new BO.ProductItem
-                                   {
-                                       idOfProduct = (int)(product?.idOfProduct),
-                                       Name = product?.Name,
-                                       Price = (double)(product?.Price),
-                                       InStock = ((int)(product?.InStock) > 0),
-                                       Amount = 0,
-                                       ProductCategory = (BO.Enum.Category)product?.ProductCategory
-                                   });
+                                   select (doToBoProductItem(product));
             return productsItemList;
         }
+
+        private ProductItem doToBoProductItem(DO.Product? product)
+        {
+            return new BO.ProductItem
+            {
+                idOfProduct = (int)(product?.idOfProduct),
+                Name = product?.Name,
+                Price = (double)(product?.Price),
+                InStock = ((int)(product?.InStock) > 0),
+                Amount = 0,
+                ProductCategory = (BO.Enum.Category)product?.ProductCategory
+            };
+        }
+
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
         {
             IEnumerable<DO.Product?> products = dal.Product.getAllByParam(param) ?? throw new Exception("NULL");
             var productsList = from product in products
-                               select (new BO.ProductForList
-                               {
-                                   idOfProduct = (int)(product?.idOfProduct),
-                                   Name = product?.Name,
-                                   Price = (double)(product?.Price),
-                                   ProductCategory = (BO.Enum.Category)product?.ProductCategory
-                               });
+                               select (doToBoProductForList(product));
             return productsList;
         }
+
+        private ProductForList doToBoProductForList(DO.Product? product)
+        {
+            return new BO.ProductForList
+            {
+                idOfProduct = (int)(product?.idOfProduct),
+                Name = product?.Name,
+                Price = (double)(product?.Price),
+                ProductCategory = (BO.Enum.Category)product?.ProductCategory,
+            };
+        }
+
         public BO.Product GetProduct(int idOfProduct)
         {
             BO.Product product = new BO.Product();
@@ -118,6 +130,11 @@ namespace BlImplementation
                 throw new BO.incorrectData();
             }
             List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAllByParam();
+
+            //if (orderItem.Any(o => o.idProduct == idOfProduct))
+            //{
+
+            //}
             foreach (var thisOrderItem in orderItem)
                 if (idOfProduct == thisOrderItem.idProduct)
                 {
@@ -125,7 +142,7 @@ namespace BlImplementation
                 }
             dal.Product.delete(idOfProduct);
         }
-        public void update(BO.Product product)
+        public void Update(BO.Product product)
         {
           //  try
             {
@@ -143,6 +160,11 @@ namespace BlImplementation
                 dal.Product.update(Dproduct);
             }
           //  catch()
+        }
+
+        public ProductForList? GetProductForList(int productId)
+        {
+            return doToBoProductForList(dal.Product.getOneByParam(p => p?.idOfProduct == productId));
         }
     }
 }

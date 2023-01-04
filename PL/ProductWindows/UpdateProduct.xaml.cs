@@ -23,18 +23,20 @@ namespace PL.ProductWindows
     public partial class UpdateProduct : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
-        public UpdateProduct(string id)
+        public event Action<int> action;
+        public IEnumerable<BO.Enum.Category> Categories { set; get; }
+        public UpdateProduct(Action<int> action)
         {
             InitializeComponent();
-            ID.Text = id.ToString();
-            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
-
+            //ID.Text = id.ToString();
+            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
+            this.action = action;
         }
 
         private void UpdateProduct_Click(object sender, RoutedEventArgs e)
         {
             try
-            {//Receives the new data to update the product and performs input integrity checks.
+            {//Receives the new data to Update the product and performs input integrity checks.
                 int.TryParse(ID.Text, out int id);
                 if (id <= 99999 || id >= 1000000)
                     MessageBox.Show(
@@ -92,7 +94,8 @@ namespace PL.ProductWindows
                     Price = price,
                     ProductCategory = category
                 };
-                bl?.Product.update(product);
+                bl?.Product.Update(product);
+                action(id);
 
                 new ProductWindows.ProductList().Show();
                 this.Close();
@@ -152,7 +155,7 @@ namespace PL.ProductWindows
         private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
         {
             //move to Main window
-            new ProductWindows.ProductList().Show();
+           // new ProductWindows.ProductList().Show();
             this.Close();
         }
 

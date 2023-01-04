@@ -67,7 +67,7 @@ public class Program
                             InStock = inStock
                         };
 
-                        ibl.Product.update(product);
+                        ibl.Product.Update(product);
                         break;
                     }
                 case 'd'://delete

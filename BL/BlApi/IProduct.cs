@@ -56,7 +56,7 @@ namespace BlApi
         /// Update product details.
         /// </summary>
         /// <param name="product"></param>
-        public void update(BO.Product idOfProduct);
-      
+        public void Update(BO.Product idOfProduct);
+        ProductForList? GetProductForList(int productId);
     }
 }

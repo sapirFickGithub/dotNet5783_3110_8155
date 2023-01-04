@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        DataContext="{Binding RelativeSource={RelativeSource self}}"
         xmlns:local="clr-namespace:PL.ProductWindows"
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="485">
@@ -70,7 +71,7 @@
             />
         <Label Content="In stock:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontFamily="Maiandra GD" FontWeight="Normal" FontSize="14"/>
 
-        <ComboBox 
+        <!--<ComboBox 
             x:Name="Category_selector"
             HorizontalAlignment="Left" 
             Margin="162,5,0,0" 
@@ -80,7 +81,17 @@
             VerticalAlignment="Top" 
             Width="250" 
             Height="30"
-            SelectionChanged="Category_selector_SelectionChanged"/>
+            SelectionChanged="Category_selector_SelectionChanged"/>-->
+        <ComboBox x:Name="Category_selector"
+                  Grid.Row="5"
+                  HorizontalAlignment="Left"
+                  Margin="162,5,0,0" 
+                   FontFamily= "Maiandra GD"
+                  VerticalAlignment="Center"
+                  Width="250" Height="30"
+                  SelectionChanged="Category_SelectionChanged"
+                  ItemsSource="{Binding Categories}">
+        </ComboBox>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="82,8,0,7" Grid.Row="5" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
 
         <Button Content="Add"

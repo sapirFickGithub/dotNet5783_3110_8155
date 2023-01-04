@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +22,25 @@ namespace PL.ProductWindows
     public partial class AddProduct : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
-        public AddProduct()
+        public IEnumerable<BO.Enum.Category> Categories { set; get; }
+
+        public event Action<int> action;
+        public AddProduct(Action<int> action)
         {
             InitializeComponent();
-            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
+            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
+            this.action = action;
+            
         }
+        private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+           
+                Object selectedItem = Category_selector.SelectedItem;
 
+                
+            
+        }
 
         private void Name_TextChanged_1(object sender, TextChangedEventArgs e)
         {
@@ -100,7 +115,7 @@ namespace PL.ProductWindows
 
                 bl.Product.addProduct(id, Name.Text, category, price, inStock);
 
-                new ProductWindows.ProductList().Show();
+                action(id);
                 this.Close();
             }
             catch (BO.incorrectData)
@@ -130,7 +145,7 @@ namespace PL.ProductWindows
         private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
         {
             //move to Main window
-            new ProductWindows.ProductList().Show();
+           // new ProductWindows.ProductList().Show();
             this.Close();
         }
     }

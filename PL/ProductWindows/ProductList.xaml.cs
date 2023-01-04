@@ -13,8 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using System.ComponentModel;
-
-
+using System.Collections.ObjectModel;
 
 namespace PL.ProductWindows
 {
@@ -26,11 +25,25 @@ namespace PL.ProductWindows
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
         public bool hasSorted = true;
+
+        public ObservableCollection<ProductForList?> ProductsForList
+        {
+            get { return (ObservableCollection<ProductForList?>)GetValue(ProductsForListProperty); }
+            set { SetValue(ProductsForListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProductsForList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProductsForListProperty =
+            DependencyProperty.Register("ProductsForList", typeof(ObservableCollection<ProductForList?>), typeof(ProductList));
+
+
+
+        public IEnumerable<BO.Enum.Category> Categories { set; get; }
         public ProductList()
         {
+            ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct());
+            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();////////////
             InitializeComponent();
-            List_of_product.ItemsSource = bl.Product.getListOfProduct();
-            Category_selector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));////////////
         }
 
         private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,80 +52,44 @@ namespace PL.ProductWindows
         }
 
 
-        private void Sort_By_Name_Click(object sender, RoutedEventArgs e)
+        private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
-            var listTemp = bl.Product.getListOfProduct();
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
+            GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
 
-                view.SortDescriptions.Add(new("Name", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
+            if (gridViewColumnHeader is not null)
             {
-                view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
-        private void Sort_By_ID_Click(object sender, RoutedEventArgs e) // sort the list view by ID
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
-        private void Sort_By_Category_Click(object sender, RoutedEventArgs e) // sort the list view by Category
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-                view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
+                string name = (gridViewColumnHeader.Tag as string)!;
+                var listTemp = bl.Product.getListOfProduct();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
 
-        private void Sort_By_Price_Click(object sender, RoutedEventArgs e)
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-                view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
+                view.SortDescriptions.Clear();
+                if (hasSorted)
+                {
 
+                    view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
+                    hasSorted = false;
+                }
+                else
+                {
+                    view.SortDescriptions.Add(new SortDescription(name, ListSortDirection.Ascending));
+                    hasSorted = true;
+                }
+            }
+           
+        }
+       
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 Object selectedItem = Category_selector.SelectedItem;
+
                 if (selectedItem.ToString() == "All")
-                    List_of_product.ItemsSource = bl.Product.getListOfProduct();
+                    ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct());
+                
                 else
-                    List_of_product.ItemsSource = bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString());
+                    ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString()));
             }
             catch (Exception)
             {
@@ -126,23 +103,27 @@ namespace PL.ProductWindows
                          MessageBoxOptions.RtlReading);
             }
         }
+        private void addProductForList(int productId)
+        => ProductsForList.Add(bl.Product.GetProductForList(productId));
 
+        private void updateProductForList(int productId)
+            => ProductsForList.Remove(bl.Product.GetProductForList(productId));
         private void AddProductWindow_Click(object sender, RoutedEventArgs e)
         {//move to add product window
-            new ProductWindows.AddProduct().Show();
-            this.Close();
+            new ProductWindows.AddProduct(addProductForList).Show();
+            //this.Close();
         }
         private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {//move to updete product window
 
-            string id = List_of_product.SelectedItems[0].ToString();
+          //  string id = List_of_product.SelectedItems[0].ToString();
 
 
-          id = id.Substring(17,6);
-            Console.WriteLine(id);
-            new ProductWindows.UpdateProduct(id.ToString()).Show();
+          //id = id.Substring(17,6);
+          //  Console.WriteLine(id);
+            new ProductWindows.UpdateProduct(updateProductForList).Show();
 
-            this.Close();
+           // this.Close();
         }
 
         private void BackToMainWindow_Click(object sender, RoutedEventArgs e)

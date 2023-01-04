@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
 using System.ComponentModel;
+using PL.ProductWindows;
+using System.Collections.ObjectModel;
 
 namespace PL.OrderWindows
 {
@@ -23,10 +25,20 @@ namespace PL.OrderWindows
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
         public bool hasSorted = true;
+        public ObservableCollection<OrderForList?> OrdersForList
+        {
+            get { return (ObservableCollection<OrderForList?>)GetValue(OrdersForListProperty); }
+            set { SetValue(OrdersForListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProductsForList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OrdersForListProperty =
+            DependencyProperty.Register("OrdersForList", typeof(ObservableCollection<OrderForList?>), typeof(OrderList));
+
         public OrderList()
         {
             InitializeComponent();
-            List_of_orders.ItemsSource = bl.Order.getListOfOrder();
+           OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.getListOfOrder());
         }
 
         private void Sort_By_TotalPrice_Click(object sender, RoutedEventArgs e)
