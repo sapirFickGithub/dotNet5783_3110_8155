@@ -5,16 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
        
-
     mc:Ignorable="d"
         Title="ProductList" Height="450" Width="800">
-   
-
-
 
     <Grid>
-        
-        
+           
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
