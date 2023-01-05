@@ -4,9 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.OrderWindows"
+         DataContext="{Binding RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="AddOrder" Height="450" Width="800">
-    <Grid>
-        
+    <Grid RenderTransformOrigin="0.82,0.765">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="102*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+
+            <RowDefinition Height="128*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBox 
+            x:Name="Name"
+            HorizontalAlignment="Left" 
+            FontFamily= "Maiandra GD"
+            Height="30"
+            Width="250" 
+            Grid.Row="1"
+            TextWrapping="Wrap" 
+           VerticalAlignment="Top" Margin="162,4,0,0" TextChanged="Name_TextChanged"
+           />
+
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
+
     </Grid>
 </Window>

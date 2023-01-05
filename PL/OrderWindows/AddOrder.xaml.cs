@@ -19,8 +19,11 @@ namespace PL.OrderWindows
     /// </summary>
     public partial class AddOrder : Window
     {
-        public AddOrder()
+        private static BlApi.IBl? bl = BlApi.Factory.Get();
+        public event Action<int> action;
+        public AddOrder(Action<int> action)
         {
+            this.action = action;
             InitializeComponent();
         }
     }
