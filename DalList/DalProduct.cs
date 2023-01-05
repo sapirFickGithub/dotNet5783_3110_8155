@@ -22,18 +22,6 @@ internal class DalProduct : IProduct
         return product.idOfProduct;
     }
 
-
-    //public Product? get(int idOfProduct)
-    //{
-    //    foreach(var product in listProduct)
-    //    {
-    //        if (idOfProduct == product?.idOfProduct)
-    //        {
-    //            return product;
-    //        }
-    //    }
-    //    throw new notExist();
-    //}
     public IEnumerable<Product?> getAllByParam(Func<Product?, bool>? param)
     {
         if (param == null)
@@ -65,25 +53,13 @@ internal class DalProduct : IProduct
 
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
-        int counter = 0;
-        foreach (var item in listProduct)
-        {
-            if (id == item?.idOfProduct)
-            {
-                return counter;
-            }
-            counter++;
-        }
-        return -1;
+        return listProduct.FindIndex(item => id == item?.idOfProduct);
     }
 
 
     public void print()
     {
-        foreach (var item in listProduct)
-        {
-            Console.WriteLine(item);
-        }
+        listProduct.ForEach(item => Console.WriteLine(item));
     }
 
 

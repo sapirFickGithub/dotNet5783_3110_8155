@@ -25,7 +25,7 @@ namespace BlImplementation
             return productsItemList;
         }
 
-        private ProductItem doToBoProductItem(DO.Product? product)
+        private BO.ProductItem doToBoProductItem(DO.Product? product)
         {
             return new BO.ProductItem
             {
@@ -89,7 +89,7 @@ namespace BlImplementation
                 Price = Dproduct.Price,
                 InStock = Dproduct.InStock
             };
-
+            
             foreach (var item in cart.itemList)
             {
                 if (idOfProduct == item.idOfProduct)
