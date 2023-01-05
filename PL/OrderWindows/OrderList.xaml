@@ -23,8 +23,8 @@
                 HorizontalAlignment="Left" 
                 Margin="43,26,0,30" 
                 Padding="5"   Width="228" 
-                RenderTransformOrigin="0.446,0.113" 
-                Click="Add_Order_Window_Click">
+                RenderTransformOrigin="0.446,0.113">
+            <!--Click="Add_Order_Window_Click">-->
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1" ScaleX="-1"/>

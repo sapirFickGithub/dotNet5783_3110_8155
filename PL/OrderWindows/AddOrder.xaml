@@ -22,18 +22,6 @@
         </Grid.RowDefinitions>
 
 
-        <TextBox 
-            x:Name="Name"
-            HorizontalAlignment="Left" 
-            FontFamily= "Maiandra GD"
-            Height="30"
-            Width="250" 
-            Grid.Row="1"
-            TextWrapping="Wrap" 
-           VerticalAlignment="Top" Margin="162,4,0,0" TextChanged="Name_TextChanged"
-           />
-
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
     </Grid>
 </Window>

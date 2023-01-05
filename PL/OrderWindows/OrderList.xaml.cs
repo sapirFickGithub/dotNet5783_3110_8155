@@ -74,9 +74,9 @@ namespace PL.OrderWindows
             => OrdersForList.Add(bl.Order.GetOneOrderForList(orderId));
 
 
-        private void Add_Order_Window_Click(object sender, RoutedEventArgs e)
-        => new OrderWindows.AddOrder().Show();
-        
+        //private void Add_Order_Window_Click(object sender, RoutedEventArgs e)
+        //=> new OrderWindows.AddOrder().Show();
+
 
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
