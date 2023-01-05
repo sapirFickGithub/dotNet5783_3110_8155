@@ -1,4 +1,5 @@
 ﻿using BO;
+using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -14,43 +15,47 @@ namespace BlImplementation
         DalApi.IDal? dal = DalApi.Factory.Get();
         public IEnumerable<BO.OrderForList?> getListOfOrder()
         {
-            var orderItem =dal.OrderItem?.getAllByParam() ??throw new BO.notExist();
-            var order = dal.Order.getAllByParam() ?? throw new BO.notExist();
-            List<BO.OrderForList?> orderForList = new List<BO.OrderForList>();
-            BO.OrderForList? tempOrderForList;
+            IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem?.getAllByParam() ?? throw new BO.notExist();
+            var order = dal.Order.getAllByParam() ?? throw new BO.notExist();            
+            var orderForList = from item in order select (doToBoOrderForList(item, orderItem));
+            return orderForList;
 
-            foreach (var item in order)
-            {
-                int? _items = 0;
-                double? _totalPrice = 0;
-                //Count how many products are in the order and the overall price of the order
-                foreach (var ite in orderItem)
-                {
-                    if (ite?.idOfOrder == item?.idOfOrder)
-                    {
-                        _items += ite?.amount;
-                        _totalPrice += ite?.Price * ite?.amount;
-                    }
-                }
-                tempOrderForList = new() { idOfOrder = (int)item?.idOfOrder, CustomerName = item?.CustomerName, AmountOfItem = (int)_items, TotalPrice = (int)_totalPrice };
-                var orderTemp = dal.Order.getOneByParam(x => item?.idOfOrder == x?.idOfOrder);
-
-                if (orderTemp?.DateOfOrder == null)
-                {
-                    tempOrderForList.Status = (BO.Enum.OrderStatus.SHIPPED);
-                }
-                else if (orderTemp?.DateOfShipping != null && orderTemp?.DateOfOrder == null)
-                {
-                    tempOrderForList.Status = (BO.Enum.OrderStatus.ORDERED);
-                }
-                else
-                {
-                    tempOrderForList.Status = (BO.Enum.OrderStatus.DLIVERY);
-                }
-                orderForList.Add(tempOrderForList);
-            }
-            return orderForList.AsEnumerable();
         }
+
+
+
+        private OrderForList doToBoOrderForList(DO.Order? order, IEnumerable <DO.OrderItem?> orderItem)
+        {
+ 
+            var OrderItem = from item in orderItem where (item?.idOfOrder == order?.idOfOrder) select item;
+            double _totalPrice = OrderItem.Sum((item => item?.Price ?? 0));
+
+            BO.OrderForList? OrderForList = new()
+            {
+                idOfOrder = (int)order?.idOfOrder,
+                CustomerName = order?.CustomerName,
+                AmountOfItem = OrderItem.Count(),
+                TotalPrice = _totalPrice 
+            };
+            var orderTemp = dal.Order.getOneByParam(x => order?.idOfOrder == x?.idOfOrder);
+
+            if (orderTemp?.DateOfOrder == null)
+            {
+                OrderForList.Status = (BO.Enum.OrderStatus.SHIPPED);
+            }
+            else if (orderTemp?.DateOfShipping != null && orderTemp?.DateOfOrder == null)
+            {
+                OrderForList.Status = (BO.Enum.OrderStatus.ORDERED);
+            }
+            else
+            {
+                OrderForList.Status = (BO.Enum.OrderStatus.DLIVERY);
+            }
+            return OrderForList;
+        }
+
+
+
         public BO.Order GetOrder(int numOfOrder)
         {
             if (numOfOrder > 999999 || numOfOrder < 100000)
@@ -180,6 +185,13 @@ namespace BlImplementation
             orderItem.amount = amount;
             dal.OrderItem.update(orderItem);
             return true;
+        }
+
+
+        public OrderForList? GetOrderForList(int orderId)
+        {
+            IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem?.getAllByParam() ?? throw new BO.notExist();
+            return doToBoOrderForList(dal.Order.getOneByParam(p => p?.idOfOrder == orderId), orderItem);
         }
 
     }
