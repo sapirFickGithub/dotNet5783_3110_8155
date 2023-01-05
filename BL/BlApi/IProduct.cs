@@ -45,7 +45,7 @@ namespace BlApi
         /// <param name="productCategory"></param>
         /// <param name="price"></param>
         /// <param name="inStock"></param>
-        public void addProduct(int idOfProduct, string name, BO.Enum.Category productCategory, double price, int inStock);
+        public int addProduct( string name, BO.Enum.Category productCategory, double price, int inStock);
         /// <summary>
         /// Deletion of a product from the inventory
         /// </summary>

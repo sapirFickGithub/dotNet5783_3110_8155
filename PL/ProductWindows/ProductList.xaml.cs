@@ -23,7 +23,11 @@ namespace PL.ProductWindows
     /// </summary>
     public partial class ProductList : Window
     {
+
         private static BlApi.IBl? bl = BlApi.Factory.Get();
+
+        public IEnumerable<BO.Enum.Category> Categories { set; get; }
+
         public bool hasSorted = true;
 
         public ObservableCollection<ProductForList?> ProductsForList
@@ -37,8 +41,6 @@ namespace PL.ProductWindows
             DependencyProperty.Register("ProductsForList", typeof(ObservableCollection<ProductForList?>), typeof(ProductList));
 
 
-
-        public IEnumerable<BO.Enum.Category> Categories { set; get; }
         public ProductList()
         {
             ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct());
@@ -75,9 +77,9 @@ namespace PL.ProductWindows
                     hasSorted = true;
                 }
             }
-           
+
         }
-       
+
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -87,7 +89,7 @@ namespace PL.ProductWindows
 
                 if (selectedItem.ToString() == "All")
                     ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct());
-                
+
                 else
                     ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct(a => a?.ProductCategory.ToString() == selectedItem.ToString()));
             }
@@ -108,22 +110,15 @@ namespace PL.ProductWindows
 
         private void updateProductForList(int productId)
             => ProductsForList.Remove(bl.Product.GetProductForList(productId));
+
         private void AddProductWindow_Click(object sender, RoutedEventArgs e)
         {//move to add product window
             new ProductWindows.AddProduct(addProductForList).Show();
-            //this.Close();
         }
         private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {//move to updete product window
+            new ProductWindows.UpdateProduct(updateProductForList, (ProductForList)List_of_product.SelectedItem).Show();
 
-          //  string id = List_of_product.SelectedItems[0].ToString();
-
-
-          //id = id.Substring(17,6);
-          //  Console.WriteLine(id);
-            new ProductWindows.UpdateProduct(updateProductForList).Show();
-
-           // this.Close();
         }
 
         private void BackToMainWindow_Click(object sender, RoutedEventArgs e)

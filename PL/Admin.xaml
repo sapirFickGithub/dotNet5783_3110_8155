@@ -10,16 +10,13 @@
 
         <Button Content="Product"
                 FontSize="36"
-                Background="#FFFEFEEC"
-                FontFamily= "Maiandra GD"
                 Margin="0,123,325,251" 
                 Click="ProductListWindow_Click"
                 HorizontalAlignment="Right"
                 Width="205">
         </Button>
         <Button Content="Order"
-                FontSize="36"
-                Margin="0,255,325,120" 
+                FontSize="36" Margin="0,255,325,120" 
                 FontWeight="Normal"
                 Click="OrderListWindow_Click"
                 HorizontalAlignment="Right"

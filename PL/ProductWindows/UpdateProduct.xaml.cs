@@ -23,29 +23,33 @@ namespace PL.ProductWindows
     public partial class UpdateProduct : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
+
         public event Action<int> action;
         public IEnumerable<BO.Enum.Category> Categories { set; get; }
-        public UpdateProduct(Action<int> action)
+
+        public BO.Product? product { set; get; } 
+        public UpdateProduct(Action<int> action, ProductForList productForList)
         {
-            InitializeComponent();
-            //ID.Text = id.ToString();
+             product =bl.Product?.GetProduct(productForList.idOfProduct);
+           // var productOb
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             this.action = action;
+            InitializeComponent();
         }
 
         private void UpdateProduct_Click(object sender, RoutedEventArgs e)
         {
             try
             {//Receives the new data to Update the product and performs input integrity checks.
-                int.TryParse(ID.Text, out int id);
-                if (id <= 99999 || id >= 1000000)
-                    MessageBox.Show(
-                        "The ID you enter is incorrect",
-                        "Invalid input",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
-                        MessageBoxOptions.RtlReading);
+                //int.TryParse(ID.Text, out int id);
+                //if (id <= 99999 || id >= 1000000)
+                //    MessageBox.Show(
+                //        "The ID you enter is incorrect",
+                //        "Invalid input",
+                //        MessageBoxButton.OK,
+                //        MessageBoxImage.Hand,
+                //        MessageBoxResult.Cancel,
+                //        MessageBoxOptions.RtlReading);
 
                 double.TryParse(Price.Text, out double price);
                 if (price < 0)
@@ -86,16 +90,17 @@ namespace PL.ProductWindows
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
                 }
-                BO.Product product = new BO.Product()
+                BO.Product productn = new BO.Product()
                 {
-                    idOfProduct = id,
+                    idOfProduct = product.idOfProduct,
                     Name = Name.Text,
                     InStock = inStock,
                     Price = price,
                     ProductCategory = category
                 };
-                bl?.Product.Update(product);
-                action(id);
+                bl?.Product.Update(productn);
+
+                action(product.idOfProduct);
 
                 new ProductWindows.ProductList().Show();
                 this.Close();
@@ -129,34 +134,19 @@ namespace PL.ProductWindows
                          MessageBoxButton.OK,
                          MessageBoxImage.Hand,
                          MessageBoxResult.Cancel,
-                         MessageBoxOptions.RtlReading) ;
+                         MessageBoxOptions.RtlReading);
             }
         }
 
-        private void Category_selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+   
         private void Price_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void Price_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-
-        }
         private void InStock_TextChanged_1(object sender, TextChangedEventArgs e)
         {
 
-        }
-
-        private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
-        {
-            //move to Main window
-           // new ProductWindows.ProductList().Show();
-            this.Close();
         }
 
         private void ID_TextChanged(object sender, TextChangedEventArgs e)
@@ -167,6 +157,18 @@ namespace PL.ProductWindows
         private void Name_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
+        {
+            //move to Main window
+            // new ProductWindows.ProductList().Show();
+            this.Close();
         }
     }
 }

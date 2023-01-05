@@ -42,6 +42,10 @@ namespace PL
             this.Close();
         }
 
-      
+        private void Track_Click(object sender, RoutedEventArgs e)
+        {
+            new OrderWindows.Tracking().Show();
+            this.Close();
+        }
     }
 }

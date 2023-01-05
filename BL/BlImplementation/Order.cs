@@ -13,20 +13,28 @@ namespace BlImplementation
     {
 
         DalApi.IDal? dal = DalApi.Factory.Get();
-        public IEnumerable<BO.OrderForList?> getListOfOrder()
+        public IEnumerable<BO.OrderForList?> GetAllOrderForList()
         {
             IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem?.getAllByParam() ?? throw new BO.notExist();
-            var order = dal.Order.getAllByParam() ?? throw new BO.notExist();            
+            var order = dal.Order.getAllByParam() ?? throw new BO.notExist();
             var orderForList = from item in order select (doToBoOrderForList(item, orderItem));
             return orderForList;
 
         }
-
-
-
-        private OrderForList doToBoOrderForList(DO.Order? order, IEnumerable <DO.OrderItem?> orderItem)
+        public OrderForList? GetOneOrderForList(int orderId)//get one order in orderForList var.
         {
- 
+            IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem?.getAllByParam() ?? throw new BO.notExist();
+            return doToBoOrderForList(dal.Order.getOneByParam(p => p?.idOfOrder == orderId), orderItem);
+        }
+
+        /// <summary>
+        /// conversion DO order to BO order for list
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="orderItem"></param>
+        /// <returns></returns>
+        private OrderForList doToBoOrderForList(DO.Order? order, IEnumerable<DO.OrderItem?> orderItem)
+        {
             var OrderItem = from item in orderItem where (item?.idOfOrder == order?.idOfOrder) select item;
             double _totalPrice = OrderItem.Sum((item => item?.Price ?? 0));
 
@@ -35,7 +43,7 @@ namespace BlImplementation
                 idOfOrder = (int)order?.idOfOrder,
                 CustomerName = order?.CustomerName,
                 AmountOfItem = OrderItem.Count(),
-                TotalPrice = _totalPrice 
+                TotalPrice = _totalPrice
             };
             var orderTemp = dal.Order.getOneByParam(x => order?.idOfOrder == x?.idOfOrder);
 
@@ -188,11 +196,6 @@ namespace BlImplementation
         }
 
 
-        public OrderForList? GetOrderForList(int orderId)
-        {
-            IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem?.getAllByParam() ?? throw new BO.notExist();
-            return doToBoOrderForList(dal.Order.getOneByParam(p => p?.idOfOrder == orderId), orderItem);
-        }
 
     }
 

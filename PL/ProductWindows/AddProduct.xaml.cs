@@ -21,25 +21,21 @@ namespace PL.ProductWindows
     /// </summary>
     public partial class AddProduct : Window
     {
+
         private static BlApi.IBl? bl = BlApi.Factory.Get();
+
         public IEnumerable<BO.Enum.Category> Categories { set; get; }
 
         public event Action<int> action;
         public AddProduct(Action<int> action)
         {
-            InitializeComponent();
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             this.action = action;
-            
+            InitializeComponent();
         }
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-           
-                Object selectedItem = Category_selector.SelectedItem;
 
-                
-            
         }
 
         private void Name_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -51,27 +47,17 @@ namespace PL.ProductWindows
         {
 
         }
-        private void Category_selector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        { }
 
         private void InStock_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+      
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {//Receiving values for the product and input tests.
             try
             {
-                int.TryParse(ID.Text, out int id);
-                if (id <= 99999 || id >= 1000000)
-                    MessageBox.Show(
-                        "The ID you enter is incorrect",
-                        "Invalid input",
-                        MessageBoxButton.OKCancel,
-                        MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
-                        MessageBoxOptions.RtlReading);
-
+                
                 double.TryParse(Price.Text, out double price);
                 if (price < 0)
                     MessageBox.Show(
@@ -113,8 +99,7 @@ namespace PL.ProductWindows
                         MessageBoxOptions.RtlReading);
                 }
 
-                bl.Product.addProduct(id, Name.Text, category, price, inStock);
-
+               int id= bl.Product.addProduct( Name.Text, category, price, inStock);
                 action(id);
                 this.Close();
             }
@@ -145,8 +130,13 @@ namespace PL.ProductWindows
         private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
         {
             //move to Main window
-           // new ProductWindows.ProductList().Show();
+            // new ProductWindows.ProductList().Show();
             this.Close();
+        }
+
+        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 

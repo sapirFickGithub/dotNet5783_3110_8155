@@ -29,7 +29,7 @@
             </Setter>
 
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Background" Value="#FFFEFEEC" />
+            <Setter Property="Background" Value="#FFF1F1D8" />
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Maiandra GD"/>

@@ -17,21 +17,10 @@
             <RowDefinition Height="40*"/>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="40*"/>
-            <RowDefinition Height="45*"/>
+
             <RowDefinition Height="128*"/>
         </Grid.RowDefinitions>
 
-        <TextBox 
-            x:Name="ID"
-            HorizontalAlignment="Left"
-            FontFamily= "Maiandra GD"
-            Height="30"
-            Width="250" 
-            Grid.Row="1"
-            TextWrapping="Wrap" 
-            VerticalAlignment="Center" TextChanged="InStock_TextChanged" Margin="162,0,0,0"
-            />
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
         <TextBox 
             x:Name="Name"
@@ -39,12 +28,12 @@
             FontFamily= "Maiandra GD"
             Height="30"
             Width="250" 
-            Grid.Row="2"
+            Grid.Row="1"
             TextWrapping="Wrap" 
-           VerticalAlignment="Center" Margin="162,0,0,0"
+           VerticalAlignment="Top" Margin="162,4,0,0" TextChanged="Name_TextChanged"
            />
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
         <TextBox 
             x:Name="Price"
@@ -83,16 +72,15 @@
             Height="30"
             SelectionChanged="Category_selector_SelectionChanged"/>-->
         <ComboBox x:Name="Category_selector"
-                  Grid.Row="5"
                   HorizontalAlignment="Left"
                   Margin="162,5,0,0" 
-                   FontFamily= "Maiandra GD"
-                  VerticalAlignment="Center"
-                  Width="250" Height="30"
+                  FontFamily= "Maiandra GD"
+                  VerticalAlignment="Top"
+                  Width="250" Height="30" Grid.Row="2"
                   SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding Categories}">
         </ComboBox>
-        <Label Content="Category:" HorizontalAlignment="Left" Margin="82,8,0,7" Grid.Row="5" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="82,8,0,10" Grid.Row="2" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
 
         <Button Content="Add"
                 Background="#FFF1F1D8"

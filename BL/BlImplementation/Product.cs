@@ -108,19 +108,18 @@ namespace BlImplementation
             }
             throw new BO.notExist();
         }
-        public void addProduct(int idOfProduct, string name, BO.Enum.Category productCategory, double price, int inStock)
+        public int addProduct(string name, BO.Enum.Category productCategory, double price, int inStock)
         {
-            if ((idOfProduct > 999999 || idOfProduct < 100000) && name == null && price < 0 && inStock <= 0)
+            if (name == null && price < 0 && inStock <= 0)
             { throw new incorrectData(); }
             DO.Product Dproduct = new DO.Product
             {
-                idOfProduct = idOfProduct,
                 Name = name,
                 ProductCategory = (DO.Category)productCategory,
                 Price = price,
                 InStock = inStock
             };
-            dal.Product.Add(Dproduct);
+            return dal.Product.Add(Dproduct);
 
         }
         public void delete(int idOfProduct)
@@ -144,7 +143,7 @@ namespace BlImplementation
         }
         public void Update(BO.Product product)
         {
-          //  try
+            //  try
             {
                 if ((product.idOfProduct > 999999 || product.idOfProduct < 100000) && product.Name == null && product.Price < 0 && product.InStock <= 0)
                 { throw new incorrectData(); }
@@ -159,7 +158,7 @@ namespace BlImplementation
                 };
                 dal.Product.update(Dproduct);
             }
-          //  catch()
+            //  catch()
         }
 
         public ProductForList? GetProductForList(int productId)

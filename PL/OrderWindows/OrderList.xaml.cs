@@ -23,8 +23,11 @@ namespace PL.OrderWindows
     /// </summary>
     public partial class OrderList : Window
     {
+
         private static BlApi.IBl? bl = BlApi.Factory.Get();
+
         public bool hasSorted = true;
+        
         public ObservableCollection<OrderForList?> OrdersForList
         {
             get { return (ObservableCollection<OrderForList?>)GetValue(OrdersForListProperty); }
@@ -37,9 +40,10 @@ namespace PL.OrderWindows
 
         public OrderList()
         {
-            OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.getListOfOrder());
+            OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
             InitializeComponent();
         }
+
         private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
@@ -47,7 +51,7 @@ namespace PL.OrderWindows
             if (gridViewColumnHeader is not null)
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
-                var listTemp = bl.Order.getListOfOrder();
+                var listTemp = bl.Order.GetAllOrderForList();
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
 
                 view.SortDescriptions.Clear();
@@ -67,19 +71,17 @@ namespace PL.OrderWindows
         }
 
         private void addOrderForList(int orderId)
-            => OrdersForList.Add(bl.GetOrderForList(orderId));
+            => OrdersForList.Add(bl.Order.GetOneOrderForList(orderId));
+
 
         private void Add_Order_Window_Click(object sender, RoutedEventArgs e)
-        {
-            new OrderWindows.AddOrder().Show();
-           // this.Close();
-        }
+        => new OrderWindows.AddOrder().Show();
+        
+
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new OrderWindows.UpdateOrder().Show();
-           // this.Close();
-        }
+           =>  new OrderWindows.UpdateOrder().Show();
+        
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -40,14 +40,15 @@ public class Program
                     }
                 case 'a'://Product
                     {
-                        Console.WriteLine("insert id, name, category, price and instock.");
-                        int.TryParse(Console.ReadLine(), out int id);
+                        Console.WriteLine("insert name, category, price and instock.");
+
                         string? name = Console.ReadLine();
                         BO.Enum.Category productCategory = (BO.Enum.Category)Enum.Category.Parse(typeof(BO.Enum.Category), Console.ReadLine());
                         double.TryParse(Console.ReadLine(), out double price);
                         int.TryParse(Console.ReadLine(), out int inStock);
+                        int id = ibl.Product.addProduct(name, productCategory, price, inStock);
 
-                        ibl.Product.addProduct(id, name, productCategory, price, inStock);
+                        Console.WriteLine("id of the product is" + id);
                         break;
                     }
                 case 'u'://updete
@@ -86,8 +87,8 @@ public class Program
                     {
 
                         //BO.ProductForList JlistProduct = (ProductForList)ibl.Product.getListOfProduct();
-                      var listProduct = ibl.Product.getListOfProduct();
-                        foreach(var product in listProduct)
+                        var listProduct = ibl.Product.getListOfProduct();
+                        foreach (var product in listProduct)
                         {
                             Console.WriteLine(product);
                         }
@@ -125,14 +126,14 @@ public class Program
                 case 'a'://Admin updat order
                     {
                         Console.WriteLine("insert id of order you wand to edit.");
-                        int.TryParse(Console.ReadLine(), out int idOrder); 
+                        int.TryParse(Console.ReadLine(), out int idOrder);
                         Console.WriteLine("insert id of product you want to chang.");
                         int.TryParse(Console.ReadLine(), out int idProduct);
                         Console.WriteLine("insert the new amount.");
                         int.TryParse(Console.ReadLine(), out int amount);
-                        if ( ibl.Order.updateAdmin(idOrder,idProduct, amount))
+                        if (ibl.Order.updateAdmin(idOrder, idProduct, amount))
 
-                        Console.WriteLine(ibl.Order.GetOrder(idOrder));
+                            Console.WriteLine(ibl.Order.GetOrder(idOrder));
                         break;
                     }
                 case 'g'://get order
@@ -167,7 +168,7 @@ public class Program
                     }
                 case 'l'://tracking
                     {
-                        var listOrder = ibl.Order.getListOfOrder();
+                        var listOrder = ibl.Order.GetAllOrderForList();
                         foreach (var product in listOrder)
                         {
                             Console.WriteLine(product);
