@@ -92,13 +92,7 @@ internal class DalProduct : IProduct
 
     public Product? getOneByParam(Func<Product?, bool>? param)
     {
-        foreach (var item in listProduct)
-        {
-            if (param(item))
-            {
-                return item;
-            }
-        }
+        return listProduct.FirstOrDefault(param);
         throw new notExist();
 
     }
