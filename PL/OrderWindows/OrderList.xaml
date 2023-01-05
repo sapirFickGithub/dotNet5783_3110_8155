@@ -42,6 +42,7 @@
                   Margin="0,40,0,5"
                   FontFamily="Maiandra GD" 
                   Grid.RowSpan="3"
+                  ItemsSource="{Binding OrdersForList}"
                   MouseDoubleClick="List_of_orders_MouseDoubleClick">
             <ListView.View>
                 <GridView>

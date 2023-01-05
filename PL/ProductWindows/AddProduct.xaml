@@ -60,17 +60,7 @@
             />
         <Label Content="In stock:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontFamily="Maiandra GD" FontWeight="Normal" FontSize="14"/>
 
-        <!--<ComboBox 
-            x:Name="Category_selector"
-            HorizontalAlignment="Left" 
-            Margin="162,5,0,0" 
-            Grid.Row="5" 
-           FontFamily= "Maiandra GD"
-            Background="#FFF1F1D8"
-            VerticalAlignment="Top" 
-            Width="250" 
-            Height="30"
-            SelectionChanged="Category_selector_SelectionChanged"/>-->
+       
         <ComboBox x:Name="Category_selector"
                   HorizontalAlignment="Left"
                   Margin="162,5,0,0" 
