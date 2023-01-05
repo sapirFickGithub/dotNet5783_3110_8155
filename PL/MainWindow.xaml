@@ -67,7 +67,8 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button Content="Track order" HorizontalAlignment="Left" Margin="67,196,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="148" Click="Track_Click"/>
+        <Button Content="Track order" HorizontalAlignment="Left" Margin="29,40,0,0" Grid.Row="2" VerticalAlignment="Top" Height="36" Width="148" Click="Track_Click"/>
+        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="34,7,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="27" TextChanged="TextBox_TextChanged"/>
 
     </Grid>
 </Window>
