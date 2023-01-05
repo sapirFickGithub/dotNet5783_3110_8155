@@ -44,8 +44,14 @@ namespace PL
 
         private void Track_Click(object sender, RoutedEventArgs e)
         {
-            new OrderWindows.Tracking().Show();
+            int.TryParse(ID_to_track.Text, out int id);
+            new OrderWindows.Tracking(id).Show();
             this.Close();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
