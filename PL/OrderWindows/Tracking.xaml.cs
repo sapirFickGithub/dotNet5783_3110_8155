@@ -20,9 +20,7 @@ using System.Collections.ObjectModel;
 /// </summary>
 namespace PL.OrderWindows
 {
-    /// <summary>
-    /// Interaction logic for Tracking.xaml
-    /// </summary>
+
 
     public partial class Tracking : Window
     {
@@ -35,31 +33,6 @@ namespace PL.OrderWindows
             orderTrack = bl?.Order.orderTracking(id);
             InitializeComponent();
         }
-        //private string _status;
-        //public string Status
-        //{
-        //    get { return _status; }
-        //    set
-        //    {
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs(_status));
-
-        //    }
-        //}
-
-        //public event PropertyChangedEventHandler? PropertyChanged;
-       
-        //private void OnPropertyChanged(string track)
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(track));
-        //}
-       //private void GoTracking_Click(object sender, RoutedEventArgs e)
-       // {
-       //     int.TryParse(ID.Text, out int id);
-       //     orderTrack = bl?.Order.orderTracking(id);
-       //     _status = orderTrack.Status.ToString();
-       // }      
         
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {

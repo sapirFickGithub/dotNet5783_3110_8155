@@ -9,14 +9,9 @@
         Title="Tracking" Height="300" Width="400">
     <Grid Margin="0,0,0,0">
 
-        <!--<TextBox x:Name="ID"  
-                 Background="#FFFEFEEC" HorizontalAlignment="Left" Margin="156,50,0,0"
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="136" Height="35"  FontSize="20"
-                FontFamily="Maiandra GD" TextChanged="ID_TextChanged"/>-->
         <Label Content="Enter ID of your order to track:" 
                HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="293"
                FontFamily="Maiandra GD" Height="35"/>
-        <!--<Button Content="OK" HorizontalAlignment="Left" Margin="312,52,0,0" VerticalAlignment="Top" Height="33" Width="44" Click= "GoTracking_Click" />-->
         <TextBlock HorizontalAlignment="Left" FontSize="26" Margin="200,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="130" Width="129"
                   Text="{Binding orderTrack}" />
         <Button x:Name="Back_Botton"
