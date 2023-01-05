@@ -37,86 +37,48 @@ namespace PL.OrderWindows
 
         public OrderList()
         {
+            OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.getListOfOrder());
             InitializeComponent();
-           OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.getListOfOrder());
         }
-
-        private void Sort_By_TotalPrice_Click(object sender, RoutedEventArgs e)
+        private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
+            GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
+
+            if (gridViewColumnHeader is not null)
             {
-                view.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Descending));
-                hasSorted = false;
+                string name = (gridViewColumnHeader.Tag as string)!;
+                var listTemp = bl.Order.getListOfOrder();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+
+                view.SortDescriptions.Clear();
+                if (hasSorted)
+                {
+
+                    view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
+                    hasSorted = false;
+                }
+                else
+                {
+                    view.SortDescriptions.Add(new SortDescription(name, ListSortDirection.Ascending));
+                    hasSorted = true;
+                }
             }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("TotalPrice", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
+
         }
 
-        private void Sort_By_AmountOfItem_Click(object sender, RoutedEventArgs e)
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-                view.SortDescriptions.Add(new SortDescription("AmountOfItem", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("AmountOfItem", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
-
-        private void Sort_By_CustumerName_Click(object sender, RoutedEventArgs e)
-        {
-            var listTemp = bl.Product.getListOfProduct();
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-
-                view.SortDescriptions.Add(new("CustomerName", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("CustomerName", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
-
-        private void Sort_By_ID_Click(object sender, RoutedEventArgs e)
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
-            view.SortDescriptions.Clear();
-            if (hasSorted)
-            {
-                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Descending));
-                hasSorted = false;
-            }
-            else
-            {
-                view.SortDescriptions.Add(new SortDescription("ID", ListSortDirection.Ascending));
-                hasSorted = true;
-            }
-        }
+        private void addOrderForList(int orderId)
+            => OrdersForList.Add(bl.GetOrderForList(orderId));
 
         private void Add_Order_Window_Click(object sender, RoutedEventArgs e)
         {
             new OrderWindows.AddOrder().Show();
-            this.Close();
+           // this.Close();
         }
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new OrderWindows.UpdateOrder().Show();
-            this.Close();
+           // this.Close();
         }
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)

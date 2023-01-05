@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.ProductWindows"
+       DataContext="{Binding RelativeSource={RelativeSource self}}"  
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
     <Grid  RenderTransformOrigin="0.82,0.765">
@@ -21,11 +22,7 @@
                 Grid.Row="3" 
                 HorizontalAlignment="Left" 
                 Margin="43,26,0,30" 
-                Padding="5" 
-                Background="#FFF1F1D8"
-                Width="228" 
-                 FontFamily= "Maiandra GD"
-                FontSize="20" 
+                Padding="5"   Width="228" 
                 RenderTransformOrigin="0.446,0.113" 
                 Click="Add_Order_Window_Click">
             <Button.RenderTransform>
@@ -37,7 +34,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-     
+
 
         <ListView x:Name="List_of_orders"
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
@@ -52,37 +49,38 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding idOfOrder}">
                         <GridViewColumnHeader 
-                            Content="ID" FontFamily= "Maiandra GD"
-                            Click="Sort_By_ID_Click"/>
+                            Content="ID" FontFamily= "Maiandra GD" Tag="idOfOrder"
+                            Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding CustomerName}" >
                         <GridViewColumnHeader 
-                            Content="Name" FontFamily= "Maiandra GD"
-                            Click="Sort_By_CustumerName_Click"/>
+                            Content="Name" FontFamily= "Maiandra GD" Tag="CustomerName"
+                            Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
 
                     <GridViewColumn  
                             DisplayMemberBinding="{Binding Status }" >
                         <GridViewColumnHeader 
-                            Content="Status" FontFamily= "Maiandra GD"/>
+                            Content="Status" FontFamily= "Maiandra GD" Tag="Status"
+                            Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn  
                             DisplayMemberBinding="{Binding AmountOfItem }" >
                         <GridViewColumnHeader 
-                            Content="Amount of item" FontFamily= "Maiandra GD"
-                             Click="Sort_By_AmountOfItem_Click"/>
+                            Content="Amount of item" FontFamily= "Maiandra GD" Tag="AmountOfItem"
+                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
-                            <GridViewColumn 
+                    <GridViewColumn 
                             DisplayMemberBinding="{Binding TotalPrice}" >
-                                <GridViewColumnHeader 
-                            Content= "Total price" FontFamily= "Maiandra GD"
-                            Click= "Sort_By_TotalPrice_Click"/>
-                            </GridViewColumn>
+                        <GridViewColumnHeader 
+                            Content= "Total price" FontFamily= "Maiandra GD" Tag="TotalPrice"
+                             Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
 
                 </GridView>
 
