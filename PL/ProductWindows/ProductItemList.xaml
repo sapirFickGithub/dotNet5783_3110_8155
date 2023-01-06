@@ -1,16 +1,39 @@
-﻿<Window x:Class="PL.CartWindows.CartNew"
+﻿<Window x:Class="PL.ProductWindows.ProductItemList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.CartWindows"
-         DataContext="{Binding RelativeSource={RelativeSource self}}"
+        xmlns:local="clr-namespace:PL.ProductWindows"
+    
+        DataContext="{Binding RelativeSource={RelativeSource self}}"
        
-        mc:Ignorable="d"
-        Title="new cart" Height="450" Width="657">
+    mc:Ignorable="d"
+        Title="ProductList" Height="450" Width="800">
+
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="105*"/>
+            <RowDefinition Height="102*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="Category_selector"
+                  HorizontalAlignment="Left"
+                  Margin="583,0,0,0" 
+                   FontFamily= "Maiandra GD"
+                  VerticalAlignment="Center"
+                  Width="181" Height="22"
+                  SelectionChanged="Category_SelectionChanged"
+                  ItemsSource="{Binding Categories}">
+        </ComboBox>
+
         <ListView x:Name="List_of_product"
-                  ItemsSource="{Binding MyCart.itemList}"
+                  ItemsSource="{Binding Items}"
                   Margin="0,40,0,5" Grid.RowSpan="3"
                   FontFamily="Maiandra GD" 
                   MouseDoubleClick="Add_to_cart">
@@ -57,23 +80,16 @@
                             Content= "Instock" FontFamily= "Maiandra GD" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
+
                 </GridView>
 
             </ListView.View>
         </ListView>
-
-        <Label Content="My cart:" HorizontalAlignment="Left" Margin="42,15,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="81"/>
-        <Button Content="Order" HorizontalAlignment="Left" Margin="527,366,0,0" VerticalAlignment="Top" Height="33" Width="82"
-                Click="approve_orer_Click"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="256,399,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="142,356,0,0" TextWrapping="Wrap" 
-                   Text="Total_price_print" VerticalAlignment="Top" Height="28" Width="114"/>
-        <Label Content="Total price:" HorizontalAlignment="Left" Margin="38,350,0,0" 
-               VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="81"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="497,50,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
-        <Label Content="Address:" HorizontalAlignment="Left" Margin="497,103,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
-        <Label Content="Mail:" HorizontalAlignment="Left" Margin="497,163,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
-        <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" VerticalAlignment="Top" FontSize="7" Height="34" Width="97"/>
+        <Button x:Name="Back_Botton" Content="Back"   
+                HorizontalAlignment="Left" Grid.Row="3"
+                Margin="647,23,0,0" Height="46"  Width="117"   
+                VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>             
+              
 
     </Grid>
 </Window>

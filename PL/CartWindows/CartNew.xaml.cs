@@ -11,8 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.ComponentModel;
-
+using BlApi;
+using BlImplementation;
+using BO;
 
 namespace PL.CartWindows
 {
@@ -22,12 +23,20 @@ namespace PL.CartWindows
     public partial class CartNew : Window
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
-      
-        public CartNew()
+
+        public event Action<int> action;
+
+        private BO.Cart MyCart;
+
+        public CartNew(Action<int> action, ProductItem productItem)
         {
+            this.action = action;
             InitializeComponent();
-            
         }
 
+        private void approve_orer_Click(object sender, RoutedEventArgs e)
+        {
+            bl.Cart.approvment(MyCart);
+        }
     }
 }
