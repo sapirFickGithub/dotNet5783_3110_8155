@@ -48,25 +48,13 @@ internal class DalOrderItem : IOrderItem
  
     public int search(int id)//help function for delete, get id and check if the id exist in the product
     {
-        int counter = 0;
-        foreach (var item in listOrderItem)
-        {
-            if (id == item?.ID)
-            {
-                return counter;
-            }
-            counter++;
-        }
-        return -1;
+       return listOrderItem.FindIndex(item => id == item?.ID);
     }
 
 
     public void print()
     {
-        foreach (var item in listOrderItem)
-        {
-            Console.WriteLine(item);
-        }
+        listOrderItem.ForEach(item => Console.WriteLine(item));
     }
 
 
@@ -76,13 +64,7 @@ internal class DalOrderItem : IOrderItem
 
     public OrderItem? getOneByParam(Func<OrderItem?, bool>? param)
     {
-        foreach (var item in listOrderItem)
-        {
-            if (param(item))
-            {
-                return item;
-            }
-        }
+        return listOrderItem.FirstOrDefault(param);
         throw new notExist();
     }
 }

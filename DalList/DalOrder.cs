@@ -51,40 +51,22 @@ internal class DalOrder : IOrder
 
     public int search(int id)//help function, get id and check if the id exist in the product and send the index of the list
     {
-        int counter = 0;
-        foreach (var item in listOrder)
-        {
-            if (id == item?.idOfOrder)
-            {
-                return counter;
-            }
-            counter++;
-        }
-        return -1;
+        return listOrder.FindIndex(item => id == item?.idOfOrder);
     }
 
 
     public void print()
     {
-        foreach (var item in listOrder)
-        {
-            Console.WriteLine(item);
-        }
+        listOrder.ForEach(item => Console.WriteLine(item));
     }
 
-    
+
     public int length() { return listOrder.Count(); }
 
 
     public Order? getOneByParam(Func<Order?, bool>? param)
     {
-        foreach (var item in listOrder)
-        {
-            if (param(item))
-            {
-                return item;
-            }
-        }
+        return listOrder.FirstOrDefault(param);
         throw new notExist();
 
     }

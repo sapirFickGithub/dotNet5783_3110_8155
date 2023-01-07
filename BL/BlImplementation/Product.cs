@@ -25,7 +25,7 @@ namespace BlImplementation
             return productsItemList;
         }
 
-        private ProductItem doToBoProductItem(DO.Product? product)
+        private BO.ProductItem doToBoProductItem(DO.Product? product)
         {
             return new BO.ProductItem
             {
@@ -90,22 +90,45 @@ namespace BlImplementation
                 InStock = Dproduct.InStock
             };
 
-            foreach (var item in cart.itemList)
+
+            return cart.itemList.Aggregate((BO.ProductItem)null, (result, item) =>
             {
-                if (idOfProduct == item.idOfProduct)
+                if (result != null || idOfProduct != item.idOfProduct)
                 {
-                    BO.ProductItem productItem = new()
-                    {
-                        idOfProduct = item.idOfProduct,
-                        Name = item.NameOfProduct,
-                        Price = item.PriceOfProduct,
-                        ProductCategory = (BO.Enum.Category)item.ProductCategory,
-                        Amount = item.amount,
-                        InStock = (tempProduct.InStock > 0)
-                    };
-                    return productItem;
+                    return result;
                 }
-            }
+                return new BO.ProductItem
+                {
+                    idOfProduct = item.idOfProduct,
+                    Name = item.NameOfProduct,
+                    Price = item.PriceOfProduct,
+                    ProductCategory = (BO.Enum.Category)item.ProductCategory,
+                    Amount = item.amount,
+                    InStock = (tempProduct.InStock > 0)
+                };
+            });
+
+
+
+            //foreach (var item in cart.itemList)
+            //{
+            //    if (idOfProduct == item.idOfProduct)
+            //    {
+            //        BO.ProductItem productItem = new()
+            //        {
+            //            idOfProduct = item.idOfProduct,
+            //            Name = item.NameOfProduct,
+            //            Price = item.PriceOfProduct,
+            //            ProductCategory = (BO.Enum.Category)item.ProductCategory,
+            //            Amount = item.amount,
+            //            InStock = (tempProduct.InStock > 0)
+            //        };
+            //        return productItem;
+            //    }
+            //}
+
+
+
             throw new BO.notExist();
         }
         public int addProduct(string name, BO.Enum.Category productCategory, double price, int inStock)
@@ -128,17 +151,12 @@ namespace BlImplementation
             {
                 throw new BO.incorrectData();
             }
-            List<DO.OrderItem> orderItem = (List<DO.OrderItem>)dal.OrderItem.getAllByParam();
+            IEnumerable<DO.OrderItem?> orderItem =dal?.OrderItem.getAllByParam();
 
-            //if (orderItem.Any(o => o.idProduct == idOfProduct))
-            //{
-
-            //}
-            foreach (var thisOrderItem in orderItem)
-                if (idOfProduct == thisOrderItem.idProduct)
-                {
-                    throw new existInOrders();
-                }
+            if (orderItem.Any(thisOrderItem => idOfProduct == thisOrderItem?.idProduct))
+            {
+                throw new existInOrders();
+            }
             dal.Product.delete(idOfProduct);
         }
         public void Update(BO.Product product)

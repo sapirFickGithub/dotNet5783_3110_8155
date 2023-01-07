@@ -17,19 +17,34 @@ namespace BlImplementation
         {
             DO.Product product = dal?.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
 
-            foreach (var item in cart.itemList)
+            var item = cart.itemList.FirstOrDefault(i => i.idOfProduct == idOfProduct);
+            if (item != null)
             {
-                if (item.idOfProduct == idOfProduct)
-                {//item alredy in cart- amount++
-                    if (product.InStock - item.amount >= 0)
-                    {
-                        item.amount++;
-                        item.totalPrice += product.Price;
-                        return cart;
-                    }
-                    else throw new outOfStock();
+                if (product.InStock - item.amount >= 0)
+                {
+                    item.amount++;
+                    item.totalPrice += product.Price;
+                    return cart;
+                }
+                else
+                {
+                    throw new outOfStock();
                 }
             }
+
+            //foreach (var item in cart.itemList)
+            //{
+            //    if (item.idOfProduct == idOfProduct)
+            //    {//item alredy in cart- amount++
+            //        if (product.InStock - item.amount >= 0)
+            //        {
+            //            item.amount++;
+            //            item.totalPrice += product.Price;
+            //            return cart;
+            //        }
+            //        else throw new outOfStock();
+            //    }
+            //}
 
             if (product.InStock > 0)// add the item to cart 
             {
@@ -52,29 +67,26 @@ namespace BlImplementation
         public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
         {
             DO.Product product = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
-
-            foreach (var item in cart.itemList)
+            var item = cart.itemList.Where(i => i.idOfProduct == idOfProduct).FirstOrDefault();
+            if (item == null)
+                throw new BO.notExist();
+            if (amount == 0)
             {
-                if (item.idOfProduct == idOfProduct)
-                {
-                    if (amount == 0)
-                    {
-                        cart.itemList.Remove(item);
-                        return cart;
-                    }
-                    if (product.InStock - amount >= 0)
-                    {
-                        cart.TotalPrice += (amount - item.amount) * product.Price;// so that we dont count the price that was befor.
-                        item.amount = amount;
-                        item.totalPrice = amount * product.Price;
-
-                        return cart;
-                    }
-                    else throw new outOfStock();
-                }
+                cart.itemList.Remove(item);
+                return cart;
             }
+            if (product.InStock - amount >= 0)
+            {
+                cart.TotalPrice += (amount - item.amount) * product.Price;
+                item.amount = amount;
+                item.totalPrice = amount * product.Price;
 
-            return cart;
+                return cart;
+            }
+            else
+            {
+                throw new outOfStock();
+            }
         }
         public bool approvment(BO.Cart cart)
         {
@@ -91,28 +103,57 @@ namespace BlImplementation
             newOrder.DateOfShipping = null;
             newOrder.DateOfDelivery = null;
 
-            foreach (var item in cart.itemList)
+            if (cart.itemList.All(item =>
             {
-                //check if the product is in stock
-                DO.Product product = dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct) ?? throw new notExist();
-
-                if (product.InStock - item.amount < 0)
-                    return false;
-                //if the produt in stock so add to order
-                DO.OrderItem newOrderItem = new DO.OrderItem()
+                var product = dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct) ?? throw new notExist();
+                return product.InStock - item.amount >= 0;
+            }))
+            {
+                cart.itemList.ForEach(item =>
                 {
-                    idProduct = product.idOfProduct,
-                    idOfOrder = item.idOfOrder,
-                    Price = item.PriceOfProduct,
-                    amount = item.amount,
-                };
+                    var product = dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct) ?? throw new notExist();
+                    DO.OrderItem newOrderItem = new DO.OrderItem()
+                    {
+                        idProduct = product.idOfProduct,
+                        idOfOrder = item.idOfOrder,
+                        Price = item.PriceOfProduct,
+                        amount = item.amount,
+                    };
 
-                dal.OrderItem.Add(newOrderItem);
+                    dal.OrderItem.Add(newOrderItem);
+                });
+
+                Console.WriteLine("your order number is : " + idOfOrder);
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
-            //all the details are true
-            Console.WriteLine("your order number is : " + idOfOrder);
-            return true;
+
+            //foreach (var item in cart.itemList)
+            //{
+            //    //check if the product is in stock
+            //    DO.Product product = dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct) ?? throw new notExist();
+
+            //    if (product.InStock - item.amount < 0)
+            //        return false;
+            //    //if the produt in stock so add to order
+            //    DO.OrderItem newOrderItem = new DO.OrderItem()
+            //    {
+            //        idProduct = product.idOfProduct,
+            //        idOfOrder = item.idOfOrder,
+            //        Price = item.PriceOfProduct,
+            //        amount = item.amount,
+            //    };
+
+            //    dal.OrderItem.Add(newOrderItem);
+            //}
+
+            ////all the details are true
+            //Console.WriteLine("your order number is : " + idOfOrder);
+            //return true;
         }
     }
 }

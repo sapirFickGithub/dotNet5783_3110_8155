@@ -7,17 +7,17 @@
         mc:Ignorable="d"
         Title="Customer" Height="450" Width="800">
     <Grid>
-        <Button x:Name="cart" Content="Cart" HorizontalAlignment="Left" Height="84" Margin="693,10,0,0" VerticalAlignment="Top" Width="97" FontSize="24"  Background="#FFFEFEEC" FontFamily="Maiandra GD" Click="List_Product_View"/>
-        <Button x:Name="Back_Botton"
-                Content="Back"   
+        <Button x:Name="cart"  Content="Cart" 
+                HorizontalAlignment="Left" 
+                Height="84" Width="97" Margin="199,50,0,0" 
+                VerticalAlignment="Top"  Click="my_cart_win"/>
+        <Button x:Name="Back_Botton"   Content="Back"   
                 HorizontalAlignment="Left"
-                Margin="680,369,0,0"
-                Background="#FFF1F1D8"
-                VerticalAlignment="Top"
-                Height="38" 
-                Width="110" 
-                FontSize="20"
-                FontFamily="Maiandra GD"
-                Click="BackToProductListWindow_Click"/>
+                Margin="680,369,0,0"  Height="38"   Width="110"              
+                VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>
+        <Button x:Name="product_list"   Content="catalog"
+                HorizontalAlignment="Left"
+                Height="84" Width="97"  Margin="49,50,0,0" 
+                VerticalAlignment="Top"  Click="List_Product_View"  />
     </Grid>
 </Window>

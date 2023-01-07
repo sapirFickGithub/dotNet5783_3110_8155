@@ -26,14 +26,21 @@ namespace PL
 
         private void List_Product_View(object sender, RoutedEventArgs e)
         {
-            new CartWindows.CartNew().Show();
+            new ProductWindows.ProductItemList().Show();
             this.Close();
         }
 
-        private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
+
+        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
         {
-            //move to Main window
+   //move to Main window
             new MainWindow().Show();
+            this.Close();
+        }
+
+        private void my_cart_win(object sender, RoutedEventArgs e)
+        {
+            new CartWindows.CartNew();
             this.Close();
         }
     }

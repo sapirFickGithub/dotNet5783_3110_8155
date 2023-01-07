@@ -36,7 +36,7 @@ namespace PL.OrderWindows
             set { SetValue(OrdersForListProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ProductsForList.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty OrdersForListProperty =
             DependencyProperty.Register("OrdersForList", typeof(ObservableCollection<OrderForList?>), typeof(OrderList));
 

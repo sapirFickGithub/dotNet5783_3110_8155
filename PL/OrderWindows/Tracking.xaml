@@ -9,14 +9,26 @@
         Title="Tracking" Height="300" Width="400">
     <Grid Margin="0,0,0,0">
 
-        <Label Content="Enter ID of your order to track:" 
-               HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="293"
+        <Label Content="The status of your order :" 
+               HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="153"
                FontFamily="Maiandra GD" Height="35"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="15" Margin="200,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="130" Width="129"
-                  Text="{Binding orderTrack}" />
+        <TextBlock HorizontalAlignment="Left" FontSize="12" Margin="160,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="129"
+                  Text="{Binding orderTrack.idOfOrder}" />
+        <Label Content=" is:" 
+               HorizontalAlignment="Left" Margin="130,70,0,0" VerticalAlignment="Top" Width="27"
+               FontFamily="Maiandra GD" Height="35"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="12" Margin="160,76,0,0" TextWrapping="Wrap" 
+                   VerticalAlignment="Top" Height="28" Width="129"
+                  Text="{Binding orderTrack.Status}" />
+        <Label Content=" at:" 
+               HorizontalAlignment="Left" Margin="130,100,0,0" VerticalAlignment="Top" Width="27"
+               FontFamily="Maiandra GD" Height="35"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="9" Margin="160,104,0,0" TextWrapping="Wrap" 
+                   VerticalAlignment="Top" Height="108" Width="155"
+                  Text="{Binding orderTrack.Track[0]}" />
         <Button x:Name="Back_Botton"
                 Content="Back"   
                 HorizontalAlignment="Left"
-                Margin="10,372,0,0"  VerticalAlignment="Top" Height="38" Width="110" Click="BackToMain_Click"/>
+                Margin="130,213,0,0"  VerticalAlignment="Top" Height="38" Width="110" Click="BackToMain_Click"/>
     </Grid>
 </Window>
