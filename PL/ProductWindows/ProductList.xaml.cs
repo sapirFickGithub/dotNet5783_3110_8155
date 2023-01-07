@@ -30,7 +30,7 @@ namespace PL.ProductWindows
 
         public bool hasSorted = true;
 
-        public ObservableCollection<ProductForList?> ProductsForList
+        public ObservableCollection<ProductForList?> ProductsForList//dependency proprty in order to use 'data binding'
         {
             get { return (ObservableCollection<ProductForList?>)GetValue(ProductsForListProperty); }
             set { SetValue(ProductsForListProperty, value); }

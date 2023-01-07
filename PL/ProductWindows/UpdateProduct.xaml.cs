@@ -30,7 +30,7 @@ namespace PL.ProductWindows
         public BO.Product? product { set; get; } 
         public UpdateProduct(Action<int> action, ProductForList productForList)
         {
-             product =bl.Product?.GetProduct(productForList.idOfProduct);
+             product =bl?.Product?.GetProduct(productForList.idOfProduct);
            // var productOb
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             this.action = action;

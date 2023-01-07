@@ -4,9 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.OrderWindows"
+          DataContext="{Binding RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
         Title="OrderView" Height="377" Width="415">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Center"
+                 Margin="0,50,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="368"
+                 Text="{Binding order.Status}" 
+                 Height="131"
+                 />
+        <Button Content="Back" HorizontalAlignment="Left" Margin="41,305,0,0" VerticalAlignment="Top" Width="98"
+                Click="BackToOrderListWindow_Click"/>
+        <Button x:Name="update_order"
+                Content="Update"
+                HorizontalAlignment="Left"
+                Margin="105,212,0,0" 
+                VerticalAlignment="Top" 
+                Width="179" Height="47"
+                Click="UpdateOrder_click"                
+                />
+
+
+
     </Grid>
 </Window>

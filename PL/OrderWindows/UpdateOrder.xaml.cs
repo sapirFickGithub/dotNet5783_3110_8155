@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
+using BlImplementation;
+using BO;
+using DO;
 
 namespace PL.OrderWindows
 {
@@ -19,9 +23,19 @@ namespace PL.OrderWindows
     /// </summary>
     public partial class UpdateOrder : Window
     {
-        public UpdateOrder()
+        private static BlApi.IBl? bl = BlApi.Factory.Get();
+        public event Action<int> action;
+        public BO.OrderForList? order { set; get; }
+        public UpdateOrder(Action<int> action,OrderForList orderForList)
         {
+            order = bl?.Order?.GetOneOrderForList(orderForList.idOfOrder);
+            this.action = action;
             InitializeComponent();
+        }
+
+        private void Status_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

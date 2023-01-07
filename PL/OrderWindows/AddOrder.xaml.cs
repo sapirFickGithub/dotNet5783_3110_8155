@@ -26,5 +26,10 @@ namespace PL.OrderWindows
             this.action = action;
             InitializeComponent();
         }
+
+        private void CustomerName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

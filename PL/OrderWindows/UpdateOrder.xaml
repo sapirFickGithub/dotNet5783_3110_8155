@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="UpdateOrder" Height="450" Width="800">
     <Grid>
-        
+
+        <ComboBox x:Name="Category_selector"
+                  HorizontalAlignment="Left"
+                  Margin="583,0,0,0" 
+                   FontFamily= "Maiandra GD"
+                  VerticalAlignment="Center"
+                  Width="181" Height="22"
+                  SelectionChanged="Status_SelectionChanged"
+                  ItemsSource="{Binding Status}">
+        </ComboBox>
+
     </Grid>
 </Window>

@@ -27,7 +27,9 @@ namespace PL.OrderWindows
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
         public bool hasSorted = true;
-        
+
+        public IEnumerable<BO.Enum.OrderStatus> Status { set; get; }
+
         public ObservableCollection<OrderForList?> OrdersForList
         {
             get { return (ObservableCollection<OrderForList?>)GetValue(OrdersForListProperty); }
@@ -38,9 +40,10 @@ namespace PL.OrderWindows
         public static readonly DependencyProperty OrdersForListProperty =
             DependencyProperty.Register("OrdersForList", typeof(ObservableCollection<OrderForList?>), typeof(OrderList));
 
-        public OrderList()
+        public OrderList()//constructur
         {
             OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
+            Status = System.Enum.GetValues(typeof(BO.Enum.OrderStatus)).Cast<BO.Enum.OrderStatus>();
             InitializeComponent();
         }
 
@@ -70,17 +73,17 @@ namespace PL.OrderWindows
 
         }
 
-        private void addOrderForList(int orderId)
-            => OrdersForList.Add(bl.Order.GetOneOrderForList(orderId));
 
 
-        //private void Add_Order_Window_Click(object sender, RoutedEventArgs e)
-        //=> new OrderWindows.AddOrder().Show();
+
+
+        //private void getOrderForList(int orderId)
+        //    => OrdersForList.Add(bl.Order.GetOneOrderForList(orderId));
 
 
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-           =>  new OrderWindows.UpdateOrder().Show();
+           =>  new OrderWindows.OrderView(OrdersForList,(OrderForList)List_of_orders.SelectedItem).Show();
         
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)

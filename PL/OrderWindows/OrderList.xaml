@@ -17,23 +17,7 @@
             <RowDefinition Height="105*"/>
             <RowDefinition Height="102*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="Add_New_Order"
-                Content="Add new order"
-                Grid.Row="3" 
-                HorizontalAlignment="Left" 
-                Margin="43,26,0,30" 
-                Padding="5"   Width="228" 
-                RenderTransformOrigin="0.446,0.113">
-            <!--Click="Add_Order_Window_Click">-->
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1" ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="179.662"/>
-                    <TranslateTransform X="0.292" Y="-0.198"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+
 
 
         <ListView x:Name="List_of_orders"
