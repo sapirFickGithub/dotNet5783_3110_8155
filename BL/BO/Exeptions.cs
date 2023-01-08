@@ -31,9 +31,17 @@ namespace BO
         }
     }
 
-    public class outOfStock : Exception
+    public class outOfStock :Exception
     {
-        public string? Messege => "OUT OF STOCK!";
+        public outOfStock(int idOfProduct)
+        {
+            this.idOfProduct = idOfProduct;
+        }
+
+       public int idOfProduct { set; get; }
+        
+        public string? Messege => "OUT OF STOCK!\n the id of the order is:"+ idOfProduct;
+
         public string? ToString()
         {
             return Messege;

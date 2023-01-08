@@ -10,10 +10,10 @@
         Title="new cart" Height="450" Width="657">
     <Grid>
         <ListView x:Name="List_of_product"
-                  ItemsSource="{Binding MyCart.itemList}"
+                  ItemsSource="{Binding MyCart[0].itemList}"
                   Margin="24,48,204,96"
                   FontFamily="Maiandra GD" 
-                  MouseDoubleClick="Add_to_cart">
+                  MouseDoubleClick="Update_in_Cart_MouseDoubleClick">
             <ListView.View>
                 <GridView>
 
@@ -77,7 +77,7 @@
                 Click="approve_orer_Click"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="142,356,0,0" TextWrapping="Wrap" 
-                   Text="{Binding MyCart.TotalPrice}" VerticalAlignment="Top" Height="28" Width="114"/>
+                   Text="{Binding MyCart[0].TotalPrice}" VerticalAlignment="Top" Height="28" Width="114"/>
 
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="38,350,0,0" 
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="81"/>
@@ -93,10 +93,18 @@
 
         <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" 
                VerticalAlignment="Top" FontSize="7" Height="34" Width="97"/>
-        <Button Content="Add product&#xD;&#xA; to cart" HorizontalAlignment="Left" Margin="361,348,0,0" VerticalAlignment="Top" Width="91" FontSize="16"/>
-        <TextBox x:Name="costumer_Name"  HorizontalAlignment="Left" Margin="501,80,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="122" Height="23"/>
-        <TextBox  x:Name="costumer_Address" HorizontalAlignment="Left" Margin="501,136,0,0" TextWrapping="Wrap" Text="your city" VerticalAlignment="Top" Width="122" Height="23"/>
-        <TextBox  x:Name="costumer_Mail" HorizontalAlignment="Left" Margin="501,194,0,0" TextWrapping="Wrap" Text="@gmail.com" VerticalAlignment="Top" Width="122" Height="23"/>
+        
+        <Button Content="Go to catalog" HorizontalAlignment="Left" Margin="361,348,0,0" 
+                VerticalAlignment="Top" Width="91" FontSize="16" Click="Catalog_Click"/>
+        
+        <TextBox x:Name="customer_Name"  HorizontalAlignment="Left" Margin="501,80,0,0"
+                 TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="122" Height="23"/>
+        
+        <TextBox  x:Name="customer_Address" HorizontalAlignment="Left" Margin="501,136,0,0" 
+                  TextWrapping="Wrap" Text="your city" VerticalAlignment="Top" Width="122" Height="23"/>
+        
+        <TextBox  x:Name="customer_Mail" HorizontalAlignment="Left" Margin="501,194,0,0" 
+                  TextWrapping="Wrap" Text="@gmail.com" VerticalAlignment="Top" Width="122" Height="23"/>
 
     </Grid>
 </Window>

@@ -235,7 +235,7 @@ public class Program
                     }
                 case 'v'://approvment
                     {
-                        if (ibl.Cart.approvment(cart))
+                        if (ibl.Cart.approvment(cart)>0)
                             Console.WriteLine("V");
                         else
                             Console.WriteLine("X");

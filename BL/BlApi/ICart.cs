@@ -30,6 +30,6 @@ namespace BlApi
         /// </summary>
         /// <param name="cart"></param>
         /// <returns><bool>
-        public bool approvment(Cart cart);
+        public int approvment(Cart cart);
     }
 }

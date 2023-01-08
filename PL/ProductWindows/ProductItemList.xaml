@@ -16,27 +16,27 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="187*"/>
-            <RowDefinition Height="105*"/>
-            <RowDefinition Height="102*"/>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="156*"/>
+            <RowDefinition Height="126*"/>
+            <RowDefinition Height="81*"/>
         </Grid.RowDefinitions>
 
         <ComboBox x:Name="Category_selector"
                   HorizontalAlignment="Left"
-                  Margin="583,0,0,0" 
+                  Margin="607,39,0,0" 
                    FontFamily= "Maiandra GD"
-                  VerticalAlignment="Center"
-                  Width="181" Height="22"
+                  VerticalAlignment="Top"
+                  Width="137" Height="22"
                   SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding Categories}">
         </ComboBox>
 
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding Items}"
-                  Margin="0,40,0,5" Grid.RowSpan="3"
+                  Margin="40,10,54,31" Grid.RowSpan="2"
                   FontFamily="Maiandra GD" 
-                  MouseDoubleClick="Add_to_cart">
+                  MouseDoubleClick="Add_to_cart" Grid.Row="1">
             <ListView.View>
                 <GridView>
 
@@ -87,9 +87,15 @@
         </ListView>
         <Button x:Name="Back_Botton" Content="Back"   
                 HorizontalAlignment="Left" Grid.Row="3"
-                Margin="647,23,0,0" Height="46"  Width="117"   
-                VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>             
-              
+                Margin="639,9,0,0" Height="46"  Width="117"   
+                VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>
+        <Button x:Name="Go_to_Cart" Content="Go to cart"   
+            HorizontalAlignment="Left" Grid.Row="3"
+            Margin="40,9,0,0" Height="46"  Width="117"   
+            VerticalAlignment="Top"   Click="Go_to_Cart_Click"
+                Visibility="{Binding CartShow}"/>
+        <Label Content="To add product double click on the requested product:" HorizontalAlignment="Left" Margin="40,29,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Maiandra GD"/>
+
 
     </Grid>
 </Window>

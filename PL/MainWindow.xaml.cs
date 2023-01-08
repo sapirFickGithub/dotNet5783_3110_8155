@@ -38,7 +38,7 @@ namespace PL
 
         private void Client_Click(object sender, RoutedEventArgs e)
         {
-            new Customer().Show();
+            new ProductWindows.ProductItemList().Show();
             this.Close();
         }
 

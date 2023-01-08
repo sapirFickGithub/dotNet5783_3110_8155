@@ -26,9 +26,11 @@ namespace PL.CartWindows
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
+        public bool hasSorted = true;
+
         public event Action<int> action;
 
-       // public BO.Cart? MyCart { set; get; }
+        // public BO.Cart? MyCart { set; get; }
 
 
         public ObservableCollection<BO.Cart?> MyCart//dependency proprty in order to use 'data binding'
@@ -42,31 +44,109 @@ namespace PL.CartWindows
             DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart?>), typeof(CartNew));
 
 
-        public CartNew(Action<int> action, ProductItem productItem, BO.Cart? myCart)
+        public CartNew(BO.Cart? myCart)
         {
-           
-                MyCart = new ObservableCollection<BO.Cart?>((IEnumerable<Cart?>)(myCart));
-                this.action = action;
-                InitializeComponent();
+
+            MyCart = new ObservableCollection<BO.Cart?>((IEnumerable<Cart?>)(myCart));
+            this.action = action;
+            InitializeComponent();
         }
 
         private void approve_orer_Click(object sender, RoutedEventArgs e)
         {
-            if(costumer_Name.Text=="")
-            MessageBox.Show(
-                        "Please enter your name",
+            if (customer_Name.Text == "")
+                MessageBox.Show(
+                            "Please enter your name",
+                            "Waiting for input...",
+                            MessageBoxButton.OKCancel,
+                            MessageBoxImage.Hand,
+                            MessageBoxResult.Cancel,
+                            MessageBoxOptions.RtlReading);
+            else if (customer_Address.Text == "") MessageBox.Show(
+                        "Please enter your address",
                         "Waiting for input...",
                         MessageBoxButton.OKCancel,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
-            else if(costumer_Addre.Text==
+            else if ((customer_Mail.Text == "") || (!customer_Mail.Text.EndsWith("@gmail.com"))) MessageBox.Show(
+                        "Please enter correct Email address.",
+                        "Waiting for correct input...",
+                        MessageBoxButton.OKCancel,
+                        MessageBoxImage.Hand,
+                        MessageBoxResult.Cancel,
+                        MessageBoxOptions.RtlReading);
+
+            MyCart[0].CustomerName = customer_Name.Text;
+            MyCart[0].CustomerAddress = customer_Address.Text;
+            MyCart[0].CustomerMail = customer_Mail.Text;
+            try
+            {
+               int idOrder= bl.Cart.approvment(MyCart[0]);
+                if (idOrder>0)
+                {
+                    MessageBox.Show(
+                            "Your order is being processed" +
+                            "your order number is: " + idOrder+
+                            "Thanks for buying!",
+                            "Approvment",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Hand,
+                            MessageBoxResult.None,
+                            MessageBoxOptions.RtlReading);
+
+                    this.Close();
+                }
+            }
+            catch (BO.outOfStock a)
+            {
+                MessageBox.Show(
+                           "Your order is being processed" +
+                          a.idOfProduct,
+                           "Approvment",
+                           MessageBoxButton.OK,
+                           MessageBoxImage.Hand,
+                           MessageBoxResult.None,
+                           MessageBoxOptions.RtlReading);
+            }
+
+        }
 
 
-            MyCart[0].CustomerName = costumer_Name.Text;
-            MyCart[0].CustomerAddress = costumer_Address.Text;
-            MyCart[0].CustomerMail=costumer_Mail.Text;
-            bl.Cart.approvment(MyCart[0]);
+        private void Update_in_Cart_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
+
+            if (gridViewColumnHeader is not null)
+            {
+                string name = (gridViewColumnHeader.Tag as string)!;
+                var listTemp = bl.Product.getListOfProductItem();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+
+                view.SortDescriptions.Clear();
+                if (hasSorted)
+                {
+
+                    view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
+                    hasSorted = false;
+                }
+                else
+                {
+                    view.SortDescriptions.Add(new SortDescription(name, ListSortDirection.Ascending));
+                    hasSorted = true;
+                }
+            }
+
+        }
+
+        private void Catalog_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

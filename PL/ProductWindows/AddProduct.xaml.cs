@@ -63,9 +63,9 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "The price you enter is incorrect",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
+                        MessageBoxResult.OK,
                         MessageBoxOptions.RtlReading);
 
                 int.TryParse(InStock.Text, out int inStock);
@@ -73,9 +73,9 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "The in stock you enter is incorrect",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
+                        MessageBoxResult.OK,
                         MessageBoxOptions.RtlReading);
 
                 BO.Enum.Category.TryParse(Category_selector.Text, out BO.Enum.Category category);
@@ -83,9 +83,9 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "You did not choose a category",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
+                        MessageBoxResult.OK,
                         MessageBoxOptions.RtlReading);
 
                 if (Name.Text == "")
@@ -93,9 +93,9 @@ namespace PL.ProductWindows
                     MessageBox.Show(
                         "You did not enter a name for the product.",
                         "Invalid input",
-                        MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
                         MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
+                        MessageBoxResult.OK,
                         MessageBoxOptions.RtlReading);
                 }
 

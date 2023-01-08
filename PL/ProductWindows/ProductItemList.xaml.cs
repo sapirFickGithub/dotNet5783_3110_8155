@@ -25,9 +25,11 @@ namespace PL.ProductWindows
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
+        public BO.Cart MyCart { get; set; }
         public IEnumerable<BO.Enum.Category> Categories { set; get; }
 
         public bool hasSorted = true;
+        public bool CartShow = true;
 
         public ObservableCollection<ProductItem?> Items
         {
@@ -103,16 +105,35 @@ namespace PL.ProductWindows
             new MainWindow().Show();
             this.Close();
         }
-
-        private void update_Item_list(int id)
-        {
-
-        }
         private void Add_to_cart(object sender, MouseButtonEventArgs e)
         {
 
-            new CartWindows.CartNew(update_Item_list,(ProductItem)List_of_product.SelectedItem).Show();
-            
+            int amount = ((ProductItem)List_of_product.SelectedItem).Amount;
+            try
+            {
+                if (amount - 1 < 0)
+                {
+                    throw new BO.outOfStock();
+                }
+            }
+            catch(outOfStock ex)
+            {
+                MessageBox.Show(
+                        "The product ",
+                        // MessageBoxButton.OKCancel,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Hand,
+                        MessageBoxResult.Cancel,
+                        MessageBoxOptions.RtlReading);
+            }
+            ((ProductItem)List_of_product.SelectedItem).Amount++;
+            bl.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct);
+        }
+
+        private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
+        {
+            new CartWindows.CartNew(MyCart);
+            CartShow = false;
         }
     }
 }

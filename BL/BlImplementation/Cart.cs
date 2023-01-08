@@ -29,7 +29,7 @@ namespace BlImplementation
                 }
                 else
                 {
-                    throw new outOfStock();
+                    throw new outOfStock(product.idOfProduct);
                 }
             }
 
@@ -61,7 +61,7 @@ namespace BlImplementation
                 cart.TotalPrice += product.Price;
                 return cart;
             }
-            else throw new outOfStock();
+            else throw new outOfStock(product.idOfProduct);
 
 
         }
@@ -86,10 +86,10 @@ namespace BlImplementation
             }
             else
             {
-                throw new outOfStock();
+                throw new outOfStock(product.idOfProduct);
             }
         }
-        public bool approvment(BO.Cart cart)
+        public int approvment(BO.Cart cart)
         {
             //data tast
             if ((!(cart.CustomerMail.Contains('@') || cart.CustomerMail == "")) && (cart.CustomerName == "") && (cart.CustomerAddress == ""))
@@ -107,7 +107,13 @@ namespace BlImplementation
             if (cart.itemList.All(item =>
             {
                 var product = dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct) ?? throw new notExist();
-                return product.InStock - item.amount >= 0;
+                if (product.InStock - item.amount < 0)
+                {
+                    throw new outOfStock(item.idOfProduct);
+
+                }
+                else return true;
+                
             }))
             {
                 cart.itemList.ForEach(item =>
@@ -125,12 +131,10 @@ namespace BlImplementation
                 });
 
                 Console.WriteLine("your order number is : " + idOfOrder);
-                return true;
+                return idOfOrder;
             }
-            else
-            {
-                return false;
-            }
+            throw new incorrectData();
+            
 
 
             //foreach (var item in cart.itemList)
