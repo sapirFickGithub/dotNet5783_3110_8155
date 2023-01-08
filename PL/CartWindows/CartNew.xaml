@@ -41,14 +41,14 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding totalPrice}" >
                         <GridViewColumnHeader 
-                            Content= "Price" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Total Price" FontFamily= "Maiandra GD" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding PriceOfProduct}" >
                         <GridViewColumnHeader 
-                            Content= "Amount" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Price of product" FontFamily= "Maiandra GD" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 

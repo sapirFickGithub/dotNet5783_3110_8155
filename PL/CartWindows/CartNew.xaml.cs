@@ -28,35 +28,45 @@ namespace PL.CartWindows
 
         public event Action<int> action;
 
-        public BO.Cart? MyCart { set; get; }
+       // public BO.Cart? MyCart { set; get; }
 
 
-        public ObservableCollection<BO.OrderItem?> CartItems//dependency proprty in order to use 'data binding'
+        public ObservableCollection<BO.Cart?> MyCart//dependency proprty in order to use 'data binding'
         {
-            get { return (ObservableCollection<BO.OrderItem?>)GetValue(OrderItemProperty); }
-            set { SetValue(OrderItemProperty, value); }
+            get { return (ObservableCollection<BO.Cart?>)GetValue(CartProperty); }
+            set { SetValue(CartProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ProductsForList.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OrderItemProperty =
-            DependencyProperty.Register("CartItems", typeof(ObservableCollection<BO.OrderItem?>), typeof(CartNew));
+        // Using a DependencyProperty as the backing store for order utem.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CartProperty =
+            DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart?>), typeof(CartNew));
 
 
         public CartNew(Action<int> action, ProductItem productItem, BO.Cart? myCart)
         {
-
-            MyCart = myCart;
-            CartItems = new ObservableCollection<ProductForList?>(myCart?.itemList);
-            this.action = action;
-            InitializeComponent();
+           
+                MyCart = new ObservableCollection<BO.Cart?>((IEnumerable<Cart?>)(myCart));
+                this.action = action;
+                InitializeComponent();
         }
 
         private void approve_orer_Click(object sender, RoutedEventArgs e)
         {
-            MyCart.CustomerName = costumer_Name.Text;
-            MyCart.CustomerAddress = costumer_Address.Text;
-            MyCart.CustomerMail=costumer_Mail.Text;
-            bl.Cart.approvment(MyCart);
+            if(costumer_Name.Text=="")
+            MessageBox.Show(
+                        "Please enter your name",
+                        "Waiting for input...",
+                        MessageBoxButton.OKCancel,
+                        MessageBoxImage.Hand,
+                        MessageBoxResult.Cancel,
+                        MessageBoxOptions.RtlReading);
+            else if(costumer_Addre.Text==
+
+
+            MyCart[0].CustomerName = costumer_Name.Text;
+            MyCart[0].CustomerAddress = costumer_Address.Text;
+            MyCart[0].CustomerMail=costumer_Mail.Text;
+            bl.Cart.approvment(MyCart[0]);
         }
     }
 }

@@ -20,6 +20,8 @@ using BO;
 
 namespace PL.OrderWindows
 {
+
+
     /// <summary>
     /// Interaction logic for OrderView.xaml
     /// </summary>
