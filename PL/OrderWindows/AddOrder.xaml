@@ -31,7 +31,7 @@
             Width="250" 
             Grid.Row="1"
             TextWrapping="Wrap" 
-           VerticalAlignment="Top" Margin="162,4,0,0" TextChanged="CustomerName_TextChanged"
+           VerticalAlignment="Center" Margin="216,0,0,0" TextChanged="CustomerName_TextChanged"
            />
 
         <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>

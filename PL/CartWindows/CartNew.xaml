@@ -11,14 +11,14 @@
     <Grid>
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding MyCart.itemList}"
-                  Margin="0,40,0,5" Grid.RowSpan="3"
+                  Margin="24,48,204,96"
                   FontFamily="Maiandra GD" 
                   MouseDoubleClick="Add_to_cart">
             <ListView.View>
                 <GridView>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding Name}" >
+                            DisplayMemberBinding="{Binding NameOfProduct}" >
                         <GridViewColumnHeader 
                             Content="Name" FontFamily= "Maiandra GD" Tag="Name"
                             Click="Sort_By_Colmun_Click"/>
@@ -39,13 +39,21 @@
                     </GridViewColumn>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding Price}" >
+                            DisplayMemberBinding="{Binding totalPrice}" >
                         <GridViewColumnHeader 
                             Content= "Price" FontFamily= "Maiandra GD" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
+
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding Amount}" >
+                            DisplayMemberBinding="{Binding PriceOfProduct}" >
+                        <GridViewColumnHeader 
+                            Content= "Amount" FontFamily= "Maiandra GD" Tag="Price"
+                            Click= "Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding amount}" >
                         <GridViewColumnHeader 
                             Content= "Amount" FontFamily= "Maiandra GD" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
@@ -62,18 +70,33 @@
             </ListView.View>
         </ListView>
 
-        <Label Content="My cart:" HorizontalAlignment="Left" Margin="42,15,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="81"/>
-        <Button Content="Order" HorizontalAlignment="Left" Margin="527,366,0,0" VerticalAlignment="Top" Height="33" Width="82"
+        <Label Content="My cart:" HorizontalAlignment="Left" Margin="42,15,0,0" 
+               VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="81"/>
+
+        <Button Content="Completion &#xD;&#xA;  the order" HorizontalAlignment="Left" Margin="497,315,0,0" VerticalAlignment="Top" Height="70" Width="112"
                 Click="approve_orer_Click"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="256,399,0,0" VerticalAlignment="Top"/>
+
         <TextBlock HorizontalAlignment="Left" Margin="142,356,0,0" TextWrapping="Wrap" 
-                   Text="Total_price_print" VerticalAlignment="Top" Height="28" Width="114"/>
+                   Text="{Binding MyCart.TotalPrice}" VerticalAlignment="Top" Height="28" Width="114"/>
+
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="38,350,0,0" 
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="81"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="497,50,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
-        <Label Content="Address:" HorizontalAlignment="Left" Margin="497,103,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
-        <Label Content="Mail:" HorizontalAlignment="Left" Margin="497,163,0,0" VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
-        <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" VerticalAlignment="Top" FontSize="7" Height="34" Width="97"/>
+
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="497,50,0,0" 
+               VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
+
+        <Label Content="Address:" HorizontalAlignment="Left" Margin="497,103,0,0"
+               VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
+
+        <Label Content="Mail:" HorizontalAlignment="Left" Margin="497,163,0,0" 
+               VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="27" Width="71"/>
+
+        <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" 
+               VerticalAlignment="Top" FontSize="7" Height="34" Width="97"/>
+        <Button Content="Add product&#xD;&#xA; to cart" HorizontalAlignment="Left" Margin="361,348,0,0" VerticalAlignment="Top" Width="91" FontSize="16"/>
+        <TextBox x:Name="costumer_Name"  HorizontalAlignment="Left" Margin="501,80,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="122" Height="23"/>
+        <TextBox  x:Name="costumer_Address" HorizontalAlignment="Left" Margin="501,136,0,0" TextWrapping="Wrap" Text="your city" VerticalAlignment="Top" Width="122" Height="23"/>
+        <TextBox  x:Name="costumer_Mail" HorizontalAlignment="Left" Margin="501,194,0,0" TextWrapping="Wrap" Text="@gmail.com" VerticalAlignment="Top" Width="122" Height="23"/>
 
     </Grid>
 </Window>

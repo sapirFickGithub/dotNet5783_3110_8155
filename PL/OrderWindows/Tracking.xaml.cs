@@ -26,14 +26,14 @@ namespace PL.OrderWindows
     {
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
- public BO.OrderTracking orderTrack { set; get; }
+        public BO.OrderTracking orderTrack { set; get; }
 
         public Tracking(int id)
         {
             orderTrack = bl?.Order.orderTracking(id);
             InitializeComponent();
         }
-        
+
         private void BackToMain_Click(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
