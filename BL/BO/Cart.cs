@@ -12,8 +12,9 @@ namespace BO
         public string? CustomerName { get; set; }
         public string? CustomerMail { get; set; }
         public string? CustomerAddress { get; set; }
-        public List<OrderItem?>? itemList { get; set; } = new List<OrderItem>();
-        public double TotalPrice { get; set; }
+        public List<OrderItem?>? itemList { get; set; } = new List<OrderItem?>();
+        public double? TotalPrice { get; set; } = 0;
+
 
 
 
@@ -24,13 +25,25 @@ Cart:
    Customer name: {CustomerName}.
    Customer Mail- {CustomerMail}.
    Custamer address- {CustomerAddress}.";
-            foreach (var item in itemList)
-            {
-                print = print + "\n" + item.NameOfProduct + "\n" + item.ToString();
-            }
-            print = print + "\n" + $@"TotalPrice: {TotalPrice}";
+            print += itemList?.Aggregate("", (acc, item) => acc + "\n" + item?.NameOfProduct + "\n" + item?.ToString());
+            print += "\n" + $@"TotalPrice: {TotalPrice}";
             return print;
         }
+
+        //        public override string ToString()
+        //        {
+        //            string print = $@"
+        //Cart:
+        //   Customer name: {CustomerName}.
+        //   Customer Mail- {CustomerMail}.
+        //   Custamer address- {CustomerAddress}.";
+        //            foreach (var item in itemList)
+        //            {
+        //                print = print + "\n" + item?.NameOfProduct + "\n" + item?.ToString();
+        //            }
+        //            print = print + "\n" + $@"TotalPrice: {TotalPrice}";
+        //            return print;
+        //        }
     }
 }
 

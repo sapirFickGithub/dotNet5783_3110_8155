@@ -14,11 +14,11 @@ namespace BlImplementation
     internal class Cart : ICart
     {
         DalApi.IDal? dal = DalApi.Factory.Get();
-        public BO.Cart add(BO.Cart cart, int idOfProduct)
+        public BO.Cart? add(BO.Cart? cart, int idOfProduct)
         {
             DO.Product product = dal?.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
 
-            var item = cart.itemList.FirstOrDefault(i => i.idOfProduct == idOfProduct);
+            BO.OrderItem? item = cart?.itemList?.FirstOrDefault(i => i?.idOfProduct == idOfProduct);
             if (item != null)
             {
                 if (product.InStock - item.amount >= 0)
@@ -57,7 +57,7 @@ namespace BlImplementation
                     totalPrice = product.Price,
                     amount = 1
                 };
-                cart.itemList.Add(newItem);
+                cart?.itemList?.Add(newItem);
                 cart.TotalPrice += product.Price;
                 return cart;
             }
@@ -65,19 +65,20 @@ namespace BlImplementation
 
 
         }
-        public BO.Cart updete(BO.Cart cart, int idOfProduct, int amount)
+        public BO.Cart? updete(BO.Cart? cart, int idOfProduct, int amount)
         {
-            DO.Product product = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
-            var item = cart.itemList.Where(i => i.idOfProduct == idOfProduct).FirstOrDefault();
+            DO.Product product = dal?.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
+            var item = cart?.itemList?.Where(i => i.idOfProduct == idOfProduct).FirstOrDefault();
             if (item == null)
                 throw new BO.notExist();
             if (amount == 0)
             {
-                cart.itemList.Remove(item);
+                cart?.itemList?.Remove(item);
                 return cart;
             }
             if (product.InStock - amount >= 0)
             {
+
                 cart.TotalPrice += (amount - item.amount) * product.Price;
                 item.amount = amount;
                 item.totalPrice = amount * product.Price;
