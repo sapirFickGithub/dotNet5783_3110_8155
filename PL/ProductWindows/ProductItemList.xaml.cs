@@ -43,6 +43,7 @@ namespace PL.ProductWindows
 
         public ProductItemList()
         {
+            MyCart = new BO.Cart();
             Items = new ObservableCollection<ProductItem?>(bl.Product.getListOfProductItem());
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             InitializeComponent();
@@ -55,7 +56,7 @@ namespace PL.ProductWindows
             if (gridViewColumnHeader is not null)
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
-                var listTemp = bl.Product.getListOfProductItem();
+                var listTemp = bl?.Product.getListOfProductItem();
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
 
                 view.SortDescriptions.Clear();
@@ -107,27 +108,27 @@ namespace PL.ProductWindows
         }
         private void Add_to_cart(object sender, MouseButtonEventArgs e)
         {
-
-            int amount = ((ProductItem)List_of_product.SelectedItem).Amount;
+            var p = bl?.Product.GetProduct( ((ProductItem)List_of_product.SelectedItem).idOfProduct);
             try
             {
-                if (amount - 1 < 0)
+                if (p.InStock - 1 < 0)
                 {
-                    throw new BO.outOfStock();
+                    throw new BO.outOfStock(p.idOfProduct);
                 }
             }
-            catch(outOfStock ex)
+            catch (outOfStock ex)
             {
                 MessageBox.Show(
-                        "The product ",
-                        // MessageBoxButton.OKCancel,
+                        "The product "+ ex.idOfProduct +
+                        "is out of stock",
+                       "Out of stock",
                         MessageBoxButton.OK,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
             }
             ((ProductItem)List_of_product.SelectedItem).Amount++;
-            bl.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct);
+           MyCart= bl.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct);
         }
 
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)

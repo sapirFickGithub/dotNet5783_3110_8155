@@ -16,7 +16,7 @@ namespace BlApi
         /// <param name="cart"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public BO.Cart add(Cart cart, int id);
+        public BO.Cart? add(Cart? cart, int id);
         /// <summary>
         /// Update a product in the shopping cart.
         /// </summary>
@@ -24,12 +24,12 @@ namespace BlApi
         /// <param name="id"></param>
         /// <param name="amount"></param>
         /// <returns><Cart>
-        public BO.Cart updete(Cart cart, int id, int amount);
+        public BO.Cart? updete(Cart? cart, int id, int amount);
         /// <summary>
         /// approve the cart and crate a order if all the details are right.
         /// </summary>
         /// <param name="cart"></param>
         /// <returns><bool>
-        public int approvment(Cart cart);
+        public int approvment(Cart? cart);
     }
 }
