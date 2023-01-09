@@ -22,33 +22,26 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="ID"
-            HorizontalAlignment="Left"
-            FontFamily= "Maiandra GD"
-            Height="30" Width="250"
-            Margin="152,7,0,0"
-            VerticalAlignment="Top" Grid.Row="1"
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Height="30" Width="250" Margin="152,7,0,0" Grid.Row="1"
             Text="{Binding product.idOfProduct }"
             />
         <Label Content="ID:" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD" Grid.Row="1"/>
 
         <TextBox  x:Name="Name"
-            HorizontalAlignment="Left" 
-            FontFamily= "Maiandra GD"
-            Height="30"  Width="250" Grid.Row="2"
-            Margin="152,7,0,0" 
+            HorizontalAlignment="Left"  TextWrapping="Wrap" 
+            Height="30"  Width="250" Margin="152,7,0,0" Grid.Row="2"
             VerticalAlignment="Top" TextChanged="Name_TextChanged"
-            TextWrapping="Wrap" 
             Text="{Binding product.Name }"
             
            />
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14" FontFamily= "Maiandra GD"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="2" VerticalAlignment="Center" FontSize="14"/>
 
         <TextBox 
             x:Name="Price"
             HorizontalAlignment="Left" 
-            Height="30" Width="250" Grid.Row="3"
-            Margin="152,0,0,0"  FontFamily= "Maiandra GD"        
+            Height="30" Width="250"  Margin="152,0,0,0" Grid.Row="3"    
             TextWrapping="Wrap"  VerticalAlignment="Center" 
             RenderTransformOrigin="1.372,3.394" 
            Text="{Binding product.Price }"
@@ -57,25 +50,21 @@
 
         <TextBox 
             x:Name="InStock"
-            HorizontalAlignment="Left" 
-            FontFamily= "Maiandra GD"
-            Height="30" Width="250" Grid.Row="4"
-            Margin="152,0,0,0" TextWrapping="Wrap" 
+            HorizontalAlignment="Left" TextWrapping="Wrap"  
+            Height="30" Width="250" Margin="152,0,0,0" Grid.Row="4"         
             VerticalAlignment="Center"
             Text="{Binding product.InStock }"
             />
-        <Label Content="In stock:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="4" VerticalAlignment="Center"  FontFamily= "Maiandra GD" FontWeight="Normal" FontSize="14"/>
+        <Label Content="In stock:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="4" VerticalAlignment="Center"  FontWeight="Normal" FontSize="14"/>
 
         <ComboBox x:Name="Category_selector"
-                  HorizontalAlignment="Left"
-                  Margin="152,10,0,0" FontFamily= "Maiandra GD"
-                  VerticalAlignment="Top"
-                  Width="250" Height="30" Grid.Row="5"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Width="250" Height="30"  Margin="152,10,0,0" Grid.Row="5"                  
                   SelectionChanged="Category_SelectionChanged"
                   Text="{Binding product.ProductCategory }"
                   ItemsSource="{Binding Categories}">
         </ComboBox>
-        <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontSize="14" FontWeight="Normal"/>
 
         <Button 
             Content="Update"
@@ -92,7 +81,7 @@
                 HorizontalAlignment="Left"
                 Grid.Row="6" Width="110" Height="33" 
                 VerticalAlignment="Top" Click="BackToProductListWindow_Click"/>
-        <Label Content="Insert the details:" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontSize="18" FontFamily="Maiandra GD" FontWeight="Normal"/>
+        <Label Content="Insert the details:" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontWeight="Normal"/>
 
 
 

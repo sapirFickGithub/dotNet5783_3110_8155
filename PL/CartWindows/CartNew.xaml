@@ -12,7 +12,6 @@
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding MyCart[0].itemList}"
                   Margin="24,48,204,96"
-                  FontFamily="Maiandra GD" 
                   MouseDoubleClick="Update_in_Cart_MouseDoubleClick">
             <ListView.View>
                 <GridView>
@@ -20,14 +19,14 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding NameOfProduct}" >
                         <GridViewColumnHeader 
-                            Content="Name" FontFamily= "Maiandra GD" Tag="Name"
+                            Content="Name" Tag="Name"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding idOfProduct}">
                         <GridViewColumnHeader 
-                            Content="ID" FontFamily= "Maiandra GD" Tag="idOfProduct"
+                            Content="ID" Tag="idOfProduct"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
@@ -41,14 +40,14 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding totalPrice}" >
                         <GridViewColumnHeader 
-                            Content= "Total Price" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Total Price" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding PriceOfProduct}" >
                         <GridViewColumnHeader 
-                            Content= "Price of product" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Price of product" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
@@ -93,16 +92,16 @@
 
         <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" 
                VerticalAlignment="Top" FontSize="7" Height="34" Width="97"/>
-        
-        <Button Content="Go to catalog" HorizontalAlignment="Left" Margin="361,348,0,0" 
-                VerticalAlignment="Top" Width="91" FontSize="16" Click="Catalog_Click"/>
-        
+
+        <Button Content="Go to catalog" HorizontalAlignment="Left" Margin="328,348,0,0" 
+                VerticalAlignment="Top" Width="124" FontSize="16" Click="Catalog_Click" Height="36"/>
+
         <TextBox x:Name="customer_Name"  HorizontalAlignment="Left" Margin="501,80,0,0"
                  TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="122" Height="23"/>
-        
+
         <TextBox  x:Name="customer_Address" HorizontalAlignment="Left" Margin="501,136,0,0" 
                   TextWrapping="Wrap" Text="your city" VerticalAlignment="Top" Width="122" Height="23"/>
-        
+
         <TextBox  x:Name="customer_Mail" HorizontalAlignment="Left" Margin="501,194,0,0" 
                   TextWrapping="Wrap" Text="@gmail.com" VerticalAlignment="Top" Width="122" Height="23"/>
 

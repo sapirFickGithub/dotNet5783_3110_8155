@@ -2,11 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        
-        DataContext="{Binding RelativeSource={RelativeSource self}}"
-       
-    mc:Ignorable="d"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+        DataContext="{Binding RelativeSource={RelativeSource self}}"    
+        mc:Ignorable="d"
         Title="ProductList" Height="450" Width="800">
 
     <Grid>
@@ -68,21 +66,21 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding idOfProduct}">
                         <GridViewColumnHeader 
-                            Content="ID" FontFamily= "Maiandra GD" Tag="idOfProduct"
+                            Content="ID" Tag="idOfProduct"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
                     
                     <GridViewColumn  
                             DisplayMemberBinding="{Binding ProductCategory }" >
                         <GridViewColumnHeader 
-                            Content="Category" FontFamily= "Maiandra GD" Tag="ProductCategory"
+                            Content="Category" Tag="ProductCategory"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
                     
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding Price}" >
                         <GridViewColumnHeader 
-                            Content= "Price" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Price" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 

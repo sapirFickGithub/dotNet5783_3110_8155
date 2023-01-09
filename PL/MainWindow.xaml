@@ -11,64 +11,23 @@
             <ImageBrush ImageSource="/1593678163641.jpeg" TileMode="None"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="116"/>
-            <RowDefinition Height="74*"/>
-            <RowDefinition Height="53*"/>
+            <RowDefinition Height="63"/>
+            <RowDefinition Height="349*"/>
+            <RowDefinition Height="212*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="Admin" 
-              Margin="289,145,306,93"
-              RenderTransformOrigin="0.5,0.5"
-              Background="#FFFEFEEC"
-              Cursor="" Grid.Row="1">
-            <Button Content="Admin"
-                FontSize="36"
-                Background="#FFFEFEEC"
-                FontFamily= "Maiandra GD"
-                Margin="0,1,0,-1" 
-                FontWeight="Normal"
-                Click="Admin_Click"
-                HorizontalAlignment="Right" 
-                Width="205" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
-            <Button Content="Client"
-                FontSize="36"
-                Background="#FFFEFEEC"
-                FontFamily= "Maiandra GD"
-                Margin="0,91,0,-91" 
-                FontWeight="Normal"
-                Click= "Client_Click"
-                HorizontalAlignment="Center"
-                Width="205"/>
+        <Label Content="בס''ד" HorizontalAlignment="Left" Margin="707,0,0,0" VerticalAlignment="Center" FontSize="24" Height="40" Width="66"/>
 
-            <Grid.OpacityMask>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FFC54F4F" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.OpacityMask>
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.228"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Grid.RenderTransform>
-        </Grid>
-        <Label Content="ה הוא המלך " HorizontalAlignment="Left" Margin="304,28,0,28" Background="#FF59F9FF" FontSize="44" Width="266" HorizontalContentAlignment="Right"/>
-        <Label Content="בס''ד" HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" FontSize="24" Height="40" Width="66"/>
-        <Label Content=": ) נ נח נחמן נחמן מאומן  :)" HorizontalAlignment="Right" Margin="0,97,106,228" Background="#FF59F9FF" FontSize="44" Width="522" HorizontalContentAlignment="Right" Grid.RowSpan="2"/>
-        <Label Content="הרב כהנא צדק" HorizontalAlignment="Left" Margin="561,160,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FF9E1FF4" FontSize="36" RenderTransformOrigin="0.5,0.5">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="41.081"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
-        </Label>
-        <Button Content="Track order" HorizontalAlignment="Left" Margin="29,40,0,0" Grid.Row="2" VerticalAlignment="Top" Height="36" Width="148" Click="Track_Click"/>
-        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="34,7,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="143" Height="27" TextChanged="TextBox_TextChanged"/>
+        <Button Content="Track order" HorizontalAlignment="Left" Margin="29,40,0,0" Grid.Row="2" VerticalAlignment="Top"
+                Height="36" Width="148" Click="Track_Click"/>
+
+        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="34,7,0,0" Grid.Row="2" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="143" Height="27" TextChanged="TextBox_TextChanged"/>
+
+        <Button Content="Admin" HorizontalAlignment="Left" Margin="607,10,0,0" VerticalAlignment="Top" 
+                Height="65" Width="133" Grid.Row="1"  Click="Admin_Click" />
+
+        <Button Content="Claint" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top"
+                Height="65" Width="133" Grid.Row="1"  Click="Client_Click"  />
 
     </Grid>
 </Window>

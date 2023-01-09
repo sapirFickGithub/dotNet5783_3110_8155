@@ -4,8 +4,24 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Button">
 
+            <Style TargetType="Control" x:Key="CommonControlStyle">
+            <Setter Property="FontFamily" Value="Maiandra GD" />
+            </Style>
+
+
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#FFF1F1D8"/>
+        </Style>
+
+        
+        
+        <Style TargetType="Button">
 
             <Setter Property="Template">
                 <Setter.Value>
@@ -14,7 +30,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="FontWeight" Value="ExtraBold"/>
-                                <Setter Property="Foreground" Value="Aqua"/>
+                                <Setter Property="Foreground" Value="Purple"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
 
@@ -29,10 +45,9 @@
             </Setter>
 
             <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Background" Value="#FFF1F1D8" />
+            <Setter Property="Background" Value="#FFEDCCFB" />
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontFamily" Value="Maiandra GD"/>
             <Setter Property="FontStyle" Value="Normal"/>
 
         </Style>
