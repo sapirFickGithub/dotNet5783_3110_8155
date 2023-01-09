@@ -10,6 +10,9 @@
             </Style>
 
 
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
 
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="20" />

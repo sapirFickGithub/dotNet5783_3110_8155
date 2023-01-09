@@ -30,6 +30,7 @@ namespace PL.OrderWindows
         public IEnumerable<BO.Enum.OrderStatus> status { set; get; }
 
         public BO.OrderForList order { get; set; }
+
         public bool hasSorted = true;
 
         public ObservableCollection<OrderItem> Items
@@ -114,6 +115,11 @@ namespace PL.OrderWindows
                     hasSorted = true;
                 }
             }
+        }
+
+        private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -10,7 +10,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left"
-                 Margin="505,47,0,0" 
+                 Margin="501,47,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="234"
@@ -33,7 +33,7 @@
         <Label Content="Amount&#xD;&#xA; of item:" HorizontalAlignment="Left" Margin="547,154,0,0" VerticalAlignment="Top" Width="156"/>
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,222,0,0" VerticalAlignment="Top" Width="105"/>
         <TextBlock HorizontalAlignment="Left"
-            Margin="148,44,0,0" 
+            Margin="155,47,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="203"
@@ -50,23 +50,23 @@
                  />
         <ComboBox x:Name="Status_selector"
                   HorizontalAlignment="Left"
-                  Margin="652,112,0,0" Width="98" Height="38"
+                  Margin="636,112,0,0" Width="114" Height="38"
                   VerticalAlignment="Top" SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding status}"
                   SelectedItem="{Binding order.Status}">
         </ComboBox>
-        
+
         <TextBlock HorizontalAlignment="Left"
-            Width="66" Height="58" Margin="668,160,0,0" 
-            TextWrapping="Wrap"
+            Width="66" Height="38" Margin="657,170,0,0" 
+            TextWrapping="Wrap" FontSize="20"
             VerticalAlignment="Top"
             Text="{Binding order.AmountOfItem}"             
                  />
         <TextBlock HorizontalAlignment="Left"
-            Margin="662,227,0,0" 
+            Margin="662,225,0,0"  Width="88"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="88"
+           FontSize="20"
             Text="{Binding order.TotalPrice}" 
             Height="37" 
                  />
@@ -75,14 +75,14 @@
         <ListView 
             x:Name="List_of_orders"
              ItemsSource="{Binding Items}" MouseDoubleClick="Update_amount_Click"
-            d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98">
+            d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98" SelectionChanged="List_of_orders_SelectionChanged">
             <ListView.View>
                 <GridView>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding Name}" >
+                            DisplayMemberBinding="{Binding NameOfProduct}" >
                         <GridViewColumnHeader 
-                            Content="Name" Tag="Name"
+                            Content="Name" Tag="NameOfProduct"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
@@ -94,31 +94,32 @@
                     </GridViewColumn>
 
                     <GridViewColumn  
-                            DisplayMemberBinding="{Binding ProductCategory }" >
+                            DisplayMemberBinding="{Binding  ProductCategory }" >
                         <GridViewColumnHeader 
                             Content="Category" Tag="ProductCategory"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding productItem.Price}" >
+                            DisplayMemberBinding="{Binding PriceOfProduct}" >
                         <GridViewColumnHeader 
-                            Content= "Price" Tag="Price"
-                            Click= "Sort_By_Colmun_Click"/>
-                    </GridViewColumn>
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding productItem.Amount}" >
-                        <GridViewColumnHeader 
-                            Content= "Amount" Tag="Price"
+                            Content= "Price" Tag="PriceOfProduct"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding InStock}" >
+                            DisplayMemberBinding="{Binding amount}" >
                         <GridViewColumnHeader 
-                            Content= "Instock" Tag="Price"
+                            Content= "Amount" Tag="amount"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
+
+                    <!--<GridViewColumn 
+                            DisplayMemberBinding="{Binding totalPrice}" >
+                        <GridViewColumnHeader 
+                            Content= "Price" Tag="totalPrice"
+                            Click= "Sort_By_Colmun_Click"/>
+                    </GridViewColumn>-->
 
                 </GridView>
             </ListView.View>
