@@ -10,11 +10,11 @@
 
         <Button Content="Product"
                 FontSize="36"
-                Margin="0,157,500,217" 
+                Margin="0,157,500,204" 
                 Click="ProductListWindow_Click"
                 Width="204"/>
         <Button Content="Order"
-                FontSize="36" Margin="0,158,130,217" 
+                FontSize="36" Margin="0,158,130,204" 
                 FontWeight="Normal"
                 Click="OrderListWindow_Click"
                 Width="205"/>
