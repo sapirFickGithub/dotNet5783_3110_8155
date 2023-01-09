@@ -16,6 +16,7 @@ using BlImplementation;
 using BO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using PL.ProductWindows;
 
 namespace PL.OrderWindows
 {
@@ -28,14 +29,24 @@ namespace PL.OrderWindows
         // public event Action<int> action;
         public IEnumerable<BO.Enum.OrderStatus> status { set; get; }
 
-        public BO.OrderForList? order { get; set; }
+        public BO.OrderForList order { get; set; }
 
+        public ObservableCollection<OrderItem> Items
+        {
+            get { return (ObservableCollection<OrderItem>)GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ItemsProperty =
+            DependencyProperty.Register("Items", typeof(ObservableCollection<OrderItem>), typeof(ViewOrder));
 
 
         public ViewOrder(OrderForList? orderForList)
         {
             order = orderForList;
             status = System.Enum.GetValues(typeof(BO.Enum.OrderStatus)).Cast<BO.Enum.OrderStatus>();
+            Items = new ObservableCollection<OrderItem>(bl.Order.GetOrder(order.idOfOrder).Items);
 
             InitializeComponent();
         }
@@ -51,7 +62,7 @@ namespace PL.OrderWindows
                 bl.Order.UpdateSupplyDelivery(order.idOfOrder);
             if(Status_selector.Text== "Dlivery")
             bl.Order.updateDliveryOrder(order.idOfOrder);
-            if(order.)
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -64,12 +75,17 @@ namespace PL.OrderWindows
 
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void Supply_Checked(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Update_amount_Click(object sender, MouseButtonEventArgs e)
         {
 
         }
