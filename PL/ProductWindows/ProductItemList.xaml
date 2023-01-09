@@ -4,14 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.ProductWindows"
-    
         DataContext="{Binding RelativeSource={RelativeSource self}}"
-       
-    mc:Ignorable="d"
+        mc:Ignorable="d"
         Title="ProductList" Height="450" Width="800">
-
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -24,10 +20,8 @@
 
         <ComboBox x:Name="Category_selector"
                   HorizontalAlignment="Left"
-                  Margin="607,39,0,0" 
-                   FontFamily= "Maiandra GD"
+                  Margin="607,39,0,0"  Width="137" Height="22"
                   VerticalAlignment="Top"
-                  Width="137" Height="22"
                   SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding Categories}">
         </ComboBox>
@@ -35,7 +29,6 @@
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding Items}"
                   Margin="40,10,54,31" Grid.RowSpan="2"
-                  FontFamily="Maiandra GD" 
                   MouseDoubleClick="Add_to_cart" Grid.Row="1">
             <ListView.View>
                 <GridView>
@@ -43,58 +36,59 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding Name}" >
                         <GridViewColumnHeader 
-                            Content="Name" FontFamily= "Maiandra GD" Tag="Name"
+                            Content="Name" Tag="Name"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding idOfProduct}">
                         <GridViewColumnHeader 
-                            Content="ID" FontFamily= "Maiandra GD" Tag="idOfProduct"
+                            Content="ID" Tag="idOfProduct"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn  
                             DisplayMemberBinding="{Binding ProductCategory }" >
                         <GridViewColumnHeader 
-                            Content="Category" FontFamily= "Maiandra GD" Tag="ProductCategory"
+                            Content="Category" Tag="ProductCategory"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding Price}" >
+                            DisplayMemberBinding="{Binding productItem.Price}" >
                         <GridViewColumnHeader 
-                            Content= "Price" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Price" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding Amount}" >
+                            DisplayMemberBinding="{Binding productItem.Amount}" >
                         <GridViewColumnHeader 
-                            Content= "Amount" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Amount" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding InStock}" >
                         <GridViewColumnHeader 
-                            Content= "Instock" FontFamily= "Maiandra GD" Tag="Price"
+                            Content= "Instock" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-
+                    
                 </GridView>
-
             </ListView.View>
         </ListView>
+        
         <Button x:Name="Back_Botton" Content="Back"   
                 HorizontalAlignment="Left" Grid.Row="3"
                 Margin="639,9,0,0" Height="46"  Width="117"   
                 VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>
+        
         <Button x:Name="Go_to_Cart" Content="Go to cart"   
             HorizontalAlignment="Left" Grid.Row="3"
             Margin="40,9,0,0" Height="46"  Width="117"   
             VerticalAlignment="Top"   Click="Go_to_Cart_Click"
                 Visibility="{Binding CartShow}"/>
-        <Label Content="To add product double click on the requested product:" HorizontalAlignment="Left" Margin="40,29,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Maiandra GD"/>
+        <Label Content="To add product double click on the requested product:" HorizontalAlignment="Left" Margin="40,29,0,0" VerticalAlignment="Top" />
 
 
     </Grid>

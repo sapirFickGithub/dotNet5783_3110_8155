@@ -126,18 +126,17 @@ namespace PL.ProductWindows
                          MessageBoxOptions.RtlReading);
             }
         }
+    private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
         private void BackToProductListWindow_Click(object sender, RoutedEventArgs e)
         {
             //move to Main window
             // new ProductWindows.ProductList().Show();
             this.Close();
         }
-
-        private void Name_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+    
     }
 
 }

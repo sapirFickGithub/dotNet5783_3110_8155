@@ -27,24 +27,27 @@ namespace PL.ProductWindows
 
         public BO.Cart MyCart { get; set; }
         public IEnumerable<BO.Enum.Category> Categories { set; get; }
-
+        public BO.ProductItem productItem { get; set; }
+       
         public bool hasSorted = true;
-        public bool CartShow = true;
 
-        public ObservableCollection<ProductItem?> Items
+        //public bool CartShow = true;
+
+        public ObservableCollection<ProductItem> Items
         {
-            get { return (ObservableCollection<ProductItem?>)GetValue(ProductsForListProperty); }
-            set { SetValue(ProductsForListProperty, value); }
+            get { return (ObservableCollection<ProductItem>)GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ProductsForListProperty =
-            DependencyProperty.Register("ProductsForList", typeof(ObservableCollection<ProductItem?>), typeof(ProductList));
+        public static readonly DependencyProperty ItemsProperty =
+            DependencyProperty.Register("Items", typeof(ObservableCollection<ProductItem>), typeof(ProductList));
 
         public ProductItemList()
         {
+            productItem = new BO.ProductItem();
             MyCart = new BO.Cart();
-            Items = new ObservableCollection<ProductItem?>(bl.Product.getListOfProductItem());
+            Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             InitializeComponent();
         }
@@ -83,17 +86,16 @@ namespace PL.ProductWindows
                 Object selectedItem = Category_selector.SelectedItem;
 
                 if (selectedItem.ToString() == "All")
-                    Items = new ObservableCollection<ProductItem?>(bl?.Product.getListOfProductItem());
+                    Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
 
                 else
-                    Items = new ObservableCollection<ProductItem?>(bl?.Product.getListOfProductItem((a => a?.ProductCategory.ToString() == selectedItem.ToString())));
+                    Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem((a => a?.ProductCategory.ToString() == selectedItem.ToString())));
             }
             catch (Exception)
             {
                 MessageBox.Show(
                          "Somthing went worng...\n please try again later",
                          "Unknown error",
-                         // MessageBoxButton.OKCancel,
                          MessageBoxButton.OK,
                          MessageBoxImage.Hand,
                          MessageBoxResult.Cancel,
@@ -108,15 +110,23 @@ namespace PL.ProductWindows
         }
         private void Add_to_cart(object sender, MouseButtonEventArgs e)
         {
+            // productItem = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
+
+            productItem = 
             var p = bl?.Product.GetProduct( ((ProductItem)List_of_product.SelectedItem).idOfProduct);
             try
             {
                 if (p.InStock - 1 < 0)
                 {
                     throw new BO.outOfStock(p.idOfProduct);
-                }
-            }
-            catch (outOfStock ex)
+                }           
+
+            ((ProductItem)List_of_product.SelectedItem).Amount++;
+
+
+           MyCart= bl?.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct)?? throw new BO.incorrectData();
+      }  
+            catch (BO.outOfStock ex)
             {
                 MessageBox.Show(
                         "The product "+ ex.idOfProduct +
@@ -124,17 +134,25 @@ namespace PL.ProductWindows
                        "Out of stock",
                         MessageBoxButton.OK,
                         MessageBoxImage.Hand,
-                        MessageBoxResult.Cancel,
+                        MessageBoxResult.OK,
                         MessageBoxOptions.RtlReading);
             }
-            ((ProductItem)List_of_product.SelectedItem).Amount++;
-           MyCart= bl.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct);
+            catch (BO.incorrectData)
+            {
+                MessageBox.Show(
+                       "There is a data problem; try again.",
+                       "Incorrect data:",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Hand,
+                        MessageBoxResult.OK,
+                        MessageBoxOptions.RtlReading);
+            }
         }
 
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
         {
             new CartWindows.CartNew(MyCart);
-            CartShow = false;
+           ///this.Close();
         }
     }
 }

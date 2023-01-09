@@ -10,19 +10,15 @@
 
         <Button Content="Product"
                 FontSize="36"
-                Margin="0,123,325,251" 
+                Margin="0,157,500,217" 
                 Click="ProductListWindow_Click"
-                HorizontalAlignment="Right"
-                Width="205">
-        </Button>
+                Width="204"/>
         <Button Content="Order"
-                FontSize="36" Margin="0,255,325,120" 
+                FontSize="36" Margin="0,158,130,217" 
                 FontWeight="Normal"
                 Click="OrderListWindow_Click"
-                HorizontalAlignment="Right"
-                Width="205">
-        </Button>
-                    
+                Width="205"/>
+
         <TextBox HorizontalAlignment="Left"
                  Margin="24,35,0,0"
                  FontSize="36"

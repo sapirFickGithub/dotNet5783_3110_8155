@@ -28,27 +28,21 @@ namespace PL.CartWindows
 
         public bool hasSorted = true;
 
-        public event Action<int> action;
 
-        // public BO.Cart? MyCart { set; get; }
-
-
-        public ObservableCollection<BO.Cart?> MyCart//dependency proprty in order to use 'data binding'
+        public ObservableCollection<BO.Cart> MyCart//dependency proprty in order to use 'data binding'
         {
-            get { return (ObservableCollection<BO.Cart?>)GetValue(CartProperty); }
+            get { return (ObservableCollection<BO.Cart>)GetValue(CartProperty); }
             set { SetValue(CartProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for order utem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CartProperty =
-            DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart?>), typeof(CartNew));
+            DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart>), typeof(CartNew));
 
 
-        public CartNew(BO.Cart? myCart)
+        public CartNew(BO.Cart myCart)
         {
-
-            MyCart = new ObservableCollection<BO.Cart?>((IEnumerable<Cart?>)(myCart));
-            this.action = action;
+            MyCart = new ObservableCollection<BO.Cart> { myCart };
             InitializeComponent();
         }
 
@@ -125,7 +119,7 @@ namespace PL.CartWindows
             if (gridViewColumnHeader is not null)
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
-                var listTemp = bl.Product.getListOfProductItem();
+                var listTemp = bl?.Product.getListOfProductItem();
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
 
                 view.SortDescriptions.Clear();
