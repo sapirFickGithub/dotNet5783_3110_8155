@@ -54,7 +54,7 @@ namespace PL.OrderWindows
             if (gridViewColumnHeader is not null)
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
-                var listTemp = bl.Order.GetAllOrderForList();
+                ObservableCollection<BO.OrderForList?> listTemp = (ObservableCollection<OrderForList?>)(bl?.Order?.GetAllOrderForList());
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
 
                 view.SortDescriptions.Clear();
@@ -83,7 +83,7 @@ namespace PL.OrderWindows
 
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-           =>  new OrderWindows.OrderView(OrdersForList,(OrderForList)List_of_orders.SelectedItem).Show();
+           => new OrderWindows.ViewOrder((OrderForList)List_of_orders.SelectedItem).Show();
         
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)

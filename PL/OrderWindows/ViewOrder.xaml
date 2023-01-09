@@ -1,0 +1,97 @@
+﻿<Window x:Class="PL.OrderWindows.ViewOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.OrderWindows"
+        mc:Ignorable="d"
+         DataContext="{Binding RelativeSource={RelativeSource self}}"  
+        Title="ViewOrder" Height="450" Width="800">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left"
+                 Margin="505,39,0,0" 
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="234"
+                 Text="{Binding order.CustomerName}" 
+                 Height="25" 
+                 />
+        <Button Content="Back" HorizontalAlignment="Left" Margin="38,357,0,0" VerticalAlignment="Top" Width="117"
+                Click="BackToOrderListWindow_Click" Height="42"/>
+        <Button x:Name="update_order"
+                Content="Update"
+                HorizontalAlignment="Left"
+                Margin="547,352,0,0" 
+                VerticalAlignment="Top" 
+                Width="179" Height="47"
+                Click="UpdateOrder_click"                
+                />
+        <Label Content="Customer name:" HorizontalAlignment="Left" Margin="400,38,0,0" VerticalAlignment="Top" Width="96"/>
+        <Label Content="ID of order:" HorizontalAlignment="Left" Margin="38,38,0,0" VerticalAlignment="Top" Width="74"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="547,112,0,0" VerticalAlignment="Top" Width="49"/>
+        <Label Content="Amount of item:" HorizontalAlignment="Left" Margin="547,154,0,0" VerticalAlignment="Top" Width="97"/>
+        <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,191,0,0" VerticalAlignment="Top" Width="97"/>
+        <TextBlock HorizontalAlignment="Left"
+            Margin="120,39,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="232"
+            Text="{Binding order.idOfOrder}" 
+            Height="25" 
+                 />
+        <TextBlock HorizontalAlignment="Center"
+            Margin="0,100,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="234"
+            Text="{Binding order.idOfOrder}" 
+            Height="25"
+                 />
+        <ComboBox x:Name="Status_selector"
+                  HorizontalAlignment="Left"
+                  Margin="654,117,0,0" 
+                  FontFamily= "Maiandra GD"
+                  VerticalAlignment="Top"
+                  Width="98" 
+                  Height="25"
+                  SelectionChanged="Category_SelectionChanged"
+                  ItemsSource="{Binding status}"
+                  SelectedItem="{Binding order.Status}" 
+
+            >
+
+        </ComboBox>
+        <!--<TextBox HorizontalAlignment="Center"
+            Margin="0,100,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="234"
+            Text="{Binding order.Status}" 
+            Height="25" TextChanged="TextBox_TextChanged"
+                 />-->
+        <TextBlock HorizontalAlignment="Left"
+            Width="98" Height="26" Margin="654,154,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Text="{Binding order.AmountOfItem}"             
+                 />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="654,192,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="98"
+            Text="{Binding order.TotalPrice}" 
+            Height="25" 
+                 />
+        <CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="603,231,0,0" Height="24" Width="98" Checked="CheckBox_Checked"/>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
