@@ -18,7 +18,7 @@ namespace BlImplementation
         {
             DO.Product product = dal?.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
 
-            BO.OrderItem? item = cart?.itemList?.FirstOrDefault(i => i?.idOfProduct == idOfProduct);
+            BO.OrderItem? item = cart?.itemList?.FirstOrDefault(i => i?.idOfProduct == idOfProduct);//item  = null
             if (item != null)
             {
                 if (product.InStock - item.amount >= 0)

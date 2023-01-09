@@ -30,6 +30,7 @@ namespace PL.OrderWindows
         public IEnumerable<BO.Enum.OrderStatus> status { set; get; }
 
         public BO.OrderForList order { get; set; }
+        public bool hasSorted = true;
 
         public ObservableCollection<OrderItem> Items
         {
@@ -88,6 +89,31 @@ namespace PL.OrderWindows
         private void Update_amount_Click(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
+
+            if (gridViewColumnHeader is not null)
+            {
+                string name = (gridViewColumnHeader.Tag as string)!;
+                ObservableCollection<BO.OrderForList?> listTemp = (ObservableCollection<OrderForList?>)(bl?.Order?.GetAllOrderForList());
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+
+                view.SortDescriptions.Clear();
+                if (hasSorted)
+                {
+
+                    view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
+                    hasSorted = false;
+                }
+                else
+                {
+                    view.SortDescriptions.Add(new SortDescription(name, ListSortDirection.Ascending));
+                    hasSorted = true;
+                }
+            }
         }
     }
 }

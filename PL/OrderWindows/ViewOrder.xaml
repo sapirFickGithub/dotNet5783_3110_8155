@@ -73,6 +73,7 @@
         <CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
                   Margin="547,281,0,0" Height="32" Width="154" Checked="Supply_Checked" FontSize="20"/>
         <ListView 
+            x:Name="List_of_orders"
              ItemsSource="{Binding Items}" MouseDoubleClick="Update_amount_Click"
             d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98">
             <ListView.View>
