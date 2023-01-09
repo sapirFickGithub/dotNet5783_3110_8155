@@ -25,7 +25,7 @@ namespace BlImplementation
             return productsItemList;
         }
 
-        private BO.ProductItem doToBoProductItem(DO.Product? product)
+        public BO.ProductItem doToBoProductItem(DO.Product? product)
         {
             return new BO.ProductItem
             {

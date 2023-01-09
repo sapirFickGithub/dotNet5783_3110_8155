@@ -55,13 +55,13 @@
                     </GridViewColumn>
 
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding productItem.Price}" >
+                            DisplayMemberBinding="{Binding Price}" >
                         <GridViewColumnHeader 
                             Content= "Price" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
                     <GridViewColumn 
-                            DisplayMemberBinding="{Binding productItem.Amount}" >
+                            DisplayMemberBinding="{Binding Amount}" >
                         <GridViewColumnHeader 
                             Content= "Amount" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>

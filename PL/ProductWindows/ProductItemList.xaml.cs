@@ -28,7 +28,9 @@ namespace PL.ProductWindows
         public BO.Cart MyCart { get; set; }
         public IEnumerable<BO.Enum.Category> Categories { set; get; }
         public BO.ProductItem productItem { get; set; }
-       
+        public BO.Product? product { get; set; }
+
+
         public bool hasSorted = true;
 
         //public bool CartShow = true;
@@ -41,10 +43,11 @@ namespace PL.ProductWindows
 
         // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsProperty =
-            DependencyProperty.Register("Items", typeof(ObservableCollection<ProductItem>), typeof(ProductList));
+            DependencyProperty.Register("Items", typeof(ObservableCollection<ProductItem>), typeof(ProductItemList));
 
         public ProductItemList()
         {
+            product = new BO.Product();
             productItem = new BO.ProductItem();
             MyCart = new BO.Cart();
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
@@ -112,24 +115,26 @@ namespace PL.ProductWindows
         {
             // productItem = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
 
-            productItem = 
-            var p = bl?.Product.GetProduct( ((ProductItem)List_of_product.SelectedItem).idOfProduct);
+
+            product = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
             try
             {
-                if (p.InStock - 1 < 0)
+                if (product?.InStock - 1 < 0)
                 {
-                    throw new BO.outOfStock(p.idOfProduct);
-                }           
-
-            ((ProductItem)List_of_product.SelectedItem).Amount++;
+                    throw new BO.outOfStock(product.idOfProduct);
+                }
 
 
-           MyCart= bl?.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct)?? throw new BO.incorrectData();
-      }  
+                productItem = ((ProductItem)List_of_product.SelectedItem);
+                productItem.Amount++;
+               
+
+                MyCart = bl?.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct) ?? throw new BO.incorrectData();
+            }
             catch (BO.outOfStock ex)
             {
                 MessageBox.Show(
-                        "The product "+ ex.idOfProduct +
+                        "The product " + ex.idOfProduct +
                         "is out of stock",
                        "Out of stock",
                         MessageBoxButton.OK,
@@ -152,7 +157,7 @@ namespace PL.ProductWindows
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
         {
             new CartWindows.CartNew(MyCart);
-           ///this.Close();
+            ///this.Close();
         }
     }
 }
