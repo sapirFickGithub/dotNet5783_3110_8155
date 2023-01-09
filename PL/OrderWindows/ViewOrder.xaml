@@ -10,7 +10,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left"
-                 Margin="505,39,0,0" 
+                 Margin="505,47,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="234"
@@ -28,15 +28,15 @@
                 Click="UpdateOrder_click"                
                 />
         <Label Content="Customer name:" HorizontalAlignment="Left" Margin="400,38,0,0" VerticalAlignment="Top" Width="96"/>
-        <Label Content="ID of order:" HorizontalAlignment="Left" Margin="38,38,0,0" VerticalAlignment="Top" Width="74"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="547,112,0,0" VerticalAlignment="Top" Width="49"/>
-        <Label Content="Amount of item:" HorizontalAlignment="Left" Margin="547,154,0,0" VerticalAlignment="Top" Width="97"/>
-        <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,191,0,0" VerticalAlignment="Top" Width="97"/>
+        <Label Content="ID of order:" HorizontalAlignment="Left" Margin="38,38,0,0" VerticalAlignment="Top" Width="117"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="547,112,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Amount&#xD;&#xA; of item:" HorizontalAlignment="Left" Margin="547,154,0,0" VerticalAlignment="Top" Width="156"/>
+        <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,222,0,0" VerticalAlignment="Top" Width="105"/>
         <TextBlock HorizontalAlignment="Left"
-            Margin="120,39,0,0" 
+            Margin="148,44,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="232"
+            Width="203"
             Text="{Binding order.idOfOrder}" 
             Height="25" 
                  />
@@ -50,45 +50,75 @@
                  />
         <ComboBox x:Name="Status_selector"
                   HorizontalAlignment="Left"
-                  Margin="654,117,0,0" 
-                  FontFamily= "Maiandra GD"
-                  VerticalAlignment="Top"
-                  Width="98" 
-                  Height="25"
-                  SelectionChanged="Category_SelectionChanged"
+                  Margin="652,112,0,0" Width="98" Height="38"
+                  VerticalAlignment="Top" SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding status}"
-                  SelectedItem="{Binding order.Status}" 
-
-            >
-
+                  SelectedItem="{Binding order.Status}">
         </ComboBox>
-        <!--<TextBox HorizontalAlignment="Center"
-            Margin="0,100,0,0" 
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="234"
-            Text="{Binding order.Status}" 
-            Height="25" TextChanged="TextBox_TextChanged"
-                 />-->
+        
         <TextBlock HorizontalAlignment="Left"
-            Width="98" Height="26" Margin="654,154,0,0" 
+            Width="66" Height="58" Margin="668,160,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Text="{Binding order.AmountOfItem}"             
                  />
         <TextBlock HorizontalAlignment="Left"
-            Margin="654,192,0,0" 
+            Margin="662,227,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="98"
+            Width="88"
             Text="{Binding order.TotalPrice}" 
-            Height="25" 
+            Height="37" 
                  />
-        <CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="603,231,0,0" Height="24" Width="98" Checked="CheckBox_Checked"/>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98">
+        <CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="547,281,0,0" Height="32" Width="154" Checked="Supply_Checked" FontSize="20"/>
+        <ListView 
+             ItemsSource="{Binding Items}" MouseDoubleClick="Update_amount_Click"
+            d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding Name}" >
+                        <GridViewColumnHeader 
+                            Content="Name" Tag="Name"
+                            Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding idOfProduct}">
+                        <GridViewColumnHeader 
+                            Content="ID" Tag="idOfProduct"
+                            Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn  
+                            DisplayMemberBinding="{Binding ProductCategory }" >
+                        <GridViewColumnHeader 
+                            Content="Category" Tag="ProductCategory"
+                            Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding productItem.Price}" >
+                        <GridViewColumnHeader 
+                            Content= "Price" Tag="Price"
+                            Click= "Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding productItem.Amount}" >
+                        <GridViewColumnHeader 
+                            Content= "Amount" Tag="Price"
+                            Click= "Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding InStock}" >
+                        <GridViewColumnHeader 
+                            Content= "Instock" Tag="Price"
+                            Click= "Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>
