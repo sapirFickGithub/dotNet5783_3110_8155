@@ -61,7 +61,7 @@
                   HorizontalAlignment="Left" VerticalAlignment="Top"
                   Width="250" Height="30"  Margin="152,10,0,0" Grid.Row="5"                  
                   SelectionChanged="Category_SelectionChanged"
-                  Text="{Binding product.ProductCategory }"
+                  SelectedItem="{Binding product.ProductCategory}"              
                   ItemsSource="{Binding Categories}">
         </ComboBox>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontSize="14" FontWeight="Normal"/>
