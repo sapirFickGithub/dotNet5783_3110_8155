@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 namespace Dal;
+
+using DalApi;
 using DO;
 using System.Runtime.CompilerServices;
 using System.Windows.Markup;
@@ -83,14 +85,32 @@ using System.Windows.Markup;
             Order _order = new Order();
             _order.idOfOrder = _Config.get_OrderID;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
-            _order.DateOfShipping = null;
+           // _order.DateOfShipping = null;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
-            _order.DateOfOrder = DateTime.Now;
-            int _rand = rand.Next(0, 10);
-            if (_rand <=8)
+            _order.DateOfOrder = new DateTime(2023,1,1,4,0,0);
+            int _rand = rand.Next(0, 11);
+            //if (_rand <=8)
+            //{
+            //    _order.DateOfShipping = (DateTime)(DateTime.Now + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)));
+            //    if (_rand <=4)
+            //    {
+            //        _order.DateOfDelivery = _order.DateOfShipping + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
+            //    }
+            //    else
+            //    {
+            //        _order.DateOfDelivery = null;
+            //    }
+            //}
+            //else
+            //{
+            //    _order.DateOfShipping = null;
+            //    _order.DateOfDelivery = null;
+
+            //}
+            if (_rand <= 8)
             {
-                _order.DateOfShipping = (DateTime)(_order.DateOfOrder + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)));
-                if (_rand <=4)
+                _order.DateOfShipping = _order.DateOfOrder + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
+                if (_rand <=6)
                 {
                     _order.DateOfDelivery = _order.DateOfShipping + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
                 }
@@ -103,6 +123,7 @@ using System.Windows.Markup;
             {
                 _order.DateOfShipping = null;
                 _order.DateOfDelivery = null;
+
             }
             _order.CustamerAddress = city[rand.Next(0, 5)];//"jrusalem";
             _order.CustomerMail = _order.CustomerName+"@gmail.com";

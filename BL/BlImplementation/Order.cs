@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using DalApi;
 using DO;
 using System;
@@ -47,15 +48,17 @@ namespace BlImplementation
             };
             var orderTemp = dal.Order.getOneByParam(x => order?.idOfOrder == x?.idOfOrder);
 
-            if (orderTemp?.DateOfOrder == null)
-            {
-                OrderForList.Status = (BO.Enum.OrderStatus.SHIPPED);
-            }
-            else if (orderTemp?.DateOfShipping != null && orderTemp?.DateOfOrder == null)
+            if (orderTemp?.DateOfOrder == null )
             {
                 OrderForList.Status = (BO.Enum.OrderStatus.ORDERED);
             }
-            else
+            
+           
+            else if (orderTemp?.DateOfOrder != null && orderTemp?.DateOfShipping == null)
+            {
+                OrderForList.Status = (BO.Enum.OrderStatus.SHIPPED);
+            }
+            else if (orderTemp?.DateOfDelivery != null)
             {
                 OrderForList.Status = (BO.Enum.OrderStatus.DLIVERY);
             }
@@ -80,11 +83,11 @@ namespace BlImplementation
                 DateOfOrder = Dorder.DateOfOrder,
                 DateOfDelivery = Dorder.DateOfDelivery
             };
-            if (Dorder.DateOfOrder == null)
+            if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
             {
                 order.Status = (BO.Enum.OrderStatus.SHIPPED);
             }
-            else if (Dorder.DateOfShipping != null && Dorder.DateOfOrder == null)
+            else if (Dorder.DateOfOrder == null)
             {
                 order.Status = (BO.Enum.OrderStatus.ORDERED);
             }
@@ -92,7 +95,19 @@ namespace BlImplementation
             {
                 order.Status = (BO.Enum.OrderStatus.DLIVERY);
             }
-            int i = 0;
+            //if (Dorder.DateOfOrder == null)
+            //{
+            //    order.Status = (BO.Enum.OrderStatus.SHIPPED);
+            //}
+            //else if (Dorder.DateOfShipping != null && Dorder.DateOfOrder == null)
+            //{
+            //    order.Status = (BO.Enum.OrderStatus.ORDERED);
+            //}
+            //else
+            //{
+            //    order.Status = (BO.Enum.OrderStatus.DLIVERY);
+            //}
+            
             order.Items = new List<BO.OrderItem>();
 
 
@@ -108,18 +123,6 @@ namespace BlImplementation
             order.TotalPrice = order.Items.Sum(item => item.totalPrice);
 
 
-            //foreach (var item in orderItems)
-            //{
-            //    order.Items.Add(new() { });
-            //    order.Items[i].idOfOrder = (int)item?.ID;
-            //    order.Items[i].idOfProduct = (int)item?.idProduct;
-            //    order.Items[i].NameOfProduct = (dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct))?.Name;
-            //    order.Items[i].amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount;
-            //    order.Items[i].PriceOfProduct = (double)item?.Price;
-            //    order.Items[i].totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price;
-            //    order.TotalPrice += (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price;
-            //    i++;
-            //}
             return order;
         }
 
@@ -164,16 +167,17 @@ namespace BlImplementation
 
             BO.OrderTracking orderTracking = new() { idOfOrder = numOfOrder };
             orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
+            
 
-            if (Dorder.DateOfShipping == null)
+            if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
             {
-                orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
+                orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
                 a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status);
 
             }
-            else if (Dorder.DateOfOrder != null && Dorder.DateOfDelivery == null)
+            else if (Dorder.DateOfOrder == null)
             {
-                orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
+                orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
                 a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, (BO.Enum.OrderStatus)orderTracking.Status);
             }
             else
