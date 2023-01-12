@@ -60,7 +60,6 @@ namespace PL.OrderWindows
                 view.SortDescriptions.Clear();
                 if (hasSorted)
                 {
-
                     view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
                     hasSorted = false;
                 }
@@ -72,15 +71,6 @@ namespace PL.OrderWindows
             }
 
         }
-
-
-
-
-
-        //private void getOrderForList(int orderId)
-        //    => OrdersForList.Add(bl.Order.GetOneOrderForList(orderId));
-
-
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
            => new OrderWindows.ViewOrder((OrderForList)List_of_orders.SelectedItem).Show();

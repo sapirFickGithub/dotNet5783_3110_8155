@@ -62,15 +62,14 @@ namespace BlImplementation
             return OrderForList;
         }
 
-
-
         public BO.Order GetOrder(int numOfOrder)
         {
             if (numOfOrder > 999999 || numOfOrder < 100000)
                 throw new incorrectData();
 
             DO.Order Dorder = (DO.Order)dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder);
-            IEnumerable<DO.OrderItem?> orderItems = dal.OrderItem.getAllByParam(x => numOfOrder == (int)(x?.ID));
+            IEnumerable<DO.OrderItem?> orderItems = dal.OrderItem.getAllByParam(x => numOfOrder == (int)(x?.ID));/// return null??
+
             BO.Order? order = new()
             {
                 idOfOrder = numOfOrder,
@@ -95,21 +94,34 @@ namespace BlImplementation
             }
             int i = 0;
             order.Items = new List<BO.OrderItem>();
-            foreach (var item in orderItems)
+
+
+            order.Items.AddRange(orderItems.Select((item, index) => new BO.OrderItem
             {
-                order.Items.Add(new() { });
-                order.Items[i].idOfOrder = (int)item?.ID;
-                order.Items[i].idOfProduct = (int)item?.idProduct;
-                order.Items[i].NameOfProduct = (dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct))?.Name;
-                order.Items[i].amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount;
-                order.Items[i].PriceOfProduct = (double)item?.Price;
-                order.Items[i].totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price;
-                order.TotalPrice += (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price;
-                i++;
-            }
+                idOfOrder = (int)item?.ID,
+                idOfProduct = (int)item?.idProduct,
+                NameOfProduct = dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct)?.Name,
+                amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount,
+                PriceOfProduct = (double)item?.Price,
+                totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price
+            }));
+            order.TotalPrice = order.Items.Sum(item => item.totalPrice);
+
+
+            //foreach (var item in orderItems)
+            //{
+            //    order.Items.Add(new() { });
+            //    order.Items[i].idOfOrder = (int)item?.ID;
+            //    order.Items[i].idOfProduct = (int)item?.idProduct;
+            //    order.Items[i].NameOfProduct = (dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct))?.Name;
+            //    order.Items[i].amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount;
+            //    order.Items[i].PriceOfProduct = (double)item?.Price;
+            //    order.Items[i].totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price;
+            //    order.TotalPrice += (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price;
+            //    i++;
+            //}
             return order;
         }
-
 
         public BO.Order? updateDliveryOrder(int numOfOrder)
         {

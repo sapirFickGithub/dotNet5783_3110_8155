@@ -9,19 +9,16 @@
     <Grid>
 
         <Button Content="Product"
-                FontSize="36"
-                Margin="0,157,500,204" 
+                Margin="0,157,500,204"  FontSize="36"
                 Click="ProductListWindow_Click"
                 Width="204"/>
         <Button Content="Order"
-                FontSize="36" Margin="0,158,130,204" 
-                FontWeight="Normal"
+                Margin="0,158,130,204"  FontSize="36" 
                 Click="OrderListWindow_Click"
                 Width="205"/>
 
         <TextBox HorizontalAlignment="Left"
-                 Margin="24,35,0,0"
-                 FontSize="36"
+                 Margin="24,35,0,0"   FontSize="36"
                  FontFamily= "Maiandra GD"
                  TextWrapping="Wrap"
                  Text="Admin options:"

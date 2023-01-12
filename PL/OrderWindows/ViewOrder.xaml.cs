@@ -29,7 +29,7 @@ namespace PL.OrderWindows
         // public event Action<int> action;
         public IEnumerable<BO.Enum.OrderStatus> status { set; get; }
 
-        public BO.OrderForList order { get; set; }
+        public BO.OrderForList orderForList { get; set; }
 
         public bool hasSorted = true;
 
@@ -44,26 +44,27 @@ namespace PL.OrderWindows
             DependencyProperty.Register("Items", typeof(ObservableCollection<OrderItem>), typeof(ViewOrder));
 
 
-        public ViewOrder(OrderForList? orderForList)
+        public ViewOrder(OrderForList? orderForLst)
         {
-            order = orderForList;
+            orderForList = orderForLst;
             status = System.Enum.GetValues(typeof(BO.Enum.OrderStatus)).Cast<BO.Enum.OrderStatus>();
-            Items = new ObservableCollection<OrderItem>(bl.Order.GetOrder(order.idOfOrder).Items);
+
+            Items = new ObservableCollection<OrderItem>(bl.Order.GetOrder(orderForList.idOfOrder).Items);
 
             InitializeComponent();
         }
 
         private void BackToOrderListWindow_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void UpdateOrder_click(object sender, RoutedEventArgs e)
         {
             if (is_supply.IsChecked == true)
-                bl.Order.UpdateSupplyDelivery(order.idOfOrder);
+                bl.Order.UpdateSupplyDelivery(orderForList.idOfOrder);
             if(Status_selector.Text== "Dlivery")
-            bl.Order.updateDliveryOrder(order.idOfOrder);
+            bl.Order.updateDliveryOrder(orderForList.idOfOrder);
             
         }
 
@@ -89,7 +90,7 @@ namespace PL.OrderWindows
 
         private void Update_amount_Click(object sender, MouseButtonEventArgs e)
         {
-
+            new UpdateAmountItem();
         }
 
         private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)

@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:PL.OrderWindows"
         mc:Ignorable="d"
          DataContext="{Binding RelativeSource={RelativeSource self}}"  
-        Title="ViewOrder" Height="450" Width="800">
+        Title="Update order" Height="450" Width="800">
 
     <Grid>
         <TextBlock HorizontalAlignment="Left"
-                 Margin="501,47,0,0" 
+                 Margin="501,43,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="234"
-                 Text="{Binding order.CustomerName}" 
+                 Text="{Binding orderForList.CustomerName}" 
                  Height="25" 
                  />
         <Button Content="Back" HorizontalAlignment="Left" Margin="38,357,0,0" VerticalAlignment="Top" Width="117"
@@ -33,11 +33,11 @@
         <Label Content="Amount&#xD;&#xA; of item:" HorizontalAlignment="Left" Margin="547,154,0,0" VerticalAlignment="Top" Width="156"/>
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,222,0,0" VerticalAlignment="Top" Width="105"/>
         <TextBlock HorizontalAlignment="Left"
-            Margin="155,47,0,0" 
+            Margin="155,43,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="203"
-            Text="{Binding order.idOfOrder}" 
+            Text="{Binding orderForList.idOfOrder}" 
             Height="25" 
                  />
         <TextBlock HorizontalAlignment="Center"
@@ -45,7 +45,7 @@
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="234"
-            Text="{Binding order.idOfOrder}" 
+            Text="{Binding orderForList.idOfOrder}" 
             Height="25"
                  />
         <ComboBox x:Name="Status_selector"
@@ -53,21 +53,21 @@
                   Margin="636,112,0,0" Width="114" Height="38"
                   VerticalAlignment="Top" SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding status}"
-                  SelectedItem="{Binding order.Status}">
+                  SelectedItem="{Binding orderForList.Status}">
         </ComboBox>
 
         <TextBlock HorizontalAlignment="Left"
             Width="66" Height="38" Margin="657,170,0,0" 
             TextWrapping="Wrap" FontSize="20"
             VerticalAlignment="Top"
-            Text="{Binding order.AmountOfItem}"             
+            Text="{Binding orderForList.AmountOfItem}"             
                  />
         <TextBlock HorizontalAlignment="Left"
             Margin="662,225,0,0"  Width="88"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
            FontSize="20"
-            Text="{Binding order.TotalPrice}" 
+            Text="{Binding orderForList.TotalPrice}" 
             Height="37" 
                  />
         <CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -82,45 +82,33 @@
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding NameOfProduct}" >
                         <GridViewColumnHeader 
-                            Content="Name" Tag="NameOfProduct"
-                            Click="Sort_By_Colmun_Click"/>
+                            Content="Name" Tag="NameOfProduct"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding idOfProduct}">
                         <GridViewColumnHeader 
-                            Content="ID" Tag="idOfProduct"
-                            Click="Sort_By_Colmun_Click"/>
+                            Content="ID" Tag="idOfProduct"/>
                     </GridViewColumn>
 
                     <GridViewColumn  
                             DisplayMemberBinding="{Binding  ProductCategory }" >
                         <GridViewColumnHeader 
-                            Content="Category" Tag="ProductCategory"
-                            Click="Sort_By_Colmun_Click"/>
+                            Content="Category" Tag="ProductCategory"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding PriceOfProduct}" >
                         <GridViewColumnHeader 
-                            Content= "Price" Tag="PriceOfProduct"
-                            Click= "Sort_By_Colmun_Click"/>
+                            Content= "Price" Tag="PriceOfProduct"/>
                     </GridViewColumn>
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding amount}" >
                         <GridViewColumnHeader 
-                            Content= "Amount" Tag="amount"
-                            Click= "Sort_By_Colmun_Click"/>
+                            Content= "Amount" Tag="amount"/>
                     </GridViewColumn>
-
-                    <!--<GridViewColumn 
-                            DisplayMemberBinding="{Binding totalPrice}" >
-                        <GridViewColumnHeader 
-                            Content= "Price" Tag="totalPrice"
-                            Click= "Sort_By_Colmun_Click"/>
-                    </GridViewColumn>-->
-
+                    
                 </GridView>
             </ListView.View>
         </ListView>
