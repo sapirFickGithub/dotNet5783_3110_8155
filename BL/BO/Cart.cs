@@ -30,20 +30,7 @@ Cart:
             return print;
         }
 
-        //        public override string ToString()
-        //        {
-        //            string print = $@"
-        //Cart:
-        //   Customer name: {CustomerName}.
-        //   Customer Mail- {CustomerMail}.
-        //   Custamer address- {CustomerAddress}.";
-        //            foreach (var item in itemList)
-        //            {
-        //                print = print + "\n" + item?.NameOfProduct + "\n" + item?.ToString();
-        //            }
-        //            print = print + "\n" + $@"TotalPrice: {TotalPrice}";
-        //            return print;
-        //        }
+       
     }
 }
 

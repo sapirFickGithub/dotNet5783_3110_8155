@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32929.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stage0", "Stage0\Stage0.csproj", "{77BC34C6-8772-4E1A-9983-7BFB742723FF}"
 EndProject
@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{8BA75BB9-638
 	ProjectSection(SolutionItems) = preProject
 		xml\dal-config.xml = xml\dal-config.xml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,26 @@ Global
 		{766F7D01-FBBF-4B88-A695-8BF260520E06}.Release|x64.Build.0 = Release|Any CPU
 		{766F7D01-FBBF-4B88-A695-8BF260520E06}.Release|x86.ActiveCfg = Release|Any CPU
 		{766F7D01-FBBF-4B88-A695-8BF260520E06}.Release|x86.Build.0 = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|x64.Build.0 = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Debug|x86.Build.0 = Debug|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|ARM.Build.0 = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|ARM64.Build.0 = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x64.ActiveCfg = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x64.Build.0 = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x86.ActiveCfg = Release|Any CPU
+		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

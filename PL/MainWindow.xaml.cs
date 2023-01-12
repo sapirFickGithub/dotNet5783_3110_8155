@@ -38,7 +38,8 @@ namespace PL
 
         private void Client_Click(object sender, RoutedEventArgs e)
         {
-            new ProductWindows.ProductItemList().Show();
+            BO.Cart cart = new BO.Cart();
+            new ProductWindows.ProductItemList(cart).Show();
             this.Close();
         }
 

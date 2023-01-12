@@ -17,6 +17,7 @@ using BO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 
+
 namespace PL.CartWindows
 {
     /// <summary>
@@ -29,22 +30,51 @@ namespace PL.CartWindows
         public bool hasSorted = true;
 
 
+        public ObservableCollection<BO.OrderItem> items
+        {
+            get { return (ObservableCollection<BO.OrderItem>)GetValue(ItemsProperty); }
+            set { SetValue(ItemsProperty, value); }
+        }
+        public static readonly DependencyProperty ItemsProperty =
+            DependencyProperty.Register("Items", typeof(ObservableCollection<BO.OrderItem>), typeof(CartNew));
+
+
+
         public ObservableCollection<BO.Cart> MyCart//dependency proprty in order to use 'data binding'
         {
             get { return (ObservableCollection<BO.Cart>)GetValue(CartProperty); }
             set { SetValue(CartProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for order utem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CartProperty =
-            DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart>), typeof(CartNew));
+           DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart>), typeof(CartNew));
 
 
-        public CartNew(BO.Cart myCart)
+        public ObservableCollection<string> TotalPrice
         {
+            get { return (ObservableCollection<string>)GetValue(TotalPrieProperty); }
+            set { SetValue(TotalPrieProperty, value); }
+        }
+        public static readonly DependencyProperty TotalPrieProperty =
+            DependencyProperty.Register("TotalPrie", typeof(ObservableCollection<string>), typeof(CartNew));
+
+
+
+        public ProductWindows.ProductItemList parent;
+
+        public CartNew(BO.Cart myCart, ProductWindows.ProductItemList parnt)
+        {
+            parent = parnt;
+            //TotalPrice[0] = myCart.TotalPrice.ToString();
+            items = new ObservableCollection<BO.OrderItem>(myCart.itemList);
             MyCart = new ObservableCollection<BO.Cart> { myCart };
             InitializeComponent();
         }
+
+        private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
         private void approve_orer_Click(object sender, RoutedEventArgs e)
         {
@@ -76,19 +106,22 @@ namespace PL.CartWindows
             MyCart[0].CustomerMail = customer_Mail.Text;
             try
             {
-               int idOrder= bl.Cart.approvment(MyCart[0]);
-                if (idOrder>0)
+                int idOrder = bl.Cart.approvment(MyCart[0]);
+                if (idOrder > 0)
                 {
                     MessageBox.Show(
-                            "Your order is being processed" +
-                            "your order number is: " + idOrder+
-                            "Thanks for buying!",
+                            "Your order is being processed " +
+                            "your order number is:   " + idOrder +
+                            "   Thanks for buying!",
                             "Approvment",
                             MessageBoxButton.OK,
                             MessageBoxImage.Hand,
                             MessageBoxResult.None,
                             MessageBoxOptions.RtlReading);
 
+                    new MainWindow().Show();
+
+                    parent.Close();
                     this.Close();
                 }
             }
@@ -107,10 +140,7 @@ namespace PL.CartWindows
         }
 
 
-        private void Update_in_Cart_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
 
-        }
 
         private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
@@ -138,9 +168,112 @@ namespace PL.CartWindows
 
         }
 
-        private void Catalog_Click(object sender, RoutedEventArgs e)
-        {
 
+
+
+
+
+        private void Increase_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            OrderItem orderItem = button.DataContext as OrderItem;
+
+            var p = bl.Product.GetProduct(orderItem.idOfProduct);
+
+            int productId = (int)button.Tag;
+
+            if ((p.InStock - orderItem.amount < 0))
+                MessageBox.Show(
+                         "No more of this item in stock :( ",
+                         "Out of stock",
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Hand,
+                         MessageBoxResult.Cancel,
+                         MessageBoxOptions.RtlReading);
+
+            else
+            {
+                bl.Cart.add(MyCart[0], productId);
+
+                // Find the product in the collection and update its amount
+                var product = parent.Items.FirstOrDefault(p => p.idOfProduct == productId);
+                if (product != null)
+                {
+                    product.Amount++;
+                }
+
+                //עידכון המחיר הכולל
+               // this.TotalPrice[0] = MyCart[0].TotalPrice.ToString();
+
+                // Update the OrderForObservableCollection in the parent window
+                this.Dispatcher.Invoke(() =>
+                {
+                    parent.Items = new ObservableCollection<BO.ProductItem>(parent.Items);
+                    this.items = new ObservableCollection<BO.OrderItem>(this.items);
+                    //this.TotalPrice = new ObservableCollection<string>(this.TotalPrice);
+                });
+            }
         }
+
+
+
+
+        private void Decrease_Click(object sender, RoutedEventArgs e)
+        {
+            Button myButtom = sender as Button;
+            int productId = (int)myButtom.Tag;
+
+
+            OrderItem orderItem = myButtom.DataContext as OrderItem;
+
+
+            if (orderItem.amount == 0)
+                MessageBox.Show(
+                         "Cant ",
+                         "ERROR",
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Hand,
+                         MessageBoxResult.Cancel,
+                         MessageBoxOptions.RtlReading);
+            else
+            {
+
+                // Find the product in the `productItemForObservableCollection` list
+                var product = parent.Items.FirstOrDefault(item => item.idOfProduct == productId);
+
+                if (product != null)
+                {
+                    product.Amount--;
+
+                    // If the product's amount is now zero, remove it from the `listOfOrderItemForObservableCollection` list
+                    if (product.Amount == 0)
+
+                        this.items.Remove(
+                            this.items.FirstOrDefault(x => x.idOfProduct == product.idOfProduct)
+                            );
+
+                    // Otherwise, update the product's quantity in the `dataCart` object
+                    bl.Cart.updete(MyCart[0], productId, (int)product.Amount);
+
+
+                   // this.TotalPrice[0] = MyCart[0].TotalPrice.ToString();
+
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        parent.Items = new ObservableCollection<BO.ProductItem>(parent.Items);
+                        this.items = new ObservableCollection<BO.OrderItem>(this.items);
+                       /// this.TotalPrice = new ObservableCollection<string>(this.TotalPrice);
+                    });
+
+
+
+                }
+            }
+        }
+
+
     }
 }
+
