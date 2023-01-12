@@ -49,7 +49,7 @@ namespace PL.ProductWindows
         public ProductItemList()
         {
             product = new BO.Product();
-            // productItem = new BO.ProductItem();
+            productItem = new BO.ProductItem();
             MyCart = new BO.Cart();
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
@@ -116,45 +116,49 @@ namespace PL.ProductWindows
         {
             // productItem = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
 
-            
+            productItem = (ProductItem)((ListView)sender).SelectedItem;
+            productItem.Amount++;
+            //ProductsForList.Remove(bl.Product.GetProductForList(productId));
+            Items.Remove(productItem);
 
-            product = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
-            try
-            {
-                if (product?.InStock - 1 < 0)
-                {
-                    throw new BO.outOfStock(product.idOfProduct);
-                }
 
-                BO.ProductItem deltemp = new ProductItem();
-                productItem =  bl.Product.GetProductItem(((ProductItem)List_of_product.SelectedItem).idOfProduct);
+            //product = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
+            //try
+            //{
+            //    if (product?.InStock - 1 < 0)
+            //    {
+            //        throw new BO.outOfStock(product.idOfProduct);
+            //    }
+
+            //    BO.ProductItem deltemp = new ProductItem();
+            //    productItem =  bl.Product.GetProductItem(((ProductItem)List_of_product.SelectedItem).idOfProduct);
          
-                bl.Product.delete(productItem.idOfProduct);
-                productItem.Amount++;
-                MyCart = bl?.Cart.add(MyCart, (productItem.idOfProduct))?? throw new BO.incorrectData();
-                Items.Add(productItem);
-            }
-            catch (BO.outOfStock ex)
-            {
-                MessageBox.Show(
-                        "The product " + ex.idOfProduct +
-                        "is out of stock",
-                       "Out of stock",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Hand,
-                        MessageBoxResult.OK,
-                        MessageBoxOptions.RtlReading);
-            }
-            catch (BO.incorrectData)
-            {
-                MessageBox.Show(
-                       "There is a data problem; try again.",
-                       "Incorrect data:",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Hand,
-                        MessageBoxResult.OK,
-                        MessageBoxOptions.RtlReading);
-            }
+            //    bl.Product.delete(productItem.idOfProduct);
+            //    productItem.Amount++;
+            //    MyCart = bl?.Cart.add(MyCart, (productItem.idOfProduct))?? throw new BO.incorrectData();
+            //    Items.Add(productItem);
+            //}
+            //catch (BO.outOfStock ex)
+            //{
+            //    MessageBox.Show(
+            //            "The product " + ex.idOfProduct +
+            //            "is out of stock",
+            //           "Out of stock",
+            //            MessageBoxButton.OK,
+            //            MessageBoxImage.Hand,
+            //            MessageBoxResult.OK,
+            //            MessageBoxOptions.RtlReading);
+            //}
+            //catch (BO.incorrectData)
+            //{
+            //    MessageBox.Show(
+            //           "There is a data problem; try again.",
+            //           "Incorrect data:",
+            //            MessageBoxButton.OK,
+            //            MessageBoxImage.Hand,
+            //            MessageBoxResult.OK,
+            //            MessageBoxOptions.RtlReading);
+            //}
         }
 
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
