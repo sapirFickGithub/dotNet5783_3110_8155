@@ -10,9 +10,9 @@
         Title="new cart" Height="450" Width="657">
     <Grid>
         <ListView x:Name="List_of_product"
-                  ItemsSource="{Binding MyCart[0].itemList}"
+                  ItemsSource="{Binding Items}"
                   Margin="24,48,204,96"
-                  MouseDoubleClick="Update_in_Cart_MouseDoubleClick" SelectionChanged="List_of_product_SelectionChanged">
+                 SelectionChanged="List_of_product_SelectionChanged">
             <ListView.View>
                 <GridView>
 
@@ -30,13 +30,6 @@
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
-                    <GridViewColumn  
-                            DisplayMemberBinding="{Binding ProductCategory }" >
-                        <GridViewColumnHeader 
-                            Content="Category" FontFamily= "Maiandra GD" Tag="ProductCategory"
-                            Click="Sort_By_Colmun_Click"/>
-                    </GridViewColumn>
-
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding totalPrice}" >
                         <GridViewColumnHeader 
@@ -51,18 +44,55 @@
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding amount}" >
-                        <GridViewColumnHeader 
-                            Content= "Amount" FontFamily= "Maiandra GD" Tag="Price"
-                            Click= "Sort_By_Colmun_Click"/>
-                    </GridViewColumn>
 
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding InStock}" >
-                        <GridViewColumnHeader 
-                            Content= "Instock" FontFamily= "Maiandra GD" Tag="Price"
-                            Click= "Sort_By_Colmun_Click"/>
+                    <GridViewColumn>
+                        <GridViewColumnHeader
+                                Content="Amount" 
+                                AllowDrop="True" 
+                                Focusable="True" 
+                                Tag="amount"
+                              />
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button
+                                            x:Name="Decrease"
+                                                          Width="20"
+                                            Height="20"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center" 
+                                            FontSize="14" 
+                                            
+                                            Click="Decrease_Click" 
+                                            
+                                            Content="-" 
+                                            
+                                            Tag="{Binding idOfProduct}"
+                                            
+                                            />
+
+                                    <Label Content="{Binding amount}" />
+
+
+                                    <Button 
+                                            x:Name="Increase"
+                                            Width="20"  Height="20" Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            
+                                            Click="Increase_Click"
+                                            
+                                            Content="+" 
+                                            
+                                            FontSize="14" 
+                                            
+                                            Tag="{Binding idOfProduct}" />
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
 
@@ -93,8 +123,6 @@
         <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" 
                VerticalAlignment="Top" FontSize="7" Height="34" Width="97" />
 
-        <Button Content="Go to catalog" HorizontalAlignment="Left" Margin="328,348,0,0" 
-                VerticalAlignment="Top" Width="124" FontSize="16" Click="Catalog_Click" Height="36"/>
 
         <TextBox x:Name="customer_Name"  HorizontalAlignment="Left" Margin="501,80,0,0"
                  TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="122" Height="23"/>

@@ -29,7 +29,7 @@
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding Items}"
                   Margin="40,10,54,31" Grid.RowSpan="2"
-                  MouseDoubleClick="Add_to_cart" Grid.Row="1">
+                  Grid.Row="1">
             <ListView.View>
                 <GridView>
 
@@ -60,17 +60,62 @@
                             Content= "Price" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding Amount}" >
-                        <GridViewColumnHeader 
-                            Content= "Amount" Tag="Price"
-                            Click= "Sort_By_Colmun_Click"/>
+
+                    <GridViewColumn>
+                        <GridViewColumnHeader
+                                Content="Amount" 
+                                AllowDrop="True" 
+                                Focusable="True" 
+                                Tag="Amount"
+                                Click="Sort_By_Colmun_Click"/>
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button
+                                            x:Name="Decrease"
+                                                          Width="20"
+                                            Height="20"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center" 
+                                            FontSize="14" 
+                                            
+                                            Click="Decrease_Click" 
+                                            
+                                            Content="-" 
+                                            
+                                            Tag="{Binding idOfProduct}"
+                                            
+                                            />
+
+                                    <Label Content="{Binding Amount}" />
+
+
+                                    <Button 
+                                            x:Name="Increase"
+                                            Width="20"  Height="20" Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            
+                                            Click="Increase_Click"
+                                            
+                                            Content="+" 
+                                            
+                                            FontSize="14" 
+                                            
+                                            Tag="{Binding idOfProduct}" />
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
 
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding InStock}" >
                         <GridViewColumnHeader 
-                            Content= "Instock" Tag="Price"
+                            Content= "Instock" Tag="Instock"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
 

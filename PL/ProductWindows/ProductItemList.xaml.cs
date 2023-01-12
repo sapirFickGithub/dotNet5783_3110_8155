@@ -46,15 +46,25 @@ namespace PL.ProductWindows
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register("Items", typeof(ObservableCollection<ProductItem>), typeof(ProductItemList));
 
+
+
+
         public ProductItemList(BO.Cart cart)
-        {
+        {  
             product = new BO.Product();
             productItem = new BO.ProductItem();
             MyCart = cart;
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             InitializeComponent();
+            itemsListInitialize();
+
         }
+
+
+       
+
+
         private void itemsListInitialize()
         {
             if (MyCart.TotalPrice != 0)//its meen the cart is empty
@@ -69,6 +79,8 @@ namespace PL.ProductWindows
                 }
             }
         }
+
+
         private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
@@ -119,16 +131,33 @@ namespace PL.ProductWindows
                          MessageBoxOptions.RtlReading);
             }
         }
+
         private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
         {
             //move to Main window
             new MainWindow().Show();
             this.Close();
         }
-        private void Add_to_cart(object sender, MouseButtonEventArgs e)
+      
+       
+        private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
         {
-            ProductItem productItem = (ProductItem)((ListView)sender).SelectedItem;
-            if (productItem.InStock == false)
+            if (MyCart != null)
+                new CartWindows.CartNew(MyCart,this).ShowDialog();
+           
+        }
+
+        private void Increase_Click(object sender, RoutedEventArgs e)
+        {
+
+         var myButtom=   sender as Button;
+
+            ProductItem productItem = myButtom.DataContext as ProductItem;
+
+                var p = bl.Product.GetProduct(productItem.idOfProduct);
+
+
+            if ((productItem.InStock == false) && (p.InStock - productItem.Amount <= 0))
                 MessageBox.Show(
                          "No more of this item in stock :( ",
                          "Out of stock",
@@ -139,22 +168,48 @@ namespace PL.ProductWindows
             else
             {
                 Items.Remove(productItem);
+
                 productItem.Amount++;
                 Items.Add(productItem);
 
                 bl.Cart.add(MyCart, productItem.idOfProduct);
 
+              
             }
 
-
         }
 
-        private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
+        private void Decrease_Click(object sender, RoutedEventArgs e)
         {
-            if (MyCart != null)
-                new CartWindows.CartNew(MyCart).Show();
-            this.Close();
+
+
+            var myButtom = sender as Button;
+
+            ProductItem productItem = myButtom.DataContext as ProductItem;
+
+            var p = bl.Product.GetProduct(productItem.idOfProduct);
+
+
+            if (productItem.Amount == 0)
+                MessageBox.Show(
+                         "Cant ",
+                         "ERROR",
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Hand,
+                         MessageBoxResult.Cancel,
+                         MessageBoxOptions.RtlReading);
+            else
+            {
+                Items.Remove(productItem);
+                productItem.Amount--;
+                Items.Add(productItem);
+
+                bl.Cart.updete(MyCart, productItem.idOfProduct, productItem.Amount);
+
+
+            }
         }
+
     }
 }
 

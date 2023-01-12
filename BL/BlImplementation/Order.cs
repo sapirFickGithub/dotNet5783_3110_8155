@@ -138,6 +138,7 @@ namespace BlImplementation
             dal.Order.update(Dorder);
             return order;
         }
+
         public BO.Order? UpdateSupplyDelivery(int numOfOrder)
         {
             DO.Order Dorder = dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder) ?? throw new BO.notExist();
@@ -154,41 +155,51 @@ namespace BlImplementation
                 throw new incorrectData();
             }
         }
-        public BO.OrderTracking? orderTracking(int numOfOrder)
+
+
+
+
+        public OrderTracking? orderTracking(int orderID)
         {
-            if (numOfOrder > 999999 || numOfOrder < 100000)
-                throw new incorrectData();
 
-            DO.Order Dorder = dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder) ?? throw new BO.notExist();
-            Tuple<DateTime, BO.Enum.OrderStatus> a;
+            DO.Order trackedOrder = dal.Order.getOneByParam(x => orderID == x?.idOfOrder) ?? throw new BO.notExist();
 
-            BO.OrderTracking orderTracking = new() { idOfOrder = numOfOrder };
-            orderTracking.Track = new List<Tuple<DateTime, BO.Enum.OrderStatus>>();
 
-            if (Dorder.DateOfShipping == null)
-            {
-                orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
-                a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status)!;
+            BO.OrderTracking tracking = new() { idOfOrder = orderID };
+            tracking.Track = new() { };
 
-            }
-            else if (Dorder.DateOfOrder != null && Dorder.DateOfDelivery == null)
-            {
-                orderTracking.Status = (BO.Enum.OrderStatus.SHIPPED);
-                a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfShipping, (BO.Enum.OrderStatus)orderTracking.Status);
+            tracking.Status = (BO.Enum.OrderStatus.ORDERED);
+            tracking.Track.Add(new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)trackedOrder.DateOfOrder, (BO.Enum.OrderStatus)tracking.Status));
+
+
+            if (trackedOrder.DateOfShipping != null)
+            { // if the value of the shiping is define
+
+                tracking.Status = (BO.Enum.OrderStatus.SHIPPED);
+                tracking.Track.Add(new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)trackedOrder.DateOfShipping, (BO.Enum.OrderStatus)tracking.Status));
+
+                if (trackedOrder.DateOfDelivery != null)// and if the value of the deliverying is define
+                {
+                    tracking.Status = (BO.Enum.OrderStatus.DLIVERY);
+                    tracking.Track.Add(new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)trackedOrder.DateOfDelivery, (BO.Enum.OrderStatus)tracking.Status));
+                }
+                else
+                {
+                    tracking.Track.Add(null);
+                }
             }
             else
             {
-                orderTracking.Status = (BO.Enum.OrderStatus.DLIVERY);
-                a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfDelivery, (BO.Enum.OrderStatus)orderTracking.Status);
+                tracking.Track.Add(null);
+                tracking.Track.Add(null);
             }
 
 
-            orderTracking.Track.Add((a));
-
-            return orderTracking;
-
+            return tracking;
 
         }
+
+
 
         public bool updateAdmin(int idOrder, int idProduct, int amount)
         {
