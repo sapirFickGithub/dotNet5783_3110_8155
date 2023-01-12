@@ -122,43 +122,7 @@ namespace PL.ProductWindows
             Items.Remove(productItem);
 
 
-            //product = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
-            //try
-            //{
-            //    if (product?.InStock - 1 < 0)
-            //    {
-            //        throw new BO.outOfStock(product.idOfProduct);
-            //    }
-
-            //    BO.ProductItem deltemp = new ProductItem();
-            //    productItem =  bl.Product.GetProductItem(((ProductItem)List_of_product.SelectedItem).idOfProduct);
-         
-            //    bl.Product.delete(productItem.idOfProduct);
-            //    productItem.Amount++;
-            //    MyCart = bl?.Cart.add(MyCart, (productItem.idOfProduct))?? throw new BO.incorrectData();
-            //    Items.Add(productItem);
-            //}
-            //catch (BO.outOfStock ex)
-            //{
-            //    MessageBox.Show(
-            //            "The product " + ex.idOfProduct +
-            //            "is out of stock",
-            //           "Out of stock",
-            //            MessageBoxButton.OK,
-            //            MessageBoxImage.Hand,
-            //            MessageBoxResult.OK,
-            //            MessageBoxOptions.RtlReading);
-            //}
-            //catch (BO.incorrectData)
-            //{
-            //    MessageBox.Show(
-            //           "There is a data problem; try again.",
-            //           "Incorrect data:",
-            //            MessageBoxButton.OK,
-            //            MessageBoxImage.Hand,
-            //            MessageBoxResult.OK,
-            //            MessageBoxOptions.RtlReading);
-            //}
+            
         }
 
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
