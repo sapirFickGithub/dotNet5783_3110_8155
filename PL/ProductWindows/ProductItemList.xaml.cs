@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using BO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using DO;
 
 
 namespace PL.ProductWindows
@@ -47,9 +48,9 @@ namespace PL.ProductWindows
 
         public ProductItemList()
         {
-            //product = new BO.Product();
-           // productItem = new BO.ProductItem();
-            //MyCart = new BO.Cart();
+            product = new BO.Product();
+            // productItem = new BO.ProductItem();
+            MyCart = new BO.Cart();
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             InitializeComponent();
@@ -115,6 +116,7 @@ namespace PL.ProductWindows
         {
             // productItem = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
 
+            
 
             product = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
             try
@@ -124,12 +126,13 @@ namespace PL.ProductWindows
                     throw new BO.outOfStock(product.idOfProduct);
                 }
 
-
-                productItem = ((ProductItem)List_of_product.SelectedItem);
+                BO.ProductItem deltemp = new ProductItem();
+                productItem =  bl.Product.GetProductItem(((ProductItem)List_of_product.SelectedItem).idOfProduct);
+         
+                bl.Product.delete(productItem.idOfProduct);
                 productItem.Amount++;
-               
-
-                MyCart = bl?.Cart.add(MyCart, ((ProductItem)List_of_product.SelectedItem).idOfProduct) ?? throw new BO.incorrectData();
+                MyCart = bl?.Cart.add(MyCart, (productItem.idOfProduct))?? throw new BO.incorrectData();
+                Items.Add(productItem);
             }
             catch (BO.outOfStock ex)
             {

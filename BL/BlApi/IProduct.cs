@@ -17,6 +17,9 @@ namespace BlApi
         /// <IEnumerable<BO.ProductForList>></returns>
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param=null);
 
+
+        public BO.ProductItem GetProductItem(int idOfProduct);
+
         public IEnumerable<BO.ProductItem> getListOfProductItem(Func<DO.Product?, bool>? param = null);
 
         /// <summary>
