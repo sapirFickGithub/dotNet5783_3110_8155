@@ -17,13 +17,14 @@ using BO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 
+
 namespace PL.CartWindows
 {
     /// <summary>
     /// Interaction logic for CartNew.xaml
     /// </summary>
     public partial class CartNew : Window
-    {
+    { 
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
         public bool hasSorted = true;
@@ -45,6 +46,12 @@ namespace PL.CartWindows
             MyCart = new ObservableCollection<BO.Cart> { myCart };
             InitializeComponent();
         }
+
+        private void List_of_product_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
         private void approve_orer_Click(object sender, RoutedEventArgs e)
         {
@@ -76,18 +83,20 @@ namespace PL.CartWindows
             MyCart[0].CustomerMail = customer_Mail.Text;
             try
             {
-               int idOrder= bl.Cart.approvment(MyCart[0]);
-                if (idOrder>0)
+                int idOrder = bl.Cart.approvment(MyCart[0]);
+                if (idOrder > 0)
                 {
                     MessageBox.Show(
-                            "Your order is being processed" +
-                            "your order number is: " + idOrder+
-                            "Thanks for buying!",
+                            "Your order is being processed " +
+                            "your order number is:   " + idOrder +
+                            "   Thanks for buying!",
                             "Approvment",
                             MessageBoxButton.OK,
                             MessageBoxImage.Hand,
                             MessageBoxResult.None,
                             MessageBoxOptions.RtlReading);
+
+                    new MainWindow().Show();
 
                     this.Close();
                 }
@@ -140,7 +149,10 @@ namespace PL.CartWindows
 
         private void Catalog_Click(object sender, RoutedEventArgs e)
         {
-
+            new ProductWindows.ProductItemList(MyCart[0]).Show();
+            this.Close();
         }
     }
 }
+      
+        

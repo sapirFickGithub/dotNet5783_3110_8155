@@ -20,7 +20,7 @@
 
         <ComboBox x:Name="Category_selector"
                   HorizontalAlignment="Left"
-                  Margin="607,39,0,0"  Width="137" Height="22"
+                  Margin="609,36,0,0"  Width="137" Height="32"
                   VerticalAlignment="Top"
                   SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding Categories}">
@@ -73,21 +73,20 @@
                             Content= "Instock" Tag="Price"
                             Click= "Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-                    
+
                 </GridView>
             </ListView.View>
         </ListView>
-        
+
         <Button x:Name="Back_Botton" Content="Back"   
                 HorizontalAlignment="Left" Grid.Row="3"
                 Margin="639,9,0,0" Height="46"  Width="117"   
                 VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>
-        
+
         <Button x:Name="Go_to_Cart" Content="Go to cart"   
             HorizontalAlignment="Left" Grid.Row="3"
             Margin="40,9,0,0" Height="46"  Width="117"   
-            VerticalAlignment="Top"   Click="Go_to_Cart_Click"
-                Visibility="{Binding CartShow}"/>
+            VerticalAlignment="Top"   Click="Go_to_Cart_Click"/>
         <Label Content="To add product double click on the requested product:" HorizontalAlignment="Left" Margin="40,29,0,0" VerticalAlignment="Top" />
 
 

@@ -168,7 +168,7 @@ namespace BlImplementation
             if (Dorder.DateOfShipping == null)
             {
                 orderTracking.Status = (BO.Enum.OrderStatus.ORDERED);
-                a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status);
+                a = new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)Dorder.DateOfOrder, (BO.Enum.OrderStatus)orderTracking.Status)!;
 
             }
             else if (Dorder.DateOfOrder != null && Dorder.DateOfDelivery == null)

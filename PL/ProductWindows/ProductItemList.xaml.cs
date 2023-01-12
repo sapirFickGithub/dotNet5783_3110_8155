@@ -34,7 +34,7 @@ namespace PL.ProductWindows
 
         public bool hasSorted = true;
 
-        //public bool CartShow = true;
+
 
         public ObservableCollection<ProductItem> Items
         {
@@ -46,16 +46,29 @@ namespace PL.ProductWindows
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register("Items", typeof(ObservableCollection<ProductItem>), typeof(ProductItemList));
 
-        public ProductItemList()
+        public ProductItemList(BO.Cart cart)
         {
             product = new BO.Product();
             productItem = new BO.ProductItem();
-            MyCart = new BO.Cart();
+            MyCart = cart;
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
             Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             InitializeComponent();
         }
-
+        private void itemsListInitialize()
+        {
+            if (MyCart.TotalPrice != 0)//its meen the cart is empty
+            {
+                foreach (var item in MyCart.itemList)
+                {
+                    foreach (var it in Items)
+                    {
+                        if (it.idOfProduct == item.idOfProduct)
+                            it.Amount = item.amount;
+                    }
+                }
+            }
+        }
         private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
@@ -114,21 +127,33 @@ namespace PL.ProductWindows
         }
         private void Add_to_cart(object sender, MouseButtonEventArgs e)
         {
-            // productItem = bl?.Product.GetProduct(((ProductItem)List_of_product.SelectedItem).idOfProduct);
+            ProductItem productItem = (ProductItem)((ListView)sender).SelectedItem;
+            if (productItem.InStock == false)
+                MessageBox.Show(
+                         "No more of this item in stock :( ",
+                         "Out of stock",
+                         MessageBoxButton.OK,
+                         MessageBoxImage.Hand,
+                         MessageBoxResult.Cancel,
+                         MessageBoxOptions.RtlReading);
+            else
+            {
+                Items.Remove(productItem);
+                productItem.Amount++;
+                Items.Add(productItem);
 
-            productItem = (ProductItem)((ListView)sender).SelectedItem;
-            productItem.Amount++;
-            //ProductsForList.Remove(bl.Product.GetProductForList(productId));
-            Items.Remove(productItem);
+                bl.Cart.add(MyCart, productItem.idOfProduct);
+
+            }
 
 
-            
         }
 
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
         {
-            new CartWindows.CartNew(MyCart);
-            ///this.Close();
+            if (MyCart != null)
+                new CartWindows.CartNew(MyCart).Show();
+            this.Close();
         }
     }
 }
