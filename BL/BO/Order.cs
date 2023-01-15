@@ -8,6 +8,11 @@ namespace BO
 {
     public class Order
     {
+        public Order(Order? order)
+        {
+            Order = order;
+        }
+
         public int idOfOrder { get; set; }
         public string? CustomerName { get; set; }
         public string? CustomerMail { get; set; }
@@ -19,7 +24,7 @@ namespace BO
         public DateTime? PaymentDate { get; set; }
         public List<OrderItem?>? Items { get; set; }
         public double TotalPrice { get; set; }
-
+        public Order? Order { get; }
 
         public override string ToString() {
             string print = $@"
