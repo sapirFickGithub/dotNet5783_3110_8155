@@ -48,13 +48,13 @@ namespace BlImplementation
             };
             var orderTemp = dal.Order.getOneByParam(x => order?.idOfOrder == x?.idOfOrder);
 
-            if (orderTemp?.DateOfOrder == null )
+            if (orderTemp?.DateOfOrder != null&& orderTemp?.DateOfShipping == null)
             {
                 OrderForList.Status = (BO.Enum.OrderStatus.ORDERED);
             }
             
            
-            else if (orderTemp?.DateOfOrder != null && orderTemp?.DateOfShipping == null)
+            else if (orderTemp?.DateOfOrder != null && orderTemp?.DateOfShipping != null && orderTemp?.DateOfDelivery == null)
             {
                 OrderForList.Status = (BO.Enum.OrderStatus.SHIPPED);
             }
@@ -62,6 +62,7 @@ namespace BlImplementation
             {
                 OrderForList.Status = (BO.Enum.OrderStatus.DLIVERY);
             }
+            
             return OrderForList;
         }
 
@@ -73,42 +74,33 @@ namespace BlImplementation
             DO.Order Dorder = (DO.Order)dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder);
             IEnumerable<DO.OrderItem?> orderItems = dal.OrderItem.getAllByParam(x => numOfOrder == (int)(x?.ID));/// return null??
 
-            /// the
-            BO.Order? order = new()
+            DateTime? dateOfOrder = Dorder.DateOfOrder;
+            BO.Order order = new()
             {
                 idOfOrder = numOfOrder,
                 CustomerName = Dorder.CustomerName,
                 CustomerAddress = Dorder.CustamerAddress,
                 CustomerMail = Dorder.CustomerMail,
                 DateOfShipping = Dorder.DateOfShipping,
-                DateOfOrder = Dorder.DateOfOrder,
+                DateOfOrder = dateOfOrder,
                 DateOfDelivery = Dorder.DateOfDelivery
             };
+            
+
             if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
-            {
-                order.Status = (BO.Enum.OrderStatus.SHIPPED);
-            }
-            else if (Dorder.DateOfOrder == null)
             {
                 order.Status = (BO.Enum.OrderStatus.ORDERED);
             }
-            else
+            else if (Dorder.DateOfOrder != null && Dorder.DateOfShipping != null && Dorder.DateOfDelivery == null)
+            {
+                order.Status = (BO.Enum.OrderStatus.SHIPPED);
+            }
+            else if (Dorder.DateOfDelivery != null)
             {
                 order.Status = (BO.Enum.OrderStatus.DLIVERY);
             }
-            //if (Dorder.DateOfOrder == null)
-            //{
-            //    order.Status = (BO.Enum.OrderStatus.SHIPPED);
-            //}
-            //else if (Dorder.DateOfShipping != null && Dorder.DateOfOrder == null)
-            //{
-            //    order.Status = (BO.Enum.OrderStatus.ORDERED);
-            //}
-            //else
-            //{
-            //    order.Status = (BO.Enum.OrderStatus.DLIVERY);
-            //}
-            
+           
+
             order.Items = new List<BO.OrderItem>();
 
 
@@ -174,6 +166,11 @@ namespace BlImplementation
 
             tracking.Status = (BO.Enum.OrderStatus.ORDERED);
             tracking.Track.Add(new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)trackedOrder.DateOfOrder, (BO.Enum.OrderStatus)tracking.Status));
+
+
+
+
+
 
 
             if (trackedOrder.DateOfShipping != null)

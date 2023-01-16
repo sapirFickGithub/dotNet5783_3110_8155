@@ -10,7 +10,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left"
-                 Margin="501,43,0,0" 
+                 Margin="236,162,0,0" 
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="234"
@@ -27,41 +27,37 @@
                 Width="179" Height="47"
                 Click="UpdateOrder_click"                
                 />
-        <Label Content="Customer name:" HorizontalAlignment="Left" Margin="400,38,0,0" VerticalAlignment="Top" Width="96"/>
-        <Label Content="ID of order:" HorizontalAlignment="Left" Margin="38,38,0,0" VerticalAlignment="Top" Width="117"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="547,112,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Amount&#xD;&#xA; of item:" HorizontalAlignment="Left" Margin="547,154,0,0" VerticalAlignment="Top" Width="156"/>
+        <Label Content="Customer name:" HorizontalAlignment="Left" Margin="82,155,0,0" VerticalAlignment="Top" Width="154"/>
+        <Label Content="ID of order:" HorizontalAlignment="Left" Margin="120,113,0,0" VerticalAlignment="Top" Width="116"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="160,76,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Content="Amount:" HorizontalAlignment="Left" Margin="152,235,0,0" VerticalAlignment="Top" Width="92"/>
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,222,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Date Of delivery:" HorizontalAlignment="Left" Margin="82,195,0,0" VerticalAlignment="Top" Width="169" RenderTransformOrigin="-0.375,-2.649"/>
         <TextBlock HorizontalAlignment="Left"
-            Margin="155,43,0,0" 
+            Margin="236,123,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="203"
             Text="{Binding orderForList.idOfOrder}" 
             Height="25" 
                  />
-        <TextBlock HorizontalAlignment="Center"
-            Margin="0,100,0,0" 
+        <TextBlock HorizontalAlignment="Left"
+            Margin="244,240,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="234"
-            Text="{Binding orderForList.idOfOrder}" 
+            Text="{Binding orderForList.AmountOfItem}" 
             Height="25"
                  />
         <ComboBox x:Name="Status_selector"
                   HorizontalAlignment="Left"
-                  Margin="636,112,0,0" Width="114" Height="38"
+                  Margin="236,70,0,0" Width="114" Height="38"
                   VerticalAlignment="Top" SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding status}"
                   SelectedItem="{Binding orderForList.Status}">
         </ComboBox>
 
-        <TextBlock HorizontalAlignment="Left"
-            Width="66" Height="38" Margin="657,170,0,0" 
-            TextWrapping="Wrap" FontSize="20"
-            VerticalAlignment="Top"
-            Text="{Binding orderForList.AmountOfItem}"             
-                 />
+       
         <TextBlock HorizontalAlignment="Left"
             Margin="662,225,0,0"  Width="88"
             TextWrapping="Wrap"
@@ -70,13 +66,13 @@
             Text="{Binding orderForList.TotalPrice}" 
             Height="37" 
                  />
-        <CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
-                  Margin="547,281,0,0" Height="32" Width="154" Checked="Supply_Checked" FontSize="20"/>
-        <ListView 
+        <!--<CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Margin="547,281,0,0" Height="32" Width="154" Checked="Supply_Checked" FontSize="20"/>-->
+        <!--<ListView 
             x:Name="List_of_orders"
              ItemsSource="{Binding Items}" MouseDoubleClick="Update_amount_Click"
-            d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98" SelectionChanged="List_of_orders_SelectionChanged">
-            <ListView.View>
+            d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98" SelectionChanged="List_of_orders_SelectionChanged">-->
+        <!--<ListView.View>
                 <GridView>
 
                     <GridViewColumn 
@@ -108,10 +104,10 @@
                         <GridViewColumnHeader 
                             Content= "Amount" Tag="amount"/>
                     </GridViewColumn>
-                    
-                </GridView>
-            </ListView.View>
-        </ListView>
+
+                </GridView>-->
+        <!--</ListView.View>
+        </ListView>-->
 
     </Grid>
 </Window>

@@ -30,6 +30,7 @@ namespace PL.OrderWindows
         public IEnumerable<BO.Enum.OrderStatus> status { set; get; }
 
         public BO.OrderForList orderForList { get; set; }
+        public BO.Order orderDeatails { get; set; }
 
         public bool hasSorted = true;
 
@@ -47,6 +48,7 @@ namespace PL.OrderWindows
         public ViewOrder(OrderForList? orderForLst)
         {
             orderForList = orderForLst;
+            orderDeatails = new BO.Order(bl.Order.GetOrder(orderForList.idOfOrder));
             status = System.Enum.GetValues(typeof(BO.Enum.OrderStatus)).Cast<BO.Enum.OrderStatus>();
 
             Items = new ObservableCollection<OrderItem>(bl.Order.GetOrder(orderForList.idOfOrder).Items);
@@ -61,8 +63,8 @@ namespace PL.OrderWindows
 
         private void UpdateOrder_click(object sender, RoutedEventArgs e)
         {
-            if (is_supply.IsChecked == true)
-                bl.Order.UpdateSupplyDelivery(orderForList.idOfOrder);
+            //if (is_supply.IsChecked == true)
+            //    bl.Order.UpdateSupplyDelivery(orderForList.idOfOrder);
             if(Status_selector.Text== "Dlivery")
             bl.Order.updateDliveryOrder(orderForList.idOfOrder);
             
@@ -93,30 +95,30 @@ namespace PL.OrderWindows
             new UpdateAmountItem();
         }
 
-        private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
+        //private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
+        //{
+        //    GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
 
-            if (gridViewColumnHeader is not null)
-            {
-                string name = (gridViewColumnHeader.Tag as string)!;
-                ObservableCollection<BO.OrderForList?> listTemp = (ObservableCollection<OrderForList?>)(bl?.Order?.GetAllOrderForList());
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+        //    if (gridViewColumnHeader is not null)
+        //    {
+        //        string name = (gridViewColumnHeader.Tag as string)!;
+        //        ObservableCollection<BO.OrderForList?> listTemp = (ObservableCollection<OrderForList?>)(bl?.Order?.GetAllOrderForList());
+        //        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
 
-                view.SortDescriptions.Clear();
-                if (hasSorted)
-                {
+        //        view.SortDescriptions.Clear();
+        //        if (hasSorted)
+        //        {
 
-                    view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
-                    hasSorted = false;
-                }
-                else
-                {
-                    view.SortDescriptions.Add(new SortDescription(name, ListSortDirection.Ascending));
-                    hasSorted = true;
-                }
-            }
-        }
+        //            view.SortDescriptions.Add(new(name, ListSortDirection.Descending));
+        //            hasSorted = false;
+        //        }
+        //        else
+        //        {
+        //            view.SortDescriptions.Add(new SortDescription(name, ListSortDirection.Ascending));
+        //            hasSorted = true;
+        //        }
+        //    }
+        //}
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
