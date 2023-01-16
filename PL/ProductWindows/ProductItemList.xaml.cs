@@ -55,7 +55,7 @@ namespace PL.ProductWindows
             productItem = new BO.ProductItem();
             MyCart = cart;
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
-            Categories = System.Enum.GetValues(typeof(BO.Enum.CategoryView)).Cast<BO.Enum.Category>();
+            Categories = System.Enum.GetValues(typeof(BO.Enum.CategoryView)).Cast<BO.Enum.CategoryView>();
             InitializeComponent();
             itemsListInitialize();
 
