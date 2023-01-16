@@ -27,7 +27,7 @@ namespace PL.ProductWindows
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
         public BO.Cart MyCart { get; set; }
-        public IEnumerable<BO.Enum.Category> Categories { set; get; }
+        public IEnumerable<BO.Enum.CategoryView> Categories { set; get; }
         public BO.ProductItem productItem { get; set; }
         public BO.Product? product { get; set; }
 
@@ -55,7 +55,7 @@ namespace PL.ProductWindows
             productItem = new BO.ProductItem();
             MyCart = cart;
             Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());
-            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
+            Categories = System.Enum.GetValues(typeof(BO.Enum.CategoryView)).Cast<BO.Enum.Category>();
             InitializeComponent();
             itemsListInitialize();
 

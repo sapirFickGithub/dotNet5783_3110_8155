@@ -26,7 +26,7 @@ namespace PL.ProductWindows
 
         private static BlApi.IBl? bl = BlApi.Factory.Get();
 
-        public IEnumerable<BO.Enum.Category> Categories { set; get; }
+        public IEnumerable<BO.Enum.CategoryView> Categories { set; get; }
 
         public bool hasSorted = true;
 
@@ -44,7 +44,7 @@ namespace PL.ProductWindows
         public ProductList()
         {
             ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct());
-            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();////////////
+            Categories = System.Enum.GetValues(typeof(BO.Enum.CategoryView)).Cast<BO.Enum.Category>();////////////
             InitializeComponent();
         }
 
