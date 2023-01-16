@@ -33,32 +33,17 @@ internal class DalProduct : IProduct
     public int Add(Product product)
     {
         List<DO.Product?> listProduct = XmlTools.LoadListFromXMLSerializer<DO.Product>(productPath);
-
-        int checkIDProduct = product.idOfProduct;
-        try
+        product.idOfProduct= random.Next(100000, 1000000);
+        int index = search(product.idOfProduct);
+        while (index != -1)
         {
-            if (checkIDProduct >= 100000 && checkIDProduct <= 999999)
-            {
-                Read(product);
-            }
-            if (product.Name != null)
-            {
-                do
-                {
-                    checkIDProduct = random.Next(100000, 1000000);
-                }
-                while (Read(new() { ID = checkIDProduct }).Name != null);
-            }
-            return checkIDProduct;
+            product.idOfProduct = random.Next(100000, 1000000);
+            index = search(product.idOfProduct);
+        }
+        listProduct.Add(product);
+        XmlTools.SaveListToXMLSerializer(listProduct, productPath);
+        return product.idOfProduct;
 
-        }
-        catch (IDWhoException)
-        {
-            product.ID = checkIDProduct;
-            listProduct.Add(product);
-            XmlTools.SaveListToXMLSerializer(listProduct, productPath);
-            return (int)product.ID;
-        }
     }
 
     

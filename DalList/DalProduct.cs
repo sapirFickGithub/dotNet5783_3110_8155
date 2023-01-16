@@ -14,9 +14,10 @@ internal class DalProduct : IProduct
     {
         product.idOfProduct = _Config.get_ProductID;
         int index = search(product.idOfProduct);
-        if (index != -1)
+        while(index != -1)
         {
-            throw new duplication();
+            product.idOfProduct = _Config.get_ProductID;
+            index = search(product.idOfProduct);
         }
         listProduct.Add(product);
         return product.idOfProduct;

@@ -14,42 +14,41 @@ internal class DalOrderItem : IOrderItem
     const string orderItemPath = "OrderItem";
     static XElement config = XmlTools.LoadConfig();
 
-    public int Create(OrderItem orderItem1)
+    public int search(int id)//help function, get id and check if the id exist in the product and send the index of the list
+    {
+        List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
+        return listOrderItem.FindIndex(item => id == item?.idOfOrder);
+    }
+    public int length()
+    {
+        List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
+        return listOrderItem.Count();
+    }
+    public void print()
+    {
+        List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
+        listOrderItem.ForEach(item => Console.WriteLine(item));
+    }
+    public int Add(OrderItem orderItem1)
     {
         List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
 
-        orderItem1.OrderItemID = int.Parse(config.Element("OrderItemID")!.Value) + 1;
-        XmlTools.SaveConfigXElement("OrderItemID", orderItem1.OrderItemID);
+        orderItem1.ID = int.Parse(config.Element("OrderItemID")!.Value) + 1;
+        XmlTools.SaveConfigXElement("OrderItemID", orderItem1.ID);
         listOrderItem.Add(orderItem1);
 
         XmlTools.SaveListToXMLSerializer(listOrderItem, orderItemPath);
 
-        return orderItem1.OrderItemID;
+        return orderItem1.ID;
     }
 
-    public OrderItem Read(OrderItem orderItem)
+ 
+
+    public void update(OrderItem orderItem)
     {
         List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
 
-        OrderItem? isNULL = ReadObject(a => a?.OrderItemID == orderItem.OrderItemID);
-
-        int I = listOrderItem.IndexOf(isNULL);
-
-        if (I != -1) // if the ID exist return the details else throw an Error
-        {
-            return (OrderItem)listOrderItem[I];
-        }
-        else
-        {
-            throw new IDWhoException("Delete range Error ");
-        }
-    }
-
-    public void Update(OrderItem orderItem)
-    {
-        List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
-
-        OrderItem? isNULL = ReadObject(a => a?.OrderItemID == orderItem.OrderItemID);
+        OrderItem? isNULL = getOneByParam(a => a?.ID == orderItem.ID);
 
         int I = listOrderItem.IndexOf(isNULL);
         if (I != -1) // if the ID exist update the details else throw an Error
@@ -59,28 +58,20 @@ internal class DalOrderItem : IOrderItem
         }
         else
         {
-            throw new IDWhoException("object doesn't exist - Update");
+            throw new Exception("object doesn't exist - Update");
         }
     }
 
-    public void Delete(OrderItem orderItem)
+    public void delete(int IDorderItem)
     {
+
         List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
-
-        OrderItem? isNULL = ReadObject(a => a?.OrderItemID == orderItem.OrderItemID);
-
-        if (isNULL?.OrderItemID != -1) // if the ID exist delete the details else throw an Error
-        {
-            listOrderItem.Remove(orderItem);
-            XmlTools.SaveListToXMLSerializer(listOrderItem, orderItemPath);
-        }
-        else
-        {
-            throw new IndexOutOfRangeException("Delete range Error");
-        }
+        listOrderItem.Remove(getOneByParam(x => IDorderItem == x?.ID));
+        XmlTools.SaveListToXMLSerializer(listOrderItem, orderItemPath);
+        
     }
 
-    public IEnumerable<OrderItem?> ReadAll(Func<OrderItem?, bool>? func = null)
+    public IEnumerable<OrderItem?> getAllByParam(Func<OrderItem?, bool>? func = null)
     {
         List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
 
@@ -101,7 +92,7 @@ internal class DalOrderItem : IOrderItem
         }
     }
 
-    public OrderItem ReadObject(Func<OrderItem?, bool>? func)
+    public OrderItem? getOneByParam(Func<OrderItem?, bool>? func)
     {
         List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
 
