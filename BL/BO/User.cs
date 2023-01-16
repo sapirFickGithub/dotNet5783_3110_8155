@@ -20,7 +20,7 @@ namespace BO
 
         public List<DO.Order?>? MyOrders { get; set; }
 
-        public BO.Cart UserCart { get; set; }
+        public BO.Cart? UserCart { get; set; }
 
 
     }
