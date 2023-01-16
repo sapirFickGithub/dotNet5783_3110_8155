@@ -30,7 +30,7 @@ namespace PL.OrderWindows
         public IEnumerable<BO.Enum.OrderStatus> status { set; get; }
 
         public BO.OrderForList orderForList { get; set; }
-        public BO.Order orderDeatails { get; set; }
+        //public BO.Order orderDeatails { get; set; }
 
         public bool hasSorted = true;
 
@@ -48,7 +48,7 @@ namespace PL.OrderWindows
         public ViewOrder(OrderForList? orderForLst)
         {
             orderForList = orderForLst;
-            orderDeatails = new BO.Order(bl.Order.GetOrder(orderForList.idOfOrder));
+            //orderDeatails = new BO.Order(bl.Order.GetOrder(orderForList.idOfOrder));
             status = System.Enum.GetValues(typeof(BO.Enum.OrderStatus)).Cast<BO.Enum.OrderStatus>();
 
             Items = new ObservableCollection<OrderItem>(bl.Order.GetOrder(orderForList.idOfOrder).Items);

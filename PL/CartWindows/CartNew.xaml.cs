@@ -29,14 +29,14 @@ namespace PL.CartWindows
 
         public bool hasSorted = true;
 
-
+       
         public ObservableCollection<BO.OrderItem> items
         {
             get { return (ObservableCollection<BO.OrderItem>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
         public static readonly DependencyProperty ItemsProperty =
-            DependencyProperty.Register("Items", typeof(ObservableCollection<BO.OrderItem>), typeof(CartNew));
+            DependencyProperty.Register("items", typeof(ObservableCollection<BO.OrderItem>), typeof(CartNew));
 
 
 
@@ -46,16 +46,16 @@ namespace PL.CartWindows
             set { SetValue(CartProperty, value); }
         }
         public static readonly DependencyProperty CartProperty =
-           DependencyProperty.Register("Cart", typeof(ObservableCollection<BO.Cart>), typeof(CartNew));
+           DependencyProperty.Register("MyCart", typeof(ObservableCollection<BO.Cart>), typeof(CartNew));
 
 
-        public ObservableCollection<string> TotalPrice
+        public double TotalPrice
         {
-            get { return (ObservableCollection<string>)GetValue(TotalPrieProperty); }
+            get { return (double)GetValue(TotalPrieProperty); }
             set { SetValue(TotalPrieProperty, value); }
         }
         public static readonly DependencyProperty TotalPrieProperty =
-            DependencyProperty.Register("TotalPrie", typeof(ObservableCollection<string>), typeof(CartNew));
+            DependencyProperty.Register("TotalPrice", typeof(double), typeof(CartNew));
 
 
 
@@ -64,7 +64,7 @@ namespace PL.CartWindows
         public CartNew(BO.Cart myCart, ProductWindows.ProductItemList parnt)
         {
             parent = parnt;
-            //TotalPrice[0] = myCart.TotalPrice.ToString();
+            TotalPrice = myCart.TotalPrice;
             items = new ObservableCollection<BO.OrderItem>(myCart.itemList);
             MyCart = new ObservableCollection<BO.Cart> { myCart };
             InitializeComponent();
@@ -202,16 +202,16 @@ namespace PL.CartWindows
                 {
                     product.Amount++;
                 }
-
+                this.TotalPrice = MyCart[0].TotalPrice;
                 //עידכון המחיר הכולל
-               // this.TotalPrice[0] = MyCart[0].TotalPrice.ToString();
+               //this.TotalPrice[0] += product.Price;
 
                 // Update the OrderForObservableCollection in the parent window
                 this.Dispatcher.Invoke(() =>
                 {
                     parent.Items = new ObservableCollection<BO.ProductItem>(parent.Items);
                     this.items = new ObservableCollection<BO.OrderItem>(this.items);
-                    //this.TotalPrice = new ObservableCollection<string>(this.TotalPrice);
+                    this.TotalPrice = this.TotalPrice;
                 });
             }
         }
@@ -251,20 +251,23 @@ namespace PL.CartWindows
 
                         this.items.Remove(
                             this.items.FirstOrDefault(x => x.idOfProduct == product.idOfProduct)
+                           
+
                             );
 
                     // Otherwise, update the product's quantity in the `dataCart` object
                     bl.Cart.updete(MyCart[0], productId, (int)product.Amount);
 
 
-                   // this.TotalPrice[0] = MyCart[0].TotalPrice.ToString();
+                    this.TotalPrice = MyCart[0].TotalPrice;
 
 
                     this.Dispatcher.Invoke(() =>
                     {
                         parent.Items = new ObservableCollection<BO.ProductItem>(parent.Items);
                         this.items = new ObservableCollection<BO.OrderItem>(this.items);
-                       /// this.TotalPrice = new ObservableCollection<string>(this.TotalPrice);
+
+                       this.TotalPrice = this.TotalPrice;
                     });
 
 
@@ -273,7 +276,7 @@ namespace PL.CartWindows
             }
         }
 
-
+       
     }
 }
 

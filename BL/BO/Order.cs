@@ -8,10 +8,7 @@ namespace BO
 {
     public class Order
     {
-        public Order(Order? order)
-        {
-            Order = order;
-        }
+        
 
         public int idOfOrder { get; set; }
         public string? CustomerName { get; set; }
@@ -21,10 +18,10 @@ namespace BO
         public DateTime? DateOfShipping { get; set; }//תאריך שילוח
         public DateTime? DateOfDelivery { get; set; }//תאריך אספקה
         public Enum.OrderStatus? Status { get; set; }
-        public DateTime? PaymentDate { get; set; }
+        
         public List<OrderItem?>? Items { get; set; }
         public double TotalPrice { get; set; }
-        public Order? Order { get; }
+
 
         public override string ToString() {
             string print = $@"
@@ -33,8 +30,8 @@ Order ID={idOfOrder}: {CustomerName}.
    Custamer address- {CustomerAddress}.
    Date of order: {DateOfShipping}.
    Date of delivery: {DateOfDelivery}.
-   Status: {Status}.
-   Date of payment: {PaymentDate}.";
+   Status: {Status}.";
+   
             foreach (var item in Items)
             {
                 print = print + "\n" + $@"TotalPrice: {TotalPrice}";

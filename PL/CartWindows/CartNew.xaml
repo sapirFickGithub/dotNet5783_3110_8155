@@ -10,7 +10,7 @@
         Title="new cart" Height="450" Width="657">
     <Grid>
         <ListView x:Name="List_of_product"
-                  ItemsSource="{Binding Items}"
+                  ItemsSource="{Binding items}"
                   Margin="24,48,204,96"
                  SelectionChanged="List_of_product_SelectionChanged">
             <ListView.View>
@@ -50,7 +50,7 @@
                                 Content="Amount" 
                                 AllowDrop="True" 
                                 Focusable="True" 
-                                Tag="amount"
+                                Tag="amount" 
                               />
                         <GridViewColumn.CellTemplate >
                             <DataTemplate >
@@ -106,7 +106,7 @@
                 Click="approve_orer_Click"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="142,356,0,0" TextWrapping="Wrap" 
-                   Text="{Binding MyCart[0].TotalPrice}" VerticalAlignment="Top" Height="28" Width="114"/>
+                   Text="{Binding TotalPrice}" VerticalAlignment="Top" Height="28" Width="114"/>
 
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="10,350,0,0" 
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="109"/>

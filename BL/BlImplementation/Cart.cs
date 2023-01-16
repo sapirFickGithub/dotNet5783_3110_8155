@@ -25,6 +25,7 @@ namespace BlImplementation
                 {
                     item.amount++;
                     item.totalPrice += product.Price;
+                    cart.TotalPrice += product.Price;
                     return cart;
                 }
                 else
@@ -73,6 +74,7 @@ namespace BlImplementation
                 throw new BO.notExist();
             if (amount == 0)
             {
+                cart.TotalPrice -= product.Price;
                 cart?.itemList?.Remove(item);
                 return cart;
             }
@@ -81,7 +83,7 @@ namespace BlImplementation
 
                 cart.TotalPrice += (amount - item.amount) * product.Price;
                 item.amount = amount;
-                item.totalPrice = amount * product.Price;
+                item.totalPrice += amount * product.Price;
 
                 return cart;
             }
@@ -98,12 +100,15 @@ namespace BlImplementation
 
             DO.Order newOrder = new DO.Order();
 
-            int idOfOrder = dal.Order.Add(newOrder);//return the id of the new order
-            if (idOfOrder < 0)
-                throw new incorrectData();
+           //return the id of the new order
+         
             newOrder.DateOfOrder = DateTime.Now;
             newOrder.DateOfShipping = null;
             newOrder.DateOfDelivery = null;
+            newOrder.CustomerName = cart.CustomerName;
+            newOrder.CustomerMail = cart.CustomerMail;
+            newOrder.CustamerAddress = cart.CustomerAddress;
+            int idOfOrder = dal.Order.Add(newOrder);
 
             if (cart.itemList.All(item =>
             {
@@ -123,16 +128,19 @@ namespace BlImplementation
                     DO.OrderItem newOrderItem = new DO.OrderItem()
                     {
                         idProduct = product.idOfProduct,
-                        idOfOrder = item.idOfOrder,
+                        idOfOrder = idOfOrder,
                         Price = item.PriceOfProduct,
                         amount = item.amount,
+                                            
                     };
 
                     dal.OrderItem.Add(newOrderItem);
                 });
 
                 Console.WriteLine("your order number is : " + idOfOrder);
+                //dal.Order.update(newOrder);
                 return idOfOrder;
+
             }
             throw new incorrectData();
             

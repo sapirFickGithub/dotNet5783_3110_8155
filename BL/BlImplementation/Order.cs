@@ -37,15 +37,17 @@ namespace BlImplementation
         private OrderForList doToBoOrderForList(DO.Order? order, IEnumerable<DO.OrderItem?> orderItem)
         {
             var OrderItem = from item in orderItem where (item?.idOfOrder == order?.idOfOrder) select item;
-            double _totalPrice = OrderItem.Sum((item => item?.Price ?? 0));
-
+            double _totalPrice = OrderItem.Sum((item => item?.Price*item?.amount ?? 0));
+            int sumAmount = OrderItem.Sum(item => item?.amount ?? 0);
             BO.OrderForList? OrderForList = new()
             {
                 idOfOrder = (int)order?.idOfOrder,
                 CustomerName = order?.CustomerName,
-                AmountOfItem = OrderItem.Count(),
+                AmountOfItem = sumAmount,
                 TotalPrice = _totalPrice
-            };
+                
+        };
+           
             var orderTemp = dal.Order.getOneByParam(x => order?.idOfOrder == x?.idOfOrder);
 
             if (orderTemp?.DateOfOrder != null&& orderTemp?.DateOfShipping == null)
@@ -74,7 +76,6 @@ namespace BlImplementation
             DO.Order Dorder = (DO.Order)dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder);
             IEnumerable<DO.OrderItem?> orderItems = dal.OrderItem.getAllByParam(x => numOfOrder == (int)(x?.ID));/// return null??
 
-            DateTime? dateOfOrder = Dorder.DateOfOrder;
             BO.Order order = new()
             {
                 idOfOrder = numOfOrder,
@@ -82,24 +83,33 @@ namespace BlImplementation
                 CustomerAddress = Dorder.CustamerAddress,
                 CustomerMail = Dorder.CustomerMail,
                 DateOfShipping = Dorder.DateOfShipping,
-                DateOfOrder = dateOfOrder,
+                DateOfOrder = Dorder.DateOfOrder,
                 DateOfDelivery = Dorder.DateOfDelivery
             };
-            
-
             if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
-            {
-                order.Status = (BO.Enum.OrderStatus.ORDERED);
-            }
-            else if (Dorder.DateOfOrder != null && Dorder.DateOfShipping != null && Dorder.DateOfDelivery == null)
             {
                 order.Status = (BO.Enum.OrderStatus.SHIPPED);
             }
-            else if (Dorder.DateOfDelivery != null)
+            else if (Dorder.DateOfOrder == null)
+            {
+                order.Status = (BO.Enum.OrderStatus.ORDERED);
+            }
+            else
             {
                 order.Status = (BO.Enum.OrderStatus.DLIVERY);
             }
-           
+            //if (Dorder.DateOfOrder == null)
+            //{
+            //    order.Status = (BO.Enum.OrderStatus.SHIPPED);
+            //}
+            //else if (Dorder.DateOfShipping != null && Dorder.DateOfOrder == null)
+            //{
+            //    order.Status = (BO.Enum.OrderStatus.ORDERED);
+            //}
+            //else
+            //{
+            //    order.Status = (BO.Enum.OrderStatus.DLIVERY);
+            //}
 
             order.Items = new List<BO.OrderItem>();
 

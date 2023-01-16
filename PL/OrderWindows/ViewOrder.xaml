@@ -27,7 +27,7 @@
                 Width="179" Height="47"
                 Click="UpdateOrder_click"                
                 />
-        <Label Content="Customer name:" HorizontalAlignment="Left" Margin="82,155,0,0" VerticalAlignment="Top" Width="154"/>
+        <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="82,155,0,0" VerticalAlignment="Top" Width="154"/>
         <Label Content="ID of order:" HorizontalAlignment="Left" Margin="120,113,0,0" VerticalAlignment="Top" Width="116"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="160,76,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Content="Amount:" HorizontalAlignment="Left" Margin="152,235,0,0" VerticalAlignment="Top" Width="92"/>
