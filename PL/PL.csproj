@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\DalXml\DalXml.csproj" />
   </ItemGroup>
 
   <ItemGroup>

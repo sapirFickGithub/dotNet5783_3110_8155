@@ -125,7 +125,7 @@ static class XmlTools
     {
         return new DO.Product
         {
-            idOfProduct = int.Parse(xElem.Element("ID")!.Value),
+            idOfProduct = int.Parse(xElem.Element("idOfProduct")!.Value),
             Name = xElem.Element("Name")!.Value,
             ProductCategory = (DO.Category?)Enum.Parse(typeof(DO.Category), xElem.Element("Category")!.Value),
             InStock = int.Parse(xElem.Element("InStock")!.Value),

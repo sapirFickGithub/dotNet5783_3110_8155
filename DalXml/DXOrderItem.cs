@@ -6,10 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace Dal;
 
-internal class DalOrderItem : IOrderItem
+internal class DXOrderItem : IOrderItem
 {
     const string orderItemPath = "OrderItem";
     static XElement config = XmlTools.LoadConfig();

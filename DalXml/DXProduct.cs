@@ -6,10 +6,15 @@ using DalApi;
 using System.Threading.Tasks;
 using DO;
 using System.Xml.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace Dal;
 
-internal class DalProduct : IProduct
+internal class DXProduct : IProduct
 {
     const string productPath = "Product";
     static XElement config = XmlTools.LoadConfig();
