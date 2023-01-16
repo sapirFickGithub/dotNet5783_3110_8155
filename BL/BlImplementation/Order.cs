@@ -73,6 +73,7 @@ namespace BlImplementation
             DO.Order Dorder = (DO.Order)dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder);
             IEnumerable<DO.OrderItem?> orderItems = dal.OrderItem.getAllByParam(x => numOfOrder == (int)(x?.ID));/// return null??
 
+            /// the
             BO.Order? order = new()
             {
                 idOfOrder = numOfOrder,
