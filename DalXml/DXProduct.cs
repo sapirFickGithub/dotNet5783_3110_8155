@@ -69,7 +69,7 @@ internal class DalProduct : IProduct
 
     public void delete(int idProduct)
     {
-        List<DO.Product?> listProduct = XmlTools.LoadListFromXMLSerializer<DO.Order>(orderPath);
+        List<DO.Product?> listProduct = XmlTools.LoadListFromXMLSerializer<DO.Product>(productPath);
         listProduct.Remove(getOneByParam(x => idProduct == x?.idOfProduct));
         XmlTools.SaveListToXMLSerializer(listProduct, productPath);
     }

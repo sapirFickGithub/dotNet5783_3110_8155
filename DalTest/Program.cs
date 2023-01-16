@@ -1,5 +1,6 @@
 ﻿
 using Dal;
+using DalTest;
 using DO;
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -197,7 +198,7 @@ public class Program
     ///  test all the fonctions on order item
     /// </summary>
     /// <param name="dal"></param>
-    public static void orderItem(DalApi.IDal? dal)
+    public static void orderItemOption(DalApi.IDal? dal)
     {
         char option;
         Console.WriteLine("Order Item\n" +
@@ -294,6 +295,8 @@ public class Program
     public static void Main(string[] args)
     {
         DalApi.IDal? dal = DalApi.Factory.Get();
+        OrderItem orderItem = new OrderItem();
+        Order order = new Order();
 
         char num = '5';
         Console.WriteLine("press 0 to exit\nfor Product press 1\nfor Ordr press 2\nfor OrderItem press 3");
@@ -324,9 +327,21 @@ public class Program
                     case '3'://orderitem
                         {
 
-                            orderItem(dal);
+                            orderItemOption(dal);
                             break;
                         }
+                    case '4':
+                        DalApi.IDal? access = DalApi.Factory.Get();
+
+                        XmlTools.SaveListToXMLSerializer(access.Product.getAllByParam().ToList(), "Product");
+                        XmlTools.SaveListToXMLSerializer(access.Order.getAllByParam().ToList(), "Order");
+                        XmlTools.SaveListToXMLSerializer(access.OrderItem.getAllByParam().ToList(), "OrderItem");
+
+                        int lastOrderItemID = access.OrderItem.getAllByParam().Last()?.ID ?? 0;
+                        int lastOrderID = access.Order.getAllByParam().Last()?.idOfOrder ?? 0;
+                        XmlTools.SaveConfigXElement("OrderID", lastOrderID);
+                        XmlTools.SaveConfigXElement("OrderItemID", lastOrderItemID);
+                        break;
                 }
                 Console.WriteLine("PLEASE ENTER YOUR NEXT CHOICE");
 
