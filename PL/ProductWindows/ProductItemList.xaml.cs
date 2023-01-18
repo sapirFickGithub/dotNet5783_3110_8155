@@ -217,18 +217,15 @@ namespace PL.ProductWindows
 
         private void GroupingCheak_Checked(object sender, RoutedEventArgs e)
         {
-           var check= sender as CheckBox;
-            if(check.IsChecked==true)
-                collectionView.GroupDescriptions.Add(propertyGroupDescription);
-          
+
+            collectionView.GroupDescriptions.Add(propertyGroupDescription);
+
         }
 
         private void GroupingCheak_UnChecked(object sender, RoutedEventArgs e)
         {
-           
-            var check = sender as CheckBox;
-            if (check.IsChecked == false)
-                collectionView.GroupDescriptions.Remove(propertyGroupDescription);
+
+            collectionView.GroupDescriptions.Remove(propertyGroupDescription);
         }
     }
 }

@@ -136,7 +136,7 @@
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Name}" Foreground="{DynamicResource PrimaryHuMidBrush}" VerticalAlignment="Bottom"/>
-                                                    <TextBlock Text="{Binding ItemCount}" Foreground="{DynamicResource PrimaryHuLirhtBrush}"  VerticalAlignment="Bottom"/>
+                                                    <TextBlock Text="{Binding Items}" Foreground="{DynamicResource PrimaryHuLirhtBrush}"  VerticalAlignment="Bottom"/>
                                                     <TextBlock Text="item(s)" Foreground="{DynamicResource PrimaryHuLirhtBrush}"  VerticalAlignment="Bottom"/>
                                                 </StackPanel>
                                             </Expander.Header>
@@ -160,7 +160,7 @@
             HorizontalAlignment="Left" Grid.Row="3"
             Margin="40,9,0,0" Height="46"  Width="117"   
             VerticalAlignment="Top"   Click="Go_to_Cart_Click"/>
-        <CheckBox Content="See in groups" HorizontalAlignment="Left" Margin="40,52,0,4"   IsChecked="GroupingCheak_Checked" UnChecked="GroupingCheak_UnChecked"/>
+        <CheckBox Content="See in groups" HorizontalAlignment="Left" Margin="40,52,0,151" Unchecked="GroupingCheak_UnChecked" Checked="GroupingCheak_Checked" Grid.RowSpan="2" Width="92"/>
 
 
     </Grid>
