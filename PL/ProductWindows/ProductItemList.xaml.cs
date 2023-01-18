@@ -46,11 +46,14 @@ namespace PL.ProductWindows
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register("Items", typeof(ObservableCollection<ProductItem>), typeof(ProductItemList));
 
-
+        ICollectionView collectionView;
+        PropertyGroupDescription propertyGroupDescription;
 
 
         public ProductItemList(BO.Cart cart)
-        {  
+        {
+
+
             product = new BO.Product();
             productItem = new BO.ProductItem();
             MyCart = cart;
@@ -58,11 +61,13 @@ namespace PL.ProductWindows
             Categories = System.Enum.GetValues(typeof(BO.Enum.CategoryView)).Cast<BO.Enum.CategoryView>();
             InitializeComponent();
             itemsListInitialize();
-
+            /////////////////////////////
+            collectionView = CollectionViewSource.GetDefaultView(Items);
+            propertyGroupDescription = new PropertyGroupDescription("Category");
         }
 
 
-       
+
 
 
         private void itemsListInitialize()
@@ -138,23 +143,23 @@ namespace PL.ProductWindows
             new MainWindow().Show();
             this.Close();
         }
-      
-       
+
+
         private void Go_to_Cart_Click(object sender, RoutedEventArgs e)
         {
             if (MyCart != null)
-                new CartWindows.CartNew(MyCart,this).ShowDialog();
-           
+                new CartWindows.CartNew(MyCart, this).ShowDialog();
+
         }
 
         private void Increase_Click(object sender, RoutedEventArgs e)
         {
 
-         var myButtom=   sender as Button;
+            var myButtom = sender as Button;
 
             ProductItem productItem = myButtom.DataContext as ProductItem;
 
-                var p = bl.Product.GetProduct(productItem.idOfProduct);
+            var p = bl.Product.GetProduct(productItem.idOfProduct);
 
 
             if ((productItem.InStock == false) && (p.InStock - productItem.Amount <= 0))
@@ -174,7 +179,7 @@ namespace PL.ProductWindows
 
                 bl.Cart.add(MyCart, productItem.idOfProduct);
 
-              
+
             }
 
         }
@@ -210,6 +215,21 @@ namespace PL.ProductWindows
             }
         }
 
+        private void GroupingCheak_Checked(object sender, RoutedEventArgs e)
+        {
+           var check= sender as CheckBox;
+            if(check.IsChecked==true)
+                collectionView.GroupDescriptions.Add(propertyGroupDescription);
+          
+        }
+
+        private void GroupingCheak_UnChecked(object sender, RoutedEventArgs e)
+        {
+           
+            var check = sender as CheckBox;
+            if (check.IsChecked == false)
+                collectionView.GroupDescriptions.Remove(propertyGroupDescription);
+        }
     }
 }
 
