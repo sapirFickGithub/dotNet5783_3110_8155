@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace BlImplementation
 {
@@ -86,23 +87,26 @@ namespace BlImplementation
                 DateOfOrder = Dorder.DateOfOrder,
                 DateOfDelivery = Dorder.DateOfDelivery
             };
+
             if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
-            {
-                order.Status = (BO.Enum.OrderStatus.SHIPPED);
-            }
-            else if (Dorder.DateOfOrder == null)
             {
                 order.Status = (BO.Enum.OrderStatus.ORDERED);
             }
-            else
+
+
+            else if (Dorder.DateOfOrder != null && Dorder.DateOfShipping != null && Dorder.DateOfDelivery == null)
+            {
+                order.Status = (BO.Enum.OrderStatus.SHIPPED);
+            }
+            else if (Dorder.DateOfDelivery != null)
             {
                 order.Status = (BO.Enum.OrderStatus.DLIVERY);
             }
-            //if (Dorder.DateOfOrder == null)
+            //if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
             //{
             //    order.Status = (BO.Enum.OrderStatus.SHIPPED);
             //}
-            //else if (Dorder.DateOfShipping != null && Dorder.DateOfOrder == null)
+            //else if (Dorder.DateOfOrder == null)
             //{
             //    order.Status = (BO.Enum.OrderStatus.ORDERED);
             //}
@@ -111,18 +115,36 @@ namespace BlImplementation
             //    order.Status = (BO.Enum.OrderStatus.DLIVERY);
             //}
 
+
             order.Items = new List<BO.OrderItem>();
 
-
-            order.Items.AddRange(orderItems.Select((item, index) => new BO.OrderItem
-            {
-                idOfOrder = (int)item?.ID,
-                idOfProduct = (int)item?.idProduct,
-                NameOfProduct = dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct)?.Name,
-                amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount,
-                PriceOfProduct = (double)item?.Price,
-                totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price
-            }));
+            List<DO.OrderItem?> item = (dal.OrderItem.getAllByParam(x => numOfOrder == x?.idOfOrder).ToList() ?? throw new BO.notExist());
+      
+            item.ForEach(item =>
+                {
+                    DO.Product? temp =  dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct);
+                    BO.OrderItem newOrderItem = new BO.OrderItem()
+                    {
+                        idOfProduct = (int)item?.idProduct,
+                        idOfOrder = (int)item?.idOfOrder,
+                        NameOfProduct = temp?.Name,
+                        PriceOfProduct = (int)item?.Price,
+                        amount = (int)item?.amount,
+                        ProductCategory = (BO.Enum.Category?)(temp?.ProductCategory),
+                        totalPrice = (double)(temp?.Price * (int)item?.amount)
+                    };
+                    order.Items.Add(newOrderItem);
+                });
+            //order.Items.Add(orderItems.Select((item, index) => new BO.OrderItem
+            //{
+            //    idOfOrder = (int)item?.ID,
+            //    idOfProduct = (int)item?.idProduct,
+            //    NameOfProduct = dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct)?.Name,
+            //    amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount,
+            //    PriceOfProduct = (double)item?.Price,
+            //    totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price
+            //}));
+           
             order.TotalPrice = order.Items.Sum(item => item.totalPrice);
 
 
@@ -135,12 +157,14 @@ namespace BlImplementation
                 throw new incorrectData();
 
             DO.Order Dorder = dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder) ?? throw new BO.notExist();
-            if (Dorder.DateOfDelivery == null)
-                throw new incorrectData();
-
+            if (Dorder.DateOfDelivery != null)
+            {
+                throw new Exception("the order is already delivered");
+            }
             Dorder.DateOfDelivery = DateTime.Now;
             BO.Order order = GetOrder(numOfOrder);
             order.DateOfDelivery = DateTime.Now;
+            order.Status = BO.Enum.OrderStatus.DLIVERY;
             dal.Order.update(Dorder);
             return order;
         }
@@ -148,14 +172,21 @@ namespace BlImplementation
         public BO.Order? UpdateSupplyDelivery(int numOfOrder)
         {
             DO.Order Dorder = dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder) ?? throw new BO.notExist();
-            if (Dorder.DateOfDelivery != null && (Dorder.idOfOrder <= 999999 && numOfOrder >= 100000) && Dorder.DateOfShipping == null)
+            if (Dorder.DateOfShipping != null)
+            {
+                throw new Exception("the order is already shipped");
+
+            }
+            else if (Dorder.DateOfOrder != null && (Dorder.idOfOrder <= 999999 && numOfOrder >= 100000) && Dorder.DateOfShipping == null)
             {
                 Dorder.DateOfShipping = DateTime.Now;
                 BO.Order order = GetOrder(numOfOrder);
                 order.DateOfShipping = DateTime.Now;
+                order.Status = BO.Enum.OrderStatus.SHIPPED;
                 dal.Order.update(Dorder);
                 return order;
             }
+            
             else
             {
                 throw new incorrectData();
@@ -212,25 +243,36 @@ namespace BlImplementation
 
 
 
-        public bool updateAdmin(int idOrder, int idProduct, int amount)
+        public void updateAdmin(int idOrder, int idProduct, int amount)
         {
 
-            List<DO.OrderItem> orderItems = (List<DO.OrderItem>)(dal?.OrderItem?.getAllByParam(x => (idOrder == x?.idOfOrder) && (idProduct == x?.idProduct)));
+           DO.OrderItem orderItem = ((DO.OrderItem)dal.OrderItem.getOneByParam(x => (idOrder == x?.idOfOrder) && (idProduct == x?.idProduct)));
 
-            if (orderItems[0].amount == amount)
-                return true;
+            //if (orderItem?.amount == amount)
+            //    return true;
+            if (amount == 0)
+            {
+                dal.OrderItem.delete(orderItem.ID);
+            }
             var Dproduct = dal.Product.getOneByParam(x => idProduct == x?.idOfProduct) ?? throw new BO.notExist();
-            if (Dproduct.InStock - amount < 0)
-                return false;
+            if (amount > orderItem.amount)
+            {
+                if (Dproduct.InStock - amount < 0)
+                    throw new Exception("there is not enough products in stock");
+                else
+                {
+                    orderItem.amount = amount;
+                    dal.OrderItem.update(orderItem);
+                }
 
-            var orderItem = orderItems[0];
-            orderItem.amount = amount;
-            dal.OrderItem.update(orderItem);
-            return true;
+            }
+            else if(amount!=0)
+                {
+                orderItem.amount = amount;
+                dal.OrderItem.update(orderItem);
+
+            }
         }
-
-
-
     }
 
 }

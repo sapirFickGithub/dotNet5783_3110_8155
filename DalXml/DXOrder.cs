@@ -33,8 +33,8 @@ internal class DXOrder : IOrder
     public int Add(Order order)
     {
         List<DO.Order?> listOrder = XmlTools.LoadListFromXMLSerializer<DO.Order>(orderPath);
-        
-        XmlTools.SaveConfigXElement("OrderID", order.idOfOrder);
+        order.idOfOrder = int.Parse(config.Element("idOfOrder")!.Value) + 1;
+        XmlTools.SaveConfigXElement("idOfOrder", order.idOfOrder);
         listOrder.Add(order);
         XmlTools.SaveListToXMLSerializer(listOrder, orderPath);
         return order.idOfOrder;

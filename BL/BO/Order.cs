@@ -8,7 +8,7 @@ namespace BO
 {
     public class Order
     {
-        
+       
 
         public int idOfOrder { get; set; }
         public string? CustomerName { get; set; }
@@ -21,7 +21,7 @@ namespace BO
         
         public List<OrderItem?>? Items { get; set; }
         public double TotalPrice { get; set; }
-
+      
 
         public override string ToString() {
             string print = $@"

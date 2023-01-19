@@ -65,6 +65,6 @@ namespace BlApi
         /// <param name="idProduct"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public bool updateAdmin(int idOrder, int idProduct, int amount);
+        public void updateAdmin(int idOrder, int idProduct, int amount);
     }
 }

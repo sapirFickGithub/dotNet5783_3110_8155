@@ -70,7 +70,9 @@ namespace BlImplementation
                 idOfProduct = Dproduct.idOfProduct,
                 Name = Dproduct.Name,
                 Price = Dproduct.Price,
-                InStock = Dproduct.InStock
+                InStock = Dproduct.InStock,
+                ProductCategory = (BO.Enum.Category?)Dproduct.ProductCategory
+
             };
             return tempProduct;
 

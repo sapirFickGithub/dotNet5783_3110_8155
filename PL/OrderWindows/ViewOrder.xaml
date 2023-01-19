@@ -8,64 +8,233 @@
          DataContext="{Binding RelativeSource={RelativeSource self}}"  
         Title="Update order" Height="450" Width="800">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Left"
-                 Margin="236,162,0,0" 
-                 TextWrapping="Wrap"
-                 VerticalAlignment="Top"
-                 Width="234"
-                 Text="{Binding orderForList.CustomerName}" 
-                 Height="25" 
-                 />
+    <Grid Margin="-1,0,1,0">
+
         <Button Content="Back" HorizontalAlignment="Left" Margin="38,357,0,0" VerticalAlignment="Top" Width="117"
                 Click="BackToOrderListWindow_Click" Height="42"/>
-        <Button x:Name="update_order"
-                Content="Update"
-                HorizontalAlignment="Left"
-                Margin="547,352,0,0" 
-                VerticalAlignment="Top" 
-                Width="179" Height="47"
-                Click="UpdateOrder_click"                
-                />
-        <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="82,155,0,0" VerticalAlignment="Top" Width="154"/>
-        <Label Content="ID of order:" HorizontalAlignment="Left" Margin="120,113,0,0" VerticalAlignment="Top" Width="116"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="160,76,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Content="Amount:" HorizontalAlignment="Left" Margin="152,235,0,0" VerticalAlignment="Top" Width="92"/>
-        <Label Content="Total price:" HorizontalAlignment="Left" Margin="547,222,0,0" VerticalAlignment="Top" Width="105"/>
-        <Label Content="Date Of delivery:" HorizontalAlignment="Left" Margin="82,195,0,0" VerticalAlignment="Top" Width="169" RenderTransformOrigin="-0.375,-2.649"/>
+
+        <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.74,0.422"/>
+        <Label Content="Order ID:" HorizontalAlignment="Left" Margin="120,57,0,0" VerticalAlignment="Top" Width="68" Height="23"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="356,59,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Content="Total price:" HorizontalAlignment="Left" Margin="542,355,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Order Date:" HorizontalAlignment="Left" Margin="336,85,0,0" VerticalAlignment="Top" Width="68" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Customer Email:" HorizontalAlignment="Left" Margin="91,107,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Customer Address:" HorizontalAlignment="Left" Margin="82,132,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <TextBlock HorizontalAlignment="Left"
-            Margin="236,123,0,0" 
+            Margin="170,62,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="203"
+            Width="100"
             Text="{Binding orderForList.idOfOrder}" 
-            Height="25" 
+            Height="23" 
                  />
-        <TextBlock HorizontalAlignment="Left"
-            Margin="244,240,0,0" 
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="234"
-            Text="{Binding orderForList.AmountOfItem}" 
-            Height="25"
-                 />
-        <ComboBox x:Name="Status_selector"
+
+        <!--<ComboBox x:Name="Status_selector"
                   HorizontalAlignment="Left"
                   Margin="236,70,0,0" Width="114" Height="38"
                   VerticalAlignment="Top" SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding status}"
                   SelectedItem="{Binding orderForList.Status}">
-        </ComboBox>
+        </ComboBox>-->
 
-       
+
         <TextBlock HorizontalAlignment="Left"
-            Margin="662,225,0,0"  Width="88"
+            Margin="624,355,0,0"  Width="88"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-           FontSize="20"
-            Text="{Binding orderForList.TotalPrice}" 
+           FontSize="10"
+            Text="{Binding order.TotalPrice}" 
             Height="37" 
                  />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="177,87,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding orderForList.CustomerName}" 
+            Height="23" 
+                 />
+        <Label Content="Ship Date:" HorizontalAlignment="Left" Margin="344,111,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Delivery Date:" HorizontalAlignment="Left" Margin="328,136,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <TextBlock HorizontalAlignment="Left"
+            Margin="177,111,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding order.CustomerMail}" 
+            Height="23" 
+                 />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="177,136,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding order.CustomerAddress}" 
+            Height="23" 
+                 />
+        <Label Content="Amount Of Item:" HorizontalAlignment="Left" Margin="91,157,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <TextBlock HorizontalAlignment="Left"
+            Margin="177,161,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding orderForList.AmountOfItem}" 
+            Height="23" 
+                 />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="404,62,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding order.Status}" 
+            Height="23" 
+                 />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="401,87,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding order.DateOfOrder}" 
+            Height="23" 
+                 />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="402,113,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding order.DateOfShipping}" 
+            Height="23" 
+                 />
+        <TextBlock HorizontalAlignment="Left"
+            Margin="401,141,0,0" 
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="100"
+            Text="{Binding order.DateOfDelivery}" 
+            Height="23" 
+                 />
+        <Button Content="update"
+                HorizontalAlignment="Left"
+                Margin="526,117,0,0" 
+                VerticalAlignment="Top"
+                Click="update_ShipDate_Click"
+                />
+        <Button Content="update"
+                HorizontalAlignment="Left"
+                Margin="526,142,0,0" 
+                VerticalAlignment="Top"
+                Click ="update_DeliveryDate_Click"
+                />
+
+        <ListView 
+                  d:ItemsSource="{d:SampleData ItemCount=5}" 
+                  SelectionChanged="List_of_orders_SelectionChanged"
+                  Margin="152,202,132,104"
+                  FontFamily="Maiandra GD"
+                  ItemsSource="{Binding order.Items}"
+                  MouseDoubleClick="List_of_orders_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding idOfProduct}">
+                        <GridViewColumnHeader 
+                            Content="Product ID" FontFamily= "Maiandra GD" Tag="idOfOrder"
+                            Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding NameOfProduct}" >
+                        <GridViewColumnHeader 
+                            Content="Product Name" FontFamily= "Maiandra GD" Tag="CustomerName"
+                            Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+
+                    <GridViewColumn  
+                            DisplayMemberBinding="{Binding PriceOfProduct }" >
+                        <GridViewColumnHeader 
+                            Content="Product Price" FontFamily= "Maiandra GD" Tag="Status"
+                            Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn  
+                            DisplayMemberBinding="{Binding amount }" >
+                        <GridViewColumnHeader 
+                            Content="Amount" FontFamily= "Maiandra GD" Tag="AmountOfItem"
+                             Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding totalPrice}" >
+                        <GridViewColumnHeader 
+                            Content= "Total price" FontFamily= "Maiandra GD" Tag="TotalPrice"
+                             Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+
+                    <GridViewColumn 
+                            DisplayMemberBinding="{Binding ProductCategory}" >
+                        <GridViewColumnHeader 
+                            Content= "Category" FontFamily= "Maiandra GD" Tag="TotalPrice"
+                             Click="Sort_By_Colmun_Click"/>
+                    </GridViewColumn>
+                    
+                     <GridViewColumn>
+                        <GridViewColumnHeader
+                                Content="Amount" 
+                                AllowDrop="True" 
+                                Focusable="True" 
+                                Tag="amount" 
+                              />
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Button
+                                            x:Name="Decrease"
+                                            Visibility="Hidden"
+                                            Width="20"
+                                            Height="20"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center" 
+                                            FontSize="14" 
+                                            
+                                            Click="Decrease_Click" 
+                                            
+                                            Content="-" 
+                                            
+                                            Tag="{Binding idOfProduct}"
+                                            
+                                            />
+
+                                    <Label Content="{Binding amount}" />
+
+
+                                    <Button 
+                                            x:Name="Increase"
+                                            Width="20"  Height="20" Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            
+                                            Click="Increase_Click"
+                                            
+                                            Content="+" 
+                                            
+                                            FontSize="14" 
+                                            
+                                            Tag="{Binding idOfProduct}" />
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+
+
+            </ListView.View>
+        </ListView>
         <!--<CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
                   Margin="547,281,0,0" Height="32" Width="154" Checked="Supply_Checked" FontSize="20"/>-->
         <!--<ListView 

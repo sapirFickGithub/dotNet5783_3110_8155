@@ -26,13 +26,27 @@ namespace PL.ProductWindows
 
         public event Action<int> action;
         public IEnumerable<BO.Enum.Category> Categories { set; get; }
+        //public BO.Enum.Category Categories { set; get; }
 
-        public BO.Product? product { set; get; } 
+
+        public BO.Product product
+        {
+            get { return (BO.Product)GetValue(productProperty); }
+            set { SetValue(productProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for product.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty productProperty =
+            DependencyProperty.Register("product", typeof(BO.Product), typeof(UpdateProduct));
+
+
+
+        //public BO.Product? product { set; get; } 
         public UpdateProduct(Action<int> action, ProductForList productForList)
         {
              product =bl?.Product?.GetProduct(productForList.idOfProduct);
-           // var productOb
-            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
+           
+            //Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             this.action = action;
             InitializeComponent();
         }
@@ -40,16 +54,7 @@ namespace PL.ProductWindows
         private void UpdateProduct_Click(object sender, RoutedEventArgs e)
         {
             try
-            {//Receives the new data to Update the product and performs input integrity checks.
-                //int.TryParse(ID.Text, out int id);
-                //if (id <= 99999 || id >= 1000000)
-                //    MessageBox.Show(
-                //        "The ID you enter is incorrect",
-                //        "Invalid input",
-                //        MessageBoxButton.OK,
-                //        MessageBoxImage.Hand,
-                //        MessageBoxResult.Cancel,
-                //        MessageBoxOptions.RtlReading);
+            {
 
                 double.TryParse(Price.Text, out double price);
                 if (price < 0)

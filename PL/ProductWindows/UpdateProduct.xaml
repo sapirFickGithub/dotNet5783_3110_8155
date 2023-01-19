@@ -26,7 +26,7 @@
             Height="30" Width="250" Margin="152,7,0,0" Grid.Row="1"
             Text="{Binding product.idOfProduct }"
             />
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD" Grid.Row="1"/>
+        <Label Content="Product ID:" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD" Grid.Row="1"/>
 
         <TextBox  x:Name="Name"
             HorizontalAlignment="Left"  TextWrapping="Wrap" 
@@ -61,7 +61,7 @@
                   HorizontalAlignment="Left" VerticalAlignment="Top"
                   Width="250" Height="30"  Margin="152,10,0,0" Grid.Row="5"                  
                   SelectionChanged="Category_SelectionChanged"
-                  ItemsSource="{Binding Categories}"
+                  ItemsSource="{Binding product.ProductCategory}"
                   SelectedItem="{Binding product.ProductCategory}" >
         </ComboBox>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontSize="14" FontWeight="Normal"/>

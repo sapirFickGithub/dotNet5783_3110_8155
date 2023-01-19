@@ -38,8 +38,8 @@ internal class DXOrderItem : IOrderItem
     {
         List<DO.OrderItem?> listOrderItem = XmlTools.LoadListFromXMLSerializer<DO.OrderItem>(orderItemPath);
 
-        orderItem1.ID = int.Parse(config.Element("OrderItemID")!.Value) + 1;
-        XmlTools.SaveConfigXElement("OrderItemID", orderItem1.ID);
+        orderItem1.ID = int.Parse(config.Element("ID")!.Value) + 1;
+        XmlTools.SaveConfigXElement("ID", orderItem1.ID);
         listOrderItem.Add(orderItem1);
 
         XmlTools.SaveListToXMLSerializer(listOrderItem, orderItemPath);

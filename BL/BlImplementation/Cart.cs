@@ -146,28 +146,7 @@ namespace BlImplementation
             
 
 
-            //foreach (var item in cart.itemList)
-            //{
-            //    //check if the product is in stock
-            //    DO.Product product = dal.Product.getOneByParam(x => item.idOfProduct == x?.idOfProduct) ?? throw new notExist();
-
-            //    if (product.InStock - item.amount < 0)
-            //        return false;
-            //    //if the produt in stock so add to order
-            //    DO.OrderItem newOrderItem = new DO.OrderItem()
-            //    {
-            //        idProduct = product.idOfProduct,
-            //        idOfOrder = item.idOfOrder,
-            //        Price = item.PriceOfProduct,
-            //        amount = item.amount,
-            //    };
-
-            //    dal.OrderItem.Add(newOrderItem);
-            //}
-
-            ////all the details are true
-            //Console.WriteLine("your order number is : " + idOfOrder);
-            //return true;
+           
         }
     }
 }
