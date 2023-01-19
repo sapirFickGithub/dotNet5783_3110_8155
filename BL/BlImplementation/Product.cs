@@ -27,15 +27,22 @@ namespace BlImplementation
 
         public BO.ProductItem doToBoProductItem(DO.Product? product)
         {
-            return new BO.ProductItem
+            try
             {
-                idOfProduct = (int)(product?.idOfProduct),
-                Name = product?.Name,
-                Price = (double)(product?.Price),
-                InStock = ((int)(product?.InStock) > 0),
-                Amount = 0,
-                ProductCategory = (BO.Enum.Category)product?.ProductCategory
-            };
+                return new BO.ProductItem
+                {
+                    idOfProduct = (int)(product?.idOfProduct),
+                    Name = product?.Name,
+                    Price = (double)(product?.Price),
+                    InStock = ((int)(product?.InStock) > 0),
+                    Amount = 0,
+                    ProductCategory = (BO.Enum.Category)product?.ProductCategory
+                };
+            }
+            catch(DO.notExist ex)
+            {
+                throw new BO.BlMissingEntityException("not exist ",ex);
+            }
         }
 
         public IEnumerable<BO.ProductForList> getListOfProduct(Func<DO.Product?, bool>? param)
@@ -48,13 +55,21 @@ namespace BlImplementation
 
         private ProductForList doToBoProductForList(DO.Product? product)
         {
-            return new BO.ProductForList
+            try
             {
-                idOfProduct = (int)(product?.idOfProduct),
-                Name = product?.Name,
-                Price = (double)(product?.Price),
-                ProductCategory = (BO.Enum.Category)product?.ProductCategory,
-            };
+                return new BO.ProductForList
+                {
+                    idOfProduct = (int)(product?.idOfProduct),
+                    Name = product?.Name,
+                    Price = (double)(product?.Price),
+                    ProductCategory = (BO.Enum.Category)product?.ProductCategory,
+                };
+            }
+            catch (DO.notExist ex)
+            {
+                throw new BO.BlMissingEntityException("the product for list doesn't exsit", ex);
+            }
+
         }
 
         public BO.Product GetProduct(int idOfProduct)
@@ -65,6 +80,7 @@ namespace BlImplementation
                 throw new incorrectData();
             }
             DO.Product Dproduct = dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
+
             BO.Product? tempProduct = new()
             {
                 idOfProduct = Dproduct.idOfProduct,
@@ -80,17 +96,25 @@ namespace BlImplementation
 
         public BO.ProductItem GetProductItem(int idOfProduct)
         {
-            var item = (DO.Product)(dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist()); ;
-            BO.ProductItem productItem = new()
+            try
             {
-                idOfProduct = item.idOfProduct,
-                Name = item.Name,
-                Price = item.Price,
-                ProductCategory = (BO.Enum.Category)item.ProductCategory,
-                Amount = 0,
-                InStock = (item.InStock > 0)
-            };
-            return productItem;
+                var item = (DO.Product)(dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist()); ;
+                BO.ProductItem productItem = new()
+                {
+                    idOfProduct = item.idOfProduct,
+                    Name = item.Name,
+                    Price = item.Price,
+                    ProductCategory = (BO.Enum.Category)item.ProductCategory,
+                    Amount = 0,
+                    InStock = (item.InStock > 0)
+                };
+
+                return productItem;
+            }
+            catch (DO.notExist ex)
+            {
+                throw new BO.BlMissingEntityException("the product doesn't exist ", ex);
+            }
         }
 
 
@@ -101,28 +125,36 @@ namespace BlImplementation
             {
                 throw new BO.incorrectData();
             }
-            DO.Product Dproduct = (DO.Product)dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
-            BO.Product tempProduct = new()
+            try
             {
-                idOfProduct = Dproduct.idOfProduct,
-                Name = Dproduct.Name,
-                Price = Dproduct.Price,
-                InStock = Dproduct.InStock
-            };
+                DO.Product Dproduct = (DO.Product)dal.Product.getOneByParam(x => idOfProduct == x?.idOfProduct);
+                BO.Product tempProduct = new()
+                {
+                    idOfProduct = Dproduct.idOfProduct,
+                    Name = Dproduct.Name,
+                    Price = Dproduct.Price,
+                    InStock = Dproduct.InStock
+                };
 
 
-            var item = cart?.itemList.First(x => x?.idOfProduct == idOfProduct) ?? throw new BO.notExist();
 
-            BO.ProductItem productItem = new()
+                var item = cart?.itemList.First(x => x?.idOfProduct == idOfProduct) ?? throw new BO.notExist();
+
+                BO.ProductItem productItem = new()
+                {
+                    idOfProduct = item.idOfProduct,
+                    Name = item.NameOfProduct,
+                    Price = item.PriceOfProduct,
+                    ProductCategory = (BO.Enum.Category)item.ProductCategory,
+                    Amount = item.amount,
+                    InStock = (tempProduct.InStock > 0)
+                };
+                return productItem;
+            }
+            catch (DO.notExist ex)
             {
-                idOfProduct = item.idOfProduct,
-                Name = item.NameOfProduct,
-                Price = item.PriceOfProduct,
-                ProductCategory =(BO.Enum.Category) item.ProductCategory,
-                Amount = item.amount,
-                InStock = (tempProduct.InStock > 0)
-            };
-            return productItem;
+                throw new BO.BlMissingEntityException("the product doesn't exist ", ex);
+            }
 
         }
         public int addProduct(string name, BO.Enum.Category productCategory, double price, int inStock)

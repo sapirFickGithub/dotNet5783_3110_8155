@@ -69,8 +69,8 @@ internal class DalProduct : IProduct
 
     public Product? getOneByParam(Func<Product?, bool>? param)
     {
-        return listProduct.FirstOrDefault(param);
-        throw new notExist();
+        return listProduct.FirstOrDefault(param) ?? throw new notExist();
+        
 
     }
 }

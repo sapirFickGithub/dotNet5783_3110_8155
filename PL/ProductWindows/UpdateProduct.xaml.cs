@@ -46,7 +46,7 @@ namespace PL.ProductWindows
         {
              product =bl?.Product?.GetProduct(productForList.idOfProduct);
            
-            //Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
+            Categories = System.Enum.GetValues(typeof(BO.Enum.Category)).Cast<BO.Enum.Category>();
             this.action = action;
             InitializeComponent();
         }

@@ -66,8 +66,8 @@ internal class DalOrder : IOrder
 
     public Order? getOneByParam(Func<Order?, bool>? param)
     {
-        return listOrder.FirstOrDefault(param);
-        throw new notExist();
+        return listOrder.FirstOrDefault(param)?? throw new notExist();
+       
 
     }
 }

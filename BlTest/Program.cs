@@ -131,7 +131,7 @@ public class Program
                         int.TryParse(Console.ReadLine(), out int idProduct);
                         Console.WriteLine("insert the new amount.");
                         int.TryParse(Console.ReadLine(), out int amount);
-                        if (ibl.Order.updateAdmin(idOrder, idProduct, amount))
+                        //if (ibl.Order.updateAdmin(idOrder, idProduct, amount))
 
                             Console.WriteLine(ibl.Order.GetOrder(idOrder));
                         break;

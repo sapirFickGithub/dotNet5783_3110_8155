@@ -34,19 +34,7 @@ namespace BlImplementation
                 }
             }
 
-            //foreach (var item in cart.itemList)
-            //{
-            //    if (item.idOfProduct == idOfProduct)
-            //    {//item alredy in cart- amount++
-            //        if (product.InStock - item.amount >= 0)
-            //        {
-            //            item.amount++;
-            //            item.totalPrice += product.Price;
-            //            return cart;
-            //        }
-            //        else throw new outOfStock();
-            //    }
-            //}
+           
 
             if (product.InStock > 0)// add the item to cart 
             {

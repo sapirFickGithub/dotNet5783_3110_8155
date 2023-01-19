@@ -192,7 +192,7 @@
 
                                     <Button
                                             x:Name="Decrease"
-                                            Visibility="Hidden"
+                                            
                                             Width="20"
                                             Height="20"
                                             Padding="0"

@@ -47,4 +47,22 @@ namespace BO
             return Messege;
         }
     }
+
+    public class BlMissingEntityException: Exception
+    {
+        public BlMissingEntityException(string message, Exception innerException)
+            : base(message, innerException) { }
+        public override string ToString() =>
+            base.ToString() + $" Missing entity";
+        
+    }
+    public class BlAlreadyExistEntityException : Exception
+    {
+        public BlAlreadyExistEntityException(string message, Exception innerException)
+            : base(message, innerException) { }
+        public override string ToString() =>
+            base.ToString() + $"Entity is already exists";
+
+
+    }
 }

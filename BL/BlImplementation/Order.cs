@@ -258,7 +258,7 @@ namespace BlImplementation
             if (amount > orderItem.amount)
             {
                 if (Dproduct.InStock - amount < 0)
-                    throw new Exception("there is not enough products in stock");
+                    throw new BO.outOfStock(Dproduct.idOfProduct);
                 else
                 {
                     orderItem.amount = amount;
