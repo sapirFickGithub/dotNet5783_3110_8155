@@ -87,7 +87,9 @@ using System.Windows.Markup;
             _order.CustomerName = CustomerName[rand.Next(0, 7)];
            // _order.DateOfShipping = null;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
-            _order.DateOfOrder = new DateTime(2023,1,1,4,0,0);
+            int month = rand.Next(0, 12);
+            int day = rand.Next(0, 28);
+            _order.DateOfOrder = new DateTime(2023, day, month, 0,0, 0) + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)); 
             int _rand = rand.Next(0, 11);
             //if (_rand <=8)
             //{

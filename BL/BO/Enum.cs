@@ -12,10 +12,10 @@ public class Enum
     public enum CategoryView {Familly, Race, Jeep, Sport ,Gears, Collectors, All}
 
 
-    public enum OrderStatus { DLIVERY, SHIPPED, ORDERED }
+    public enum OrderStatus { DELIVERY, SHIPPED, ORDERED }
     // ORDERED - order been received and take care of
     // SHIPPED- the order has been ordered and shipped out to the customer
-    // DLIVERY - the order being ordered shipped and delivered to the customer
+    // DELIVERY - the order being ordered shipped and delivered to the customer
 
 
 };

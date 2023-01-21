@@ -339,8 +339,8 @@ public class Program
 
                         int lastOrderItemID = access.OrderItem.getAllByParam().Last()?.ID ?? 0;
                         int lastOrderID = access.Order.getAllByParam().Last()?.idOfOrder ?? 0;
-                        XmlTools.SaveConfigXElement("OrderID", lastOrderID);
-                        XmlTools.SaveConfigXElement("OrderItemID", lastOrderItemID);
+                        XmlTools.SaveConfigXElement("idOfOrder", lastOrderID);
+                        XmlTools.SaveConfigXElement("ID", lastOrderItemID);
                         break;
                 }
                 Console.WriteLine("PLEASE ENTER YOUR NEXT CHOICE");

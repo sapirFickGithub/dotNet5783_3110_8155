@@ -288,6 +288,11 @@ public class Program
                             cartOption(ibl);
                             break;
                         }
+                    case 'd':
+                        {
+                            Console.Write(ibl.Order.precedenceOrder());
+                            break;
+                        }
 
                 }
                 Console.WriteLine("hello\n" +

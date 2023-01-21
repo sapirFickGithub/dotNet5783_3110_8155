@@ -73,9 +73,9 @@ internal class DXOrder : IOrder
         List<Order?> finalResult = new List<Order?>();
         if (func != null)
         {
-            finalResult = (List<Order?>)(from Order in listOrder
+            finalResult = (from Order in listOrder
                                          where func(Order)
-                                         select Order);
+                                         select Order).ToList();
            
             return finalResult;
         }

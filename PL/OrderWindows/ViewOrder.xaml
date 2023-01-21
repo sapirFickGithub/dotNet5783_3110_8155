@@ -118,13 +118,58 @@
                 Margin="526,117,0,0" 
                 VerticalAlignment="Top"
                 Click="update_ShipDate_Click"
-                />
-        <Button Content="update"
+                >
+
+
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger
+                                Binding="{Binding order.Status }"
+                                Value="SHIPPED">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                        <DataTrigger
+                                Binding="{Binding order.Status }"
+                                Value="DELIVERY">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            </Button>
+        
+            <Button Content="update"
                 HorizontalAlignment="Left"
                 Margin="526,142,0,0" 
                 VerticalAlignment="Top"
                 Click ="update_DeliveryDate_Click"
-                />
+                >
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger
+                                Binding="{Binding order.Status }"
+                                Value="ORDERED">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                        <DataTrigger
+                                Binding="{Binding order.Status }"
+                                Value="DELIVERY">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+        </Button>
 
         <ListView 
                   d:ItemsSource="{d:SampleData ItemCount=5}" 

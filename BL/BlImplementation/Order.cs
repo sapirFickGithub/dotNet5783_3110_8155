@@ -63,7 +63,7 @@ namespace BlImplementation
             }
             else if (orderTemp?.DateOfDelivery != null)
             {
-                OrderForList.Status = (BO.Enum.OrderStatus.DLIVERY);
+                OrderForList.Status = (BO.Enum.OrderStatus.DELIVERY);
             }
             
             return OrderForList;
@@ -100,7 +100,7 @@ namespace BlImplementation
             }
             else if (Dorder.DateOfDelivery != null)
             {
-                order.Status = (BO.Enum.OrderStatus.DLIVERY);
+                order.Status = (BO.Enum.OrderStatus.DELIVERY);
             }
             //if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
             //{
@@ -112,7 +112,7 @@ namespace BlImplementation
             //}
             //else
             //{
-            //    order.Status = (BO.Enum.OrderStatus.DLIVERY);
+            //    order.Status = (BO.Enum.OrderStatus.DELIVERY);
             //}
 
 
@@ -164,7 +164,7 @@ namespace BlImplementation
             Dorder.DateOfDelivery = DateTime.Now;
             BO.Order order = GetOrder(numOfOrder);
             order.DateOfDelivery = DateTime.Now;
-            order.Status = BO.Enum.OrderStatus.DLIVERY;
+            order.Status = BO.Enum.OrderStatus.DELIVERY;
             dal.Order.update(Dorder);
             return order;
         }
@@ -222,7 +222,7 @@ namespace BlImplementation
 
                 if (trackedOrder.DateOfDelivery != null)// and if the value of the deliverying is define
                 {
-                    tracking.Status = (BO.Enum.OrderStatus.DLIVERY);
+                    tracking.Status = (BO.Enum.OrderStatus.DELIVERY);
                     tracking.Track.Add(new Tuple<DateTime, BO.Enum.OrderStatus>((DateTime)trackedOrder.DateOfDelivery, (BO.Enum.OrderStatus)tracking.Status));
                 }
                 else
@@ -273,6 +273,28 @@ namespace BlImplementation
 
             }
         }
+
+        public int? precedenceOrder()
+        {
+            var SOrdered = (dal?.Order.getAllByParam(x => x?.DateOfShipping == null));
+
+            //List<DO.Order?> SOrdered = (dal?.Order.getAllByParam(x => x?.DateOfShipping == null).ToList());
+             List<DO.Order?> SShipped = dal?.Order.getAllByParam(x => x?.DateOfShipping != null && x?.DateOfDelivery == null).ToList();
+            if (SOrdered ==null&& SShipped ==null)
+            {
+                return null;
+            }
+            DO.Order? minSO =SOrdered?.MinBy(x => x?.DateOfOrder)??null;
+            DO.Order? minSS =SShipped?.MinBy(x => x?.DateOfShipping)??null;
+            if (minSO?.DateOfOrder< minSS?.DateOfShipping)
+            {
+                return minSO?.idOfOrder;
+
+            }
+            return minSS?.idOfOrder;
+
+        }
+
     }
 
 }

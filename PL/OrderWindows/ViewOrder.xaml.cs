@@ -66,10 +66,26 @@ namespace PL.OrderWindows
             DependencyProperty.Register("Status", typeof(string), typeof(ViewOrder));
 
 
+
+        //public bool flag
+        //{
+        //    get { return (bool)GetValue(flagProperty); }
+        //    set { SetValue(flagProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for flag.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty flagProperty =
+        //    DependencyProperty.Register("flag", typeof(bool), typeof(ViewOrder));
+
+
+
+
+
         public BO.OrderForList orderForList { get; set; }
         //public BO.Order orderDeatails { get; set; }
 
         public bool hasSorted = true;
+        public PL.OrderWindows.OrderList parent;
 
         public ObservableCollection<BO.OrderItem> Items
         {
@@ -82,14 +98,14 @@ namespace PL.OrderWindows
             DependencyProperty.Register("Items", typeof(ObservableCollection<BO.OrderItem>), typeof(ViewOrder));
 
 
-        public ViewOrder(OrderForList orderForLst)
+        public ViewOrder(OrderForList orderForLst , PL.OrderWindows.OrderList orderList)
         {
 
-
+            parent = orderList;
             orderForList = orderForLst;
             order = bl.Order.GetOrder(orderForList.idOfOrder);
             //orderDeatails = new BO.Order(bl.Order.GetOrder(orderForList.idOfOrder));
-            
+            //flag = order.Status == BO.Enum.OrderStatus.DELIVERY ?true:false; 
             status = System.Enum.GetValues(typeof(BO.Enum.OrderStatus)).Cast<BO.Enum.OrderStatus>();
             totalPrice = order.TotalPrice;
             Items = new ObservableCollection<BO.OrderItem>(bl.Order.GetOrder(orderForList.idOfOrder).Items);
@@ -108,6 +124,10 @@ namespace PL.OrderWindows
             //    bl.Order.UpdateSupplyDelivery(orderForList.idOfOrder);
             //if(Status_selector.Text== "Dlivery")
             bl.Order.updateDliveryOrder(orderForList.idOfOrder);
+            parent.Dispatcher.Invoke(() =>
+            {
+                parent.OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
+            });
 
 
         }
@@ -147,11 +167,19 @@ namespace PL.OrderWindows
         private void update_ShipDate_Click(object sender, RoutedEventArgs e)
         {
             this.order = bl.Order.UpdateSupplyDelivery(order.idOfOrder);
+            parent.Dispatcher.Invoke(() =>
+            {
+                parent.OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
+            });
         }
 
         private void update_DeliveryDate_Click(object sender, RoutedEventArgs e)
         {
             this.order = bl.Order.updateDliveryOrder(order.idOfOrder);
+            parent.Dispatcher.Invoke(() =>
+            {
+                parent.OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
+            });
 
         }
 
@@ -174,6 +202,11 @@ namespace PL.OrderWindows
             bl.Order.updateAdmin(orderItem.idOfOrder, orderItem.idOfProduct, orderItem.amount);
             order = bl.Order.GetOrder(orderForList.idOfOrder);
 
+            parent.Dispatcher.Invoke(()=>
+            {
+                parent.OrdersForList =  new ObservableCollection<OrderForList?> (bl.Order.GetAllOrderForList());
+            });
+
         }
 
         private void Increase_Click(object sender, RoutedEventArgs e)
@@ -184,6 +217,11 @@ namespace PL.OrderWindows
             orderItem.amount++;
             bl.Order.updateAdmin(orderItem.idOfOrder, orderItem.idOfProduct, orderItem.amount);
             order = bl.Order.GetOrder(orderForList.idOfOrder);
+
+            parent.Dispatcher.Invoke(() =>
+            {
+                parent.OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
+            });
 
 
         }

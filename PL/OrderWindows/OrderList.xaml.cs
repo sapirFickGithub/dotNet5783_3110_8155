@@ -73,7 +73,7 @@ namespace PL.OrderWindows
         }
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-           => new OrderWindows.ViewOrder((OrderForList)List_of_orders.SelectedItem).Show();
+           => new OrderWindows.ViewOrder((OrderForList)List_of_orders.SelectedItem,this).Show();
         
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -66,5 +66,7 @@ namespace BlApi
         /// <param name="amount"></param>
         /// <returns></returns>
         public void updateAdmin(int idOrder, int idProduct, int amount);
+        public int? precedenceOrder();
+
     }
 }

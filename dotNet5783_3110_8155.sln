@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{8BA75BB9-638
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulator", "Simulator\Simulator.csproj", "{9245725B-65E7-4AEF-B474-F834C2C0755D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +209,26 @@ Global
 		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x64.Build.0 = Release|Any CPU
 		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x86.ActiveCfg = Release|Any CPU
 		{8C606231-06C3-45F4-AE2C-ACC51B8C7A32}.Release|x86.Build.0 = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|x64.Build.0 = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Debug|x86.Build.0 = Debug|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|ARM.Build.0 = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|ARM64.Build.0 = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|x64.ActiveCfg = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|x64.Build.0 = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|x86.ActiveCfg = Release|Any CPU
+		{9245725B-65E7-4AEF-B474-F834C2C0755D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
