@@ -54,5 +54,10 @@ namespace PL
         {
 
         }
+
+        private void open_simolator(object sender, RoutedEventArgs e)
+        {
+            new Simulator().Show();
+        }
     }
 }

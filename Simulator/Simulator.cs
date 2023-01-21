@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Simulator
 {
-    public static class rSimulato
+    public static class Simulator
     {
 
 
