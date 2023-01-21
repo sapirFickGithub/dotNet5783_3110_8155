@@ -88,27 +88,16 @@ using System.Windows.Markup;
            // _order.DateOfShipping = null;
             TimeSpan spaceTime = TimeSpan.FromDays(1);
             int month = rand.Next(0, 12);
-            int day = rand.Next(0, 28);
-            _order.DateOfOrder = new DateTime(2023, day, month, 0,0, 0) + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)); 
-            int _rand = rand.Next(0, 11);
-            //if (_rand <=8)
-            //{
-            //    _order.DateOfShipping = (DateTime)(DateTime.Now + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)));
-            //    if (_rand <=4)
-            //    {
-            //        _order.DateOfDelivery = _order.DateOfShipping + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));
-            //    }
-            //    else
-            //    {
-            //        _order.DateOfDelivery = null;
-            //    }
-            //}
-            //else
-            //{
-            //    _order.DateOfShipping = null;
-            //    _order.DateOfDelivery = null;
+            //int day = rand.Next(0, 28);
 
-            //}
+            int days = rand.Next(1, 365);
+
+            // Use the random number to create a random date
+    
+            _order.DateOfOrder = new DateTime(2022, 1, 1, 0,0, 0).AddDays(days) + new TimeSpan(rand.Next(0, 2), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59)); 
+            int _rand = rand.Next(0, 11);
+
+
             if (_rand <= 8)
             {
                 _order.DateOfShipping = _order.DateOfOrder + new TimeSpan(rand.Next(0, 7), rand.Next(0, 24), rand.Next(0, 59), rand.Next(0, 59));

@@ -277,8 +277,7 @@ namespace BlImplementation
         public int? precedenceOrder()
         {
             var SOrdered = (dal?.Order.getAllByParam(x => x?.DateOfShipping == null));
-
-            //List<DO.Order?> SOrdered = (dal?.Order.getAllByParam(x => x?.DateOfShipping == null).ToList());
+             
              List<DO.Order?> SShipped = dal?.Order.getAllByParam(x => x?.DateOfShipping != null && x?.DateOfDelivery == null).ToList();
             if (SOrdered ==null&& SShipped ==null)
             {
