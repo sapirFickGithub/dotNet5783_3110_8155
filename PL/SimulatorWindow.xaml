@@ -1,12 +1,20 @@
 ﻿<Window x:Class="PL.SimulatorWindow"
+     
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="SimulatorWindow" Height="450" Width="800">
+        Title="SimulatorWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
-        
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="46,38,0,0" VerticalAlignment="Top" Height="30" Width="111" Click="Stop_Click"/>
+        <ProgressBar HorizontalAlignment="Center" Height="23" Margin="0,302,0,0" VerticalAlignment="Top" Width="196"/>
+        <TextBlock HorizontalAlignment="Left" Margin="186,302,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="23" Width="55" TextAlignment="Center"/>
+        <Label Content="Satus" HorizontalAlignment="Left" Margin="102,298,0,0" VerticalAlignment="Top" Height="23"  Width="54"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,165,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Height="74" Width="162" FontSize="36"/>
+        <Button Content="Close" HorizontalAlignment="Left" Margin="232,86,0,0" VerticalAlignment="Top" Height="34" Width="100" Click="Close_Click"/>
+
+
     </Grid>
 </Window>

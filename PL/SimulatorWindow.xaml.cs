@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PL
 {
@@ -19,9 +20,31 @@ namespace PL
     /// </summary>
     public partial class SimulatorWindow : Window
     {
+
+      //  private StopWatch timer { get; set; }
+
         public SimulatorWindow()
         {
             InitializeComponent();
+        }
+
+     
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+  
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;    
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Closing-= Window_Closing;
+            this.Close();
         }
     }
 }
