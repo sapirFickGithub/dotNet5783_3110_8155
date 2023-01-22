@@ -9,7 +9,8 @@
         Title="UpdateProduct" Height="450" Width="485" x:Name="my_window">
     <Grid  RenderTransformOrigin="0.82,0.765">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="362*"/>
+            <ColumnDefinition Width="123*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="102*"/>
@@ -24,7 +25,7 @@
         <TextBlock x:Name="ID"
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Height="30" Width="250" Margin="152,7,0,0" Grid.Row="1"
-            Text="{Binding product.idOfProduct }"
+            Text="{Binding product.idOfProduct }" Grid.ColumnSpan="2"
             />
         <Label Content="Product ID:" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD" Grid.Row="1"/>
 
@@ -32,7 +33,7 @@
             HorizontalAlignment="Left"  TextWrapping="Wrap" 
             Height="30"  Width="250" Margin="152,7,0,0" Grid.Row="2"
             VerticalAlignment="Top" TextChanged="Name_TextChanged"
-            Text="{Binding product.Name }"
+            Text="{Binding product.Name }" Grid.ColumnSpan="2"
             
            />
 
@@ -44,7 +45,7 @@
             Height="30" Width="250"  Margin="152,0,0,0" Grid.Row="3"    
             TextWrapping="Wrap"  VerticalAlignment="Center" 
             RenderTransformOrigin="1.372,3.394" 
-           Text="{Binding product.Price }"
+           Text="{Binding product.Price }" Grid.ColumnSpan="2"
             />
         <Label Content="Price:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
 
@@ -53,7 +54,7 @@
             HorizontalAlignment="Left" TextWrapping="Wrap"  
             Height="30" Width="250" Margin="152,0,0,0" Grid.Row="4"         
             VerticalAlignment="Center"
-            Text="{Binding product.InStock }"
+            Text="{Binding product.InStock }" Grid.ColumnSpan="2"
             />
         <Label Content="In stock:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="4" VerticalAlignment="Center"  FontWeight="Normal" FontSize="14"/>
 
@@ -62,7 +63,7 @@
                   Width="250" Height="30"  Margin="152,10,0,0" Grid.Row="5"                  
                   SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding Categories}"
-                  SelectedItem="{Binding product.ProductCategory}" >
+                  SelectedItem="{Binding product.ProductCategory}" Grid.ColumnSpan="2" >
         </ComboBox>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontSize="14" FontWeight="Normal"/>
 
@@ -75,13 +76,13 @@
                 Width="110" 
                 Height="38" 
                 FontSize="16"
-                Click="UpdateProduct_Click"/>
+                Click="UpdateProduct_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="Back_Botton"
                 Content="Back" Margin="152,15,0,0" 
                 HorizontalAlignment="Left"
                 Grid.Row="6" Width="110" Height="33" 
                 VerticalAlignment="Top" Click="BackToProductListWindow_Click"/>
-        <Label Content="Insert the details:" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontWeight="Normal"/>
+        <Label Content="Insert the details:" HorizontalAlignment="Left" Margin="162,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontWeight="Normal"/>
 
 
 

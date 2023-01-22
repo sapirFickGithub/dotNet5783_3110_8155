@@ -35,7 +35,7 @@ namespace BlApi
         /// </summary>
         /// <param name="id"></param>
         /// <Order></returns>
-        public Order? GetOrder(int numOfOrder);
+        public Order? GetOrder(int? numOfOrder);
 
         /// <summary>
         /// Update the time of dlivery order.

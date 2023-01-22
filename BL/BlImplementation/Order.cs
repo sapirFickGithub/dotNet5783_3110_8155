@@ -69,7 +69,7 @@ namespace BlImplementation
             return OrderForList;
         }
 
-        public BO.Order GetOrder(int numOfOrder)
+        public BO.Order GetOrder(int? numOfOrder)
         {
             if (numOfOrder > 999999 || numOfOrder < 100000)
                 throw new incorrectData();
@@ -79,7 +79,7 @@ namespace BlImplementation
 
             BO.Order order = new()
             {
-                idOfOrder = numOfOrder,
+                idOfOrder = (int)numOfOrder,
                 CustomerName = Dorder.CustomerName,
                 CustomerAddress = Dorder.CustamerAddress,
                 CustomerMail = Dorder.CustomerMail,
@@ -102,18 +102,7 @@ namespace BlImplementation
             {
                 order.Status = (BO.Enum.OrderStatus.DELIVERY);
             }
-            //if (Dorder.DateOfOrder != null && Dorder.DateOfShipping == null)
-            //{
-            //    order.Status = (BO.Enum.OrderStatus.SHIPPED);
-            //}
-            //else if (Dorder.DateOfOrder == null)
-            //{
-            //    order.Status = (BO.Enum.OrderStatus.ORDERED);
-            //}
-            //else
-            //{
-            //    order.Status = (BO.Enum.OrderStatus.DELIVERY);
-            //}
+            
 
 
             order.Items = new List<BO.OrderItem>();
@@ -135,15 +124,7 @@ namespace BlImplementation
                     };
                     order.Items.Add(newOrderItem);
                 });
-            //order.Items.Add(orderItems.Select((item, index) => new BO.OrderItem
-            //{
-            //    idOfOrder = (int)item?.ID,
-            //    idOfProduct = (int)item?.idProduct,
-            //    NameOfProduct = dal.Product.getOneByParam(x => (int)item?.idProduct == x?.idOfProduct)?.Name,
-            //    amount = (int)dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount,
-            //    PriceOfProduct = (double)item?.Price,
-            //    totalPrice = (int)(dal.OrderItem.getOneByParam(x => (int)item?.ID == x?.ID)?.amount) * (double)item?.Price
-            //}));
+           
            
             order.TotalPrice = order.Items.Sum(item => item.totalPrice);
 
