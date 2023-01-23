@@ -10,7 +10,7 @@
     <Grid>
         <Button Content="Stop" HorizontalAlignment="Left" Margin="338,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Stop_Click"/>
 
-        <ProgressBar Value="{Binding BarProgress}"  Maximum="{Binding maxBar}" Background="#FFEDCCFB" Margin="274,262,320,138"/>
+        <ProgressBar  Value="{Binding BarProgress}"  Maximum="{Binding maxBar}" Background="#FFEDCCFB" Margin="274,262,320,138" ValueChanged="ProgressBar_ValueChanged"/>
 
         <TextBlock Name="Timer" HorizontalAlignment="Left" Margin="561,159,0,0" TextWrapping="Wrap" Text="{Binding stopWatch.Elapsed }" VerticalAlignment="Top" Height="61" Width="162" FontSize="36"/>
 
@@ -23,7 +23,7 @@
         <Label Content="Satus" HorizontalAlignment="Left" Margin="296,188,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
 
         <Label Content="Order ID " HorizontalAlignment="Left" Margin="296,151,0,0" VerticalAlignment="Top" Height="24"  Width="73" FontSize="20" FontWeight="Bold"/>
-       
+
         <TextBlock x:Name="orderID" HorizontalAlignment="Left" Margin="396,154,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.idOfOrder}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
         <TextBlock x:Name="orderStatus_Copy" HorizontalAlignment="Left" Margin="396,228,0,0" TextWrapping="Wrap" Text="orderStatus" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
@@ -31,6 +31,8 @@
         <Label Content="updated status" HorizontalAlignment="Left" Margin="274,222,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
 
         <Label Content="Simulator:" HorizontalAlignment="Left" Margin="106,53,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Height="54" Width="225"/>
+
+        <Label x:Name="resultLabel" HorizontalAlignment="Left" Margin="496,266,0,0" VerticalAlignment="Top" Height="30"  Width="72" FontSize="20" FontWeight="Bold"/>
 
 
     </Grid>

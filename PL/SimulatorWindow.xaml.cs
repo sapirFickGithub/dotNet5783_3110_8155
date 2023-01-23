@@ -16,7 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Collections.ObjectModel;
+using Microsoft.VisualBasic;
 using BlApi;
+using System.Windows.f;
 using Simulator;
 
 namespace PL
@@ -62,16 +65,16 @@ namespace PL
         }
 
 
+
+
+        // Using a DependencyProperty as the backing store for currentOrder.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty currentOrderProperty =
+            DependencyProperty.Register("currentOrder", typeof(BO.Order), typeof(SimulatorWindow));
         public BO.Order currentOrder
         {
             get { return (BO.Order)GetValue(currentOrderProperty); }
             set { SetValue(currentOrderProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for currentOrder.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty currentOrderProperty =
-            DependencyProperty.Register("currentOrder", typeof(BO.Order), typeof(SimulatorWindow));
-
 
 
         public SimulatorWindow()
@@ -81,17 +84,23 @@ namespace PL
             stopWatch = new Stopwatch();
             timerworker = new BackgroundWorker();
             timerworker.DoWork += Worker_DoWork;
+            timerworker.DoWork += Worker_DoWork2;
             timerworker.ProgressChanged += Worker_ProgressChanged;
             timerworker.WorkerReportsProgress = true;
+            timerworker.WorkerSupportsCancellation = true;
 
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            if (timerworker.IsBusy != true)
+                // Start the asynchronous operation. 
+                timerworker.RunWorkerAsync(12);
+
             if (!isTimerRun)
             {
                 stopWatch.Start();
                 isTimerRun = true;
-                timerworker.RunWorkerAsync();
+                // timerworker.RunWorkerAsync();
                 Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
                 Simulator.Simulator.startSimulation();
             }
@@ -101,6 +110,7 @@ namespace PL
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+
             if (isTimerRun)
             {
                 stopWatch.Stop();
@@ -111,7 +121,7 @@ namespace PL
 
         private void updateWindowView(object sender, BO.Order? e)
         {
-           
+
             EstimatedTime((int)e.TotalPrice);
             CurrentOrder(bl.Order.GetOrder(e.idOfOrder));
         }
@@ -121,12 +131,12 @@ namespace PL
             if (!CheckAccess())
             {
                 Action<BO.Order> d = CurrentOrder;
-                Dispatcher.BeginInvoke(d, new BO.Order() { idOfOrder = a.idOfOrder, Status= a.Status });
+                Dispatcher.BeginInvoke(d, new BO.Order() { idOfOrder = a.idOfOrder, Status = a.Status });
 
             }
             else
             {
-               currentOrder = a;
+                currentOrder = a;
             }
         }
 
@@ -146,15 +156,50 @@ namespace PL
         }
 
 
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+                // e.Result throw System.InvalidOperationException
+                resultLabel.Content = "Canceled!";
+            }
+            else if (e.Error != null)
+            {
+                // e.Result throw System.Reflection.TargetInvocationException
+                resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
+            }
+            else
+            {
+                long result = (long)e.Result;
+                if (result < 1000)
+                    resultLabel.Content = "Done after " + result + " ms.";
+                else
+                    resultLabel.Content = "Done after " + result / 1000 + " sec.";
+            }
+        }
+
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             string timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.Timer.Text = timerText;
+            int progress = e.ProgressPercentage;
+            resultLabel.Content = (progress + "%");
+            BarProgress = progress;
         }
 
 
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+
+
+        //private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
+        //    string timerText = stopWatch.Elapsed.ToString();
+        //    timerText = timerText.Substring(0, 8);
+        //    this.Timer.Text = timerText;
+        //}
+
+
+        private void Worker_DoWork2(object sender, DoWorkEventArgs e)
         {
             while (isTimerRun)
             {
@@ -163,6 +208,35 @@ namespace PL
             }
         }
 
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            // BackgroundWorker worker = sender as BackgroundWorker;
+            int length = (int)e.Argument;
+
+            for (int i = 1; i <= length; i++)
+            {
+
+                if (timerworker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    e.Result = stopwatch.ElapsedMilliseconds; // Unnecessary
+                    break;
+                }
+                else
+                {
+                    // Perform a time consuming operation and report progress.
+                    System.Threading.Thread.Sleep(500);
+                    timerworker.ReportProgress(i * 100 / length);
+                }
+            }
+
+            e.Result = stopwatch.ElapsedMilliseconds;
+        }
+
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
@@ -170,13 +244,13 @@ namespace PL
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Closing-= Window_Closing;
+            this.Closing -= Window_Closing;
             this.Close();
         }
 
         private BO.Order? ShowOrder(BO.Order? order)
         {
-           // Simulator.Simulator.SubscribeToUpdateSimulation(ShowOrder);
+            // Simulator.Simulator.SubscribeToUpdateSimulation(ShowOrder);
             return order;
         }
 
@@ -184,5 +258,7 @@ namespace PL
         {
 
         }
+
+
     }
 }

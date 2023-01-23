@@ -155,7 +155,7 @@ namespace BlImplementation
             DO.Order Dorder = dal.Order.getOneByParam(x => numOfOrder == x?.idOfOrder) ?? throw new BO.notExist();
             if (Dorder.DateOfShipping != null)
             {
-                throw new Exception("the order is already shipped");
+                throw new Exception("the order is already shipping");
 
             }
             else if (Dorder.DateOfOrder != null && (Dorder.idOfOrder <= 999999 && numOfOrder >= 100000) && Dorder.DateOfShipping == null)
