@@ -57,7 +57,7 @@ public static class Simulator
                order= bl.Order.updateDliveryOrder(order.idOfOrder);
             }
 
-            order.TotalPrice = 0;
+            //order.TotalPrice = 0;
 
            updateSimulation.Invoke(null, order);
         }
