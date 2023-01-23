@@ -11,11 +11,11 @@
 
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontSize" Value="12" />
         </Style>
 
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
 
       
@@ -51,7 +51,7 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Background" Value="#FFEDCCFB" />
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="22" />
             <Setter Property="FontStyle" Value="Normal"/>
 
         </Style>

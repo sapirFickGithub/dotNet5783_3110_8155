@@ -125,7 +125,7 @@
                 </GridView>
             </ListView.View>
 
-            <ListView.GroupStyle>
+            <!--<ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="{x:Type GroupItem}">
@@ -147,7 +147,7 @@
                         </Style>
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
-            </ListView.GroupStyle>
+            </ListView.GroupStyle>-->
 
         </ListView>
 
@@ -160,7 +160,7 @@
             HorizontalAlignment="Left" Grid.Row="3"
             Margin="40,9,0,0" Height="46"  Width="117"   
             VerticalAlignment="Top"   Click="Go_to_Cart_Click"/>
-        <CheckBox Content="See in groups" HorizontalAlignment="Left" Margin="40,52,0,151" Unchecked="GroupingCheak_UnChecked" Checked="GroupingCheak_Checked" Grid.RowSpan="2" Width="92"/>
+        <!--<CheckBox Content="See in groups" HorizontalAlignment="Left" Margin="40,52,0,151" Unchecked="GroupingCheak_UnChecked" Checked="GroupingCheak_Checked" Grid.RowSpan="2" Width="92"/>-->
 
 
     </Grid>

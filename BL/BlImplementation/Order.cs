@@ -191,10 +191,6 @@ namespace BlImplementation
 
 
 
-
-
-
-
             if (trackedOrder.DateOfShipping != null)
             { // if the value of the shiping is define
 

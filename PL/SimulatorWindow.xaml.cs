@@ -26,18 +26,16 @@ namespace PL
     /// </summary>
     public partial class SimulatorWindow : Window
     {
+    
+        private Stopwatch stopWatch;//counting the time.
 
-
- 
-
-
-        
-        private Stopwatch stopWatch;
         private bool isTimerRun;
+
         BackgroundWorker timerworker;
      
         public SimulatorWindow()
         {
+
             InitializeComponent();
             stopWatch = new Stopwatch();
             timerworker = new BackgroundWorker();
@@ -46,17 +44,25 @@ namespace PL
             timerworker.WorkerReportsProgress = true;
 
         }
-        private void startTimerButton_Click(object sender, RoutedEventArgs e)
+        private void Start_Click(object sender, RoutedEventArgs e)
         {
             if (!isTimerRun)
             {
-                stopWatch.Restart();
+                stopWatch.Start();
                 isTimerRun = true;
                 timerworker.RunWorkerAsync();
+                Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
+                Simulator.Simulator.startSimulation()
             }
+
         }
 
-        private void stopTimerButton_Click(object sender, RoutedEventArgs e)
+        public void updateWindowView(object seder, BO.Order? order)
+        {
+
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
         {
             if (isTimerRun)
             {
@@ -64,6 +70,7 @@ namespace PL
                 isTimerRun = false;
             }
         }
+
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -87,16 +94,6 @@ namespace PL
             e.Cancel = true;
         }
 
-     
-        private void Stop_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-  
-
-        
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Closing-= Window_Closing;
@@ -105,10 +102,10 @@ namespace PL
 
         private BO.Order? ShowOrder(BO.Order? order)
         {
-            Simulator.Simulator.SubscribeToUpdateSimulation(ShowOrder);
+           // Simulator.Simulator.SubscribeToUpdateSimulation(ShowOrder);
             return order;
         }
 
-        
+ 
     }
 }
