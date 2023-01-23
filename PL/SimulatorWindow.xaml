@@ -12,7 +12,7 @@
         <ProgressBar HorizontalAlignment="Center" Height="23" Margin="0,302,0,0" VerticalAlignment="Top" Width="196"/>
         <TextBlock HorizontalAlignment="Left" Margin="186,302,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="23" Width="55" TextAlignment="Center"/>
         <Label Content="Satus" HorizontalAlignment="Left" Margin="102,298,0,0" VerticalAlignment="Top" Height="23"  Width="54"/>
-        <TextBlock HorizontalAlignment="Left" Margin="302,165,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Height="74" Width="162" FontSize="36"/>
+        <TextBlock Name="Timer" HorizontalAlignment="Left" Margin="302,165,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Height="74" Width="162" FontSize="36"/>
         <Button Content="Close" HorizontalAlignment="Left" Margin="232,86,0,0" VerticalAlignment="Top" Height="34" Width="100" Click="Close_Click"/>
 
 

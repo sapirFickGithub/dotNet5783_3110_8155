@@ -40,7 +40,7 @@ namespace PL.CartWindows
 
 
 
-        public ObservableCollection<BO.Cart> MyCart//dependency proprty in order to use 'data binding'
+        public  ObservableCollection<BO.Cart> MyCart//dependency proprty in order to use 'data binding'
         {
             get { return (ObservableCollection<BO.Cart>)GetValue(CartProperty); }
             set { SetValue(CartProperty, value); }

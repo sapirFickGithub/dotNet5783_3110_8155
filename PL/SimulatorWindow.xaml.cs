@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using BlApi;
+using Simulator;
 
 namespace PL
 {
@@ -23,10 +26,16 @@ namespace PL
     /// </summary>
     public partial class SimulatorWindow : Window
     {
+
+
+ 
+
+
+        
         private Stopwatch stopWatch;
         private bool isTimerRun;
         BackgroundWorker timerworker;
-
+     
         public SimulatorWindow()
         {
             InitializeComponent();
@@ -60,7 +69,7 @@ namespace PL
         {
             string timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
-            this.timerTextBlock.Text = timerText;
+            this.Timer.Text = timerText;
         }
 
 
@@ -86,15 +95,20 @@ namespace PL
 
   
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;    
-        }
+        
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             this.Closing-= Window_Closing;
             this.Close();
         }
+
+        private BO.Order? ShowOrder(BO.Order? order)
+        {
+            Simulator.Simulator.SubscribeToUpdateSimulation(ShowOrder);
+            return order;
+        }
+
+        
     }
 }
