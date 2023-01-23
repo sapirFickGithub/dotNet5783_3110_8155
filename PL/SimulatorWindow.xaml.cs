@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +19,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using BlApi;
 using Simulator;
+
 
 namespace PL
 {
@@ -98,6 +100,15 @@ namespace PL
 
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // Update the value of the progress bar
+            
+
+            // Check if the progress bar has reached its maximum value
+            
+        }
+
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
@@ -148,6 +159,7 @@ namespace PL
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            BarProgress+=1;
             string timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.Timer.Text = timerText;
@@ -158,6 +170,7 @@ namespace PL
         {
             while (isTimerRun)
             {
+                BarProgress += 1;
                 timerworker.ReportProgress(1);
                 Thread.Sleep(1000);
             }
