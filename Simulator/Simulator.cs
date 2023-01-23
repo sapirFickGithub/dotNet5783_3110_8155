@@ -15,6 +15,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.VisualBasic;
 
+
 namespace Simulator;
 
 
@@ -44,13 +45,13 @@ public static class Simulator
         {
             Order? order = bl.Order.GetOrder(bl.Order.precedenceOrder());// get the oldest order
 
-            int time = new Random().Next(2, 10) * 1000;
+            int time = new Random().Next(2, 10);
 
             order.TotalPrice = time; //use the total price as saver of the time
 
             updateSimulation.Invoke(null,order);
 
-            Thread.Sleep(time);
+            Thread.Sleep(time*1000);
 
             try
             {
@@ -65,7 +66,7 @@ public static class Simulator
             }
             catch (Exception)
             {
-                MessageBox.Show("The simulator is over!", "Bay", MessageBoxButton.OK, MessageBoxImage., MessageBoxResult.OK);
+               // System.Windows.MessageBox.Show("The simulator is over!", "Bay", MessageBoxButton.OK, MessageBoxImage., MessageBoxResult.OK);
             }
 
             //order.TotalPrice = 0;

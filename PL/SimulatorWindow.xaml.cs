@@ -20,7 +20,7 @@ using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using Microsoft.VisualBasic;
 using BlApi;
-using System.Windows.f;
+
 using Simulator;
 
 
@@ -48,14 +48,16 @@ namespace PL
             set { SetValue(MyEstimatedTimeProperty, value); }
         }
 
-        public static readonly DependencyProperty MymaxBarProperty =
-            DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
+
 
         public int maxBar
         {
             get { return (int)GetValue(MymaxBarProperty); }
             set { SetValue(MymaxBarProperty, value); }
         }
+                    public static readonly DependencyProperty MymaxBarProperty =
+            DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
+    
 
         public static readonly DependencyProperty MyBarProperty =
            DependencyProperty.Register("BarProgress", typeof(int), typeof(SimulatorWindow));
@@ -78,31 +80,48 @@ namespace PL
             set { SetValue(currentOrderProperty, value); }
         }
 
+        DispatcherTimer dispatcherTimer; 
 
         public SimulatorWindow()
         {
 
             InitializeComponent();
             stopWatch = new Stopwatch();
-            timerworker = new BackgroundWorker();
-            timerworker.DoWork += Worker_DoWork;
-            timerworker.DoWork += Worker_DoWork2;
-            timerworker.ProgressChanged += Worker_ProgressChanged;
-            timerworker.WorkerReportsProgress = true;
-            timerworker.WorkerSupportsCancellation = true;
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            //timerworker = new BackgroundWorker();
+            //timerworker.DoWork += Worker_DoWork;
+            //timerworker.DoWork += Worker_DoWork2;
+            //timerworker.ProgressChanged += Worker_ProgressChanged;
+            //timerworker.WorkerReportsProgress = true;
+            //timerworker.WorkerSupportsCancellation = true;
 
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs eventArgs)
+        {
+            BarProgress += 1;
+            
+           
+           
+            string timerText = stopWatch.Elapsed.ToString();
+            timerText = timerText.Substring(0, 8);
+            this.Timer.Text = timerText;
+            int progress = (int)(((float)BarProgress / (float)maxBar)*100);
+            
+            resultLabel.Content = (progress + "%");
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            if (timerworker.IsBusy != true)
-                // Start the asynchronous operation. 
-                timerworker.RunWorkerAsync(12);
+           
+            dispatcherTimer.Start();
 
             if (!isTimerRun)
             {
                 stopWatch.Start();
                 isTimerRun = true;
-                // timerworker.RunWorkerAsync();
+              
                 Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
                 Simulator.Simulator.startSimulation();
             }
@@ -163,42 +182,48 @@ namespace PL
                 estimatedTime = a;
                 maxBar = a;
                 BarProgress = 0;
+
             }
         }
 
 
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled == true)
-            {
-                // e.Result throw System.InvalidOperationException
-                resultLabel.Content = "Canceled!";
-            }
-            else if (e.Error != null)
-            {
-                // e.Result throw System.Reflection.TargetInvocationException
-                resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
-            }
-            else
-            {
-                long result = (long)e.Result;
-                if (result < 1000)
-                    resultLabel.Content = "Done after " + result + " ms.";
-                else
-                    resultLabel.Content = "Done after " + result / 1000 + " sec.";
-            }
-        }
+        //private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    //if (e.Cancelled == true)
+        //    //{
+        //    //    // e.Result throw System.InvalidOperationException
+        //    //    resultLabel = "Canceled!";
+        //    //}
+        //    if (e.Error != null)
+        //    {
+        //        // e.Result throw System.Reflection.TargetInvocationException
+        //        resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
+        //    }
+        //    else
+        //    {
+        //        long result = (long)e.Result;
+        //        if (result < 1000)
+        //            resultLabel.Content = "Done after " + result + " ms.";
+        //        else
+        //            resultLabel.Content = "Done after " + result / 1000 + " sec.";
+        //    }
+        //}
 
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            BarProgress+=1;
-            string timerText = stopWatch.Elapsed.ToString();
-            timerText = timerText.Substring(0, 8);
-            this.Timer.Text = timerText;
-            int progress = e.ProgressPercentage;
-            resultLabel.Content = (progress + "%");
-            BarProgress = progress;
-        }
+        //private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
+
+        //    BarProgress += 1;
+        //    if (BarProgress == maxBar+1 )
+        //    {
+        //        BarProgress = 0;
+        //    }
+        //    string timerText = stopWatch.Elapsed.ToString();
+        //    timerText = timerText.Substring(0, 8);
+        //    this.Timer.Text = timerText;
+        //    int progress = e.ProgressPercentage*100;
+        //    resultLabel.Content = (progress + "%");
+        //    //BarProgress = progress;
+        //}
 
 
 
@@ -211,43 +236,43 @@ namespace PL
         //}
 
 
-        private void Worker_DoWork2(object sender, DoWorkEventArgs e)
-        {
-            while (isTimerRun)
-            {
-                BarProgress += 1;
-                timerworker.ReportProgress(1);
-                Thread.Sleep(1000);
-            }
-        }
+        //private void Worker_DoWork2(object sender, DoWorkEventArgs e)
+        //{
+        //    while (isTimerRun)
+        //    {
+             
+        //        timerworker.ReportProgress(1);
+        //        Thread.Sleep(1000);
+        //    }
+        //}
 
 
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            // BackgroundWorker worker = sender as BackgroundWorker;
-            int length = (int)e.Argument;
+        //private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    Stopwatch stopwatch = new Stopwatch();
+        //    stopwatch.Start();
+        //    // BackgroundWorker worker = sender as BackgroundWorker;
+        //    int length = (int)e.Argument;
 
-            for (int i = 1; i <= length; i++)
-            {
+        //    for (int i = 1; i <= length; i++)
+        //    {
 
-                if (timerworker.CancellationPending == true)
-                {
-                    e.Cancel = true;
-                    e.Result = stopwatch.ElapsedMilliseconds; // Unnecessary
-                    break;
-                }
-                else
-                {
-                    // Perform a time consuming operation and report progress.
-                    System.Threading.Thread.Sleep(500);
-                    timerworker.ReportProgress(i * 100 / length);
-                }
-            }
+        //        if (timerworker.CancellationPending == true)
+        //        {
+        //            e.Cancel = true;
+        //            e.Result = stopwatch.ElapsedMilliseconds; // Unnecessary
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            // Perform a time consuming operation and report progress.
+        //            System.Threading.Thread.Sleep(500);
+        //            timerworker.ReportProgress(i * 100 / length);
+        //        }
+        //    }
 
-            e.Result = stopwatch.ElapsedMilliseconds;
-        }
+        //    e.Result = stopwatch.ElapsedMilliseconds;
+        //}
 
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -261,16 +286,9 @@ namespace PL
             this.Close();
         }
 
-        private BO.Order? ShowOrder(BO.Order? order)
-        {
-            // Simulator.Simulator.SubscribeToUpdateSimulation(ShowOrder);
-            return order;
-        }
+       
 
-        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
 
-        }
 
 
     }
