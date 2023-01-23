@@ -33,7 +33,8 @@ public static class Simulator
 
     public static void startSimulation()
     {
-        thread = new Thread(Simulation);
+        isStop = false;
+         thread = new Thread(Simulation);
         thread.Start();
     }
 
@@ -41,20 +42,26 @@ public static class Simulator
     public static void Simulation()//the function gat the right order and take care about her until the order changed the status
     {
 
-        while (!isStop && bl.Order.precedenceOrder() != null)
+        while (!isStop || bl.Order.precedenceOrder() != null)
         {
             Order? order = bl.Order.GetOrder(bl.Order.precedenceOrder());// get the oldest order
 
-            int time = new Random().Next(2, 10);
+            int time = new Random().Next(2, 7);
 
             order.TotalPrice = time; //use the total price as saver of the time
 
             updateSimulation.Invoke(null,order);
-
-            Thread.Sleep(time*1000);
-
             try
             {
+                Thread.Sleep(time * 1000);
+            }
+            catch (ThreadInterruptedException)
+            {
+  
+            }
+            try
+            {
+
                 if (order.DateOfShipping == null)
                 {
                     order = bl.Order.UpdateSupplyDelivery(order.idOfOrder);
@@ -64,7 +71,7 @@ public static class Simulator
                     order = bl.Order.updateDliveryOrder(order.idOfOrder);
                 }
             }
-            catch (Exception)
+            catch (Exception )
             {
                // System.Windows.MessageBox.Show("The simulator is over!", "Bay", MessageBoxButton.OK, MessageBoxImage., MessageBoxResult.OK);
             }

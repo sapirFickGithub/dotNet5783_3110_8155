@@ -12,7 +12,7 @@
 
         <ProgressBar  Value="{Binding BarProgress}"  Maximum="{Binding maxBar}" Background="#FFEDCCFB" Margin="274,262,320,138" />
 
-        <TextBlock Name="Timer" HorizontalAlignment="Left" Margin="561,159,0,0" TextWrapping="Wrap" Text="{Binding stopWatch.Elapsed }" VerticalAlignment="Top" Height="61" Width="162" FontSize="36"/>
+        <TextBlock Name="Timer" HorizontalAlignment="Left" Margin="561,159,0,0" TextWrapping="Wrap" Text="{Binding timerText }" VerticalAlignment="Top" Height="61" Width="162" FontSize="36"/>
 
         <Button Content="Close" HorizontalAlignment="Left" Margin="561,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Close_Click"/>
 

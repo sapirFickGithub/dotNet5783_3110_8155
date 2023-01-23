@@ -35,6 +35,11 @@ namespace PL
 
         private Stopwatch stopWatch;//counting the time.
 
+
+  
+
+
+
         private bool isTimerRun;
 
         BackgroundWorker timerworker;
@@ -47,6 +52,20 @@ namespace PL
             get { return (int)GetValue(MyEstimatedTimeProperty); }
             set { SetValue(MyEstimatedTimeProperty, value); }
         }
+
+
+
+        public string timerText
+        {
+            get { return (string)GetValue(timerTextProperty); }
+            set { SetValue(timerTextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for timerText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty timerTextProperty =
+            DependencyProperty.Register("timerText", typeof(string), typeof(SimulatorWindow));
+
+
 
 
 
@@ -90,12 +109,7 @@ namespace PL
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            //timerworker = new BackgroundWorker();
-            //timerworker.DoWork += Worker_DoWork;
-            //timerworker.DoWork += Worker_DoWork2;
-            //timerworker.ProgressChanged += Worker_ProgressChanged;
-            //timerworker.WorkerReportsProgress = true;
-            //timerworker.WorkerSupportsCancellation = true;
+         
 
         }
 
@@ -105,9 +119,9 @@ namespace PL
             
            
            
-            string timerText = stopWatch.Elapsed.ToString();
+            timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
-            this.Timer.Text = timerText;
+            //this.Timer.Text = timerText;
             int progress = (int)(((float)BarProgress / (float)maxBar)*100);
             
             resultLabel.Content = (progress + "%");
@@ -128,14 +142,7 @@ namespace PL
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            // Update the value of the progress bar
-            
-
-            // Check if the progress bar has reached its maximum value
-            
-        }
+       
 
 
         private void Stop_Click(object sender, RoutedEventArgs e)
@@ -146,6 +153,9 @@ namespace PL
                 stopWatch.Stop();
                 isTimerRun = false;
             }
+            Simulator.Simulator.stopSimulation();
+            dispatcherTimer.Stop();
+
         }
 
 
@@ -188,91 +198,7 @@ namespace PL
 
 
         //private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    //if (e.Cancelled == true)
-        //    //{
-        //    //    // e.Result throw System.InvalidOperationException
-        //    //    resultLabel = "Canceled!";
-        //    //}
-        //    if (e.Error != null)
-        //    {
-        //        // e.Result throw System.Reflection.TargetInvocationException
-        //        resultLabel.Content = "Error: " + e.Error.Message; //Exception Message
-        //    }
-        //    else
-        //    {
-        //        long result = (long)e.Result;
-        //        if (result < 1000)
-        //            resultLabel.Content = "Done after " + result + " ms.";
-        //        else
-        //            resultLabel.Content = "Done after " + result / 1000 + " sec.";
-        //    }
-        //}
 
-        //private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        //{
-
-        //    BarProgress += 1;
-        //    if (BarProgress == maxBar+1 )
-        //    {
-        //        BarProgress = 0;
-        //    }
-        //    string timerText = stopWatch.Elapsed.ToString();
-        //    timerText = timerText.Substring(0, 8);
-        //    this.Timer.Text = timerText;
-        //    int progress = e.ProgressPercentage*100;
-        //    resultLabel.Content = (progress + "%");
-        //    //BarProgress = progress;
-        //}
-
-
-
-
-        //private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        //{
-        //    string timerText = stopWatch.Elapsed.ToString();
-        //    timerText = timerText.Substring(0, 8);
-        //    this.Timer.Text = timerText;
-        //}
-
-
-        //private void Worker_DoWork2(object sender, DoWorkEventArgs e)
-        //{
-        //    while (isTimerRun)
-        //    {
-             
-        //        timerworker.ReportProgress(1);
-        //        Thread.Sleep(1000);
-        //    }
-        //}
-
-
-        //private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    Stopwatch stopwatch = new Stopwatch();
-        //    stopwatch.Start();
-        //    // BackgroundWorker worker = sender as BackgroundWorker;
-        //    int length = (int)e.Argument;
-
-        //    for (int i = 1; i <= length; i++)
-        //    {
-
-        //        if (timerworker.CancellationPending == true)
-        //        {
-        //            e.Cancel = true;
-        //            e.Result = stopwatch.ElapsedMilliseconds; // Unnecessary
-        //            break;
-        //        }
-        //        else
-        //        {
-        //            // Perform a time consuming operation and report progress.
-        //            System.Threading.Thread.Sleep(500);
-        //            timerworker.ReportProgress(i * 100 / length);
-        //        }
-        //    }
-
-        //    e.Result = stopwatch.ElapsedMilliseconds;
-        //}
 
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
