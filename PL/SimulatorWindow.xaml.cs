@@ -35,11 +35,6 @@ namespace PL
 
         private Stopwatch stopWatch;//counting the time.
 
-
-  
-
-
-
         private bool isTimerRun;
 
         BackgroundWorker timerworker;
@@ -64,8 +59,6 @@ namespace PL
         // Using a DependencyProperty as the backing store for timerText.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty timerTextProperty =
             DependencyProperty.Register("timerText", typeof(string), typeof(SimulatorWindow));
-
-
 
 
 
@@ -98,6 +91,22 @@ namespace PL
             get { return (BO.Order)GetValue(currentOrderProperty); }
             set { SetValue(currentOrderProperty, value); }
         }
+
+
+
+
+        public string oldStatus
+        {
+            get { return (string)GetValue(oldStatusProperty); }
+            set { SetValue(oldStatusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for oldStatus.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty oldStatusProperty =
+            DependencyProperty.Register("oldStatus", typeof(string), typeof(SimulatorWindow), new PropertyMetadata(0));
+
+
+
 
         DispatcherTimer dispatcherTimer; 
 
@@ -161,10 +170,25 @@ namespace PL
 
         private void updateWindowView(object sender, BO.Order? e)
         {
-
+            StatusUpdating(e.Status.ToString());
             EstimatedTime((int)e.TotalPrice);
             CurrentOrder(bl.Order.GetOrder(e.idOfOrder));
         }
+
+        private void StatusUpdating(string stt)
+        {
+            if (!CheckAccess())
+            {
+                Action<string> d = StatusUpdating;
+                Dispatcher.BeginInvoke(d, oldStatus=stt);
+
+            }
+            else
+            {
+                oldStatus = " ";
+            }
+        }
+
 
         private void CurrentOrder(BO.Order a)
         {
@@ -172,7 +196,7 @@ namespace PL
             {
                 Action<BO.Order> d = CurrentOrder;
                 Dispatcher.BeginInvoke(d, new BO.Order() { idOfOrder = a.idOfOrder, Status = a.Status });
-
+                
             }
             else
             {
@@ -208,13 +232,10 @@ namespace PL
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+
             this.Closing -= Window_Closing;
             this.Close();
         }
-
-       
-
-
 
 
     }

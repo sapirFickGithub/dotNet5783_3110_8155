@@ -42,9 +42,9 @@ public static class Simulator
     public static void Simulation()//the function gat the right order and take care about her until the order changed the status
     {
 
-        while (!isStop || bl.Order.precedenceOrder() != null)
+        while (!isStop && bl.Order.precedenceOrder() != null)
         {
-            Order? order = bl.Order.GetOrder(bl.Order.precedenceOrder());// get the oldest order
+            Order? order = bl.Order.GetOrder(bl.Order.precedenceOrder()?? throw new NullReferenceException());// get the oldest order
 
             int time = new Random().Next(2, 7);
 
