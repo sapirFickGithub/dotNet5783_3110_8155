@@ -71,7 +71,7 @@ namespace PL
             set { SetValue(MymaxBarProperty, value); }
         }
         public static readonly DependencyProperty MymaxBarProperty =
-DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
+            DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
 
 
         public static readonly DependencyProperty MyBarProperty =
@@ -109,18 +109,14 @@ DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
 
 
 
-
-
-
-        // Using a DependencyProperty as the backing store for currentOrder.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty currentOrderProperty =
-            DependencyProperty.Register("currentOrder", typeof(BO.Order), typeof(SimulatorWindow));
         public BO.Order currentOrder
         {
             get { return (BO.Order)GetValue(currentOrderProperty); }
             set { SetValue(currentOrderProperty, value); }
         }
-
+        // Using a DependencyProperty as the backing store for currentOrder.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty currentOrderProperty =
+            DependencyProperty.Register("currentOrder", typeof(BO.Order), typeof(SimulatorWindow));
 
 
 
@@ -148,7 +144,7 @@ DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += dispatcherTimer_Tick;
 
-            if (bl.Order.precedenceOrder() < 7)
+            if (bl.Order.precedenceOrder()==null)
             {
                 if (isTimerRun)
                 {
@@ -178,7 +174,7 @@ DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
 
             resultLabel.Content = (progress + "%");
 
-            if (bl.Order.precedenceOrder() < 7)
+            if (bl.Order.precedenceOrder() ==null)
             {
                 if (isTimerRun)
                 {
@@ -198,37 +194,44 @@ DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.Order.precedenceOrder() == null)
+            try
             {
-                if (isTimerRun)
+                if (bl.Order.precedenceOrder() == null)
                 {
-                    stopWatch.Stop();
-                    isTimerRun = false;
+                    if (isTimerRun)
+                    {
+                        stopWatch.Stop();
+                        isTimerRun = false;
+                    }
+                    MessageBox.Show(
+                                        "All orders have been processed!",
+                                        "OVERE",
+                                         MessageBoxButton.OK,
+                                        MessageBoxImage.Exclamation,
+                                         MessageBoxResult.OK
+                                        /*  MessageBoxOptions.RtlReading*/);
+                    this.Close();
+
+
                 }
-                MessageBox.Show(
-                                    "All orders have been processed!",
-                                    "OVERE",
-                                     MessageBoxButton.OK,
-                                    MessageBoxImage.Exclamation,
-                                     MessageBoxResult.OK
-                                    /*  MessageBoxOptions.RtlReading*/);
-                this.Close();
+                else
+                {
+                    dispatcherTimer.Start();
 
+                    if (!isTimerRun && bl.Order.precedenceOrder != null)
+                    {
+                        stopWatch.Start();
+                        isTimerRun = true;
 
+                        Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView, finishSimulator);
+                        Simulator.Simulator.startSimulation();
+
+                    }
+                }
             }
-            else
+            catch (Exception)
             {
-                dispatcherTimer.Start();
-
-                if (!isTimerRun && bl.Order.precedenceOrder != null)
-                {
-                    stopWatch.Start();
-                    isTimerRun = true;
-
-                    Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView, finishSimulator);
-                    Simulator.Simulator.startSimulation();
-
-                }
+                System.Windows.MessageBox.Show("Somthing is going wrong, close and try again", "Bay", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
             }
 
         }

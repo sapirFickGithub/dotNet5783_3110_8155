@@ -10,13 +10,10 @@
 
     <Grid Margin="-1,0,1,0">
 
-        <Button Content="Back" HorizontalAlignment="Left" Margin="38,357,0,0" VerticalAlignment="Top" Width="117"
-                Click="BackToOrderListWindow_Click" Height="42"/>
-
         <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.74,0.422"/>
         <Label Content="Order ID:" HorizontalAlignment="Left" Margin="120,57,0,0" VerticalAlignment="Top" Width="68" Height="23"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="356,59,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Content="Total price:" HorizontalAlignment="Left" Margin="542,355,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Total price:" HorizontalAlignment="Left" Margin="195,353,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="Order Date:" HorizontalAlignment="Left" Margin="336,85,0,0" VerticalAlignment="Top" Width="68" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <Label Content="Customer Email:" HorizontalAlignment="Left" Margin="91,107,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <Label Content="Customer Address:" HorizontalAlignment="Left" Margin="82,132,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
@@ -39,7 +36,7 @@
 
 
         <TextBlock HorizontalAlignment="Left"
-            Margin="624,355,0,0"  Width="88"
+            Margin="277,353,0,0"  Width="88"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
            FontSize="10"
@@ -117,7 +114,7 @@
                 HorizontalAlignment="Left"
                 Margin="526,117,0,0" 
                 VerticalAlignment="Top"
-                Click="update_ShipDate_Click"
+                Click="update_ShipDate_Click" Background="#FFEEB0FF"
                 >
 
 
@@ -141,13 +138,13 @@
                 </Style>
             </Button.Style>
 
-            </Button>
-        
-            <Button Content="update"
+        </Button>
+
+        <Button Content="update"
                 HorizontalAlignment="Left"
                 Margin="526,142,0,0" 
                 VerticalAlignment="Top"
-                Click ="update_DeliveryDate_Click"
+                Click ="update_DeliveryDate_Click" Background="#FFEEB0FF"
                 >
 
             <Button.Style>
@@ -223,8 +220,8 @@
                             Content= "Category" FontFamily= "Maiandra GD" Tag="TotalPrice"
                              Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-                    
-                     <GridViewColumn>
+
+                    <GridViewColumn>
                         <GridViewColumnHeader
                                 Content="Amount" 
                                 AllowDrop="True" 
@@ -280,48 +277,19 @@
 
             </ListView.View>
         </ListView>
-        <!--<CheckBox x:Name="is_supply"  Content="Supply" HorizontalAlignment="Left" VerticalAlignment="Top"
-                  Margin="547,281,0,0" Height="32" Width="154" Checked="Supply_Checked" FontSize="20"/>-->
-        <!--<ListView 
-            x:Name="List_of_orders"
-             ItemsSource="{Binding Items}" MouseDoubleClick="Update_amount_Click"
-            d:ItemsSource="{d:SampleData ItemCount=5}" Margin="53,100,283,98" SelectionChanged="List_of_orders_SelectionChanged">-->
-        <!--<ListView.View>
-                <GridView>
+        <Button x:Name="Back_Botton_Copy"
+            Content=""   
+            HorizontalAlignment="Left"
+            Margin="6,2,0,0"
+            VerticalAlignment="Top"
+            Height="45" 
+            Width="60"  Click="BackToOrderListWindow_Click" 
+          >
+            <Button.Background>
+                <ImageBrush ImageSource="/ProductWindows/arrow.jpg"/>
+            </Button.Background>
+        </Button>
 
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding NameOfProduct}" >
-                        <GridViewColumnHeader 
-                            Content="Name" Tag="NameOfProduct"/>
-                    </GridViewColumn>
-
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding idOfProduct}">
-                        <GridViewColumnHeader 
-                            Content="ID" Tag="idOfProduct"/>
-                    </GridViewColumn>
-
-                    <GridViewColumn  
-                            DisplayMemberBinding="{Binding  ProductCategory }" >
-                        <GridViewColumnHeader 
-                            Content="Category" Tag="ProductCategory"/>
-                    </GridViewColumn>
-
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding PriceOfProduct}" >
-                        <GridViewColumnHeader 
-                            Content= "Price" Tag="PriceOfProduct"/>
-                    </GridViewColumn>
-
-                    <GridViewColumn 
-                            DisplayMemberBinding="{Binding amount}" >
-                        <GridViewColumnHeader 
-                            Content= "Amount" Tag="amount"/>
-                    </GridViewColumn>
-
-                </GridView>-->
-        <!--</ListView.View>
-        </ListView>-->
 
     </Grid>
 </Window>

@@ -5,30 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="800">
-    <Grid Name="MainGrid" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        Title="MainWindow" Height="619" Width="1088">
+    <Grid Name="MainGrid" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="0,0,0,-6">
         <Grid.Background>
-            <ImageBrush ImageSource="/1593678163641.jpeg" TileMode="None"/>
+            <ImageBrush ImageSource="lumbo"  TileMode="None"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="63"/>
             <RowDefinition Height="349*"/>
             <RowDefinition Height="212*"/>
         </Grid.RowDefinitions>
-        <Label Content="בס''ד" HorizontalAlignment="Left" Margin="707,0,0,0" VerticalAlignment="Center" FontSize="24" Height="40" Width="66"/>
+        <Label Content="בס''ד" HorizontalAlignment="Left" Margin="941,14,0,0" VerticalAlignment="Top" FontSize="36" Height="40" Width="66" Foreground="#FF6700CD"/>
 
-        <Button Content="Track order" HorizontalAlignment="Left" Margin="29,40,0,0" Grid.Row="2" VerticalAlignment="Top"
-                Height="36" Width="148" Click="Track_Click"/>
+        <Button Content="Track order" HorizontalAlignment="Left" Margin="38,52,0,0" Grid.Row="1" VerticalAlignment="Top"
+                Height="36" Width="148" Click="Track_Click" FontFamily="Bell MT"/>
 
-        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="34,7,0,0" Grid.Row="2" TextWrapping="Wrap"
+        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="43,19,0,0" Grid.Row="1" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="143" Height="27" TextChanged="TextBox_TextChanged"/>
 
-        <Button Content="Admin" HorizontalAlignment="Left" Margin="607,10,0,0" VerticalAlignment="Top" 
-                Height="65" Width="133" Grid.Row="1"  Click="Admin_Click" />
+        <Button Content="Admin" HorizontalAlignment="Left" Margin="112,37,0,0" VerticalAlignment="Top" 
+                Height="65" Width="133" Grid.Row="2"  Click="Admin_Click" />
 
-        <Button Content="Claint" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top"
-                Height="65" Width="133" Grid.Row="1"  Click="Client_Click"  />
-        <Button Content="Simulator" HorizontalAlignment="Left" Margin="313,64,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="130" Click="open_simolator"/>
+        <Button Content="Costumer" HorizontalAlignment="Left" Margin="841,32,0,0" VerticalAlignment="Top"
+                Height="65" Width="133" Grid.Row="2"  Click="Client_Click"  />
+
+        <Button Content="Simulator" HorizontalAlignment="Center" Margin="0,37,0,0" Grid.Row="2" VerticalAlignment="Top" 
+                Height="65" Width="133" Click="open_simolator"/>
 
     </Grid>
 </Window>

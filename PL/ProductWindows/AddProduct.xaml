@@ -45,7 +45,7 @@
             Height="30" Width="250"  Grid.Row="4" Margin="162,0,0,0"
             TextWrapping="Wrap"  VerticalAlignment="Center"
             TextChanged="Price_TextChanged" />
-        
+
         <Label Content="In stock:" HorizontalAlignment="Left" Margin="82,0,0,0" Grid.Row="4" VerticalAlignment="Center" FontWeight="Normal" FontSize="14"/>
 
         <ComboBox x:Name="Category_selector"
@@ -57,18 +57,22 @@
         <Label Content="Category:" HorizontalAlignment="Left" Margin="82,8,0,10" Grid.Row="2" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
 
         <Button Content="Add"
-                Grid.Row="6" HorizontalAlignment="Left"   Margin="302,10,0,0"                             
-                VerticalAlignment="Top"  Width="110"  Height="38" 
+                Grid.Row="5" HorizontalAlignment="Left"   Margin="196,10,0,0"                             
+                VerticalAlignment="Top"  Width="182"  Height="38" 
                 Click="AddProduct_Click"  />
-        
-        <Button x:Name="Back_Botton"
-                Content="Back"   
-                HorizontalAlignment="Left"
-                Margin="162,10,0,0"  Width="110" 
-                Grid.Row="6" Height="38"
-                VerticalAlignment="Top"
-                Click="BackToProductListWindow_Click"/>
-        
-        <Label Content="Insert the details:" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontSize="18" FontFamily="Maiandra GD" FontWeight="Normal"/>
+
+        <Label Content="Insert the details:" HorizontalAlignment="Left" Margin="82,57,0,0" VerticalAlignment="Top" Height="40" Width="162" FontSize="18" FontFamily="Maiandra GD" FontWeight="Normal"/>
+        <Button x:Name="Back_Botton_Copy"
+            Content=""   
+            HorizontalAlignment="Left"
+            Margin="6,2,0,0"
+            VerticalAlignment="Top"
+            Height="45" 
+            Width="60" 
+              Click="BackToProductListWindow_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/ProductWindows/arrow.jpg"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

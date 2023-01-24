@@ -11,7 +11,7 @@
     <Grid>
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding items}"
-                  Margin="24,48,204,96"
+                  Margin="24,48,204,188"
                  SelectionChanged="List_of_product_SelectionChanged">
             <ListView.View>
                 <GridView>
@@ -94,7 +94,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                 </GridView>
 
             </ListView.View>
@@ -112,27 +112,36 @@
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="10,350,0,0" 
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="14" FontWeight="Bold" Height="35" Width="109"/>
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="497,48,0,0" 
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="475,85,0,0" 
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="29" Width="71"/>
 
-        <Label Content="Address:" HorizontalAlignment="Left" Margin="497,103,0,0"
+        <Label Content="Address:" HorizontalAlignment="Left" Margin="475,140,0,0"
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="33" Width="71"/>
 
-        <Label Content="Mail:" HorizontalAlignment="Left" Margin="497,163,0,0" 
+        <Label Content="Mail:" HorizontalAlignment="Left" Margin="475,200,0,0" 
                VerticalAlignment="Top" FontFamily="Maiandra GD" FontSize="12" FontWeight="Bold" Height="31" Width="71"/>
 
-        <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="560,163,0,0" 
-               VerticalAlignment="Top" FontSize="7" Height="34" Width="97" />
+        <Label Content="The email extension&#xD;&#xA; should be @gmail.com" HorizontalAlignment="Left" Margin="538,0,0,0" 
+               VerticalAlignment="Center" FontSize="6" Height="34" Width="99" />
 
 
-        <TextBox x:Name="customer_Name"  HorizontalAlignment="Left" Margin="501,80,0,0"
+        <TextBox x:Name="customer_Name"  HorizontalAlignment="Left" Margin="479,117,0,0"
                  TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="122" Height="23"/>
 
-        <TextBox  x:Name="customer_Address" HorizontalAlignment="Left" Margin="501,136,0,0" 
+        <TextBox  x:Name="customer_Address" HorizontalAlignment="Left" Margin="479,173,0,0" 
                   TextWrapping="Wrap" Text="your city" VerticalAlignment="Top" Width="122" Height="23"/>
 
-        <TextBox  x:Name="customer_Mail" HorizontalAlignment="Left" Margin="500,196,0,0" 
-                  TextWrapping="Wrap" Text="@gmail.com" VerticalAlignment="Top" Width="122" Height="23"/>
+        <TextBox  x:Name="customer_Mail" HorizontalAlignment="Left" Margin="478,234,0,0" 
+                  TextWrapping="Wrap" Text="@gmail.com" VerticalAlignment="Top" Width="122" Height="23" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.332"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
 
     </Grid>
 </Window>

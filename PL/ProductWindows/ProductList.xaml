@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         DataContext="{Binding RelativeSource={RelativeSource self}}"    
         mc:Ignorable="d"
-        Title="ProductList" Height="450" Width="800">
+        Title="ProductList" Height="438" Width="661">
 
     <Grid>
-           
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -22,7 +22,7 @@
                 Content="Add new Product"
                 Grid.Row="3" 
                 HorizontalAlignment="Left" 
-                Margin="43,26,0,30" 
+                Margin="221,28,0,28" 
                 Padding="5" 
                 Width="228" 
                 RenderTransformOrigin="0.446,0.113" 
@@ -38,21 +38,21 @@
         </Button>
         <ComboBox x:Name="Category_selector"
                   HorizontalAlignment="Left"
-                  Margin="583,0,0,0" 
+                  Margin="387,22,0,0" 
                    FontFamily= "Maiandra GD"
-                  VerticalAlignment="Center"
+                  VerticalAlignment="Top"
                   Width="181" Height="22"
                   SelectionChanged="Category_SelectionChanged"
-                  ItemsSource="{Binding Categories}">
+                  ItemsSource="{Binding Categories}" Grid.RowSpan="2">
         </ComboBox>
 
         <ListView x:Name="List_of_product"
                   ItemsSource="{Binding ProductsForList}"
                   SelectionChanged="List_of_product_SelectionChanged"
-                  Margin="0,40,0,5"
+                  Margin="70,20,69,85"
                   FontFamily="Maiandra GD" 
                   Grid.RowSpan="3"
-                  MouseDoubleClick="List_of_product_MouseDoubleClick">
+                  MouseDoubleClick="List_of_product_MouseDoubleClick" Grid.Row="1">
             <ListView.View>
                 <GridView>
 
@@ -62,21 +62,21 @@
                             Content="Name" FontFamily= "Maiandra GD" Tag="Name"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding idOfProduct}">
                         <GridViewColumnHeader 
                             Content="ID" Tag="idOfProduct"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn  
                             DisplayMemberBinding="{Binding ProductCategory }" >
                         <GridViewColumnHeader 
                             Content="Category" Tag="ProductCategory"
                             Click="Sort_By_Colmun_Click"/>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn 
                             DisplayMemberBinding="{Binding Price}" >
                         <GridViewColumnHeader 
@@ -90,14 +90,17 @@
             </ListView.View>
         </ListView>
         <Button x:Name="Back_Botton"
-                Content="Back"   
+                Content=""   
                 HorizontalAlignment="Left"
-                Margin="647,23,0,0" 
-                Grid.Row="3"
+                Margin="6,2,0,0"
                 VerticalAlignment="Top"
-                Height="46" 
-                Width="117" 
-                Click="BackToMainWindow_Click"/>
+                Height="45" 
+                Width="60" 
+                Click="BackToMainWindow_Click" Grid.RowSpan="2">
+            <Button.Background>
+                <ImageBrush ImageSource="/ProductWindows/arrow.jpg"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

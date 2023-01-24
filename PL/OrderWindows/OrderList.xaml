@@ -23,11 +23,11 @@
         <ListView x:Name="List_of_orders"
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
                   SelectionChanged="List_of_orders_SelectionChanged"
-                  Margin="0,40,0,5"
+                  Margin="26,28,47,60"
                   FontFamily="Maiandra GD" 
                   Grid.RowSpan="3"
                   ItemsSource="{Binding OrdersForList}"
-                  MouseDoubleClick="List_of_orders_MouseDoubleClick">
+                  MouseDoubleClick="List_of_orders_MouseDoubleClick" Grid.Row="1">
             <ListView.View>
                 <GridView>
 
@@ -72,13 +72,18 @@
 
             </ListView.View>
         </ListView>
-        <Button x:Name="Back_Botton"
-                Content="Back"   
-                HorizontalAlignment="Left"
-                Margin="647,23,0,0"   Height="46" Width="117" 
-                Grid.Row="3"
-                VerticalAlignment="Top" Click="BackToMainWindow_Click"/>
-                                      
+        <Button x:Name="Back_Botton_Copy"
+            Content=""   
+            HorizontalAlignment="Left"
+            Margin="6,2,0,0" VerticalAlignment="Top"
+            Height="45" Width="60"  Click="BackToMainWindow_Click" 
+          Grid.RowSpan="2" 
+          >
+            <Button.Background>
+                <ImageBrush ImageSource="/ProductWindows/arrow.jpg"/>
+            </Button.Background>
+        </Button>
+
 
     </Grid>
 </Window>

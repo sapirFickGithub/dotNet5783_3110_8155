@@ -186,7 +186,8 @@ public static class Simulator
             }
             catch (Exception)
             {
-                // System.Windows.MessageBox.Show("The simulator is over!", "Bay", MessageBoxButton.OK, MessageBoxImage., MessageBoxResult.OK);
+                throw new Exception();
+                
             }
 
             //order.TotalPrice = 0;

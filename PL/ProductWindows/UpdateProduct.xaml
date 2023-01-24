@@ -47,7 +47,7 @@
             RenderTransformOrigin="1.372,3.394" 
            Text="{Binding product.Price }" Grid.ColumnSpan="2"
             />
-        <Label Content="Price:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" FontFamily="Maiandra GD"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="74,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="14" />
 
         <TextBox 
             x:Name="InStock"
@@ -63,26 +63,33 @@
                   Width="250" Height="30"  Margin="152,10,0,0" Grid.Row="5"                  
                   SelectionChanged="Category_SelectionChanged"
                   ItemsSource="{Binding Categories}"
-                  SelectedItem="{Binding product.ProductCategory}" Grid.ColumnSpan="2" >
+                  SelectedItem="{Binding product.ProductCategory}" Grid.ColumnSpan="2" BorderBrush="#FFEDCCFB" >
         </ComboBox>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="74,8,0,7" Grid.Row="5" Width="84" FontSize="14" FontWeight="Normal"/>
 
         <Button 
             Content="Update"
                 HorizontalAlignment="Left"
-                Margin="292,10,0,0" 
+                Margin="194,15,0,0" 
                 Grid.Row="6" 
                 VerticalAlignment="Top" 
-                Width="110" 
-                Height="38" 
+                Width="160"  Height="33" 
                 FontSize="16"
-                Click="UpdateProduct_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="Back_Botton"
-                Content="Back" Margin="152,15,0,0" 
-                HorizontalAlignment="Left"
-                Grid.Row="6" Width="110" Height="33" 
-                VerticalAlignment="Top" Click="BackToProductListWindow_Click"/>
-        <Label Content="Insert the details:" HorizontalAlignment="Left" Margin="162,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontWeight="Normal"/>
+                Click="UpdateProduct_Click"/>
+
+        <Label Content="Insert the details:" HorizontalAlignment="Left" Margin="74,51,0,0" VerticalAlignment="Top" Height="40" Width="162" FontWeight="Normal"/>
+        <Button x:Name="Back_Botton_Copy"
+            Content=""   
+            HorizontalAlignment="Left"
+            Margin="6,2,0,0"
+            VerticalAlignment="Top"
+            Height="45" 
+            Width="60" 
+           Click="BackToProductListWindow_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/ProductWindows/arrow.jpg"/>
+            </Button.Background>
+        </Button>
 
 
 

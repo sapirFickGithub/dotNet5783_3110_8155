@@ -151,15 +151,22 @@
 
         </ListView>
 
-        <Button x:Name="Back_Botton" Content="Back"   
-                HorizontalAlignment="Left" Grid.Row="3"
-                Margin="639,9,0,0" Height="46"  Width="117"   
-                VerticalAlignment="Top"   Click="BackToMainWindow_Click"/>
-
         <Button x:Name="Go_to_Cart" Content="Go to cart"   
-            HorizontalAlignment="Left" Grid.Row="3"
-            Margin="40,9,0,0" Height="46"  Width="117"   
+            HorizontalAlignment="Center" Grid.Row="3"
+            Margin="0,10,0,0" Height="46"  Width="278"   
             VerticalAlignment="Top"   Click="Go_to_Cart_Click"/>
+        <Button x:Name="Back_Botton_Copy"
+            Content=""   
+            HorizontalAlignment="Left"
+            Margin="6,2,0,0"
+            VerticalAlignment="Top"
+            Height="45" 
+            Width="60" 
+             Click="BackToMainWindow_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/ProductWindows/arrow.jpg"/>
+            </Button.Background>
+        </Button>
         <!--<CheckBox Content="See in groups" HorizontalAlignment="Left" Margin="40,52,0,151" Unchecked="GroupingCheak_UnChecked" Checked="GroupingCheak_Checked" Grid.RowSpan="2" Width="92"/>-->
 
 

@@ -18,7 +18,10 @@
 
   <ItemGroup>
     <None Remove="1593678163641.jpeg" />
-    <None Remove="Hist_5773_Sem_B_Moed_A_Pitr_Sh1.jpg" />
+    <None Remove="lumbo" />
+    <None Remove="ProductWindows\1593678163641.jpeg" />
+    <None Remove="ProductWindows\arrow.jpg" />
+    <None Remove="ProductWindows\HZ.webp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +32,10 @@
 
   <ItemGroup>
     <Resource Include="1593678163641.jpeg" />
-    <Resource Include="Hist_5773_Sem_B_Moed_A_Pitr_Sh1.jpg" />
+    <Resource Include="lumbo" />
+    <Resource Include="ProductWindows\1593678163641.jpeg" />
+    <Resource Include="ProductWindows\arrow.jpg" />
+    <Resource Include="ProductWindows\HZ.webp" />
   </ItemGroup>
 
   <ItemGroup>

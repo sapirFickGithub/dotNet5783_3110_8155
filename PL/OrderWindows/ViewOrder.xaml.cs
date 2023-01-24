@@ -152,11 +152,6 @@ namespace PL.OrderWindows
 
         }
 
-        private void Update_amount_Click(object sender, MouseButtonEventArgs e)
-        {
-            new UpdateAmountItem();
-        }
-
 
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -225,5 +220,7 @@ namespace PL.OrderWindows
 
 
         }
+
+      
     }
 }

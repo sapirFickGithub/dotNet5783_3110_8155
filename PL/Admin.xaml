@@ -5,24 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Admin" Height="450" Width="800">
-    <Grid>
+        Title="Admin" Height="404" Width="406">
+    <Grid Margin="0,0,0,-6">
 
         <Button Content="Product"
-                Margin="0,157,500,204"  FontSize="36"
+                Margin="0,99,0,233"  FontSize="36"
                 Click="ProductListWindow_Click"
-                Width="204"/>
+                Width="124" HorizontalAlignment="Center"/>
         <Button Content="Order"
-                Margin="0,158,130,204"  FontSize="36" 
+                Margin="0,197,0,135"
                 Click="OrderListWindow_Click"
-                Width="205"/>
+                Width="125" HorizontalAlignment="Center"/>
 
-        <TextBox HorizontalAlignment="Left"
-                 Margin="24,35,0,0"   FontSize="36"
-                 FontFamily= "Maiandra GD"
-                 TextWrapping="Wrap"
-                 Text="Admin options:"
+        <Label HorizontalAlignment="Left"
+                 Margin="24,35,0,0"
+                 Content="Admin options:"
                  VerticalAlignment="Top"
-                 Width="348" Height="59"/>
+                 Width="348" Height="59" Background="{x:Null}" FontSize="22"/>
     </Grid>
 </Window>

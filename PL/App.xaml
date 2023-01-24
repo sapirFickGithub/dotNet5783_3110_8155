@@ -5,26 +5,28 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-            <Style TargetType="Control" x:Key="CommonControlStyle">
-            <Setter Property="FontFamily" Value="Maiandra GD" />
-            </Style>
+        <Style TargetType="Control" x:Key="CommonControlStyle">
+            <Setter Property="FontFamily" Value="Bell MT" />
+        </Style>
 
 
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Bell MT" />
         </Style>
 
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontFamily" Value="Bell MT" />
         </Style>
 
-      
+
         <Style TargetType="ListView">
             <Setter Property="Background" Value="#FFFFFFEA"/>
+            <Setter Property="FontFamily" Value="Bell MT" />
         </Style>
 
-        
-        
+
         <Style TargetType="Button">
 
             <Setter Property="Template">
@@ -42,7 +44,9 @@
 
                             <ContentPresenter TextBlock.FontSize="{TemplateBinding FontSize}" TextBlock.FontFamily="{TemplateBinding FontFamily}"
                                               TextBlock.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                              Content="{TemplateBinding Content}" ClipToBounds="True"></ContentPresenter>
+                                              Content="{TemplateBinding Content}" ClipToBounds="True">
+                                
+                            </ContentPresenter>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -51,9 +55,9 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Background" Value="#FFEDCCFB" />
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontSize" Value="32" />
             <Setter Property="FontStyle" Value="Normal"/>
-
+            <Setter Property="FontFamily" Value="Bell MT" />
         </Style>
     </Application.Resources>
 </Application>
