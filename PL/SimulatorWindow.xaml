@@ -21,6 +21,7 @@
         <TextBlock x:Name="orderStatus" HorizontalAlignment="Left" Margin="396,194,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
         <Label Content="Satus" HorizontalAlignment="Left" Margin="296,188,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
+        <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="56,278,0,0" VerticalAlignment="Top" Height="37"  Width="150" FontSize="20" FontWeight="Bold"/>
 
         <Label Content="Order ID " HorizontalAlignment="Left" Margin="296,151,0,0" VerticalAlignment="Top" Height="24"  Width="73" FontSize="20" FontWeight="Bold"/>
 
@@ -33,6 +34,31 @@
         <Label Content="Simulator:" HorizontalAlignment="Left" Margin="106,53,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Height="54" Width="225"/>
 
         <Label x:Name="resultLabel"  HorizontalAlignment="Left" Margin="496,266,0,0" VerticalAlignment="Top" Height="30"  Width="72" FontSize="20" FontWeight="Bold"/>
+
+        <Label 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center" 
+                Grid.Row="2"
+                Grid.Column="4"
+                >
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Setter Property="Content" Value="Initials"/>
+                    <Style.Triggers>
+                        <DataTrigger
+                                Binding="{Binding currentOrder.Status }"
+                                Value="ORDERED">
+                            <Setter Property="Content" Value="SHIPPED"/>
+                        </DataTrigger>
+                        <DataTrigger 
+                                Binding="{Binding currentOrder.Status }"
+                                Value="SHIPPED">
+                            <Setter Property="Content" Value="DELIVERY"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
 
 
     </Grid>
