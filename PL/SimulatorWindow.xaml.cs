@@ -69,9 +69,9 @@ namespace PL
             get { return (int)GetValue(MymaxBarProperty); }
             set { SetValue(MymaxBarProperty, value); }
         }
-                    public static readonly DependencyProperty MymaxBarProperty =
-            DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
-    
+        public static readonly DependencyProperty MymaxBarProperty =
+DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
+
 
         public static readonly DependencyProperty MyBarProperty =
            DependencyProperty.Register("BarProgress", typeof(int), typeof(SimulatorWindow));
@@ -81,32 +81,6 @@ namespace PL
             get { return (int)GetValue(MyBarProperty); }
             set { SetValue(MyBarProperty, value); }
         }
-
-
-
-        public string Time
-        {
-            get { return (string)GetValue(TimeProperty); }
-            set { SetValue(TimeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Time.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TimeProperty =
-            DependencyProperty.Register("Time", typeof(string), typeof(SimulatorWindow));
-
-
-
-        public string CuurentTime
-        {
-            get { return (string)GetValue(CuurentTimeProperty); }
-            set { SetValue(CuurentTimeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Time.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CuurentTimeProperty =
-            DependencyProperty.Register("CuurentTime", typeof(string), typeof(SimulatorWindow));
-
-
 
 
 
@@ -135,53 +109,61 @@ namespace PL
 
 
 
-
-        DispatcherTimer dispatcherTimer; 
+        DispatcherTimer dispatcherTimer;
 
         public SimulatorWindow()
         {
 
             InitializeComponent();
-            oldStatus = "";
             stopWatch = new Stopwatch();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-         
+
 
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs eventArgs)
         {
             BarProgress += 1;
-            
-           
-           
             timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             //this.Timer.Text = timerText;
-            int progress = (int)(((float)BarProgress / (float)maxBar)*100);
-            
+            int progress = (int)(((float)BarProgress / (float)maxBar) * 100);
+
             resultLabel.Content = (progress + "%");
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-           
-            dispatcherTimer.Start();
-
-            if (!isTimerRun)
+            try
             {
-                stopWatch.Start();
-                isTimerRun = true;
-              
-                Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
-                Simulator.Simulator.startSimulation();
+                dispatcherTimer.Start();
+
+                if (!isTimerRun)
+                {
+                    stopWatch.Start();
+                    isTimerRun = true;
+                    Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
+                    Simulator.Simulator.startSimulation(finishSimulator());
+
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show(
+                    "Close the simulator and try again",
+                    "ERROR",
+                     MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation,
+                     MessageBoxResult.OK
+                    /*  MessageBoxOptions.RtlReading*/);
+                this.Close();
             }
 
         }
 
-       
-
+     
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
@@ -199,6 +181,7 @@ namespace PL
 
         private void updateWindowView(object sender, BO.Order? e)
         {
+            //call to changh the window in run time
             StatusUpdating(e.Status.ToString());
             EstimatedTime((int)e.TotalPrice);
             CurrentOrder(bl.Order.GetOrder(e.idOfOrder));
@@ -214,7 +197,7 @@ namespace PL
             }
             else
             {
-                oldStatus = stt;
+                oldStatus = " ";
             }
         }
 
@@ -225,7 +208,7 @@ namespace PL
             {
                 Action<BO.Order> d = CurrentOrder;
                 Dispatcher.BeginInvoke(d, new BO.Order() { idOfOrder = a.idOfOrder, Status = a.Status });
-                
+
             }
             else
             {
@@ -245,8 +228,7 @@ namespace PL
                 estimatedTime = a;
                 maxBar = a;
                 BarProgress = 0;
-                Time = (DateTime.Now + TimeSpan.FromSeconds(estimatedTime)).ToString();
-                CuurentTime = DateTime.Now.ToString();
+
             }
         }
 

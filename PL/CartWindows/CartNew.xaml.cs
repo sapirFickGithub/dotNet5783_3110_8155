@@ -115,7 +115,7 @@ namespace PL.CartWindows
                             "   Thanks for buying!",
                             "Approvment",
                             MessageBoxButton.OK,
-                            MessageBoxImage.Hand,
+                            MessageBoxImage.Information,
                             MessageBoxResult.None,
                             MessageBoxOptions.RtlReading);
 
