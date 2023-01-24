@@ -135,6 +135,9 @@ public static class Simulator
     private static volatile bool isStop = false;//check if the user clicked on the stop button
 
 
+
+
+
     public static Order oredr { get; set; }
 
     private static event EventHandler<Order?> updateSimulation;//

@@ -46,6 +46,8 @@ namespace PL
         public int estimatedTime
         {
             get { return (int)GetValue(MyEstimatedTimeProperty); }
+
+
             set { SetValue(MyEstimatedTimeProperty, value); }
         }
 
