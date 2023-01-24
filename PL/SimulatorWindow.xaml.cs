@@ -181,7 +181,7 @@ namespace PL
             if (!CheckAccess())
             {
                 Action<string> d = StatusUpdating;
-                Dispatcher.BeginInvoke(d, oldStatus=stt);
+                Dispatcher.BeginInvoke(d, new object[] { stt });
 
             }
             else
