@@ -142,9 +142,11 @@ public static class Simulator
 
     private static event EventHandler<Order?> updateSimulation;//
 
+    private static event Action finish;
+
     public static void startSimulation()
     {
-        isStop = false;
+               isStop = false;
         thread = new Thread(Simulation);
         thread.Start();
     }
@@ -191,8 +193,11 @@ public static class Simulator
 
             updateSimulation.Invoke(null, order);
         }
+          if(bl.Order.precedenceOrder() == null)
+            finish();
         stopSimulation();
     }
+
 
     public static void stopSimulation()
     {
@@ -202,9 +207,10 @@ public static class Simulator
 
 
 
-    public static void SubscribeToUpdateSimulation(EventHandler<Order?> handler)
+    public static void SubscribeToUpdateSimulation(EventHandler<Order?> handler, Action a)
     {
         updateSimulation += handler;
+        finish = a;
     }
 
 

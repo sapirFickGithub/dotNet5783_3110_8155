@@ -142,54 +142,138 @@ DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
         {
 
             InitializeComponent();
-            stopWatch = new Stopwatch();
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-
             oldStatus = "";
             stopWatch = new Stopwatch();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += dispatcherTimer_Tick;
 
+            if (bl.Order.precedenceOrder() < 7)
+            {
+                if (isTimerRun)
+                {
+                    stopWatch.Stop();
+                    isTimerRun = false;
+                }
+                MessageBox.Show(
+                                    "All orders have been processed!",
+                                    "OVERE",
+                                     MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation,
+                                     MessageBoxResult.OK
+                                    /*  MessageBoxOptions.RtlReading*/);
+                this.Close();
+
+            }
+
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs eventArgs)
         {
             BarProgress += 1;
-
-
-
             timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             //this.Timer.Text = timerText;
             int progress = (int)(((float)BarProgress / (float)maxBar) * 100);
 
             resultLabel.Content = (progress + "%");
+
+            if (bl.Order.precedenceOrder() < 7)
+            {
+                if (isTimerRun)
+                {
+                    stopWatch.Stop();
+                    isTimerRun = false;
+                }
+                MessageBox.Show(
+                                    "All orders have been processed!",
+                                    "OVERE",
+                                     MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation,
+                                     MessageBoxResult.OK
+                                    /*  MessageBoxOptions.RtlReading*/);
+                this.Close();
+
+            }
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-
-            dispatcherTimer.Start();
-
-            if (!isTimerRun)
+            if (bl.Order.precedenceOrder() == null)
             {
-                stopWatch.Start();
-                isTimerRun = true;
+                if (isTimerRun)
+                {
+                    stopWatch.Stop();
+                    isTimerRun = false;
+                }
+                MessageBox.Show(
+                                    "All orders have been processed!",
+                                    "OVERE",
+                                     MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation,
+                                     MessageBoxResult.OK
+                                    /*  MessageBoxOptions.RtlReading*/);
+                this.Close();
 
-                Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
-                Simulator.Simulator.startSimulation();
+
+            }
+            else
+            {
+                dispatcherTimer.Start();
+
+                if (!isTimerRun && bl.Order.precedenceOrder != null)
+                {
+                    stopWatch.Start();
+                    isTimerRun = true;
+
+                    Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView, finishSimulator);
+                    Simulator.Simulator.startSimulation();
+
+                }
             }
 
         }
 
 
+        private void finishSimulator()
+        {
+            if (bl.Order.precedenceOrder() == null)
+            {
+                if (isTimerRun)
+                {
+                    stopWatch.Stop();
+                    isTimerRun = false;
+                }
+                MessageBox.Show(
+                                    "All orders have been processed!",
+                                    "OVERE",
+                                     MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation,
+                                     MessageBoxResult.OK
+                                    /*  MessageBoxOptions.RtlReading*/);
 
+
+            }
+        }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+            if (bl.Order.precedenceOrder() == null)
+            {
+                if (isTimerRun)
+                {
+                    stopWatch.Stop();
+                    isTimerRun = false;
+                }
+                MessageBox.Show(
+                                    "All orders have been processed!",
+                                    "OVERE",
+                                     MessageBoxButton.OK,
+                                    MessageBoxImage.Exclamation,
+                                     MessageBoxResult.OK
+                                    /*  MessageBoxOptions.RtlReading*/);
+                this.Close();
 
+            }
             if (isTimerRun)
             {
                 stopWatch.Stop();
@@ -206,6 +290,7 @@ DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
             StatusUpdating(e.Status.ToString());
             EstimatedTime((int)e.TotalPrice);
             CurrentOrder(bl.Order.GetOrder(e.idOfOrder));
+
         }
 
         private void StatusUpdating(string stt)
