@@ -103,7 +103,7 @@ namespace PL
 
         // Using a DependencyProperty as the backing store for oldStatus.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty oldStatusProperty =
-            DependencyProperty.Register("oldStatus", typeof(string), typeof(SimulatorWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("oldStatus", typeof(string), typeof(SimulatorWindow));
 
 
 
@@ -114,6 +114,7 @@ namespace PL
         {
 
             InitializeComponent();
+            oldStatus = "";
             stopWatch = new Stopwatch();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
