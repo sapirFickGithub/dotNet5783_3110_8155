@@ -66,6 +66,11 @@ namespace BlApi
         /// <param name="amount"></param>
         /// <returns></returns>
         public void updateAdmin(int idOrder, int idProduct, int amount);
+
+        /// <summary>
+        /// this func give the id of the oldest order. and null if all the order is deliverd.
+        /// </summary>
+        /// <returns></returns>
         public int? precedenceOrder();
 
     }

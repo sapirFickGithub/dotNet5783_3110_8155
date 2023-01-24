@@ -67,9 +67,9 @@ namespace PL
             get { return (int)GetValue(MymaxBarProperty); }
             set { SetValue(MymaxBarProperty, value); }
         }
-                    public static readonly DependencyProperty MymaxBarProperty =
-            DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
-    
+        public static readonly DependencyProperty MymaxBarProperty =
+DependencyProperty.Register("maxBar", typeof(int), typeof(SimulatorWindow));
+
 
         public static readonly DependencyProperty MyBarProperty =
            DependencyProperty.Register("BarProgress", typeof(int), typeof(SimulatorWindow));
@@ -107,7 +107,7 @@ namespace PL
 
 
 
-        DispatcherTimer dispatcherTimer; 
+        DispatcherTimer dispatcherTimer;
 
         public SimulatorWindow()
         {
@@ -117,41 +117,51 @@ namespace PL
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-         
+
 
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs eventArgs)
         {
             BarProgress += 1;
-            
-           
-           
             timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             //this.Timer.Text = timerText;
-            int progress = (int)(((float)BarProgress / (float)maxBar)*100);
-            
+            int progress = (int)(((float)BarProgress / (float)maxBar) * 100);
+
             resultLabel.Content = (progress + "%");
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-           
-            dispatcherTimer.Start();
-
-            if (!isTimerRun)
+            try
             {
-                stopWatch.Start();
-                isTimerRun = true;
-              
-                Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
-                Simulator.Simulator.startSimulation();
+                dispatcherTimer.Start();
+
+                if (!isTimerRun)
+                {
+                    stopWatch.Start();
+                    isTimerRun = true;
+                    Simulator.Simulator.SubscribeToUpdateSimulation(updateWindowView);
+                    Simulator.Simulator.startSimulation(finishSimulator());
+
+                }
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show(
+                    "Close the simulator and try again",
+                    "ERROR",
+                     MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation,
+                     MessageBoxResult.OK
+                    /*  MessageBoxOptions.RtlReading*/);
+                this.Close();
             }
 
         }
 
-       
-
+     
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
@@ -169,6 +179,7 @@ namespace PL
 
         private void updateWindowView(object sender, BO.Order? e)
         {
+            //call to changh the window in run time
             StatusUpdating(e.Status.ToString());
             EstimatedTime((int)e.TotalPrice);
             CurrentOrder(bl.Order.GetOrder(e.idOfOrder));
@@ -195,7 +206,7 @@ namespace PL
             {
                 Action<BO.Order> d = CurrentOrder;
                 Dispatcher.BeginInvoke(d, new BO.Order() { idOfOrder = a.idOfOrder, Status = a.Status });
-                
+
             }
             else
             {
