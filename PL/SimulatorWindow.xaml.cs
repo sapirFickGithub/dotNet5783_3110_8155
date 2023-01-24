@@ -144,7 +144,7 @@ namespace PL
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += dispatcherTimer_Tick;
 
-            if (bl.Order.precedenceOrder()==null)
+            if (bl.Order.precedenceOrder() == null)
             {
                 if (isTimerRun)
                 {
@@ -174,23 +174,6 @@ namespace PL
 
             resultLabel.Content = (progress + "%");
 
-            if (bl.Order.precedenceOrder() ==null)
-            {
-                if (isTimerRun)
-                {
-                    stopWatch.Stop();
-                    isTimerRun = false;
-                }
-                MessageBox.Show(
-                                    "All orders have been processed!",
-                                    "OVERE",
-                                     MessageBoxButton.OK,
-                                    MessageBoxImage.Exclamation,
-                                     MessageBoxResult.OK
-                                    /*  MessageBoxOptions.RtlReading*/);
-                this.Close();
-
-            }
         }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
@@ -205,7 +188,7 @@ namespace PL
                     }
                     MessageBox.Show(
                                         "All orders have been processed!",
-                                        "OVERE",
+                                        "OVER",
                                          MessageBoxButton.OK,
                                         MessageBoxImage.Exclamation,
                                          MessageBoxResult.OK
@@ -253,30 +236,12 @@ namespace PL
                                     MessageBoxImage.Exclamation,
                                      MessageBoxResult.OK
                                     /*  MessageBoxOptions.RtlReading*/);
-
-
-            }
+                            }
         }
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.Order.precedenceOrder() == null)
-            {
-                if (isTimerRun)
-                {
-                    stopWatch.Stop();
-                    isTimerRun = false;
-                }
-                MessageBox.Show(
-                                    "All orders have been processed!",
-                                    "OVERE",
-                                     MessageBoxButton.OK,
-                                    MessageBoxImage.Exclamation,
-                                     MessageBoxResult.OK
-                                    /*  MessageBoxOptions.RtlReading*/);
-                this.Close();
 
-            }
             if (isTimerRun)
             {
                 stopWatch.Stop();
