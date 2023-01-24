@@ -82,6 +82,32 @@ namespace PL
 
 
 
+        public string Time
+        {
+            get { return (string)GetValue(TimeProperty); }
+            set { SetValue(TimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Time.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TimeProperty =
+            DependencyProperty.Register("Time", typeof(string), typeof(SimulatorWindow));
+
+
+
+        public string CuurentTime
+        {
+            get { return (string)GetValue(CuurentTimeProperty); }
+            set { SetValue(CuurentTimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Time.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CuurentTimeProperty =
+            DependencyProperty.Register("CuurentTime", typeof(string), typeof(SimulatorWindow));
+
+
+
+
+
 
         // Using a DependencyProperty as the backing store for currentOrder.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty currentOrderProperty =
@@ -186,7 +212,7 @@ namespace PL
             }
             else
             {
-                oldStatus = " ";
+                oldStatus = stt;
             }
         }
 
@@ -217,7 +243,8 @@ namespace PL
                 estimatedTime = a;
                 maxBar = a;
                 BarProgress = 0;
-
+                Time = (DateTime.Now + TimeSpan.FromSeconds(estimatedTime)).ToString();
+                CuurentTime = DateTime.Now.ToString();
             }
         }
 
