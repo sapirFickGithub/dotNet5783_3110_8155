@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.ProductWindows"
         mc:Ignorable="d"
              DataContext="{Binding RelativeSource={RelativeSource self}}"
-        Title="UpdateProduct" Height="450" Width="485" x:Name="my_window">
+        Title="UpdateProduct" Height="450" Width="485" x:Name="my_window"  Icon="/iconCar.jpg">
     <Grid  RenderTransformOrigin="0.82,0.765">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="362*"/>
@@ -71,9 +71,8 @@
             Content="Update"
                 HorizontalAlignment="Left"
                 Margin="194,15,0,0" 
-                Grid.Row="6" 
-                VerticalAlignment="Top" 
-                Width="160"  Height="33" 
+                Grid.Row="6"   Width="160"  Height="33" 
+                VerticalAlignment="Top"               
                 FontSize="16"
                 Click="UpdateProduct_Click"/>
 

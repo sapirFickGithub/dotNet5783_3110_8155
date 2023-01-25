@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:PL.OrderWindows"
         mc:Ignorable="d"
          DataContext="{Binding RelativeSource={RelativeSource self}}"  
-        Title="Update order" Height="450" Width="800">
+        Title="Update order" Height="450" Width="800"  Icon="/iconCar.jpg">
 
     <Grid Margin="-1,0,1,0">
 
         <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.74,0.422"/>
         <Label Content="Order ID:" HorizontalAlignment="Left" Margin="120,57,0,0" VerticalAlignment="Top" Width="68" Height="23"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="356,59,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="321,57,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="195,353,0,0" VerticalAlignment="Top" Width="105"/>
-        <Label Content="Order Date:" HorizontalAlignment="Left" Margin="336,85,0,0" VerticalAlignment="Top" Width="68" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Order Date:" HorizontalAlignment="Left" Margin="321,87,0,0" VerticalAlignment="Top" Width="68" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <Label Content="Customer Email:" HorizontalAlignment="Left" Margin="91,107,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <Label Content="Customer Address:" HorizontalAlignment="Left" Margin="82,132,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <TextBlock HorizontalAlignment="Left"
@@ -26,15 +26,7 @@
             Height="23" 
                  />
 
-        <!--<ComboBox x:Name="Status_selector"
-                  HorizontalAlignment="Left"
-                  Margin="236,70,0,0" Width="114" Height="38"
-                  VerticalAlignment="Top" SelectionChanged="Category_SelectionChanged"
-                  ItemsSource="{Binding status}"
-                  SelectedItem="{Binding orderForList.Status}">
-        </ComboBox>-->
-
-
+     
         <TextBlock HorizontalAlignment="Left"
             Margin="277,353,0,0"  Width="88"
             TextWrapping="Wrap"
@@ -51,8 +43,8 @@
             Text="{Binding orderForList.CustomerName}" 
             Height="23" 
                  />
-        <Label Content="Ship Date:" HorizontalAlignment="Left" Margin="344,111,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
-        <Label Content="Delivery Date:" HorizontalAlignment="Left" Margin="328,136,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Ship Date:" HorizontalAlignment="Left" Margin="321,111,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Delivery Date:" HorizontalAlignment="Left" Margin="321,136,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <TextBlock HorizontalAlignment="Left"
             Margin="177,111,0,0" 
             TextWrapping="Wrap"
@@ -79,7 +71,7 @@
             Height="23" 
                  />
         <TextBlock HorizontalAlignment="Left"
-            Margin="404,62,0,0" 
+            Margin="404,60,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="100"
@@ -90,7 +82,7 @@
             Margin="401,87,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="100"
+            Width="122"
             Text="{Binding order.DateOfOrder}" 
             Height="23" 
                  />
@@ -98,7 +90,7 @@
             Margin="402,113,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="100"
+            Width="119"
             Text="{Binding order.DateOfShipping}" 
             Height="23" 
                  />
@@ -106,7 +98,7 @@
             Margin="401,141,0,0" 
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            Width="100"
+            Width="120"
             Text="{Binding order.DateOfDelivery}" 
             Height="23" 
                  />
@@ -246,9 +238,24 @@
                                             
                                             Content="-" 
                                             
-                                            Tag="{Binding idOfProduct}"
-                                            
-                                            />
+                                            Tag="{Binding idOfProduct}">
+
+
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+
+                                                    <DataTrigger Binding="{Binding order.Status }" Value="DELIVERY">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+
+                                    </Button>
+
 
                                     <Label Content="{Binding amount}" />
 
@@ -265,7 +272,21 @@
                                             
                                             FontSize="14" 
                                             
-                                            Tag="{Binding idOfProduct}" />
+                                            Tag="{Binding idOfProduct}">
+
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+
+                                                    <DataTrigger Binding="{Binding order.Status }" Value="DELIVERY">
+                                                        <Setter Property="Visibility" Value="Hidden"/>
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
 
                                 </StackPanel>
                             </DataTemplate>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.OrderWindows"
          DataContext="{Binding RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
-        Title="Tracking" Height="300" Width="400">
+        Title="Tracking" Height="300" Width="400"  Icon="/iconCar.jpg">
     <Grid Margin="0,0,0,0">
 
         <Label Content="The status of your order :" 

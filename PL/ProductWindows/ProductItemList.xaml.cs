@@ -61,13 +61,9 @@ namespace PL.ProductWindows
             Categories = System.Enum.GetValues(typeof(BO.Enum.CategoryView)).Cast<BO.Enum.CategoryView>();
             InitializeComponent();
             itemsListInitialize();
-            /////////////////////////////
             collectionView = CollectionViewSource.GetDefaultView(Items);
             propertyGroupDescription = new PropertyGroupDescription("Category");
         }
-
-
-
 
 
         private void itemsListInitialize()
@@ -94,7 +90,7 @@ namespace PL.ProductWindows
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
                 var listTemp = bl?.Product.getListOfProductItem();
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(((ListView)sender).ItemsSource);
 
                 view.SortDescriptions.Clear();
                 if (hasSorted)
@@ -117,7 +113,7 @@ namespace PL.ProductWindows
         {
             try
             {
-                Object selectedItem = Category_selector.SelectedItem;
+                Object selectedItem = (BO.Enum.CategoryView)((ComboBox)sender).SelectedItem;
 
                 if (selectedItem.ToString() == "All")
                     Items = new ObservableCollection<ProductItem>(bl.Product.getListOfProductItem());

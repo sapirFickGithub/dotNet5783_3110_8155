@@ -5,23 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="619" Width="1088">
+        Title="MainWindow" Height="619" Width="1088" Icon="/iconCar.jpg">
     <Grid Name="MainGrid" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="0,0,0,-6">
         <Grid.Background>
-            <ImageBrush ImageSource="lumbo"  TileMode="None"/>
+            <ImageBrush ImageSource="/lamborghini.jpg"  TileMode="None"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="63"/>
             <RowDefinition Height="349*"/>
             <RowDefinition Height="212*"/>
         </Grid.RowDefinitions>
-        <Label Content="בס''ד" HorizontalAlignment="Left" Margin="941,14,0,0" VerticalAlignment="Top" FontSize="36" Height="40" Width="66" Foreground="#FF6700CD"/>
 
-        <Button Content="Track order" HorizontalAlignment="Left" Margin="38,52,0,0" Grid.Row="1" VerticalAlignment="Top"
+        <Label Content="בס''ד" HorizontalAlignment="Left" Margin="1011,14,0,0" VerticalAlignment="Top" FontSize="36" Height="40" Width="66" Foreground="White"/>
+
+        <Button Content="Track order" HorizontalAlignment="Left" Margin="902,73,0,0" Grid.Row="1" VerticalAlignment="Top"
                 Height="36" Width="148" Click="Track_Click" FontFamily="Bell MT"/>
 
-        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="43,19,0,0" Grid.Row="1" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="143" Height="27" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="ID_to_track" HorizontalAlignment="Left" Margin="904,40,0,0" Grid.Row="1" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="142" Height="27" TextChanged="TextBox_TextChanged" Background="#FFFFFDF6"/>
 
         <Button Content="Admin" HorizontalAlignment="Left" Margin="112,37,0,0" VerticalAlignment="Top" 
                 Height="65" Width="133" Grid.Row="2"  Click="Admin_Click" />

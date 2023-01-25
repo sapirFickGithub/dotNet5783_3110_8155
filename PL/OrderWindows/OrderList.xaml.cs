@@ -55,7 +55,7 @@ namespace PL.OrderWindows
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
                 ObservableCollection<BO.OrderForList?> listTemp = (ObservableCollection<OrderForList?>)(bl?.Order?.GetAllOrderForList());
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(((ListView)sender).ItemsSource);
 
                 view.SortDescriptions.Clear();
                 if (hasSorted)
@@ -73,7 +73,7 @@ namespace PL.OrderWindows
         }
 
         private void List_of_orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-           => new OrderWindows.ViewOrder((OrderForList)List_of_orders.SelectedItem,this).Show();
+           => new OrderWindows.ViewOrder((OrderForList)((ListView)sender).SelectedItem,this).Show();
         
 
         private void List_of_orders_SelectionChanged(object sender, SelectionChangedEventArgs e)

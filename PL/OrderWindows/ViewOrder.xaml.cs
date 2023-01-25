@@ -54,7 +54,6 @@ namespace PL.OrderWindows
             DependencyProperty.Register("order", typeof(BO.Order), typeof(ViewOrder));
 
 
-
         public string Status
         {
             get { return (string)GetValue(StatusProperty); }
@@ -64,22 +63,6 @@ namespace PL.OrderWindows
         // Using a DependencyProperty as the backing store for Status.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StatusProperty =
             DependencyProperty.Register("Status", typeof(string), typeof(ViewOrder));
-
-
-
-        //public bool flag
-        //{
-        //    get { return (bool)GetValue(flagProperty); }
-        //    set { SetValue(flagProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for flag.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty flagProperty =
-        //    DependencyProperty.Register("flag", typeof(bool), typeof(ViewOrder));
-
-
-
-
 
         public BO.OrderForList orderForList { get; set; }
         //public BO.Order orderDeatails { get; set; }
@@ -206,19 +189,29 @@ namespace PL.OrderWindows
 
         private void Increase_Click(object sender, RoutedEventArgs e)
         {
-            Button myButtom = sender as Button;
-            int productId = (int)myButtom.Tag;
-            BO.OrderItem orderItem = myButtom.DataContext as BO.OrderItem;
-            orderItem.amount++;
-            bl.Order.updateAdmin(orderItem.idOfOrder, orderItem.idOfProduct, orderItem.amount);
-            order = bl.Order.GetOrder(orderForList.idOfOrder);
-
-            parent.Dispatcher.Invoke(() =>
+            try
             {
-                parent.OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
-            });
+                Button myButtom = sender as Button;
+                int productId = (int)myButtom.Tag;
+                BO.OrderItem orderItem = myButtom.DataContext as BO.OrderItem;
+                orderItem.amount++;
 
 
+                bl.Order.updateAdmin(orderItem.idOfOrder, orderItem.idOfProduct, orderItem.amount);
+
+                order = bl.Order.GetOrder(orderForList.idOfOrder);
+
+                parent.Dispatcher.Invoke(() =>
+                {
+                    parent.OrdersForList = new ObservableCollection<OrderForList?>(bl.Order.GetAllOrderForList());
+                });
+
+            }
+            catch (BO.outOfStock)
+            {
+                MessageBox.Show("This Product is out of stock.","ERROR", MessageBoxButton.OK , MessageBoxImage.Error);
+            }
+            catch { }
         }
 
       

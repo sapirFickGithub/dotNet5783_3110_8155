@@ -31,8 +31,7 @@ using System.Windows.Markup;
     {
         //// how much places are contain thigs
         internal static int _ProductIndex = 0;//for the get product function
-        //internal static int _OrderIndex = 0;
-        //internal static int _OrderItemIndex = 0;
+       
 
         //
         private static int _OrderID = 100000;
@@ -129,7 +128,10 @@ using System.Windows.Markup;
         {
             OrderItem _orderItem = new OrderItem();
             _orderItem.ID = _Config.get_OrderItemID;
-            _orderItem.idOfOrder = listOrder[i % 19].Value.idOfOrder;//i%19 will chosse the order , in this way all the place be uesed
+
+
+
+            _orderItem.idOfOrder = listOrder[i % 20].Value.idOfOrder;//i%19 will chosse the order , in this way all the place be uesed
             int index = rand.Next(0, 10);//choss a product 
             _orderItem.idProduct = listProduct[index].Value.idOfProduct;
             _orderItem.amount = rand.Next(1, 5);
