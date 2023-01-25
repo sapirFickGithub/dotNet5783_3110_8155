@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Simulator" Height="450" Width="800" Closing="Window_Closing">
-    <Grid>
+    <Grid Margin="15,0,-15,0">
         <Button Content="Stop" HorizontalAlignment="Left" Margin="338,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Stop_Click"/>
 
         <ProgressBar  Value="{Binding BarProgress}"  Maximum="{Binding maxBar}"
@@ -19,28 +19,26 @@
 
         <Button Content="Start" HorizontalAlignment="Left" Margin="106,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Start_Click"/>
 
-        <TextBlock x:Name="orderStatus" HorizontalAlignment="Left" Margin="396,194,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
+        <TextBlock x:Name="orderStatus" HorizontalAlignment="Left" Margin="160,86,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
-        <Label Content="Satus" HorizontalAlignment="Left" Margin="296,188,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Satus" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
         <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="56,278,0,0" VerticalAlignment="Top" Height="37"  Width="150" FontSize="20" FontWeight="Bold"/>
 
-        <Label Content="Order ID " HorizontalAlignment="Left" Margin="296,151,0,0" VerticalAlignment="Top" Height="24"  Width="73" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Order ID " HorizontalAlignment="Left" Margin="338,41,0,0" VerticalAlignment="Top" Height="24"  Width="73" FontSize="20" FontWeight="Bold"/>
 
-        <TextBlock x:Name="orderID" HorizontalAlignment="Left" Margin="396,154,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.idOfOrder}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
+        <TextBlock x:Name="orderID" HorizontalAlignment="Left" Margin="424,44,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.idOfOrder}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
         <TextBlock x:Name="orderStatus_Copy" HorizontalAlignment="Left" Margin="396,228,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.Status}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
-        <Label Content="updated status" HorizontalAlignment="Left" Margin="274,222,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
+        <Label Content="updated status" HorizontalAlignment="Left" Margin="94,120,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
 
-        <Label Content="Simulator:" HorizontalAlignment="Left" Margin="106,53,0,0" VerticalAlignment="Top" FontSize="36" FontWeight="Bold" Height="54" Width="225"/>
+        <Label Content="Start of treatment" HorizontalAlignment="Left" Margin="314,88,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
 
         <Label x:Name="resultLabel"  HorizontalAlignment="Left" Margin="496,266,0,0" VerticalAlignment="Top" Height="30"  Width="72" FontSize="20" FontWeight="Bold"/>
 
         <Label 
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center" 
-                Grid.Row="2"
-                Grid.Column="4"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" Margin="200,120,0,0"
                 >
             <Label.Style>
                 <Style TargetType="Label">
@@ -60,6 +58,8 @@
                 </Style>
             </Label.Style>
         </Label>
+        <Label Content="completion of treatment" HorizontalAlignment="Left" Margin="314,120,0,0" VerticalAlignment="Top" Height="23"  Width="137" FontSize="20" FontWeight="Bold"/>
+        <TextBlock x:Name="orderStatus_Copy1" HorizontalAlignment="Left" Margin="470,89,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="98" TextAlignment="Center"/>
 
 
     </Grid>

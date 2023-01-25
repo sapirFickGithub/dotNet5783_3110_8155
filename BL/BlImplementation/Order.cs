@@ -19,7 +19,9 @@ namespace BlImplementation
         {
             IEnumerable<DO.OrderItem?> orderItem = dal.OrderItem?.getAllByParam() ?? throw new BO.notExist();
             var order = dal.Order.getAllByParam() ?? throw new BO.notExist();
+          
             var orderForList = from item in order select (doToBoOrderForList(item, orderItem));
+            orderForList = orderForList.GroupBy(x => x.idOfOrder).SelectMany(x => x).ToList();
             return orderForList;
 
         }

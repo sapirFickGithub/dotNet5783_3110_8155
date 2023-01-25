@@ -57,6 +57,7 @@ namespace BlImplementation
         public BO.Cart? updete(BO.Cart? cart, int idOfProduct, int amount)
         {
             DO.Product product = dal?.Product.getOneByParam(x => idOfProduct == x?.idOfProduct) ?? throw new BO.notExist();
+        
             var item = cart?.itemList?.Where(i => i.idOfProduct == idOfProduct).FirstOrDefault();
             if (item == null)
                 throw new BO.notExist();
