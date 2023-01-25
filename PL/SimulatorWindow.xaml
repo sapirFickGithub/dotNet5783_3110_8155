@@ -32,7 +32,7 @@
 
         <Button Content="Start" HorizontalAlignment="Left" Margin="106,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Start_Click"/>
 
-        <TextBlock x:Name="orderStatus" HorizontalAlignment="Left" Margin="108,222,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="108,222,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
         <Label Content="Satus" HorizontalAlignment="Left" Margin="70,219,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
         <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="579,270,0,0" VerticalAlignment="Top" Height="37"  Width="150" FontSize="20" FontWeight="Bold"/>
@@ -41,7 +41,7 @@
 
         <TextBlock  HorizontalAlignment="Left" Margin="383,134,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.idOfOrder}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
-        <TextBlock  HorizontalAlignment="Left" Margin="569,100,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.Status}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center" RenderTransformOrigin="0.411,0.884"/>
+        
 
         <Label Content="updated status" HorizontalAlignment="Left" Margin="579,220,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
 
