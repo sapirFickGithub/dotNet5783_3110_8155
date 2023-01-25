@@ -78,7 +78,11 @@ namespace PL.CartWindows
 
         private void approve_orer_Click(object sender, RoutedEventArgs e)
         {
+            bool flag = true;
             if (customer_Name.Text == "")
+            {
+                flag = false;
+
                 MessageBox.Show(
                             "Please enter your name",
                             "Waiting for input...",
@@ -86,57 +90,71 @@ namespace PL.CartWindows
                             MessageBoxImage.Hand,
                             MessageBoxResult.Cancel,
                             MessageBoxOptions.RtlReading);
-            else if (customer_Address.Text == "") MessageBox.Show(
+            }
+            else if (customer_Address.Text == "")
+            {
+                flag = false;
+                MessageBox.Show(
                         "Please enter your address",
                         "Waiting for input...",
                         MessageBoxButton.OKCancel,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
-            else if ((customer_Mail.Text == "") || (!customer_Mail.Text.EndsWith("@gmail.com"))) MessageBox.Show(
+            }
+            else if ((customer_Mail.Text == "") || (!customer_Mail.Text.EndsWith("@gmail.com")))
+            {
+                flag = false;
+                MessageBox.Show(
                         "Please enter correct Email address.",
                         "Waiting for correct input...",
                         MessageBoxButton.OKCancel,
                         MessageBoxImage.Hand,
                         MessageBoxResult.Cancel,
                         MessageBoxOptions.RtlReading);
-
-            MyCart[0].CustomerName = customer_Name.Text;
-            MyCart[0].CustomerAddress = customer_Address.Text;
-            MyCart[0].CustomerMail = customer_Mail.Text;
-            try
+            }
+            if (flag)
             {
-                int idOrder = bl.Cart.approvment(MyCart[0]);
-                if (idOrder > 0)
+
+
+                MyCart[0].CustomerName = customer_Name.Text;
+                MyCart[0].CustomerAddress = customer_Address.Text;
+                MyCart[0].CustomerMail = customer_Mail.Text;
+
+                try
+                {
+                    int idOrder = bl.Cart.approvment(MyCart[0]);
+                    if (idOrder > 0)
+                    {
+                        MessageBox.Show(
+                                "Your order is being processed " +
+                                "your order number is:   " + idOrder +
+                                "   Thanks for buying!",
+                                "Approvment",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information,
+                                MessageBoxResult.None,
+                                MessageBoxOptions.RtlReading);
+
+                        new MainWindow().Show();
+
+                        parent.Close();
+                        this.Close();
+                    }
+                }
+                catch (BO.outOfStock a)
                 {
                     MessageBox.Show(
-                            "Your order is being processed " +
-                            "your order number is:   " + idOrder +
-                            "   Thanks for buying!",
-                            "Approvment",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information,
-                            MessageBoxResult.None,
-                            MessageBoxOptions.RtlReading);
-
-                    new MainWindow().Show();
-
-                    parent.Close();
-                    this.Close();
+                               "Your order is being processed" +
+                              a.idOfProduct,
+                               "Approvment",
+                               MessageBoxButton.OK,
+                               MessageBoxImage.Hand,
+                               MessageBoxResult.None,
+                               MessageBoxOptions.RtlReading);
                 }
-            }
-            catch (BO.outOfStock a)
-            {
-                MessageBox.Show(
-                           "Your order is being processed" +
-                          a.idOfProduct,
-                           "Approvment",
-                           MessageBoxButton.OK,
-                           MessageBoxImage.Hand,
-                           MessageBoxResult.None,
-                           MessageBoxOptions.RtlReading);
-            }
 
+            }
         }
 
 

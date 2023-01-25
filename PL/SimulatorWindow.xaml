@@ -10,35 +10,48 @@
     <Grid>
         <Button Content="Stop" HorizontalAlignment="Left" Margin="338,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Stop_Click"/>
 
-        <ProgressBar  Value="{Binding BarProgress}"  Maximum="{Binding maxBar}"
-                      Background="#FFEDCCFB" Margin="274,262,320,138" />
+        <ProgressBar  Value="{Binding BarProgress}"  
+                      Maximum="{Binding maxBar}"
+                      Background="#FFEDCCFB" 
+                      Margin="200,271,248,126" RenderTransformOrigin="0.5,0.5" 
+                      
+                      >
+            <ProgressBar.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.142"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.598"/>
+                </TransformGroup>
+            </ProgressBar.RenderTransform>
+        </ProgressBar>
 
-        <TextBlock Name="Timer" HorizontalAlignment="Left" Margin="561,159,0,0" TextWrapping="Wrap" Text="{Binding timerText }" VerticalAlignment="Top" Height="61" Width="162" FontSize="36"/>
+        <TextBlock Name="Timer" HorizontalAlignment="Left" Margin="275,171,0,0" TextWrapping="Wrap" Text="{Binding timerText }" VerticalAlignment="Top" Height="61" Width="162" FontSize="36"/>
 
         <Button Content="Close" HorizontalAlignment="Left" Margin="561,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Close_Click"/>
 
         <Button Content="Start" HorizontalAlignment="Left" Margin="106,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Start_Click"/>
 
-        <TextBlock x:Name="orderStatus" HorizontalAlignment="Left" Margin="160,86,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
+        <TextBlock x:Name="orderStatus" HorizontalAlignment="Left" Margin="108,222,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
-        <Label Content="Satus" HorizontalAlignment="Left" Margin="100,90,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
-        <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="56,278,0,0" VerticalAlignment="Top" Height="37"  Width="150" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Satus" HorizontalAlignment="Left" Margin="70,219,0,0" VerticalAlignment="Top" Height="23"  Width="73" FontSize="20" FontWeight="Bold"/>
+        <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="579,270,0,0" VerticalAlignment="Top" Height="37"  Width="150" FontSize="20" FontWeight="Bold"/>
 
-        <Label Content="Order ID " HorizontalAlignment="Left" Margin="338,41,0,0" VerticalAlignment="Top" Height="24"  Width="73" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Order ID " HorizontalAlignment="Left" Margin="297,131,0,0" VerticalAlignment="Top" Height="24"  Width="73" FontSize="20" FontWeight="Bold"/>
 
-        <TextBlock x:Name="orderID" HorizontalAlignment="Left" Margin="424,44,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.idOfOrder}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="383,134,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.idOfOrder}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
 
-        <TextBlock x:Name="orderStatus_Copy" HorizontalAlignment="Left" Margin="396,228,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.Status}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="569,100,0,0" TextWrapping="Wrap" Text="{Binding currentOrder.Status}" VerticalAlignment="Top" Height="23" Width="84" TextAlignment="Center" RenderTransformOrigin="0.411,0.884"/>
 
-        <Label Content="updated status" HorizontalAlignment="Left" Margin="94,120,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
+        <Label Content="updated status" HorizontalAlignment="Left" Margin="579,220,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
 
-        <Label Content="Start of treatment" HorizontalAlignment="Left" Margin="314,88,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Start of treatment" HorizontalAlignment="Left" Margin="40,244,0,0" VerticalAlignment="Top" Height="23"  Width="101" FontSize="20" FontWeight="Bold"/>
 
         <Label x:Name="resultLabel"  HorizontalAlignment="Left" Margin="496,266,0,0" VerticalAlignment="Top" Height="30"  Width="72" FontSize="20" FontWeight="Bold"/>
 
         <Label 
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top" Margin="200,120,0,0"
+                VerticalAlignment="Top" Margin="685,220,0,0"
                 >
             <Label.Style>
                 <Style TargetType="Label">
@@ -58,8 +71,8 @@
                 </Style>
             </Label.Style>
         </Label>
-        <Label Content="completion of treatment" HorizontalAlignment="Left" Margin="314,120,0,0" VerticalAlignment="Top" Height="23"  Width="137" FontSize="20" FontWeight="Bold"/>
-        <TextBlock x:Name="orderStatus_Copy1" HorizontalAlignment="Left" Margin="470,89,0,0" TextWrapping="Wrap" Text="{Binding oldStatus}" VerticalAlignment="Top" Height="23" Width="98" TextAlignment="Center"/>
+        <Label Content="completion of treatment" HorizontalAlignment="Left" Margin="579,250,0,0" VerticalAlignment="Top" Height="23"  Width="137" FontSize="20" FontWeight="Bold"/>
+        <Label  HorizontalAlignment="Left" Margin="55,271,0,0"  Content="{Binding CuurentTime}" VerticalAlignment="Top" Height="23" Width="98" />
 
 
     </Grid>

@@ -153,7 +153,7 @@ namespace PL
                 }
                 MessageBox.Show(
                                     "All orders have been processed!",
-                                    "OVERE",
+                                    "OVER",
                                      MessageBoxButton.OK,
                                     MessageBoxImage.Exclamation,
                                      MessageBoxResult.OK
@@ -231,9 +231,9 @@ namespace PL
                 }
                 MessageBox.Show(
                                     "All orders have been processed!",
-                                    "OVERE",
+                                    "OVER",
                                      MessageBoxButton.OK,
-                                    MessageBoxImage.Exclamation,
+                                    MessageBoxImage.None,
                                      MessageBoxResult.OK
                                     /*  MessageBoxOptions.RtlReading*/);
                             }

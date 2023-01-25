@@ -27,7 +27,7 @@
         <Button Content="Admin" HorizontalAlignment="Left" Margin="112,37,0,0" VerticalAlignment="Top" 
                 Height="65" Width="133" Grid.Row="2"  Click="Admin_Click" />
 
-        <Button Content="Costumer" HorizontalAlignment="Left" Margin="841,32,0,0" VerticalAlignment="Top"
+        <Button Content="Customer" HorizontalAlignment="Left" Margin="841,32,0,0" VerticalAlignment="Top"
                 Height="65" Width="133" Grid.Row="2"  Click="Client_Click"  />
 
         <Button Content="Simulator" HorizontalAlignment="Center" Margin="0,37,0,0" Grid.Row="2" VerticalAlignment="Top" 

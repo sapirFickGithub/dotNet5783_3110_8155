@@ -10,13 +10,13 @@
 
     <Grid Margin="-1,0,1,0">
 
-        <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="88,83,0,0" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.74,0.422"/>
-        <Label Content="Order ID:" HorizontalAlignment="Left" Margin="120,57,0,0" VerticalAlignment="Top" Width="68" Height="23"/>
+        <Label Content="Customer Name:" HorizontalAlignment="Left" Margin="82,83,0,0" VerticalAlignment="Top" Width="84" RenderTransformOrigin="0.74,0.422"/>
+        <Label Content="Order ID:" HorizontalAlignment="Left" Margin="114,57,0,0" VerticalAlignment="Top" Width="68" Height="23"/>
         <Label Content="Status:" HorizontalAlignment="Left" Margin="321,57,0,0" VerticalAlignment="Top" Width="76"/>
         <Label Content="Total price:" HorizontalAlignment="Left" Margin="195,353,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="Order Date:" HorizontalAlignment="Left" Margin="321,87,0,0" VerticalAlignment="Top" Width="68" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
-        <Label Content="Customer Email:" HorizontalAlignment="Left" Margin="91,107,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
-        <Label Content="Customer Address:" HorizontalAlignment="Left" Margin="82,132,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Customer Email:" HorizontalAlignment="Left" Margin="82,107,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Customer Address:" HorizontalAlignment="Left" Margin="82,132,0,0" VerticalAlignment="Top" Width="103" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <TextBlock HorizontalAlignment="Left"
             Margin="170,62,0,0" 
             TextWrapping="Wrap"
@@ -28,7 +28,7 @@
 
      
         <TextBlock HorizontalAlignment="Left"
-            Margin="277,353,0,0"  Width="88"
+            Margin="272,348,0,0"  Width="88"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
            FontSize="10"
@@ -61,7 +61,7 @@
             Text="{Binding order.CustomerAddress}" 
             Height="23" 
                  />
-        <Label Content="Amount Of Item:" HorizontalAlignment="Left" Margin="91,157,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
+        <Label Content="Amount Of Item:" HorizontalAlignment="Left" Margin="82,157,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.375,-2.649" Height =" 23"/>
         <TextBlock HorizontalAlignment="Left"
             Margin="177,161,0,0" 
             TextWrapping="Wrap"
@@ -225,7 +225,7 @@
                                 <StackPanel Orientation="Horizontal">
 
                                     <Button
-                                            x:Name="Decrease"
+                                            
                                             
                                             Width="20"
                                             Height="20"
@@ -246,7 +246,8 @@
                                                 <Setter Property="Visibility" Value="Visible"/>
                                                 <Style.Triggers>
 
-                                                    <DataTrigger Binding="{Binding order.Status }" Value="DELIVERY">
+                                                    <DataTrigger Binding="{Binding order.Status }"
+                                                                 Value="DELIVERY">
                                                         <Setter Property="Visibility" Value="Hidden"/>
                                                     </DataTrigger>
 

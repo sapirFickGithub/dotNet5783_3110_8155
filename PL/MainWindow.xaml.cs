@@ -59,7 +59,21 @@ namespace PL
 
         private void open_simolator(object sender, RoutedEventArgs e)
         {
-            new SimulatorWindow().Show();
+            if (bl.Order.precedenceOrder() != null)
+            {
+
+                new SimulatorWindow().Show();
+            }
+            else
+            {
+                MessageBox.Show(
+                                  "All orders have been processed!",
+                                  "OVER",
+                                   MessageBoxButton.OK,
+                                  MessageBoxImage.Exclamation,
+                                   MessageBoxResult.OK
+                                  /*  MessageBoxOptions.RtlReading*/);
+            }
         }
 
      
