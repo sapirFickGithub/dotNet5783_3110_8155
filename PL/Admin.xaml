@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Admin" Height="404" Width="406">
+        Title="Admin" Height="404" Width="406"  Icon="/iconCar.jpg">
     <Grid Margin="0,0,0,-6">
 
         <Button Content="Product"

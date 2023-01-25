@@ -62,7 +62,7 @@ namespace PL.ProductWindows
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
                 var listTemp = bl.Product.getListOfProduct();
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(((ListView)sender).ItemsSource);
 
                 view.SortDescriptions.Clear();
                 if (hasSorted)
@@ -85,7 +85,7 @@ namespace PL.ProductWindows
         {
             try
             {
-                Object selectedItem = Category_selector.SelectedItem;
+                Object selectedItem = (BO.Enum.CategoryView)((ComboBox)sender).SelectedItem;
 
                 if (selectedItem.ToString() == "All")
                     ProductsForList = new ObservableCollection<ProductForList?>(bl.Product.getListOfProduct());
@@ -99,9 +99,8 @@ namespace PL.ProductWindows
                          "Somthing went worng...\n please try again later",
                          "Unknown error",
                          MessageBoxButton.OK,
-                         MessageBoxImage.Hand,
-                         MessageBoxResult.Cancel,
-                         MessageBoxOptions.RtlReading);
+                         MessageBoxImage.Hand
+                         );
             }
         }
         private void addProductForList(int productId)
@@ -116,7 +115,7 @@ namespace PL.ProductWindows
         }
         private void List_of_product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {//move to updete product window
-            new ProductWindows.UpdateProduct(updateProductForList, (ProductForList)List_of_product.SelectedItem).Show();
+            new ProductWindows.UpdateProduct(updateProductForList, (ProductForList)((ListView)sender).SelectedItem).Show();
 
         }
 

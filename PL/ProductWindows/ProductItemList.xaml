@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.ProductWindows"
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         mc:Ignorable="d"
-        Title="ProductList" Height="450" Width="800">
+        Title="ProductList" Height="450" Width="800"  Icon="/iconCar.jpg">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -125,30 +125,7 @@
                 </GridView>
             </ListView.View>
 
-            <!--<ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander IsExpanded="True">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" Foreground="{DynamicResource PrimaryHuMidBrush}" VerticalAlignment="Bottom"/>
-                                                    <TextBlock Text="{Binding Items}" Foreground="{DynamicResource PrimaryHuLirhtBrush}"  VerticalAlignment="Bottom"/>
-                                                    <TextBlock Text="item(s)" Foreground="{DynamicResource PrimaryHuLirhtBrush}"  VerticalAlignment="Bottom"/>
-                                                </StackPanel>
-                                            </Expander.Header>
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListView.GroupStyle>-->
-
+     
         </ListView>
 
         <Button x:Name="Go_to_Cart" Content="Go to cart"   

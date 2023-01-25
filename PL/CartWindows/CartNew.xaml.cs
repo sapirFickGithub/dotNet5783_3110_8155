@@ -140,8 +140,6 @@ namespace PL.CartWindows
         }
 
 
-
-
         private void Sort_By_Colmun_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader gridViewColumnHeader = (sender as GridViewColumnHeader)!;
@@ -150,7 +148,7 @@ namespace PL.CartWindows
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
                 var listTemp = bl?.Product.getListOfProductItem();
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_product.ItemsSource);
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(((ListView)sender).ItemsSource);
 
                 view.SortDescriptions.Clear();
                 if (hasSorted)
@@ -168,51 +166,64 @@ namespace PL.CartWindows
 
         }
 
-
-
-
-
-
         private void Increase_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-
-            OrderItem orderItem = button.DataContext as OrderItem;
-
-            var p = bl.Product.GetProduct(orderItem.idOfProduct);
-
-            int productId = (int)button.Tag;
-
-            if ((p.InStock - orderItem.amount < 0))
-                MessageBox.Show(
-                         "No more of this item in stock :( ",
-                         "Out of stock",
-                         MessageBoxButton.OK,
-                         MessageBoxImage.Hand,
-                         MessageBoxResult.Cancel,
-                         MessageBoxOptions.RtlReading);
-
-            else
+            try
             {
-                bl.Cart.add(MyCart[0], productId);
+                Button button = sender as Button;
 
-                // Find the product in the collection and update its amount
-                var product = parent.Items.FirstOrDefault(p => p.idOfProduct == productId);
-                if (product != null)
+                OrderItem orderItem = button.DataContext as OrderItem;
+
+                var p = bl.Product.GetProduct(orderItem.idOfProduct);
+
+                int productId = (int)button.Tag;
+
+                if ((p.InStock - orderItem.amount < 0))
+                    MessageBox.Show(
+                             "No more of this item in stock :( ",
+                             "Out of stock",
+                             MessageBoxButton.OK,
+                             MessageBoxImage.Hand,
+                             MessageBoxResult.Cancel,
+                             MessageBoxOptions.RtlReading);
+
+                else
                 {
-                    product.Amount++;
+
+                    bl.Cart.add(MyCart[0], productId);
+
+                    // Find the product in the collection and update its amount
+                    var product = parent.Items.FirstOrDefault(p => p.idOfProduct == productId);
+                    if (product != null)
+                    {
+                        product.Amount++;
+                    }
+                    this.TotalPrice = MyCart[0].TotalPrice;
+
+                    // Update the OrderForObservableCollection in the parent window
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        parent.Items = new ObservableCollection<BO.ProductItem>(parent.Items);
+                        this.items = new ObservableCollection<BO.OrderItem>(this.items);
+                        this.TotalPrice = this.TotalPrice;
+                    });
                 }
-                this.TotalPrice = MyCart[0].TotalPrice;
-                //עידכון המחיר הכולל
-               //this.TotalPrice[0] += product.Price;
-
-                // Update the OrderForObservableCollection in the parent window
-                this.Dispatcher.Invoke(() =>
-                {
-                    parent.Items = new ObservableCollection<BO.ProductItem>(parent.Items);
-                    this.items = new ObservableCollection<BO.OrderItem>(this.items);
-                    this.TotalPrice = this.TotalPrice;
-                });
+            }
+            catch (BO.outOfStock)
+            {
+                MessageBox.Show(
+                            "No more of this item in stock :( ",
+                            "Out of stock",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Hand);
+            }
+            catch (BO.incorrectData)
+            {
+                MessageBox.Show(
+                           "There is a incorrect input data",
+                           "Incorrect data",
+                           MessageBoxButton.OK,
+                           MessageBoxImage.Hand);
             }
         }
 

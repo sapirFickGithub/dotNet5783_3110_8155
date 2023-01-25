@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Simulator" Height="450" Width="800" Closing="Window_Closing">
-    <Grid Margin="15,0,-15,0">
+        Title="Simulator" Height="450" Width="800" Closing="Window_Closing" Icon="/iconCar.jpg">
+    <Grid>
         <Button Content="Stop" HorizontalAlignment="Left" Margin="338,347,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="Stop_Click"/>
 
         <ProgressBar  Value="{Binding BarProgress}"  Maximum="{Binding maxBar}"

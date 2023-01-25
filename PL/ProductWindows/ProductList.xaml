@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         DataContext="{Binding RelativeSource={RelativeSource self}}"    
         mc:Ignorable="d"
-        Title="ProductList" Height="438" Width="661">
+        Title="ProductList" Height="438" Width="661"  Icon="/iconCar.jpg">
 
     <Grid>
 

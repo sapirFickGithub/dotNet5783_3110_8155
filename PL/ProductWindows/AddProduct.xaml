@@ -6,8 +6,8 @@
         DataContext="{Binding RelativeSource={RelativeSource self}}"
         xmlns:local="clr-namespace:PL.ProductWindows"
         mc:Ignorable="d"
-        Title="AddProduct" Height="450" Width="485">
-    <Grid RenderTransformOrigin="0.82,0.765">
+        Title="AddProduct" Height="450" Width="485"  Icon="/iconCar.jpg">
+    <Grid  RenderTransformOrigin="0.82,0.765">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -56,9 +56,9 @@
         </ComboBox>
         <Label Content="Category:" HorizontalAlignment="Left" Margin="82,8,0,10" Grid.Row="2" Width="84" FontFamily="Maiandra GD" FontSize="14" FontWeight="Normal"/>
 
-        <Button Content="Add"
-                Grid.Row="5" HorizontalAlignment="Left"   Margin="196,10,0,0"                             
-                VerticalAlignment="Top"  Width="182"  Height="38" 
+        <Button Content="Add"   Width="160"  Height="33" 
+                Grid.Row="5" HorizontalAlignment="Left"   Margin="199,10,0,0"                             
+                VerticalAlignment="Top"  
                 Click="AddProduct_Click"  />
 
         <Label Content="Insert the details:" HorizontalAlignment="Left" Margin="82,57,0,0" VerticalAlignment="Top" Height="40" Width="162" FontSize="18" FontFamily="Maiandra GD" FontWeight="Normal"/>

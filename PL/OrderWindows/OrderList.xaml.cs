@@ -55,7 +55,7 @@ namespace PL.OrderWindows
             {
                 string name = (gridViewColumnHeader.Tag as string)!;
                 ObservableCollection<BO.OrderForList?> listTemp = (ObservableCollection<OrderForList?>)(bl?.Order?.GetAllOrderForList());
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(List_of_orders.ItemsSource);
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(((ListView)sender).ItemsSource);
 
                 view.SortDescriptions.Clear();
                 if (hasSorted)

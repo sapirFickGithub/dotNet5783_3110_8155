@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <None Remove="1593678163641.jpeg" />
+    <None Remove="iconCar.jpg" />
+    <None Remove="lamborghini.jpg" />
     <None Remove="lumbo" />
     <None Remove="ProductWindows\1593678163641.jpeg" />
     <None Remove="ProductWindows\arrow.jpg" />
@@ -32,6 +34,8 @@
 
   <ItemGroup>
     <Resource Include="1593678163641.jpeg" />
+    <Resource Include="iconCar.jpg" />
+    <Resource Include="lamborghini.jpg" />
     <Resource Include="lumbo" />
     <Resource Include="ProductWindows\1593678163641.jpeg" />
     <Resource Include="ProductWindows\arrow.jpg" />
